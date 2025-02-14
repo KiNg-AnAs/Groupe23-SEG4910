@@ -1,17 +1,42 @@
 .navbar-custom {
-    background: linear-gradient(to right, #0a192f, #1e3c72);
+    padding: 15px;
 }
 
-/* ✅ Logo Styling */
 .nav-logo {
-    height: 40px;  /* Adjust size as needed */
-    width: auto;
-    margin-right: 10px;
+    font-size: 1.8rem;
+    margin-right: 8px;
+    color: #f28d35;
 }
 
-/* ✅ Brand Name Styling */
 .brand-name {
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
+}
+
+.cart-icon {
+    font-size: 1.6rem;
+    color: white;
+    position: relative;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon:hover {
+    color: #f28d35;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: #ff4500;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
 }

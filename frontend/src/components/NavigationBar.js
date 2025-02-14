@@ -2,11 +2,10 @@ import React, { useContext } from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { FaDumbbell } from "react-icons/fa"; // ✅ Using FontAwesome for the logo
-import "./NavigationBar.css"; // Import CSS file
+import { FaDumbbell, FaShoppingCart } from "react-icons/fa"; 
+import "./NavigationBar.css";
 
-
-const NavigationBar = () => {
+const NavigationBar = ({ cartItems }) => { // Accept cartItems as a prop
   const authContext = useContext(AuthContext);
   const user = authContext?.user;
   const logout = authContext?.logout;
@@ -28,7 +27,7 @@ const NavigationBar = () => {
   return (
     <Navbar expand="lg" bg="dark" variant="dark" fixed="top" className="navbar-custom">
       <Container>
-        {/* ✅ Added Logo with FontAwesome */}
+        {/* Added Logo with FontAwesome */}
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <FaDumbbell className="nav-logo" />
           <span className="brand-name">PerfoEvolution</span>
@@ -42,6 +41,13 @@ const NavigationBar = () => {
             <Nav.Link onClick={() => scrollToSection("testimonials")}>Testimonials</Nav.Link>
             <Nav.Link onClick={() => scrollToSection("programs")}>Programs</Nav.Link>
             <Nav.Link onClick={() => scrollToSection("plans")}>Plans</Nav.Link>
+
+            {/* Cart Icon with Item Count */}
+            <Nav.Link as={Link} to="/cart" className="cart-icon">
+              <FaShoppingCart />
+              {cartItems.length > 0 && <span className="cart-badge">{cartItems.length}</span>}
+            </Nav.Link>
+
             {user ? (
               <>
                 <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
