@@ -1,0 +1,107 @@
+import React, { useState } from "react";
+import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
+import "./ProgramsOverview.css";
+import img7 from "./Assets/img7.jpg";
+import img8 from "./Assets/img8.jpg";
+import img9 from "./Assets/img9.jpg";
+import img10 from "./Assets/img10.jpg";
+import img11 from "./Assets/img11.jpg";
+import img12 from "./Assets/img12.jpg";
+import img13 from "./Assets/img13.jpg";
+import img14 from "./Assets/img14.jpg";
+import img15 from "./Assets/img15.jpg";
+import img16 from "./Assets/img16.jpg";
+import img17 from "./Assets/img17.jpg";
+import img18 from "./Assets/img18.jpg";  
+import img19 from "./Assets/img19.jpg";  
+
+const programs = [
+  { title: "Strength & Hypertrophy", description: "Increase muscle mass and strength.", image: img7, details: "Gain muscle and maximize hypertrophy." },
+  { title: "Endurance & Conditioning", description: "Enhance cardiovascular fitness.", image: img8, details: "Boost endurance and maintain strength." },
+  { title: "Sport-Specific Training", description: "Improve agility and skills.", image: img9, details: "Tailored for specific sports." },
+  { title: "Mobility & Flexibility", description: "Prevent injuries and improve movement.", image: img10, details: "Enhance flexibility and mechanics." },
+  { title: "Weight Loss & Lean Muscle", description: "Burn fat while keeping muscle.", image: img11, details: "A mix of HIIT and strength training." },
+  { title: "Off-Season & In-Season Training", description: "Optimize performance year-round.", image: img12, details: "Train smart during the season." },
+  { title: "Injury Prevention & Recovery", description: "Prevent injuries and improve recovery.", image: img18, details: "Rehabilitation and body maintenance program to keep you in peak condition." },
+  { title: "Explosiveness & Power", description: "Develop agility, speed, and explosive strength.", image: img19, details: "Focused on increasing power output and speed, ideal for athletes in high-intensity sports." }  // ✅ Added "Explosiveness & Power"
+];
+
+const premiumAddons = [
+  { title: "E-Book: Science-Based Training", description: "Comprehensive guide.", image: img13, price: "$29.99", details: "Expert-written fitness guide." },
+  { title: "1-on-1 Zoom Consultation", description: "Personalized strategy session.", image: img14, price: "$49.99", details: "Goal-setting with a coach." },
+  { title: "Custom AI Training Plan", description: "AI-generated plan.", image: img15, price: "$99.99", details: "Tailored to your goals." },
+  { title: "In-Person Private Coaching", description: "Exclusive private session.", image: img16, price: "$199.99", details: "Hands-on expert coaching." },
+  { title: "Exclusive Coaching Group", description: "Access workouts & mentorship.", image: img17, price: "$29.99/month", details: "Join a fitness community." }
+];
+
+const ProgramsOverview = () => {
+  const [selectedProgram, setSelectedProgram] = useState(null);
+  const [selectedAddon, setSelectedAddon] = useState(null);
+  const [showPremium, setShowPremium] = useState(false);
+
+  return (
+    <section id="programs" className="programs-section">
+      <Container>
+        <h2 className="section-title">Our Training Programs</h2>
+        <Row className="programs-grid">
+          {programs.map((program, index) => (
+            <Col lg={4} md={6} sm={12} key={index} className="d-flex">
+              <Card className="program-card" onClick={() => setSelectedProgram(program)}>
+                <Card.Img variant="top" src={program.image} className="program-image" />
+                <Card.Body className="premium-info">
+                  <Card.Title>{program.title}</Card.Title>
+                  <Card.Text>{program.description}</Card.Text>
+                  <Button variant="primary">Learn More</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+
+        {/* Premium Add-Ons Section */}
+        <Button variant="warning" className="premium-btn" onClick={() => setShowPremium(!showPremium)}>
+          {showPremium ? "Hide Premium Add-Ons" : "View Premium Add-Ons"}
+        </Button>
+
+        {showPremium && (
+          <div className="premium-container">
+            {premiumAddons.map((addon, index) => (
+              <div className="premium-item" key={index} onClick={() => setSelectedAddon(addon)}>
+                <img src={addon.image} alt={addon.title} className="premium-image" />
+                <div className="premium-info">
+                  <h4>{addon.title}</h4>
+                  <p>{addon.description}</p>
+                  <span className="premium-price">{addon.price}</span>
+                  <Button variant="success">Read More</Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Modals */}
+        <Modal show={selectedProgram !== null} onHide={() => setSelectedProgram(null)} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>{selectedProgram?.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>{selectedProgram?.details}</p>
+          </Modal.Body>
+        </Modal>
+
+        <Modal show={selectedAddon !== null} onHide={() => setSelectedAddon(null)} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>{selectedAddon?.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>{selectedAddon?.details}</p>
+            <h4 className="addon-price">{selectedAddon?.price}</h4>
+            <Button variant="success">Purchase</Button>
+          </Modal.Body>
+        </Modal>
+      </Container>
+    </section>
+  );
+};
+
+export default ProgramsOverview;

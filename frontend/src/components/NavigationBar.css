@@ -1,0 +1,17 @@
+.navbar-custom {
+    background: linear-gradient(to right, #0a192f, #1e3c72);
+}
+
+/* ✅ Logo Styling */
+.nav-logo {
+    height: 40px;  /* Adjust size as needed */
+    width: auto;
+    margin-right: 10px;
+}
+
+/* ✅ Brand Name Styling */
+.brand-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
