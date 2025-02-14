@@ -1,10 +1,3 @@
-.programs-section {
-    background: linear-gradient(to right, #0a192f, #1e3c72);
-    color: white;
-    padding: 80px 0;
-    text-align: center;
-}
-
 .program-card {
     color: white;
 }
@@ -147,3 +140,73 @@
 .learn-more-btn {
     margin: 0px 10px;
 }
+
+/* Programs Carousel */
+/* Programs Carousel */
+.programs-carousel {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+/* Default: Move arrows to extreme left and right */
+.programs-carousel .carousel-control-prev,
+.programs-carousel .carousel-control-next {
+    width: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+.programs-carousel .carousel-control-prev {
+    left: -50px; /* Push further left */
+}
+
+.programs-carousel .carousel-control-next {
+    right: -50px; /* Push further right */
+}
+
+/* Responsive: Move arrows to bottom for small screens */
+@media (max-width: 768px) {
+    .programs-carousel .carousel-control-prev,
+    .programs-carousel .carousel-control-next {
+        top: auto;
+        bottom: -40px; /* Position below the carousel */
+        left: 45%;
+        transform: translateX(-50%);
+        width: auto;
+    }
+
+    .programs-carousel .carousel-control-prev {
+        margin-right: 60px; 
+    }
+
+    .programs-carousel .carousel-control-next {
+        margin-left: 60px;
+    }
+}
+
+/* Programs Section */
+.programs-section {
+    background: linear-gradient(to right, #0a192f, #1e3c72);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+/* Program Cards */
+.program-card {
+    width: 100%;
+    max-width: 350px;
+    min-height: 420px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+

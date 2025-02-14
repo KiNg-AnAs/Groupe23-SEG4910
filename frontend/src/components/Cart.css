@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   max-width: 100%;
   background: url("./Assets/img2.jpg") no-repeat center center/cover;
   position: relative;
