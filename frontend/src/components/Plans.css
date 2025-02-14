@@ -5,7 +5,6 @@
     text-align: center;
 }
 
-/* 🌟 Section Title */
 .section-title {
     font-size: 2.8rem;
     font-weight: bold;
@@ -15,15 +14,14 @@
     -webkit-text-fill-color: transparent;
 }
 
-/* 🌟 Plans Grid */
 .plan-column {
     display: flex;
     justify-content: center;
-    align-items: stretch;  /* Ensures equal height */
+    align-items: stretch;  
     margin-bottom: 20px;
 }
 
-/* 🌟 Plan Card */
+
 .plan-card {
     width: 100%;
     max-width: 350px;
@@ -38,16 +36,15 @@
     gap: 10px;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Ensures all cards are the same height */
+    height: 100%; 
 }
 
-/* 🌟 Dynamic Hover Effect */
+
 .plan-card:hover {
     transform: scale(1.05);
     box-shadow: 0px 10px 30px rgba(0, 198, 255, 0.3);
 }
 
-/* 🌟 Background Overlay for Plans */
 .plan-overlay {
     position: relative;
     background-size: cover;
@@ -64,7 +61,6 @@
     height: 100%;
 }
 
-/* 🌟 Adding Gradient Overlay */
 .plan-overlay::before {
     content: "";
     position: absolute;
@@ -76,17 +72,16 @@
     border-radius: 10px;
 }
 
-/* 🌟 Plan Content */
 .plan-content {
     position: relative;
     z-index: 2;
-    flex-grow: 1;  /* Pushes content to take up equal space */
+    flex-grow: 1;  
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* 🌟 Plan Title */
+
 .plan-title {
     font-size: 1.8rem;
     font-weight: bold;
@@ -96,7 +91,6 @@
     margin-top: 10px;
 }
 
-/* 🌟 Plan Price */
 .plan-price {
     font-size: 1.5rem;
     font-weight: bold;
@@ -104,12 +98,11 @@
     margin: 10px 0;
 }
 
-/* 🌟 Plan Features */
 .plan-features {
     list-style: none;
     padding: 0;
     font-size: 1.1rem;
-    margin-bottom: auto; /* Pushes the button down */
+    margin-bottom: auto; 
 
 }
 
@@ -117,7 +110,6 @@
     margin-bottom: 8px;
 }
 
-/* 🌟 Buy Now Button */
 .buy-now {
     background: linear-gradient(90deg, #ff9d00, #ff5400);
     border: none;
@@ -126,18 +118,17 @@
     width: 100%;
     border-radius: 8px;
     transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
-    margin-top: auto; /* Ensures button stays at the bottom */
+    margin-top: auto; 
 }
 
 .buy-now:hover {
     transform: scale(1.05);
 }
 
-/* 🌟 Popular Badge */
 .popular-badge {
     position: absolute;
     top: 10px;
-    left: 10px;
+    right: 10px;
     background: linear-gradient(90deg, #00c6ff, #0072ff);
     color: white;
     font-size: 0.9rem;
@@ -146,12 +137,16 @@
     font-weight: bold;
 }
 
-/* 🌟 Hover Effects */
+.plan-icon {
+    font-size: 2rem;
+    color: #ff9d00;
+    margin-bottom: 10px;
+  }
+
 .plan-overlay:hover {
     transform: scale(1.05);
 }
 
-/* 🌟 Responsive Adjustments */
 @media (max-width: 992px) {
     .plan-column {
         flex: 1 1 100%;
