@@ -1,0 +1,91 @@
+.hero-section {
+    background: linear-gradient(to right, #0a192f, #1e3c72);
+    color: white;
+    padding: 100px 0;
+    text-align: left;
+}
+
+/* 🌟 Hero Section Text Styling */
+.hero-text h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.hero-text h1 span {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-text p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+}
+
+/* 🌟 Hero Stats */
+.hero-stats {
+    display: flex;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.hero-stats div {
+    text-align: center;
+}
+
+.hero-stats h3 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-stats p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* 🌟 Hero Buttons */
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.hero-buttons .btn-lg {
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+
+.btn-warning {
+    background: linear-gradient(90deg, #ff9d00, #ff5400);
+    border: none;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(90deg, #ff5400, #ff9d00);
+}
+
+.btn-outline-light {
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-outline-light:hover {
+    background: white;
+    color: #0a192f;
+}
+
+/* 🌟 Hero Section Carousel */
+.hero-carousel img {
+    height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}

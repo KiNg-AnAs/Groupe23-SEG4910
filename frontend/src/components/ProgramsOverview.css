@@ -1,0 +1,158 @@
+.programs-section {
+    background: linear-gradient(to right, #0a192f, #1e3c72);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.program-card {
+    color: white;
+}
+
+/* 🌟 Section Title */
+.section-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 🌟 Grid Layout */
+.programs-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* 🌟 Card Styling */
+.program-card, .addon-card {
+    width: 100%;
+    max-width: 350px;
+    min-height: 420px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto; /* Center horizontally */
+}
+
+.program-card:hover, .addon-card:hover {
+    transform: scale(1.05);
+}
+
+/* 🌟 Image Styling */
+.program-image, .addon-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* 🌟 Responsive Layout */
+@media (min-width: 992px) {
+    .programs-grid {
+        justify-content: center;
+    }
+
+    .programs-grid .col-lg-4 {
+        flex: 0 0 32%;
+        max-width: 32%;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+    .programs-grid {
+        justify-content: center;
+    }
+
+    .programs-grid .col-md-6 {
+        flex: 0 0 48%;
+        max-width: 48%;
+    }
+}
+
+@media (max-width: 767px) {
+    .programs-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .programs-grid .col-sm-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .program-card {
+        margin: 15px auto; /* Ensures centering on small screens */
+    }
+}
+
+.premium-btn {
+    margin: 20px;
+    padding: 10px;
+}
+
+/* 🌟 Premium Add-Ons Styling */
+.premium-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.premium-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+    max-width: 600px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.premium-item:hover {
+    transform: scale(1.05);
+}
+
+.premium-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.premium-info {
+    flex: 1;
+    text-align: center;
+}
+
+.premium-info h4 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: white;
+}
+
+.premium-info p {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.premium-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #00c6ff;
+    display: block;
+    margin-bottom: 10px;
+}
