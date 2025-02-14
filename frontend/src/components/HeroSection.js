@@ -12,7 +12,7 @@ const HeroSection = () => {
       <Container>
         <Row className="align-items-center">
           {/* Left Side - Text Content */}
-                    {/* Right Side - Carousel */}
+          {/* Right Side - Carousel */}
                     <Col lg={6}>
             <Carousel className="hero-carousel">
               <Carousel.Item>

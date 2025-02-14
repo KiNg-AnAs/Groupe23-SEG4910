@@ -41,7 +41,7 @@ const NavigationBar = () => {
             <Nav.Link onClick={() => scrollToSection("about")}>About</Nav.Link>
             <Nav.Link onClick={() => scrollToSection("testimonials")}>Testimonials</Nav.Link>
             <Nav.Link onClick={() => scrollToSection("programs")}>Programs</Nav.Link>
-
+            <Nav.Link onClick={() => scrollToSection("plans")}>Plans</Nav.Link>
             {user ? (
               <>
                 <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>

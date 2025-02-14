@@ -8,10 +8,9 @@ const plans = [
     price: "$29 / month",
     image: "./Assets/img21.jpg",
     features: [
-      "AI-Generated Training Plans",
-      "Workout & Progress Tracking",
-      "Basic Nutrition Guide",
-      "Monthly Fitness Assessments"
+      "- AI-Generated Training Plans",
+      "- Workout & Progress Tracking",
+      "- Basic Nutrition Guide",
     ],
     popular: false
   },
@@ -20,10 +19,9 @@ const plans = [
     price: "$49 / month",
     image: "./Assets/img22.jpg",
     features: [
-      "Everything in Basic Plan",
-      "Personalized AI Nutrition Plan",
-      "Exclusive Weekly Video Workouts",
-      "1-on-1 Coach Check-In (Monthly)"
+      "- All features from the Basic Plan",
+      "- Personalized AI Nutrition Plan updated weekly by the coach",
+      "- 1-on-1 Monthly Coaching Session"
     ],
     popular: true
   },
@@ -32,10 +30,10 @@ const plans = [
     price: "$99 / month",
     image: "./Assets/img23.jpg",
     features: [
-      "Everything in Advanced Plan",
-      "Exclusive Live Group Training Sessions",
-      "In-Depth Performance Analysis",
-      "Direct Access to a Personal Coach"
+      "- All features from the Advanced Plan",
+      "- Opportunity to train with the coach (Bi-weekly)",
+      "- Access to Fitness E-Book",
+      "- Advanced Caloric Burn Prediction Tool"
     ],
     popular: false
   }
