@@ -1,0 +1,62 @@
+.addons-section {
+    padding: 100px 20px;
+
+}
+
+.addons-container {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(to right, #0a192f, #1e3c72);
+    color: white;
+  }
+  
+  .addons-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  .addons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .addon-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .addon-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .addon-card h4 {
+    color: white;
+    font-size: 1.5rem;
+  }
+  
+  .addon-card p {
+    font-size: 1.1rem;
+    color: #ddd;
+  }
+  
+  .premium-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ff9d00;
+  }
+  
+  .addon-buttons {
+    margin-top: 10px;
+  }
+  
+  
+
+.learn-more-btn {
+    margin: 10px 10px;
+}

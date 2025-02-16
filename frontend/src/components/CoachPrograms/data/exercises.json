@@ -1,0 +1,125 @@
+{
+    "Strength & Hypertrophy": {
+      "amateur": [
+        "Squats - 3x12",
+        "Bench Press - 3x10",
+        "Deadlifts - 3x8",
+        "Leg Press - 3x15",
+        "Bicep Curls - 3x12",
+        "Tricep Dips - 3x12",
+        "Lat Pulldown - 3x10",
+        "Calf Raises - 3x15"
+      ],
+      "pro": [
+        "Back Squats - 5x5",
+        "Incline Bench Press - 4x8",
+        "Romanian Deadlifts - 4x6",
+        "Hack Squats - 4x10",
+        "Weighted Pull-Ups - 4x8",
+        "Overhead Shoulder Press - 4x10",
+        "Barbell Rows - 4x8",
+        "Hammer Curls - 3x10"
+      ]
+    },
+    "Endurance & Conditioning": {
+      "amateur": [
+        "Jump Rope - 5 min",
+        "Burpees - 3x12",
+        "Mountain Climbers - 3x30 sec",
+        "Rowing Machine - 5 min",
+        "High Knees - 3x40 sec",
+        "Jumping Jacks - 4x30 sec",
+        "Treadmill Walk - 10 min"
+      ],
+      "pro": [
+        "Sprint Intervals - 6x30 sec",
+        "Plyometric Box Jumps - 4x12",
+        "Battle Ropes - 4x20 sec",
+        "Rowing Machine - 15 min",
+        "Hill Sprints - 5x40m",
+        "Skater Jumps - 4x20 sec",
+        "Tire Flips - 3x8"
+      ]
+    },
+    "Sport-Specific Training": {
+      "amateur": [
+        "Lateral Lunges - 3x10",
+        "Sprint Drills - 5x50m",
+        "Single-Leg Hops - 3x15",
+        "Medicine Ball Throws - 4x10",
+        "Agility Ladder - 3 drills",
+        "Wall Pass Drills - 3x10"
+      ],
+      "pro": [
+        "Agility Ladder - 4 drills",
+        "High-Knee Sprints - 4x30m",
+        "Depth Jumps - 3x10",
+        "Reaction Drills - 4x10",
+        "Sprint Starts - 5x40m",
+        "Sled Push - 4x20m"
+      ]
+    },
+    "Mobility & Flexibility": {
+      "amateur": [
+        "Seated Hamstring Stretch - 3x30 sec",
+        "Cat-Cow Stretch - 3x10",
+        "Child’s Pose - 3x30 sec",
+        "Standing Quad Stretch - 3x20 sec",
+        "Hip Flexor Stretch - 3x30 sec"
+      ],
+      "pro": [
+        "Pigeon Pose - 4x30 sec",
+        "Deep Squat Hold - 4x40 sec",
+        "Resistance Band Shoulder Mobility - 4x15",
+        "Frog Stretch - 3x30 sec",
+        "Active Thoracic Stretch - 3x15"
+      ]
+    },
+    "Off-Season & In-Season Training": {
+      "amateur": [
+        "Bodyweight Squats - 3x15",
+        "Jump Lunges - 3x12",
+        "Core Twists - 3x15",
+        "Resistance Band Work - 3x12",
+        "Box Step-Ups - 3x10"
+      ],
+      "pro": [
+        "Depth Drops - 4x8",
+        "Explosive Plyometric Jumps - 4x10",
+        "Sprint Starts - 5x50m",
+        "Single-Leg Balance Drills - 3x10",
+        "Lateral Box Jumps - 4x12"
+      ]
+    },
+    "Explosiveness & Power": {
+      "amateur": [
+        "Jump Squats - 3x10",
+        "Med Ball Slams - 4x12",
+        "Broad Jumps - 3x8",
+        "Box Jumps - 3x10",
+        "Battle Ropes - 3x15 sec"
+      ],
+      "pro": [
+        "Olympic Lifts - 4x5",
+        "Depth Jumps - 3x10",
+        "Explosive Step-Ups - 4x12",
+        "Triple Jumps - 4x8",
+        "Sled Sprints - 5x20m"
+      ]
+    },
+    "Injury Prevention & Recovery": {
+      "amateur": [
+        "Foam Rolling - 5 min",
+        "Shoulder Rotations - 3x15",
+        "Hip Bridges - 3x12",
+        "Core Stability Planks - 3x30 sec",
+        "Wall Angels - 3x15"
+      ],
+      "pro": [
+        "Deep Tissue Foam Rolling - 5 min",
+        "Resistance Band Activation - 4x12",
+        "Single-Leg Stability Drills - 3x10",
+        "Plyometric Stability Drills - 3x10"
+      ]
+    }
+}

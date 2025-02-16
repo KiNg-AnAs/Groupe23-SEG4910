@@ -1,0 +1,67 @@
+.ai-coaching-section {
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+  }
+  
+  .ai-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .ai-description {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.8;
+  }
+  
+  .training-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .training-card.completed {
+    background: rgba(0, 255, 0, 0.2);
+    border: 2px solid #00ff00;
+  }
+  
+  .training-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .workout-type {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ff9d00;
+  }
+  
+  .exercise-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .exercise-list li {
+    font-size: 1rem;
+    margin: 5px 0;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+  }
+  
+  .video-container {
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  @media (max-width: 768px) {
+    .training-card {
+      margin-bottom: 20px;
+    }
+  }
+  

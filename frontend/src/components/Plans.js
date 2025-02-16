@@ -46,9 +46,9 @@ const plans = [
 const Plans = ({ cartItem, setCartItem }) => {
   const handleAddToCart = (plan) => {
     if (cartItem?.title === plan.title) {
-      setCartItem(null); // Remove if already selected
+      setCartItem(null); 
     } else {
-      setCartItem(plan); // Replace with new plan
+      setCartItem(plan); 
     }
   };
 
