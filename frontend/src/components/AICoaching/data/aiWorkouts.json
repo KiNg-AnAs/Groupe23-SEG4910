@@ -1,0 +1,43 @@
+{
+    "Muscle Gain": {
+      "3-4 times a week": [
+        {
+          "day": "Monday",
+          "type": "Strength Training",
+          "exercises": [
+            { "name": "Bench Press", "sets": 4, "reps": 10, "video": "https://www.youtube.com/embed/SCVCLChPQFY" },
+            { "name": "Squats", "sets": 4, "reps": 12, "video": "https://www.youtube.com/embed/YaXPRqUwItQ" }
+          ]
+        },
+        {
+          "day": "Wednesday",
+          "type": "Hypertrophy Training",
+          "exercises": [
+            { "name": "Deadlifts", "sets": 4, "reps": 8, "video": "https://www.youtube.com/embed/3UwO0fKukRw" },
+            { "name": "Bicep Curls", "sets": 3, "reps": 12, "video": "https://www.youtube.com/embed/ykJmrZ5v0Oo" }
+          ]
+        }
+      ]
+    },
+    "Fat Loss": {
+      "3-4 times a week": [
+        {
+          "day": "Tuesday",
+          "type": "Cardio & HIIT",
+          "exercises": [
+            { "name": "Jump Rope", "sets": 3, "reps": "2 min", "video": "https://www.youtube.com/embed/v45vYl_JxF8" },
+            { "name": "Burpees", "sets": 4, "reps": 12, "video": "https://www.youtube.com/embed/JZQA08SlJnM" }
+          ]
+        },
+        {
+          "day": "Thursday",
+          "type": "Circuit Training",
+          "exercises": [
+            { "name": "Mountain Climbers", "sets": 3, "reps": "30 sec", "video": "https://www.youtube.com/embed/lbLUFGjj7Ao" },
+            { "name": "Battle Ropes", "sets": 4, "reps": "20 sec", "video": "https://www.youtube.com/embed/nZX6AXvH4v4" }
+          ]
+        }
+      ]
+    }
+  }
+  

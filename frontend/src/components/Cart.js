@@ -17,7 +17,7 @@ const Cart = ({ cartItems, cartItem, setCartItem, removeFromCart }) => {
 
   return (
     <section id="cart" className="cart-section">
-      <Container>
+      <Container className="cart-section-container">
         <h2 className="section-title">Your Cart</h2>
 
         {/* Display Selected Plan */}

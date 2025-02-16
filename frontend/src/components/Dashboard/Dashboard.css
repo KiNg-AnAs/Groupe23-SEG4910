@@ -1,0 +1,54 @@
+
+.dashboard-container-section {
+    text-align: center;
+    padding: 150px;
+    background: url("../Assets/img20.jpeg") no-repeat center center fixed;
+    color: white;
+    border-radius: 15px;
+  }
+  
+  .dashboard-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-intro {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .dashboard-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .dashboard-card {
+    background: linear-gradient(90deg, #ff9d0000, #f9f9f930);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    border-color: azure;
+  }
+  
+  .dashboard-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .dashboard-card h4 {
+    color: white;
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-card p {
+    font-size: 1.1rem;
+    color: #ddd;
+  }
+  
+  .dashboard-card button {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  

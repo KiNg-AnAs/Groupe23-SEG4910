@@ -1,9 +1,9 @@
 import React from "react";
 import { Carousel, Container, Button, Row, Col } from "react-bootstrap";
 import "./HeroSection.css"; // Import CSS file
-import img1 from "./Assets/img1.jpg";
-import img2 from "./Assets/img2.jpg";
-import img3 from "./Assets/img3.jpg";
+import img1 from "../Assets/img1.jpg";
+import img2 from "../Assets/img2.jpg";
+import img3 from "../Assets/img3.jpg";
 
 
 const HeroSection = () => {
