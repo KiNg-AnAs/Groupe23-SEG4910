@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Button, ListGroup, Modal } from "react-bootstrap";
 import "./Cart.css";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe("your_publishable_key_here");
+
 
 const Cart = ({ cartItems, cartItem, setCartItem, removeFromCart }) => {
   const [showModal, setShowModal] = useState(false);
@@ -12,8 +16,9 @@ const Cart = ({ cartItems, cartItem, setCartItem, removeFromCart }) => {
 
   // Function to handle checkout
   const handleCheckout = () => {
-    setShowModal(true);
+    window.location.href = "https://buy.stripe.com/test_7sI5oabF364n2J2dQR"; // Replace with your Stripe Payment Link
   };
+  
 
   return (
     <section id="cart" className="cart-section">
