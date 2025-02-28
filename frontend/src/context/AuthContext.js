@@ -1,48 +1,35 @@
-import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { createContext, useContext } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export const AuthContext = createContext(); // Ensure this is correctly exported
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("http://localhost:5000/api/auth/me", {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        .then((res) => setUser(res.data.user))
-        .catch(() => localStorage.removeItem("token"));
-    }
-  }, []);
-
-  const login = async (email, password) => {
+  const fetchWithAuth = async (endpoint, options = {}) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password
+      const token = await getAccessTokenSilently();
+      const response = await fetch(endpoint, {
+        ...options,
+        headers: {
+          ...options.headers,
+          Authorization: `Bearer ${token}`,
+        },
       });
-      localStorage.setItem("token", res.data.token);
-      setUser(res.data.user);
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Login failed", err);
-    }
-  };
+      console.log("JWT Token:", token);
+      return response.json();
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    navigate("/login");
+    } catch (error) {
+      console.error("API Request Failed:", error);
+      throw error;
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, loginWithRedirect, logout, fetchWithAuth }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);
