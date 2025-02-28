@@ -15,6 +15,7 @@ const plans = [
       "Basic Nutrition Guide",
     ],
     popular: false,
+    paymentLink: "https://buy.stripe.com/test_bIY4k6aAZ2Sb83mfZ2", // Replace with your Stripe link
   },
   {
     title: "Advanced Plan",
@@ -27,6 +28,7 @@ const plans = [
       "1-on-1 Monthly Coaching Session",
     ],
     popular: true,
+    paymentLink: "https://buy.stripe.com/test_7sI5oaeRf1O76Zi7sv", // Replace with your Stripe link
   },
   {
     title: "Elite Athlete Plan",
@@ -40,15 +42,17 @@ const plans = [
       "Advanced Caloric Burn Prediction Tool",
     ],
     popular: false,
+    paymentLink: "https://buy.stripe.com/test_bIY2bY6kJcsL2J23ce", // Replace with your Stripe link
   },
 ];
 
 const Plans = ({ cartItem, setCartItem }) => {
   const handleAddToCart = (plan) => {
     if (cartItem?.title === plan.title) {
-      setCartItem(null); 
+      setCartItem(null);
     } else {
-      setCartItem(plan); 
+      setCartItem(plan);
+      window.location.href = plan.paymentLink; // Redirect user to Stripe Checkout
     }
   };
 
@@ -87,6 +91,8 @@ const Plans = ({ cartItem, setCartItem }) => {
       </Container>
     </section>
   );
+
 };
+
 
 export default Plans;
