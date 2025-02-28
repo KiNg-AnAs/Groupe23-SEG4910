@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container, Nav, Navbar, Button, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { FaDumbbell, FaShoppingCart } from "react-icons/fa";
 import "./NavigationBar.css";
 
 const NavigationBar = ({ cartItems }) => {
-  const authContext = useContext(AuthContext);
-  const user = authContext?.user;
-  const logout = authContext?.logout;
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth();
   const navigate = useNavigate();
 
   const scrollToSection = (id) => {
@@ -38,7 +36,6 @@ const NavigationBar = ({ cartItems }) => {
             <Nav.Link onClick={() => scrollToSection("about")}>About</Nav.Link>
             <Nav.Link onClick={() => scrollToSection("testimonials")}>Testimonials</Nav.Link>
 
-            {/* Drilldown for Programs */}
             <NavDropdown title="Programs" id="programs-dropdown">
               <NavDropdown.Item onClick={() => scrollToSection("best-program")}>
                 AI-Generated Program
@@ -57,18 +54,22 @@ const NavigationBar = ({ cartItems }) => {
               <FaShoppingCart />
               {cartItems.length > 0 && <span className="cart-badge">{cartItems.length}</span>}
             </Nav.Link>
-            {user ? (
-              <>
-                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-                <Button variant="outline-light" className="ms-3" onClick={logout}>
-                  Logout
-                </Button>
-              </>
+
+            <Nav className="ms-auto align-items-center d-flex">
+            /*Use AuthContext for Authentication Logic */
+            {isAuthenticated ? (
+                <>
+                  <span className="text-white me-3">{user?.name?.split(" ")[0] || "User"}</span>
+                  <Button variant="outline-light" className="ms-3"
+                          onClick={() => logout({returnTo: window.location.origin})}>
+                    Logout
+                  </Button>
+                </>
             ) : (
-              <Button variant="warning" className="ms-3" as={Link} to="/login">
+                <Button variant="warning" className="ms-3" onClick={loginWithRedirect}>
                 Login
               </Button>
-            )}
+            )}</Nav>
           </Nav>
         </Navbar.Collapse>
       </Container>
