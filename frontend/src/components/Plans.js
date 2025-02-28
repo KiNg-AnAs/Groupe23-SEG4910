@@ -15,7 +15,7 @@ const plans = [
       "Basic Nutrition Guide",
     ],
     popular: false,
-    paymentLink: "https://buy.stripe.com/test_bIY4k6aAZ2Sb83mfZ2", // Replace with your Stripe link
+    paymentLink: "https://buy.stripe.com/test_bIY4k6aAZ2Sb83mfZ2",
   },
   {
     title: "Advanced Plan",
@@ -28,7 +28,7 @@ const plans = [
       "1-on-1 Monthly Coaching Session",
     ],
     popular: true,
-    paymentLink: "https://buy.stripe.com/test_7sI5oaeRf1O76Zi7sv", // Replace with your Stripe link
+    paymentLink: "https://buy.stripe.com/test_7sI5oaeRf1O76Zi7sv",
   },
   {
     title: "Elite Athlete Plan",
@@ -42,7 +42,7 @@ const plans = [
       "Advanced Caloric Burn Prediction Tool",
     ],
     popular: false,
-    paymentLink: "https://buy.stripe.com/test_bIY2bY6kJcsL2J23ce", // Replace with your Stripe link
+    paymentLink: "https://buy.stripe.com/test_bIY2bY6kJcsL2J23ce",
   },
 ];
 
