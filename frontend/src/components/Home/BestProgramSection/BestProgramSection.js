@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import "./BestProgramSection.css";
-import img15 from "./Assets/img15.jpg"; 
-import img13 from "./Assets/img13.jpg"; 
+import img15 from "../../Assets/img15.jpg"; 
+import img13 from "../../Assets/img13.jpg"; 
 
 const BestProgramSection = () => {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Carousel } from "react-bootstrap";
 import "./Testimonials.css";
-import img4 from "./Assets/img4.jpg";
-import img5 from "./Assets/img5.jpg";
-import img6 from "./Assets/img6.jpg";
+import img4 from "../../Assets/img4.jpg";
+import img5 from "../../Assets/img5.jpg";
+import img6 from "../../Assets/img6.jpg";
 
 const Testimonials = () => {
   const testimonials = [

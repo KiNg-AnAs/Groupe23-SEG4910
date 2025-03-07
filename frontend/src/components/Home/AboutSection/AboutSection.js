@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import "./AboutSection.css";
-import img7 from "./Assets/img7.1.jpg";
+import img7 from "../../Assets/img7.1.jpg";
 
 
 const AboutSection = () => {

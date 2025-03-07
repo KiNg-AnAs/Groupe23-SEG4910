@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Collapse } from "react-bootstrap";
 import CoachPrograms from "../CoachPrograms/CoachPrograms";
-import AddOns from "../AddOns/AddOns";
+import AddOns from "../../../Shared/AddOns/AddOns";
 import AICoaching from "../AICoaching/AICoaching"; 
 import "./Dashboard.css";
 
