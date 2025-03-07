@@ -16,7 +16,7 @@ const Cart = ({ cartItems, cartItem, setCartItem, removeFromCart }) => {
 
   // Function to handle checkout
   const handleCheckout = () => {
-    window.location.href = "https://buy.stripe.com/test_7sI5oabF364n2J2dQR"; // Replace with your Stripe Payment Link
+    window.location.href = "https://buy.stripe.com/test_7sI5oabF364n2J2dQR";
   };
   
 

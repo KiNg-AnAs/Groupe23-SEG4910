@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Button, Modal, Carousel } from "react-bootstrap";
-import AddOns from "../components/AddOns/AddOns";  
+import AddOns from "../../Shared/AddOns/AddOns";  
 import "./ProgramsOverview.css";
-import img7 from "../components/Assets/img7.jpg";
-import img8 from "../components/Assets/img8.jpg";
-import img9 from "../components/Assets/img9.jpg";
-import img10 from "../components/Assets/img10.jpg";
-import img12 from "../components/Assets/img12.jpg";
-import img18 from "../components/Assets/img18.jpg";
-import img22 from "../components/Assets/img22.jpg";
+import img7 from "../../Assets/img7.jpg";
+import img8 from "../../Assets/img8.jpg";
+import img9 from "../../Assets/img9.jpg";
+import img10 from "../../Assets/img10.jpg";
+import img12 from "../../Assets/img12.jpg";
+import img18 from "../../Assets/img18.jpg";
+import img22 from "../../Assets/img22.jpg";
 
 const programs = [
   { title: "Strength & Hypertrophy", description: "Increase muscle mass and strength.", image: img7, details: "Gain muscle and maximize hypertrophy." },

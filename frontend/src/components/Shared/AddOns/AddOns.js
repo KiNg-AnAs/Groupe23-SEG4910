@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
 import "./AddOns.css";
-import img13 from "../Assets/img13.jpg";
-import img14 from "../Assets/img14.jpg";
-import img15 from "../Assets/img15.jpg";
-import img16 from "../Assets/img16.jpg";
-import img17 from "../Assets/img17.jpg";
+import img13 from "../../Assets/img13.jpg";
+import img14 from "../../Assets/img14.jpg";
+import img15 from "../../Assets/img15.jpg";
+import img16 from "../../Assets/img16.jpg";
+import img17 from "../../Assets/img17.jpg";
 
 const premiumAddons = [
   { title: "E-Book: Science-Based Training", description: "Comprehensive guide.", image: img13, price: "$29.99", details: "Expert-written fitness guide covering workout optimization, diet strategies, and scientific insights for peak performance." },
