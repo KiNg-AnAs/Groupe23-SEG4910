@@ -1,7 +1,11 @@
 import React from "react";
 import { Container, Nav, Navbar, Button, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+<<<<<<< HEAD:frontend/src/components/Shared/NavigationBar/NavigationBar.js
 import { useAuth } from "../../../context/AuthContext";
+=======
+import { useAuth } from "../context/AuthContext";
+>>>>>>> main:frontend/src/components/NavigationBar.js
 import { FaDumbbell, FaShoppingCart } from "react-icons/fa";
 import "./NavigationBar.css";
 
