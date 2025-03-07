@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { AuthProvider } from "./context/AuthContext";
-<<<<<<< HEAD
 import NavigationBar from "./components/Shared/NavigationBar/NavigationBar";
 import HeroSection from "./components/Home/HeroSection/HeroSection";
 import AboutSection from "./components/Home/AboutSection/AboutSection";
@@ -15,20 +14,6 @@ import Footer from "./components/Shared/Footer/Footer";
 import Dashboard from "./components/Board/Client/Dashboard/Dashboard";
 import OnboardingForm from "./components/Onboarding/OnboardingForm/OnboardingForm";
 import AddOns from "./components/Shared/AddOns/AddOns";
-=======
-import NavigationBar from "./components/NavigationBar";
-import HeroSection from "./components/Home/HeroSection";
-import AboutSection from "./components/AboutSection";
-import Testimonials from "./components/Testimonials";
-import BestProgramSection from "./components/BestProgramSection";
-import ProgramsOverview from "./components/ProgramsOverview";
-import Plans from "./components/Plans";
-import Cart from "./components/Cart"; 
-import Footer from "./components/Footer";
-import Dashboard from "./components/Dashboard/Dashboard";
-import OnboardingForm from "./components/Onboarding/OnboardingForm";
-import AddOns from "./components/AddOns/AddOns";
->>>>>>> main
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
