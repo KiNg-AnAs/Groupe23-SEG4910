@@ -1,0 +1,153 @@
+.nutrition-guide-section {
+    padding: 50px 20px;
+    color: white;
+    text-align: center;
+    border-width: 2px;
+    border-color: aliceblue;
+  }
+  
+  /* Title Adjustments */
+  .nutrition-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Inputs Layout */
+  .nutrition-inputs {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nutrition-inputs .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .calculate-btn {
+    margin-top: 20px;
+  }
+  
+/* Result Cards */
+.results-section {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 15px;
+  }
+  
+  .result-card {
+    background: rgb(255, 253, 253);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;  
+    min-width: 250px;  
+    white-space: normal;  
+    word-wrap: break-word; 
+  }
+  
+  .result-card h5 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .result-card p {
+    font-size: 1.1rem;
+    color: black;
+    line-height: 1.4; 
+  }
+  
+  @media (max-width: 768px) {
+    .result-card {
+      max-width: 90%;  
+      text-align: center;
+    }
+  }
+  
+  /* Meal Plan Carousel */
+  .meal-plan-carousel {
+    margin-top: 30px;
+  }
+  
+  .meal-card {
+    background: rgba(255, 255, 255, 0.402);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px auto;
+    text-align: center;
+    max-width: 400px;
+  }
+  
+  .meal-card h5 {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+  
+  .meal-info {
+    font-size: 1rem;
+    color: white;
+  }
+  
+  .total-summary {
+    margin-top: 30px;
+    background: rgba(239, 239, 239, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .total-summary h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .carousel-control-prev, .carousel-control-next {
+    width: 8%;
+  }
+  
+  .meal-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Design for Small Screens */
+  @media (max-width: 768px) {
+    .nutrition-title {
+      font-size: 2rem;
+    }
+  
+    .result-card {
+      max-width: 100%;
+      padding: 15px;
+    }
+  
+    .meal-card {
+      max-width: 90%;
+    }
+  
+    .meal-title {
+      font-size: 1rem;
+    }
+  
+    .meal-info {
+      font-size: 0.95rem;
+    }
+  
+    .carousel-control-prev, .carousel-control-next {
+      width: 10%;
+    }
+
+  }
+  

@@ -1,17 +1,30 @@
 import React from "react";
 import { Carousel, Container, Button, Row, Col } from "react-bootstrap";
+import { useAuth } from "../../../context/AuthContext"; // Import Auth Context
+import { useNavigate } from "react-router-dom";
 import "./HeroSection.css"; // Import CSS file
 import img1 from "../../Assets/img1.jpg";
 import img2 from "../../Assets/img2.jpg";
 import img3 from "../../Assets/img3.jpg";
 
-
 const HeroSection = () => {
+  const { isAuthenticated, loginWithRedirect } = useAuth(); // Get Auth State
+  const navigate = useNavigate();
+
+  // Handle "Get Started" Click
+  const handleGetStarted = () => {
+    if (isAuthenticated) {
+      navigate("/dashboard"); // Redirect to Dashboard if logged in
+    } else {
+      loginWithRedirect(); // Redirect to login if not authenticated
+    }
+  };
+
   return (
     <section id="hero" className="hero-section">
       <Container>
         <Row className="align-items-center">
-                    <Col lg={6}>
+          <Col lg={6}>
             <Carousel className="hero-carousel">
               <Carousel.Item>
                 <img className="d-block w-100" src={img1} alt="Training in Action" />
@@ -46,16 +59,14 @@ const HeroSection = () => {
               </div>
             </div>
             <div className="hero-buttons">
-                <Button variant="warning" className="btn-lg" href="/Login">
-                    Get Started
-                </Button>
-                <Button variant="outline-light" className="btn-lg" href="#programs">
-                    Explore Programs
-                </Button>
+              <Button variant="warning" className="btn-lg" onClick={handleGetStarted}>
+                Get Started
+              </Button>
+              <Button variant="outline-light" className="btn-lg" href="#best-program">
+                Explore Programs
+              </Button>
             </div>
-
           </Col>
-
         </Row>
       </Container>
     </section>
@@ -63,4 +74,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-

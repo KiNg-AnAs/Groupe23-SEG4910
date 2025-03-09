@@ -10,9 +10,8 @@ const plans = [
     image: "./Assets/img21.jpg",
     icon: <FaDumbbell className="plan-icon" />,
     features: [
-      "AI-Generated Training Plans",
-      "Workout & Progress Tracking",
-      "Basic Nutrition Guide",
+      "- AI-Generated Training Plans",
+      "- Workout & Progress Tracking",
     ],
     popular: false,
     paymentLink: "https://buy.stripe.com/test_bIY4k6aAZ2Sb83mfZ2",
@@ -23,27 +22,25 @@ const plans = [
     image: "./Assets/img22.jpg",
     icon: <FaStar className="plan-icon" />,
     features: [
-      "All features from the Basic Plan",
-      "Personalized AI Nutrition Plan updated weekly",
-      "1-on-1 Monthly Coaching Session",
+      "- All features from the Basic Plan",
+      "- Personalized AI Nutrition Plan updated weekly",
+      "- Unlimited access to add-ons with one free booking per month.",
     ],
     popular: true,
     paymentLink: "https://buy.stripe.com/test_7sI5oaeRf1O76Zi7sv",
   },
-  {
-    title: "Elite Athlete Plan",
-    price: "$99 / month",
-    image: "./Assets/img23.jpg",
-    icon: <FaCrown className="plan-icon" />,
-    features: [
-      "All features from the Advanced Plan",
-      "Opportunity to train with the coach (Bi-weekly)",
-      "Access to Fitness E-Book",
-      "Advanced Caloric Burn Prediction Tool",
-    ],
-    popular: false,
-    paymentLink: "https://buy.stripe.com/test_bIY2bY6kJcsL2J23ce",
-  },
+  // {
+  //   title: "Elite Athlete Plan",
+  //   price: "$99 / month",
+  //   image: "./Assets/img23.jpg",
+  //   icon: <FaCrown className="plan-icon" />,
+  //   features: [
+  //     "- All features from the Advanced Plan",
+  //     "- Advanced Caloric Burn Prediction Tool",
+  //   ],
+  //   popular: false,
+  //   paymentLink: "https://buy.stripe.com/test_bIY2bY6kJcsL2J23ce",
+  // },
 ];
 
 const Plans = ({ cartItem, setCartItem }) => {

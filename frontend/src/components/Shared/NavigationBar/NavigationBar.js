@@ -6,7 +6,7 @@ import { FaDumbbell, FaShoppingCart } from "react-icons/fa";
 import "./NavigationBar.css";
 
 const NavigationBar = ({ cartItems }) => {
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth();
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth();
   const navigate = useNavigate();
 
   const scrollToSection = (id) => {
@@ -36,6 +36,7 @@ const NavigationBar = ({ cartItems }) => {
             <Nav.Link onClick={() => scrollToSection("about")}>About</Nav.Link>
             <Nav.Link onClick={() => scrollToSection("testimonials")}>Testimonials</Nav.Link>
 
+            {/* Programs Dropdown */}
             <NavDropdown title="Programs" id="programs-dropdown">
               <NavDropdown.Item onClick={() => scrollToSection("best-program")}>
                 AI-Generated Program
@@ -43,33 +44,48 @@ const NavigationBar = ({ cartItems }) => {
               <NavDropdown.Item onClick={() => scrollToSection("programs")}>
                 Coach-Specific Training Programs
               </NavDropdown.Item>
+              <NavDropdown.Item onClick={() => scrollToSection("addons-section")}>
+                Premium Add-Ons
+              </NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link onClick={() => scrollToSection("plans")}>Plans</Nav.Link>
 
-            <Nav.Link as={Link} to="/onboarding">Onboarding</Nav.Link>
-            <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+            {/* Show Onboarding & Dashboard for All Authenticated Users */}
+            {isAuthenticated && (
+              <>
+                <Nav.Link as={Link} to="/onboarding">Onboarding</Nav.Link>
+                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+              </>
+            )}
 
+            {/* Added Coach Dashboard for Everyone (For Testing) */}
+            <Nav.Link as={Link} to="/coach-dashboard">Coach Dashboard</Nav.Link>
+
+            {/* Cart Icon */}
             <Nav.Link as={Link} to="/cart" className="cart-icon">
               <FaShoppingCart />
               {cartItems.length > 0 && <span className="cart-badge">{cartItems.length}</span>}
             </Nav.Link>
 
+            {/* Authentication Logic */}
             <Nav className="ms-auto align-items-center d-flex">
-            /*Use AuthContext for Authentication Logic */
-            {isAuthenticated ? (
+              {isAuthenticated ? (
                 <>
-                  <span className="text-white me-3">{user?.name?.split(" ")[0] || "User"}</span>
-                  <Button variant="outline-light" className="ms-3"
-                          onClick={() => logout({returnTo: window.location.origin})}>
+                  <Button 
+                    variant="outline-light" 
+                    className="ms-3"
+                    onClick={() => logout({ returnTo: window.location.origin })}
+                  >
                     Logout
                   </Button>
                 </>
-            ) : (
+              ) : (
                 <Button variant="warning" className="ms-3" onClick={loginWithRedirect}>
-                Login
-              </Button>
-            )}</Nav>
+                  Login
+                </Button>
+              )}
+            </Nav>
           </Nav>
         </Navbar.Collapse>
       </Container>
