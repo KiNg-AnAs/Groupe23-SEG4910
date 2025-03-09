@@ -1,0 +1,34 @@
+.client-management-container {
+    padding: 40px;
+    background: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .search-add-row {
+    margin-bottom: 20px;
+  }
+  
+  .client-table {
+    margin-top: 20px;
+  }
+  
+  .client-table th, .client-table td {
+    text-align: center;
+  }
+  
+  .client-table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .client-table tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+  

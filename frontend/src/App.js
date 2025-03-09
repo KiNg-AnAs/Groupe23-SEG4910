@@ -14,6 +14,7 @@ import Footer from "./components/Shared/Footer/Footer";
 import Dashboard from "./components/Board/Client/Dashboard/Dashboard";
 import OnboardingForm from "./components/Onboarding/OnboardingForm/OnboardingForm";
 import AddOns from "./components/Shared/AddOns/AddOns";
+import CoachDashboard from "./components/Board/Coach/CoachDashboard/CoachDashboard"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -76,6 +77,7 @@ function App() {
           <Route path="/add-ons" element={<AddOns addToCart={addToCart} />} /> 
           <Route path="/cart" element={<Cart cartItems={cartItems} cartItem={cartItem} removeFromCart={removeFromCart} setCartItem={setCartItem} />} /> 
           <Route path="/onboarding" element={<OnboardingForm saveUserData={saveUserData} />} />
+          <Route path="/coach-dashboard" element={<CoachDashboard />} /> 
         </Routes>
        </AuthProvider>
        </Router>

@@ -1,54 +1,118 @@
-
 .dashboard-container-section {
-    text-align: center;
-    padding: 150px;
-    background: url("../../../Assets/img20.jpeg") no-repeat center center fixed;
-    color: white;
-    border-radius: 15px;
-  }
-  
-  .dashboard-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .dashboard-intro {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-  }
-  
-  .dashboard-options {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .dashboard-card {
-    background: linear-gradient(90deg, #ff9d0000, #f9f9f930);
-    border-radius: 10px;
+  background: url("../../../Assets/img20.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 15px;
+}
+
+.dashboard-container {
+  text-align: center;
+  color: white;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.dashboard-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dashboard-intro {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Responsive Layout */
+.dashboard-options {
+  display: flex;
+  flex-wrap: wrap; /* Allows stacking on smaller screens */
+  justify-content: center;
+  gap: 20px;
+  padding: 0 10px;
+}
+
+/* Card Styling */
+.dashboard-card {
+  background: linear-gradient(90deg, rgba(255, 157, 0, 0.2), rgba(249, 249, 249, 0.15));
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  border: 1px solid azure;
+  width: 100%;
+  max-width: 350px; 
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dashboard-card:hover {
+  transform: scale(1.05);
+}
+
+.dashboard-card h4 {
+  color: white;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 1rem;
+  color: #ddd;
+  margin-bottom: 15px;
+}
+
+/* Button Styling */
+.dashboard-card button {
+  margin-top: auto;
+  font-size: 1rem;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
     padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    border-color: azure;
   }
-  
-  .dashboard-card:hover {
-    transform: scale(1.05);
+
+  .dashboard-title {
+    font-size: 1.8rem;
   }
-  
-  .dashboard-card h4 {
-    color: white;
-    font-size: 1.5rem;
-  }
-  
-  .dashboard-card p {
-    font-size: 1.1rem;
-    color: #ddd;
-  }
-  
-  .dashboard-card button {
-    margin-top: 10px;
+
+  .dashboard-intro {
     font-size: 1rem;
   }
-  
+
+  .dashboard-options {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .dashboard-card {
+    max-width: 100%;
+    width: 90%;
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .dashboard-card h4 {
+    font-size: 1.3rem;
+  }
+
+  .dashboard-card p {
+    font-size: 0.95rem;
+  }
+
+  .dashboard-card button {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+}

@@ -1,0 +1,70 @@
+/* General Section */
+.booking-management-section {
+    padding: 50px 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Section Title */
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Section Description */
+  .section-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.8;
+  }
+  
+  /* Booking Table */
+  .booking-table {
+    margin-top: 20px;
+  }
+  
+  .booking-table th,
+  .booking-table td {
+    text-align: center;
+    padding: 12px;
+  }
+  
+  .booking-table th {
+    background: #343a40;
+    color: white;
+  }
+  
+  .booking-table tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Status Labels */
+  .status-confirmed {
+    color: #28a745;
+    font-weight: bold;
+  }
+  
+  .status-pending {
+    color: #ffc107;
+    font-weight: bold;
+  }
+  
+  /* Buttons */
+  button {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .booking-table th,
+    .booking-table td {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  }
+  

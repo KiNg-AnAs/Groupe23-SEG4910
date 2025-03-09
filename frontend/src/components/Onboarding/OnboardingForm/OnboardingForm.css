@@ -1,5 +1,6 @@
 .onboarding-container-section {
     background: url("../../Assets/img2.jpg") no-repeat center center fixed;
+    background-size: cover;
 
 }
 

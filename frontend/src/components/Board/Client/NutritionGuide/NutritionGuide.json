@@ -1,0 +1,570 @@
+{
+    "breakfast": {
+        "Balanced": [
+            {
+                "name": "Oatmeal with Almond Butter & Banana",
+                "calories": 350,
+                "protein": 10,
+                "carbs": 45,
+                "fats": 12,
+                "description": "Warm oatmeal topped with almond butter, banana slices, and a drizzle of honey."
+            },
+            {
+                "name": "Greek Yogurt & Granola Bowl",
+                "calories": 400,
+                "protein": 20,
+                "carbs": 50,
+                "fats": 10,
+                "description": "Thick Greek yogurt topped with granola, honey, and mixed berries."
+            },
+            {
+                "name": "Whole Wheat Toast with Avocado & Egg",
+                "calories": 420,
+                "protein": 22,
+                "carbs": 40,
+                "fats": 18,
+                "description": "Crispy whole wheat toast topped with mashed avocado, a poached egg, and a sprinkle of chili flakes."
+            }
+        ],
+        "Vegan": [
+            {
+                "name": "Chia Seed Pudding with Berries",
+                "calories": 380,
+                "protein": 12,
+                "carbs": 40,
+                "fats": 18,
+                "description": "Chia seeds soaked in almond milk overnight, served with fresh berries and a drizzle of maple syrup."
+            },
+            {
+                "name": "Tofu Scramble with Spinach & Mushrooms",
+                "calories": 420,
+                "protein": 25,
+                "carbs": 30,
+                "fats": 18,
+                "description": "Crumbled tofu sautéed with turmeric, spinach, and mushrooms, served with whole wheat toast."
+            },
+            {
+                "name": "Smoothie Bowl with Coconut & Nuts",
+                "calories": 450,
+                "protein": 15,
+                "carbs": 60,
+                "fats": 15,
+                "description": "Blended banana, berries, and coconut milk topped with shredded coconut, almonds, and chia seeds."
+            }
+        ],
+        "Keto": [
+            {
+                "name": "Scrambled Eggs with Avocado & Cheese",
+                "calories": 480,
+                "protein": 28,
+                "carbs": 8,
+                "fats": 38,
+                "description": "Fluffy scrambled eggs cooked in butter, served with avocado slices and shredded cheese."
+            },
+            {
+                "name": "Keto Pancakes with Butter & Berries",
+                "calories": 460,
+                "protein": 22,
+                "carbs": 10,
+                "fats": 40,
+                "description": "Almond flour pancakes cooked in butter, served with a handful of fresh berries and sugar-free syrup."
+            },
+            {
+                "name": "Smoked Salmon & Cream Cheese Roll-Ups",
+                "calories": 410,
+                "protein": 30,
+                "carbs": 6,
+                "fats": 32,
+                "description": "Slices of smoked salmon wrapped around cream cheese and fresh dill, served with cucumber slices."
+            }
+        ],
+        "High-Protein": [
+            {
+                "name": "Egg White Omelette with Turkey & Spinach",
+                "calories": 380,
+                "protein": 40,
+                "carbs": 15,
+                "fats": 12,
+                "description": "Egg whites cooked into an omelette with lean turkey slices, spinach, and feta cheese."
+            },
+            {
+                "name": "Protein Smoothie with Peanut Butter",
+                "calories": 420,
+                "protein": 45,
+                "carbs": 35,
+                "fats": 12,
+                "description": "Blended banana, whey protein, peanut butter, and almond milk for a high-protein breakfast."
+            },
+            {
+                "name": "Cottage Cheese with Walnuts & Honey",
+                "calories": 390,
+                "protein": 35,
+                "carbs": 30,
+                "fats": 15,
+                "description": "Creamy cottage cheese topped with crushed walnuts and a drizzle of honey."
+            }
+        ],
+        "Mediterranean": [
+            {
+                "name": "Greek Yogurt with Honey & Nuts",
+                "calories": 400,
+                "protein": 25,
+                "carbs": 45,
+                "fats": 12,
+                "description": "Greek yogurt mixed with honey, crushed walnuts, and fresh figs."
+            },
+            {
+                "name": "Hummus & Whole Wheat Pita",
+                "calories": 420,
+                "protein": 20,
+                "carbs": 50,
+                "fats": 14,
+                "description": "Creamy hummus served with warm whole wheat pita and cucumber slices."
+            },
+            {
+                "name": "Olive Oil Scrambled Eggs with Feta",
+                "calories": 450,
+                "protein": 28,
+                "carbs": 10,
+                "fats": 35,
+                "description": "Scrambled eggs cooked in extra virgin olive oil, topped with feta cheese and fresh parsley."
+            }
+        ]
+    },
+    "lunch": {
+        "Balanced": [
+            {
+                "name": "Grilled Chicken Salad with Quinoa",
+                "calories": 550,
+                "protein": 45,
+                "carbs": 50,
+                "fats": 15,
+                "description": "Grilled chicken breast served on a bed of quinoa, mixed greens, cherry tomatoes, and balsamic vinaigrette."
+            },
+            {
+                "name": "Salmon & Brown Rice Bowl",
+                "calories": 620,
+                "protein": 50,
+                "carbs": 55,
+                "fats": 20,
+                "description": "Oven-baked salmon filet served with steamed brown rice, roasted vegetables, and a squeeze of lemon."
+            }
+        ],
+        "Vegan": [
+            {
+                "name": "Lentil & Sweet Potato Buddha Bowl",
+                "calories": 520,
+                "protein": 22,
+                "carbs": 65,
+                "fats": 12,
+                "description": "Roasted sweet potatoes, seasoned lentils, avocado, and tahini dressing served in a bowl."
+            },
+            {
+                "name": "Chickpea & Spinach Curry with Brown Rice",
+                "calories": 570,
+                "protein": 24,
+                "carbs": 70,
+                "fats": 14,
+                "description": "Spicy chickpea and spinach curry served with brown rice and fresh cilantro."
+            }
+        ],
+        "Keto": [
+            {
+                "name": "Grilled Steak with Cauliflower Mash",
+                "calories": 650,
+                "protein": 55,
+                "carbs": 12,
+                "fats": 40,
+                "description": "Grilled ribeye steak served with creamy garlic cauliflower mash and buttered asparagus."
+            },
+            {
+                "name": "Chicken Caesar Salad (No Croutons)",
+                "calories": 480,
+                "protein": 40,
+                "carbs": 8,
+                "fats": 32,
+                "description": "Crisp romaine lettuce topped with grilled chicken, parmesan cheese, and creamy Caesar dressing."
+            }
+        ],
+        "High-Protein": [
+            {
+                "name": "Turkey & Brown Rice Stir Fry",
+                "calories": 620,
+                "protein": 55,
+                "carbs": 60,
+                "fats": 15,
+                "description": "Ground turkey stir-fried with bell peppers, onions, and brown rice."
+            },
+            {
+                "name": "Egg White & Tuna Wrap",
+                "calories": 530,
+                "protein": 50,
+                "carbs": 55,
+                "fats": 10,
+                "description": "Whole wheat wrap filled with tuna, egg whites, spinach, and Greek yogurt dressing."
+            }
+        ],
+        "Mediterranean": [
+            {
+                "name": "Grilled Chicken with Hummus & Pita",
+                "calories": 600,
+                "protein": 45,
+                "carbs": 60,
+                "fats": 20,
+                "description": "Grilled chicken breast served with hummus, whole wheat pita, and fresh cucumber slices."
+            },
+            {
+                "name": "Mediterranean Quinoa Bowl",
+                "calories": 540,
+                "protein": 30,
+                "carbs": 65,
+                "fats": 14,
+                "description": "Quinoa mixed with cherry tomatoes, olives, feta cheese, and a lemon-garlic dressing."
+            }
+        ]
+    },
+    "dinner": {
+        "Balanced": [
+            {
+                "name": "Grilled Salmon with Quinoa & Steamed Broccoli",
+                "calories": 620,
+                "protein": 50,
+                "carbs": 55,
+                "fats": 20,
+                "description": "Oven-baked salmon served with quinoa, steamed broccoli, and a side of lemon-garlic sauce."
+            },
+            {
+                "name": "Chicken Stir-Fry with Brown Rice",
+                "calories": 580,
+                "protein": 48,
+                "carbs": 62,
+                "fats": 12,
+                "description": "Chicken breast stir-fried with bell peppers, carrots, and brown rice in a light soy-ginger sauce."
+            },
+            {
+                "name": "Beef & Sweet Potato Stew",
+                "calories": 650,
+                "protein": 52,
+                "carbs": 60,
+                "fats": 18,
+                "description": "Slow-cooked beef stew with sweet potatoes, onions, and carrots in a rich broth."
+            },
+            {
+                "name": "Shrimp & Whole Wheat Pasta",
+                "calories": 580,
+                "protein": 40,
+                "carbs": 65,
+                "fats": 10,
+                "description": "Whole wheat pasta with shrimp, cherry tomatoes, spinach, and garlic-infused olive oil."
+            }
+        ],
+        "Vegan": [
+            {
+                "name": "Chickpea & Spinach Coconut Curry",
+                "calories": 600,
+                "protein": 28,
+                "carbs": 72,
+                "fats": 16,
+                "description": "Chickpeas and spinach cooked in creamy coconut curry sauce served with brown rice."
+            },
+            {
+                "name": "Grilled Tofu with Roasted Vegetables",
+                "calories": 520,
+                "protein": 35,
+                "carbs": 50,
+                "fats": 15,
+                "description": "Marinated tofu grilled to perfection, served with roasted zucchini, eggplant, and bell peppers."
+            },
+            {
+                "name": "Quinoa & Black Bean Chili",
+                "calories": 590,
+                "protein": 32,
+                "carbs": 75,
+                "fats": 10,
+                "description": "A hearty and spicy chili made with quinoa, black beans, tomatoes, and avocado."
+            },
+            {
+                "name": "Vegan Lentil Shepherd's Pie",
+                "calories": 640,
+                "protein": 30,
+                "carbs": 78,
+                "fats": 12,
+                "description": "Mashed sweet potatoes layered over a seasoned lentil and vegetable mix."
+            }
+        ],
+        "Keto": [
+            {
+                "name": "Baked Chicken Thighs with Creamed Spinach",
+                "calories": 650,
+                "protein": 55,
+                "carbs": 10,
+                "fats": 40,
+                "description": "Juicy chicken thighs baked and served with rich, creamy spinach."
+            },
+            {
+                "name": "Garlic Butter Steak with Roasted Cauliflower",
+                "calories": 720,
+                "protein": 60,
+                "carbs": 15,
+                "fats": 45,
+                "description": "A tender steak served with roasted cauliflower and garlic butter sauce."
+            },
+            {
+                "name": "Keto Salmon & Asparagus in Lemon Butter",
+                "calories": 580,
+                "protein": 50,
+                "carbs": 8,
+                "fats": 38,
+                "description": "Pan-seared salmon with a side of sautéed asparagus in a lemon butter sauce."
+            },
+            {
+                "name": "Eggplant Lasagna (No Pasta)",
+                "calories": 600,
+                "protein": 45,
+                "carbs": 14,
+                "fats": 35,
+                "description": "Layered eggplant slices with ricotta cheese, ground beef, and marinara sauce."
+            }
+        ],
+        "High-Protein": [
+            {
+                "name": "Grilled Chicken & Avocado Salad",
+                "calories": 550,
+                "protein": 60,
+                "carbs": 45,
+                "fats": 12,
+                "description": "Grilled chicken breast served over mixed greens, avocado, and a light vinaigrette."
+            },
+            {
+                "name": "Lean Turkey Meatballs with Zucchini Noodles",
+                "calories": 580,
+                "protein": 62,
+                "carbs": 35,
+                "fats": 18,
+                "description": "Turkey meatballs in marinara sauce served over spiralized zucchini noodles."
+            },
+            {
+                "name": "Seared Tuna Steak with Quinoa & Kale",
+                "calories": 610,
+                "protein": 55,
+                "carbs": 50,
+                "fats": 20,
+                "description": "Sliced seared tuna steak served with quinoa and steamed kale."
+            },
+            {
+                "name": "Egg White & Chicken Stir-Fry",
+                "calories": 520,
+                "protein": 68,
+                "carbs": 40,
+                "fats": 8,
+                "description": "Stir-fried chicken breast and egg whites with bell peppers and mushrooms."
+            }
+        ],
+        "Mediterranean": [
+            {
+                "name": "Grilled Lamb with Hummus & Couscous",
+                "calories": 650,
+                "protein": 55,
+                "carbs": 55,
+                "fats": 22,
+                "description": "Grilled lamb chops served with hummus and a side of couscous."
+            },
+            {
+                "name": "Stuffed Bell Peppers with Ground Turkey",
+                "calories": 590,
+                "protein": 50,
+                "carbs": 60,
+                "fats": 14,
+                "description": "Bell peppers stuffed with seasoned ground turkey, tomatoes, and brown rice."
+            },
+            {
+                "name": "Baked Cod with Tomato & Olive Tapenade",
+                "calories": 560,
+                "protein": 52,
+                "carbs": 40,
+                "fats": 18,
+                "description": "Oven-baked cod filet topped with a Mediterranean tapenade of tomatoes and olives."
+            },
+            {
+                "name": "Greek Chicken Souvlaki with Tzatziki",
+                "calories": 600,
+                "protein": 58,
+                "carbs": 50,
+                "fats": 16,
+                "description": "Grilled chicken skewers served with whole wheat pita and homemade tzatziki sauce."
+            }
+        ]
+    },
+    "snacks": {
+        "Balanced": [
+            {
+                "name": "Greek Yogurt with Honey & Almonds",
+                "calories": 250,
+                "protein": 18,
+                "carbs": 25,
+                "fats": 8,
+                "description": "Creamy Greek yogurt topped with raw honey and sliced almonds."
+            },
+            {
+                "name": "Apple Slices with Peanut Butter",
+                "calories": 280,
+                "protein": 8,
+                "carbs": 34,
+                "fats": 12,
+                "description": "Crisp apple slices served with natural peanut butter."
+            },
+            {
+                "name": "Whole Wheat Crackers with Hummus",
+                "calories": 210,
+                "protein": 7,
+                "carbs": 32,
+                "fats": 6,
+                "description": "A crunchy and creamy snack with fiber and protein."
+            },
+            {
+                "name": "Boiled Eggs & Avocado Toast",
+                "calories": 290,
+                "protein": 20,
+                "carbs": 30,
+                "fats": 12,
+                "description": "Toasted whole wheat bread with mashed avocado and sliced boiled eggs."
+            }
+        ],
+        "Vegan": [
+            {
+                "name": "Chia Pudding with Coconut Milk & Berries",
+                "calories": 260,
+                "protein": 9,
+                "carbs": 38,
+                "fats": 10,
+                "description": "Chia seeds soaked in coconut milk topped with fresh berries."
+            },
+            {
+                "name": "Roasted Chickpeas",
+                "calories": 180,
+                "protein": 12,
+                "carbs": 28,
+                "fats": 4,
+                "description": "Crunchy spiced chickpeas roasted in olive oil."
+            },
+            {
+                "name": "Vegan Protein Shake (Almond Milk & Pea Protein)",
+                "calories": 250,
+                "protein": 22,
+                "carbs": 18,
+                "fats": 8,
+                "description": "A plant-based protein shake with almond milk, pea protein, and banana."
+            },
+            {
+                "name": "Carrot & Celery Sticks with Guacamole",
+                "calories": 220,
+                "protein": 4,
+                "carbs": 20,
+                "fats": 15,
+                "description": "Crunchy vegetables paired with creamy avocado dip."
+            }
+        ],
+        "Keto": [
+            {
+                "name": "Cheese Cubes & Almonds",
+                "calories": 300,
+                "protein": 15,
+                "carbs": 5,
+                "fats": 25,
+                "description": "A mix of cheese cubes and roasted almonds for a low-carb, high-fat snack."
+            },
+            {
+                "name": "Avocado Deviled Eggs",
+                "calories": 220,
+                "protein": 12,
+                "carbs": 4,
+                "fats": 18,
+                "description": "Boiled eggs stuffed with mashed avocado and a hint of lemon."
+            },
+            {
+                "name": "Keto Fat Bombs (Coconut & Cocoa)",
+                "calories": 210,
+                "protein": 3,
+                "carbs": 8,
+                "fats": 20,
+                "description": "Coconut oil, cocoa, and nuts blended into energy-packed fat bombs."
+            },
+            {
+                "name": "Bacon-Wrapped Mozzarella Sticks",
+                "calories": 280,
+                "protein": 22,
+                "carbs": 2,
+                "fats": 22,
+                "description": "Mozzarella cheese wrapped in crispy bacon for a keto-friendly snack."
+            }
+        ],
+        "High-Protein": [
+            {
+                "name": "Cottage Cheese & Blueberries",
+                "calories": 220,
+                "protein": 25,
+                "carbs": 18,
+                "fats": 6,
+                "description": "A protein-rich snack with antioxidants from fresh blueberries."
+            },
+            {
+                "name": "Tuna Salad Lettuce Wraps",
+                "calories": 250,
+                "protein": 35,
+                "carbs": 6,
+                "fats": 9,
+                "description": "Tuna mixed with Greek yogurt wrapped in crunchy lettuce leaves."
+            },
+            {
+                "name": "Hard-Boiled Eggs & String Cheese",
+                "calories": 270,
+                "protein": 30,
+                "carbs": 2,
+                "fats": 16,
+                "description": "A simple yet powerful protein-packed snack."
+            },
+            {
+                "name": "Beef Jerky & Almonds",
+                "calories": 280,
+                "protein": 40,
+                "carbs": 10,
+                "fats": 12,
+                "description": "Lean beef jerky with a handful of almonds for extra protein."
+            }
+        ],
+        "Mediterranean": [
+            {
+                "name": "Olives & Feta Cheese",
+                "calories": 200,
+                "protein": 8,
+                "carbs": 5,
+                "fats": 18,
+                "description": "A savory mix of olives and feta cheese with olive oil drizzle."
+            },
+            {
+                "name": "Greek Yogurt with Walnuts & Honey",
+                "calories": 290,
+                "protein": 16,
+                "carbs": 30,
+                "fats": 12,
+                "description": "Creamy Greek yogurt with crushed walnuts and honey."
+            },
+            {
+                "name": "Hummus & Whole Wheat Pita",
+                "calories": 280,
+                "protein": 12,
+                "carbs": 40,
+                "fats": 10,
+                "description": "Homemade hummus served with toasted whole wheat pita."
+            },
+            {
+                "name": "Dark Chocolate & Mixed Nuts",
+                "calories": 250,
+                "protein": 8,
+                "carbs": 18,
+                "fats": 16,
+                "description": "A mix of dark chocolate chunks with almonds and walnuts."
+            }
+        ]
+    }
+}
