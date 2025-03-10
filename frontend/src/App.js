@@ -19,8 +19,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 
-const domain = "dev-ksjixgafqussk8qf.us.auth0.com";
-const clientId = "rt2rlRiahelahO3QhGTtsRIuQr9U5Ajm";
+const domain = "dev-w3nk36t6hbc8zq2s.us.auth0.com";
+const clientId = "ei1rDUHUcXjRgy2PBpTbsfasfQ8f7JIA";
 
 function App() {
   const [cartItems, setCartItems] = useState([]); 
