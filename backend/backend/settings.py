@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -84,7 +85,7 @@ DATABASES = {
         'NAME': 'perfoevolution_db',
         'USER': 'django_user',
         'PASSWORD': 'perfoevolutionpassword',
-        'HOST': 'localhost',
+        'HOST': 'host.docker.internal',
         'PORT': '5432',  # Default PostgreSQL port
     }
 }
@@ -131,8 +132,21 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOW_ALL_ORIGINS = True   # Allow React frontend to communicate
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_HEADERS = [
+    "authorization",
+    "content-type",
+    "x-csrftoken",
+    "accept",
+    "origin",
+    "user-agent",
+    "x-requested-with",
+]
 
 # Configure Django to Use JWT for Authentication
 REST_FRAMEWORK = {
