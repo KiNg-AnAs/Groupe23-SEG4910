@@ -4,6 +4,8 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import * as yup from "yup";
 import { Formik } from "formik";
 import "./OnboardingForm.css";
+import { useAuth } from "../../../context/AuthContext";
+
 
 const schema = yup.object().shape({
   age: yup.number().required("Age is required").min(10, "Minimum age is 10"),
@@ -22,8 +24,9 @@ const schema = yup.object().shape({
   bodyType: yup.string().nullable(), 
 });
 
-const OnboardingForm = ({ saveUserData }) => {
+const OnboardingForm = ({ }) => {
   const navigate = useNavigate();
+  const { fetchWithAuth } = useAuth();
 
   
 
@@ -33,10 +36,20 @@ const OnboardingForm = ({ saveUserData }) => {
       <h2 className="onboarding-title">Let's Personalize Your Fitness Plan</h2>
       <Formik
         validationSchema={schema}
-        onSubmit={(values) => {
-          saveUserData(values);
-          navigate("/dashboard");
-        }}
+        onSubmit={async (values) => {
+  try {
+    const res = await fetchWithAuth("http://localhost:8000/save-profile/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values)
+    });
+    console.log("Profile Saved:", res);
+    navigate("/dashboard");
+  } catch (error) {
+    console.error("Failed to save profile", error);
+  }
+}}
+
         initialValues={{
           age: "",
           height: "",
@@ -217,6 +230,22 @@ const OnboardingForm = ({ saveUserData }) => {
             </Row>
 
             <Button type="submit" className="submit-btn">Continue</Button>
+              <Button
+                  variant="secondary"
+                  className="ms-2"
+                  onClick={async () => {
+                        try {
+                            const res = await fetchWithAuth("http://localhost:8000/user-info/");
+                            console.log("📡 User Info:", res);
+                            alert(`Role: ${res.role}, Username: ${res.username || "not set"}`);
+                        } catch (error) {
+                          console.error("Failed to fetch user info", error);
+                        }
+                  }}
+              >
+                  Test Get User Info
+              </Button>
+
           </Form>
         )}
       </Formik>

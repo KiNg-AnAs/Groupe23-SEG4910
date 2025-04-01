@@ -3,12 +3,23 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const AuthContext = createContext();
 
+const audience = "http://localhost:8000";
+
 export const AuthProvider = ({ children }) => {
-  const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const {
+    loginWithRedirect,
+    logout,
+    user,
+    isAuthenticated,
+    getAccessTokenSilently
+  } = useAuth0();
 
   const fetchWithAuth = async (endpoint, options = {}) => {
     try {
-      const token = await getAccessTokenSilently();
+      const token = await getAccessTokenSilently({
+        audience,
+      });
+
       const response = await fetch(endpoint, {
         ...options,
         headers: {
@@ -16,6 +27,7 @@ export const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       console.log("JWT Token:", token);
       return response.json();
 
@@ -26,7 +38,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, loginWithRedirect, logout, fetchWithAuth }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, loginWithRedirect, logout, fetchWithAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );
