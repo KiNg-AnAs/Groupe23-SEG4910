@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider,useAuth } from "./context/AuthContext";
 import NavigationBar from "./components/Shared/NavigationBar/NavigationBar";
 import HeroSection from "./components/Home/HeroSection/HeroSection";
 import AboutSection from "./components/Home/AboutSection/AboutSection";
@@ -24,15 +24,7 @@ const clientId = "ei1rDUHUcXjRgy2PBpTbsfasfQ8f7JIA";
 
 function App() {
   const [cartItems, setCartItems] = useState([]); 
-  const [cartItem, setCartItem] = useState(null); 
-  const [userData, setUserData] = useState(null);
-
-  // Function to store onboarding data
-  const saveUserData = (data) => {
-    setUserData(data);
-    console.log("User Data Saved:", data); 
-  };
-
+  const [cartItem, setCartItem] = useState(null);
 
   //  Function to add items to the cart (for add-ons)
   const addToCart = (item) => {
@@ -53,10 +45,14 @@ function App() {
       <Auth0Provider
       domain={domain}
       clientId={clientId}
-      authorizationParams={{ redirect_uri: window.location.origin }}
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+         audience: "http://localhost:8000"
+      }}
     >
        <Router>
        <AuthProvider>
+         <AuthSyncer />
         <NavigationBar cartItems={cartItems} />
         <Routes>
           <Route
@@ -76,13 +72,35 @@ function App() {
           <Route path="/dashboard" element={<Dashboard addToCart={addToCart} />} />
           <Route path="/add-ons" element={<AddOns addToCart={addToCart} />} /> 
           <Route path="/cart" element={<Cart cartItems={cartItems} cartItem={cartItem} removeFromCart={removeFromCart} setCartItem={setCartItem} />} /> 
-          <Route path="/onboarding" element={<OnboardingForm saveUserData={saveUserData} />} />
+          <Route path="/onboarding" element={<OnboardingForm />} />
           <Route path="/coach-dashboard" element={<CoachDashboard />} /> 
         </Routes>
        </AuthProvider>
        </Router>
       </Auth0Provider>
   );
+}
+function AuthSyncer() {
+  const { isAuthenticated, user, fetchWithAuth } = useAuth();
+
+  useEffect(() => {
+    const syncUser = async () => {
+      try {
+        const res = await fetchWithAuth("http://localhost:8000/auth0-login/", {
+          method: "POST",
+        });
+        console.log("User synced:", res);
+      } catch (err) {
+        console.error("Sync failed:", err);
+      }
+    };
+
+    if (isAuthenticated && user) {
+      syncUser();
+    }
+  }, [isAuthenticated, user]);
+
+  return null;
 }
 
 export default App;
