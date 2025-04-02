@@ -18,13 +18,14 @@ const plans = [
   },
   {
     title: "Advanced Plan",
-    price: "$49 / month",
+    price: "$39 / month",
     image: "./Assets/img22.jpg",
     icon: <FaStar className="plan-icon" />,
     features: [
       "- All features from the Basic Plan",
-      "- Personalized AI Nutrition Plan updated weekly",
-      "- Unlimited access to add-ons with one free booking per month.",
+      "- Personalized Nutrition Plan",
+      "- Access to E-Book",
+      "- Access to Coach's Personalized Training Programs",
     ],
     popular: true,
     paymentLink: "https://buy.stripe.com/test_7sI5oaeRf1O76Zi7sv",
