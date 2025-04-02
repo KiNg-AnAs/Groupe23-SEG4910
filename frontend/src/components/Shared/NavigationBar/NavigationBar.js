@@ -6,7 +6,7 @@ import { FaDumbbell, FaShoppingCart } from "react-icons/fa";
 import "./NavigationBar.css";
 
 const NavigationBar = ({ cartItems }) => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth();
+  const { isAuthenticated, loginWithRedirect, logout, isCoach } = useAuth();
   const navigate = useNavigate();
 
   const scrollToSection = (id) => {
@@ -59,8 +59,11 @@ const NavigationBar = ({ cartItems }) => {
               </>
             )}
 
-            {/* Added Coach Dashboard for Everyone (For Testing) */}
-            <Nav.Link as={Link} to="/coach-dashboard">Coach Dashboard</Nav.Link>
+           {/* Show Coach Dashboard only for authenticated coaches */}
+            {isAuthenticated && isCoach && (
+              <Nav.Link as={Link} to="/coach-dashboard">Coach Dashboard</Nav.Link>
+            )}
+
 
             {/* Cart Icon */}
             <Nav.Link as={Link} to="/cart" className="cart-icon">
