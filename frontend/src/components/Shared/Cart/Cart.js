@@ -1,88 +1,299 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Card, Button, ListGroup, Modal } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Form, Button } from "react-bootstrap";
 import "./Cart.css";
-import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
-const stripePromise = loadStripe("your_publishable_key_here");
+const plans = [
+  {
+    key: "basic",
+    title: "Basic Plan",
+    price: 29,
+    description: "AI-Generated Training Plans + Workout Tracking",
+  },
+  {
+    key: "advanced",
+    title: "Advanced Plan",
+    price: 39,
+    description:
+      "Everything in Basic + Nutrition Plan + E-Book + Custom Coaching",
+  },
+];
 
+const availableAddOns = [
+  {
+    key: "ebook",
+    title: "E-Book",
+    price: 29.99,
+  },
+  {
+    key: "zoom",
+    title: "1-on-1 Zoom Consultation",
+    price: 49.99,
+  },
+  {
+    key: "ai",
+    title: "Coach Custom AI Training Plan",
+    price: 99.99,
+  },
+];
 
-const Cart = ({ cartItems, cartItem, setCartItem, removeFromCart }) => {
-  const [showModal, setShowModal] = useState(false);
+const Cart = () => {
+  const { fetchWithAuth } = useAuth();
+  const navigate = useNavigate();
 
-  // Function to remove plan
-  const removePlan = () => {
-    setCartItem(null);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedAddOns, setSelectedAddOns] = useState({});
+  const [userPlan, setUserPlan] = useState("none");
+  const [userAddOns, setUserAddOns] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  // Get current user plan + add-ons from backend
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const res = await fetchWithAuth("http://localhost:8000/user-detail/");
+        setUserPlan(res.subscription_plan || "none");
+        setUserAddOns(res.add_ons || {});
+      } catch (error) {
+        console.error("Failed to load user details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUserDetails();
+  }, [fetchWithAuth]);
+
+  // Load from localStorage if user was building cart
+  useEffect(() => {
+    const storedPlan = localStorage.getItem("cart_plan");
+    const storedAddOns = localStorage.getItem("cart_addons");
+    if (storedPlan) setSelectedPlan(JSON.parse(storedPlan));
+    if (storedAddOns) setSelectedAddOns(JSON.parse(storedAddOns));
+  }, []);
+
+  // Save to localStorage
+  useEffect(() => {
+    localStorage.setItem("cart_plan", JSON.stringify(selectedPlan));
+    localStorage.setItem("cart_addons", JSON.stringify(selectedAddOns));
+  }, [selectedPlan, selectedAddOns]);
+
+  const handleAddOnChange = (key, value) => {
+    setSelectedAddOns((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
   };
 
-  // Function to handle checkout
-  const handleCheckout = () => {
-    window.location.href = "https://buy.stripe.com/test_7sI5oabF364n2J2dQR";
+  const handlePlanChange = (planKey) => {
+    if (planKey === "none") {
+      setSelectedPlan(null);
+    } else {
+      const chosen = plans.find((p) => p.key === planKey);
+      setSelectedPlan(chosen);
+    }
   };
-  
+
+  const calculateTotal = () => {
+    const planPrice = selectedPlan ? selectedPlan.price : 0;
+    const addOnsTotal = Object.entries(selectedAddOns).reduce(
+      (sum, [key, qty]) => {
+        const addOn = availableAddOns.find((a) => a.key === key);
+        return sum + (addOn ? addOn.price * qty : 0);
+      },
+      0
+    );
+    return (planPrice + addOnsTotal).toFixed(2);
+  };
+
+  const handleCheckout = async () => {
+    try {
+      const payload = {};
+
+      if (selectedPlan && selectedPlan.key !== userPlan) {
+        payload.subscription_plan = selectedPlan.key;
+      }
+
+      // Filter only purchased (qty > 0) add-ons
+      const updatedAddOns = {};
+      for (const [key, qty] of Object.entries(selectedAddOns)) {
+        if (qty > 0) {
+          updatedAddOns[key] = (userAddOns[key] || 0) + qty;
+        }
+      }
+
+      if (Object.keys(updatedAddOns).length > 0) {
+        payload.add_ons = updatedAddOns;
+      }
+
+      await fetchWithAuth("http://localhost:8000/user-detail/", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      localStorage.removeItem("cart_plan");
+      localStorage.removeItem("cart_addons");
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Checkout failed:", error);
+      alert("Something went wrong during checkout. Please try again.");
+    }
+  };
+
+  const alreadyHasEbook = (userAddOns["ebook"] || 0) >= 1;
+
+  const getPlanLabel = (planKey) => {
+    const plan = plans.find((p) => p.key === planKey);
+    return plan ? plan.title : "None";
+  };
+
+  if (loading) {
+    return (
+      <div className="cart-section">
+        <div className="cart-section-container">
+          <h3 className="text-center">Loading your cart...</h3>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <section id="cart" className="cart-section">
-      <Container className="cart-section-container">
-        <h2 className="section-title">Your Cart</h2>
+    <section className="cart-section">
+      <div className="cart-section-container">
+        <h2 className="section-title">🛒 Your Cart</h2>
 
-        {/* Display Selected Plan */}
-        {cartItem && (
-          <Card className="cart-plan-card">
-            <Card.Body>
-              <h4>{cartItem.title}</h4>
-              <p className="cart-item-price">{cartItem.price}</p>
-              <Button variant="danger" size="sm" onClick={removePlan}>Remove Plan</Button>
-            </Card.Body>
-          </Card>
-        )}
+        <div className="current-plan-display mb-3">
+          <strong>Current Plan:</strong> {getPlanLabel(userPlan)}
+        </div>
 
-        {/* Display Add-Ons */}
-        {cartItems.length > 0 ? (
-          <ListGroup className="cart-list">
-            {cartItems.map((item, index) => (
-              <ListGroup.Item key={index} className="cart-item">
-                <Row className="align-items-center">
-                  <Col xs={3} className="cart-img">
-                    <img src={item.image} alt={item.title} className="cart-item-image" />
-                  </Col>
-                  <Col xs={6} className="cart-item-details">
-                    <h5>{item.title}</h5>
-                    <p className="cart-item-price">{item.price}</p>
-                  </Col>
-                  <Col xs={3} className="cart-actions">
-                    <Button variant="danger" size="sm" onClick={() => removeFromCart(item.title)}>Remove</Button>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-        ) : !cartItem ? <p className="empty-cart">Your cart is empty.</p> : null}
+        {/* STEP 1: Plan Selection */}
+        <div className="step-header" data-step="①">
+          Choose Your Plan
+        </div>
+        <div className="plan-card">
+          <Form>
+            {userPlan === "none" && (
+              <>
+                {plans.map((plan) => (
+                  <Form.Check
+                    key={plan.key}
+                    type="radio"
+                    label={`${plan.title} - $${plan.price}/month`}
+                    name="plan"
+                    id={plan.key}
+                    checked={selectedPlan?.key === plan.key}
+                    onChange={() => handlePlanChange(plan.key)}
+                  />
+                ))}
+                <Form.Check
+                  type="radio"
+                  label="None (just buy add-ons)"
+                  name="plan"
+                  id="none"
+                  checked={!selectedPlan}
+                  onChange={() => handlePlanChange("none")}
+                />
+              </>
+            )}
 
-        {/* Checkout Button */}
-        {(cartItem || cartItems.length > 0) && (
-          <div className="checkout-section">
-            <h4 className="total-price">
-              Total: <span>
-                {(
-                  (cartItem ? parseFloat(cartItem.price.replace("$", "")) : 0) +
-                  cartItems.reduce((total, item) => total + parseFloat(item.price.replace("$", "")), 0)
-                ).toFixed(2)}$
-              </span>
-            </h4>
-            <Button variant="success" className="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</Button>
-          </div>
-        )}
+            {userPlan === "basic" && (
+              <>
+                <div className="text-success mb-2">You are already a Basic user.</div>
+                <Form.Check
+                  type="radio"
+                  label={`Upgrade to Advanced Plan - $${plans[1].price}/month`}
+                  name="plan"
+                  id="advanced"
+                  checked={selectedPlan?.key === "advanced"}
+                  onChange={() => handlePlanChange("advanced")}
+                />
+              </>
+            )}
 
-        {/* Checkout Modal */}
-        <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Checkout</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Thank you for your purchase! You will receive a confirmation email shortly.</p>
-          </Modal.Body>
-        </Modal>
-      </Container>
+            {userPlan === "advanced" && (
+              <div className="text-success">You are already an Advanced user.</div>
+            )}
+          </Form>
+        </div>
+
+        {/* STEP 2: Add-Ons */}
+        <div className="step-header" data-step="②">
+          Add-Ons
+        </div>
+        <div className="plan-card">
+          {availableAddOns.map((addOn) => {
+            const disabled = addOn.key === "ebook" && alreadyHasEbook;
+            return (
+              <div className="addon-item" key={addOn.key}>
+                <div className="addon-name">
+                  {addOn.title} -{" "}
+                  <span className="addon-price">${addOn.price}</span>
+                </div>
+                <Form.Control
+                  type="number"
+                  min="0"
+                  max={addOn.key === "ebook" ? 1 : 5}
+                  disabled={disabled}
+                  value={selectedAddOns[addOn.key] || 0}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value) || 0;
+                    if (addOn.key === "ebook" && value > 1) return;
+                    handleAddOnChange(addOn.key, value);
+                  }}
+                  className="addon-quantity"
+                />
+                {disabled && (
+                  <div className="addon-note text-warning">Already purchased</div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* STEP 3: Summary */}
+        <div className="step-header" data-step="③">
+          Summary
+        </div>
+        <div className="summary-card">
+          {selectedPlan ? (
+            <p>
+              <strong>Plan:</strong> {selectedPlan.title} - $
+              {selectedPlan.price}/month
+            </p>
+          ) : (
+            <p>
+              <strong>Plan:</strong> None
+            </p>
+          )}
+
+          {Object.entries(selectedAddOns)
+            .filter(([_, qty]) => qty > 0)
+            .map(([key, qty]) => {
+              const addOn = availableAddOns.find((a) => a.key === key);
+              return (
+                <p key={key}>
+                  <strong>{addOn.title}</strong> × {qty} = $
+                  {(addOn.price * qty).toFixed(2)}
+                </p>
+              );
+            })}
+
+          <div className="summary-total">Total: ${calculateTotal()}</div>
+
+          <Button
+            className="checkout-btn"
+            onClick={handleCheckout}
+            disabled={
+              !selectedPlan &&
+              Object.values(selectedAddOns).every((qty) => qty === 0)
+            }
+          >
+            Proceed to Checkout
+          </Button>
+        </div>
+      </div>
     </section>
   );
 };

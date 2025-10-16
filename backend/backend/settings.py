@@ -26,12 +26,13 @@ SECRET_KEY = "django-insecure-xs^7pfv02$zy0y__m17m)p==5_b+!jcd*-l39om+-bxer+g*b-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,15 +40,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
-    'corsheaders',
     'users',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -86,7 +86,7 @@ DATABASES = {
         'USER': 'django_user',
         'PASSWORD': 'perfoevolutionpassword',
         'HOST': 'host.docker.internal',
-        'PORT': '5432',  # Default PostgreSQL port
+        'PORT': '5433',  # Default PostgreSQL port
     }
 }
 
@@ -132,11 +132,13 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOW_CREDENTIALS = True
-
+# Permettre les requêtes du frontend React (port 3000)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+
+# Facultatif (mais utile si tu fais des requêtes avec credentials comme token/jwt)
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
     "authorization",
