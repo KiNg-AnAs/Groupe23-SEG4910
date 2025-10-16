@@ -22,6 +22,14 @@
   margin-bottom: 10px;
 }
 
+.dashboard-subtitle {
+  font-size: 1.8rem;
+  color:whitesmoke;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+
 .dashboard-intro {
   font-size: 1.2rem;
   margin-bottom: 30px;

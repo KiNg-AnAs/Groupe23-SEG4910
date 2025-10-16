@@ -1,4 +1,8 @@
 from django.db import models
+from django.utils import timezone
+from datetime import timedelta
+from django.contrib.postgres.fields import JSONField  
+from django.db.models import JSONField 
 
 # Main User Table (Clients & Coaches)
 class User(models.Model):
@@ -8,6 +12,8 @@ class User(models.Model):
     role = models.CharField(max_length=10, choices=[("user", "User"), ("coach", "Coach")], default="user")
     subscription_plan = models.CharField(max_length=10, choices=[("none", "None"), ("basic", "Basic"), ("advanced", "Advanced")], default="none")
     created_at = models.DateTimeField(auto_now_add=True)
+    add_ons = JSONField(default=dict, blank=True)  
+
 
     def __str__(self):
         return f"{self.username or self.email} - {self.role}"
@@ -79,3 +85,47 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f"{self.user.username or self.user.email} - {self.plan}"
+
+# ----------------------------------------------------
+# Add-Ons Table (Per Add-On Purchase Tracking)
+# ----------------------------------------------------
+class AddOn(models.Model):
+    ADDON_CHOICES = [
+        ("ebook", "E-Book"),
+        ("zoom", "Zoom Consultation"),
+        ("ai", "AI Training Plan"),
+    ]
+
+    STATUS_CHOICES = [
+        ("active", "Active"),
+        ("used", "Used"),
+        ("expired", "Expired"),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addons")
+    addon_type = models.CharField(max_length=20, choices=ADDON_CHOICES)
+    quantity = models.PositiveIntegerField(default=1)
+    start_date = models.DateTimeField(default=timezone.now)
+    end_date = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="active")
+
+    class Meta:
+        db_table = "users_addons"
+        ordering = ["-start_date"]
+
+    def save(self, *args, **kwargs):
+        # If it's a Zoom or AI plan and end_date not set, default to 1-year validity
+        if self.addon_type in ["zoom", "ai"] and not self.end_date:
+            self.end_date = self.start_date + timedelta(days=365)
+
+        # E-book purchases never expire
+        if self.addon_type == "ebook":
+            self.end_date = None
+
+        super().save(*args, **kwargs)
+
+    def is_expired(self):
+        return self.end_date and self.end_date < timezone.now()
+
+    def __str__(self):
+        return f"{self.user.username or self.user.email} - {self.addon_type} x{self.quantity} ({self.status})"

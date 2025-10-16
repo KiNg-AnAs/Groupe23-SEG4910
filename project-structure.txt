@@ -1,0 +1,163 @@
+.
+├── .DS_Store
+├── Project_overview.md
+├── README.md
+├── backend
+│   ├── Dockerfile
+│   ├── backend
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── manage.py
+│   ├── requirements.txt
+│   └── users
+│       ├── __init__.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── authentication.py
+│       ├── migrations
+│       │   ├── 0001_initial.py
+│       │   └── __init__.py
+│       ├── models.py
+│       ├── tests.py
+│       └── views.py
+├── docker-compose.yml
+├── frontend
+│   ├── .DS_Store
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── .nvmrc
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   └── src
+│       ├── .DS_Store
+│       ├── App.css
+│       ├── App.js
+│       ├── App.test.js
+│       ├── components
+│       │   ├── .DS_Store
+│       │   ├── Assets
+│       │   │   ├── .DS_Store
+│       │   │   ├── img1.jpg
+│       │   │   ├── img10.jpg
+│       │   │   ├── img11.jpg
+│       │   │   ├── img12.jpg
+│       │   │   ├── img13.jpg
+│       │   │   ├── img14.jpg
+│       │   │   ├── img15.jpg
+│       │   │   ├── img16.jpg
+│       │   │   ├── img17.jpg
+│       │   │   ├── img18.jpg
+│       │   │   ├── img19.jpg
+│       │   │   ├── img2.jpg
+│       │   │   ├── img20.jpeg
+│       │   │   ├── img22.jpg
+│       │   │   ├── img3.jpg
+│       │   │   ├── img4.jpg
+│       │   │   ├── img5.jpg
+│       │   │   ├── img6.jpg
+│       │   │   ├── img7.1.jpg
+│       │   │   ├── img7.jpg
+│       │   │   ├── img8.jpg
+│       │   │   └── img9.jpg
+│       │   ├── Board
+│       │   │   ├── Client
+│       │   │   │   ├── AICoaching
+│       │   │   │   │   ├── AICoaching.css
+│       │   │   │   │   ├── AICoaching.js
+│       │   │   │   │   └── data
+│       │   │   │   │       └── aiWorkouts.json
+│       │   │   │   ├── CoachPrograms
+│       │   │   │   │   ├── CoachPrograms.css
+│       │   │   │   │   ├── CoachPrograms.js
+│       │   │   │   │   └── data
+│       │   │   │   │       └── exercises.json
+│       │   │   │   ├── Dashboard
+│       │   │   │   │   ├── Dashboard.css
+│       │   │   │   │   └── Dashboard.js
+│       │   │   │   └── NutritionGuide
+│       │   │   │       ├── NutritionGuide.css
+│       │   │   │       ├── NutritionGuide.js
+│       │   │   │       └── NutritionGuide.json
+│       │   │   └── Coach
+│       │   │       ├── BookingManagement
+│       │   │       │   ├── BookingManagement.css
+│       │   │       │   └── BookingManagement.js
+│       │   │       ├── ClientManagement
+│       │   │       │   ├── ClientManagement.css
+│       │   │       │   └── ClientManagement.js
+│       │   │       ├── CoachDashboard
+│       │   │       │   ├── CoachDashboard.css
+│       │   │       │   └── CoachDashboard.js
+│       │   │       ├── Messaging
+│       │   │       │   ├── Messaging.css
+│       │   │       │   └── Messaging.js
+│       │   │       ├── Payments
+│       │   │       │   ├── Payments.css
+│       │   │       │   └── Payments.js
+│       │   │       ├── ProgressTracking
+│       │   │       │   ├── ProgressTracking.css
+│       │   │       │   └── ProgressTracking.js
+│       │   │       └── TrainingPrograms
+│       │   │           ├── TrainingPrograms.css
+│       │   │           └── TrainingPrograms.js
+│       │   ├── Home
+│       │   │   ├── AboutSection
+│       │   │   │   ├── AboutSection.css
+│       │   │   │   └── AboutSection.js
+│       │   │   ├── BestProgramSection
+│       │   │   │   ├── BestProgramSection.css
+│       │   │   │   └── BestProgramSection.js
+│       │   │   ├── HeroSection
+│       │   │   │   ├── HeroSection.css
+│       │   │   │   └── HeroSection.js
+│       │   │   ├── Plans
+│       │   │   │   ├── Plans.css
+│       │   │   │   └── Plans.js
+│       │   │   ├── ProgramsOverview
+│       │   │   │   ├── ProgramsOverview.css
+│       │   │   │   └── ProgramsOverview.js
+│       │   │   └── Testimonials
+│       │   │       ├── Testimonials.css
+│       │   │       └── Testimonials.js
+│       │   ├── Onboarding
+│       │   │   └── OnboardingForm
+│       │   │       ├── OnboardingForm.css
+│       │   │       └── OnboardingForm.js
+│       │   └── Shared
+│       │       ├── AddOns
+│       │       │   ├── AddOns.css
+│       │       │   └── AddOns.js
+│       │       ├── Booking
+│       │       │   ├── Booking.css
+│       │       │   └── Booking.js
+│       │       ├── Cart
+│       │       │   ├── Cart.css
+│       │       │   └── Cart.js
+│       │       ├── Footer
+│       │       │   ├── Footer.css
+│       │       │   └── Footer.js
+│       │       └── NavigationBar
+│       │           ├── NavigationBar.css
+│       │           └── NavigationBar.js
+│       ├── context
+│       │   └── AuthContext.js
+│       ├── index.css
+│       ├── index.js
+│       ├── logo.svg
+│       ├── reportWebVitals.js
+│       └── setupTests.js
+└── project-structure.txt
+
+42 directories, 119 files

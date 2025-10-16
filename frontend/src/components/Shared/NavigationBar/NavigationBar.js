@@ -60,16 +60,18 @@ const NavigationBar = ({ cartItems }) => {
             )}
 
            {/* Show Coach Dashboard only for authenticated coaches */}
-            {isAuthenticated && isCoach && (
+            {isAuthenticated && (
               <Nav.Link as={Link} to="/coach-dashboard">Coach Dashboard</Nav.Link>
             )}
 
-
             {/* Cart Icon */}
-            <Nav.Link as={Link} to="/cart" className="cart-icon">
-              <FaShoppingCart />
-              {cartItems.length > 0 && <span className="cart-badge">{cartItems.length}</span>}
-            </Nav.Link>
+
+            {isAuthenticated && (
+                <Nav.Link as={Link} to="/cart" className="cart-icon">
+                <FaShoppingCart />
+                {cartItems.length > 0 && <span className="cart-badge">{cartItems.length}</span>}
+              </Nav.Link>            
+            )}
 
             {/* Authentication Logic */}
             <Nav className="ms-auto align-items-center d-flex">
