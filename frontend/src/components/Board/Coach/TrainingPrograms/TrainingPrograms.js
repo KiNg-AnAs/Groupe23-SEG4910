@@ -1,216 +1,208 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Button, Form, Modal, Table, Dropdown } from "react-bootstrap";
-import { FaPlus, FaEdit, FaTrash, FaClipboardList, FaUserCheck } from "react-icons/fa";
+// TrainingPrograms.js
+import React, { useEffect, useState } from "react";
+import { Table, Button, Spinner, Alert, Modal, Form } from "react-bootstrap";
+import { FaCheckCircle, FaSync, FaRobot, FaPen } from "react-icons/fa";
+import { useAuth } from "../../../../context/AuthContext";
 import "./TrainingPrograms.css";
 
-// Dummy Clients & Programs (To be replaced with API integration)
-const initialClients = [
-  { id: 1, name: "John Doe" },
-  { id: 2, name: "Jane Smith" },
-  { id: 3, name: "Mike Johnson" }
-];
-
-const initialPrograms = [
-  {
-    id: 1,
-    name: "Strength & Hypertrophy",
-    description: "A muscle-building program focusing on progressive overload.",
-    exercises: [
-      { name: "Bench Press", sets: 4, reps: 8 },
-      { name: "Squats", sets: 4, reps: 10 }
-    ],
-    assignedClients: [1, 2]
-  },
-  {
-    id: 2,
-    name: "Endurance & Conditioning",
-    description: "Boost cardiovascular performance and stamina.",
-    exercises: [
-      { name: "Running", sets: 3, reps: "15 min" },
-      { name: "Burpees", sets: 3, reps: 12 }
-    ],
-    assignedClients: [3]
-  }
-];
-
 const TrainingPrograms = () => {
-  const [programs, setPrograms] = useState(initialPrograms);
-  const [clients, setClients] = useState(initialClients);
-  const [showProgramModal, setShowProgramModal] = useState(false);
-  const [editingProgram, setEditingProgram] = useState(null);
-  const [newProgram, setNewProgram] = useState({ name: "", description: "", exercises: [], assignedClients: [] });
-  const [selectedProgram, setSelectedProgram] = useState(null);
-  const [selectedClient, setSelectedClient] = useState(null);
+  const { fetchWithAuth } = useAuth();
 
-  // Open modal to create/edit program
-  const handleShowProgramModal = (program = null) => {
-    if (program) {
-      setEditingProgram(program);
-      setNewProgram(program);
-    } else {
-      setNewProgram({ name: "", description: "", exercises: [], assignedClients: [] });
-      setEditingProgram(null);
+  const [trainings, setTrainings] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [updating, setUpdating] = useState(false);
+
+  // notes modal
+  const [showNotes, setShowNotes] = useState(false);
+  const [activeRow, setActiveRow] = useState(null);
+  const [notesText, setNotesText] = useState("");
+
+  const openNotes = (row) => {
+    setActiveRow(row);
+    setNotesText(row.notes || "");
+    setShowNotes(true);
+  };
+
+  const closeNotes = () => {
+    setShowNotes(false);
+    setActiveRow(null);
+    setNotesText("");
+  };
+
+  const loadTrainings = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const data = await fetchWithAuth("http://localhost:8000/coach/training/");
+      setTrainings(Array.isArray(data) ? data : []);
+    } catch (e) {
+      console.error("Error loading training data:", e);
+      setError("Failed to load training progress list.");
+    } finally {
+      setLoading(false);
     }
-    setShowProgramModal(true);
   };
 
-  // Add new program or update existing
-  const handleSaveProgram = () => {
-    if (editingProgram) {
-      setPrograms(programs.map((p) => (p.id === editingProgram.id ? newProgram : p)));
-    } else {
-      setPrograms([...programs, { ...newProgram, id: programs.length + 1 }]);
+  useEffect(() => {
+    loadTrainings();
+  }, []);
+
+  const handleMarkDone = async (userId) => {
+    // Pretty confirm dialog
+    const ok = window.confirm(
+      "Confirm completion?\n\nThis will consume 1 AI training unit for this client."
+    );
+    if (!ok) return;
+
+    setUpdating(true);
+    try {
+      const resp = await fetchWithAuth(`http://localhost:8000/coach/training/${userId}/`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "Done" }),
+      });
+
+      const remaining = Number(resp?.remaining_quantity ?? 0);
+
+      if (remaining > 0) {
+        // Decrement just the quantity for that row
+        setTrainings((prev) =>
+          prev.map((t) =>
+            t.id === userId ? { ...t, quantity: remaining, last_updated: new Date().toISOString() } : t
+          )
+        );
+      } else {
+        // Remove row if none remain
+        setTrainings((prev) => prev.filter((t) => t.id !== userId));
+      }
+    } catch (e) {
+      console.error("Update failed:", e);
+    } finally {
+      setUpdating(false);
     }
-    setShowProgramModal(false);
   };
 
-  // Delete program
-  const handleDeleteProgram = (id) => {
-    setPrograms(programs.filter((program) => program.id !== id));
-  };
-
-  // Add exercise to a program
-  const handleAddExercise = () => {
-    setNewProgram({
-      ...newProgram,
-      exercises: [...newProgram.exercises, { name: "", sets: "", reps: "" }]
-    });
-  };
-
-  // Update an exercise in the program
-  const handleExerciseChange = (index, field, value) => {
-    const updatedExercises = newProgram.exercises.map((ex, i) =>
-      i === index ? { ...ex, [field]: value } : ex
-    );
-    setNewProgram({ ...newProgram, exercises: updatedExercises });
-  };
-
-  // Remove an exercise from the program
-  const handleRemoveExercise = (index) => {
-    setNewProgram({
-      ...newProgram,
-      exercises: newProgram.exercises.filter((_, i) => i !== index)
-    });
-  };
-
-  // Assign a program to a client
-  const handleAssignProgram = () => {
-    if (!selectedProgram || !selectedClient) return;
-    setPrograms(
-      programs.map((program) =>
-        program.id === selectedProgram.id
-          ? { ...program, assignedClients: [...new Set([...program.assignedClients, selectedClient.id])] }
-          : program
-      )
-    );
+  const handleSaveNotes = async () => {
+    if (!activeRow) return;
+    try {
+      await fetchWithAuth(`http://localhost:8000/coach/training/${activeRow.id}/`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notes: notesText }),
+      });
+      setTrainings((prev) =>
+        prev.map((t) =>
+          t.id === activeRow.id ? { ...t, notes: notesText, last_updated: new Date().toISOString() } : t
+        )
+      );
+      closeNotes();
+    } catch (e) {
+      console.error("Failed to update notes:", e);
+      alert("Failed to save notes.");
+    }
   };
 
   return (
-    <Container className="training-programs-container">
-      <h2 className="section-title">Training Programs</h2>
-      <Row className="programs-header">
-        <Col md={6}>
-          <Button variant="success" onClick={() => handleShowProgramModal()}>
-            <FaPlus /> Create New Program
-          </Button>
-        </Col>
-        <Col md={6} className="text-end">
-          <Dropdown>
-            <Dropdown.Toggle variant="primary">
-              <FaUserCheck /> Assign Program to Client
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {programs.map((program) => (
-                <Dropdown.Item key={program.id} onClick={() => setSelectedProgram(program)}>
-                  {program.name}
-                </Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-          {selectedProgram && (
-            <Dropdown>
-              <Dropdown.Toggle variant="info" className="ms-2">
-                Assign to...
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {clients.map((client) => (
-                  <Dropdown.Item key={client.id} onClick={() => setSelectedClient(client)}>
-                    {client.name}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-          )}
-          {selectedProgram && selectedClient && (
-            <Button variant="dark" className="ms-2" onClick={handleAssignProgram}>
-              Confirm Assignment
-            </Button>
-          )}
-        </Col>
-      </Row>
+    <div className="training-programs-container">
+      <div className="training-header">
+        <FaRobot className="training-icon" />
+        <h2>AI Training Programs</h2>
+        <p>Monitor and manage clients’ AI-based training sessions.</p>
+      </div>
 
-      <Table striped bordered hover className="programs-table">
-        <thead>
-          <tr>
-            <th>Program Name</th>
-            <th>Description</th>
-            <th>Clients Assigned</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {programs.map((program) => (
-            <tr key={program.id}>
-              <td>{program.name}</td>
-              <td>{program.description}</td>
-              <td>{program.assignedClients.map((id) => clients.find((c) => c.id === id)?.name).join(", ") || "None"}</td>
-              <td>
-                <Button variant="info" size="sm" onClick={() => handleShowProgramModal(program)}>
-                  <FaEdit />
-                </Button>
-                <Button variant="danger" size="sm" onClick={() => handleDeleteProgram(program.id)}>
-                  <FaTrash />
-                </Button>
-              </td>
+      {error && <Alert variant="danger">{error}</Alert>}
+      {loading ? (
+        <div className="loading-state">
+          <Spinner animation="border" />
+          <span>Loading training programs…</span>
+        </div>
+      ) : trainings.length === 0 ? (
+        <p className="empty-msg">No active AI training programs found.</p>
+      ) : (
+        <Table striped bordered hover responsive className="training-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Client Email</th>
+              <th>Quantity</th>
+              <th>Status</th>
+              <th>Notes</th>
+              <th>Last Updated</th>
+              <th className="text-center">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {trainings.map((t, i) => (
+              <tr key={t.id}>
+                <td>{i + 1}</td>
+                <td>{t.user_email}</td>
+                <td>{t.quantity}</td>
+                <td>
+                  <span className="status-badge pending">Pending</span>
+                </td>
+                <td>
+                  <Button
+                    variant="outline-primary"
+                    size="sm"
+                    onClick={() => openNotes(t)}
+                  >
+                    <FaPen className="me-1" /> Edit Notes
+                  </Button>
+                </td>
+                <td>{new Date(t.last_updated).toLocaleString()}</td>
+                <td className="text-center">
+                  <Button
+                    variant="success"
+                    size="sm"
+                    disabled={updating}
+                    onClick={() => handleMarkDone(t.id)}
+                  >
+                    <FaCheckCircle className="me-1" /> Mark Done
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
 
-      {/* Modal for Adding/Editing Programs */}
-      <Modal show={showProgramModal} onHide={() => setShowProgramModal(false)} centered>
+      <div className="refresh-btn">
+        <Button variant="secondary" onClick={loadTrainings} disabled={loading}>
+          <FaSync className="me-1" /> Refresh
+        </Button>
+      </div>
+
+      {/* Notes Modal */}
+      <Modal show={showNotes} onHide={closeNotes} centered size="md">
         <Modal.Header closeButton>
-          <Modal.Title>{editingProgram ? "Edit Program" : "Create Program"}</Modal.Title>
+          <Modal.Title>Coach Notes</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group>
-              <Form.Label>Program Name</Form.Label>
-              <Form.Control type="text" value={newProgram.name} onChange={(e) => setNewProgram({ ...newProgram, name: e.target.value })} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" value={newProgram.description} onChange={(e) => setNewProgram({ ...newProgram, description: e.target.value })} />
-            </Form.Group>
-            <h5>Exercises</h5>
-            {newProgram.exercises.map((exercise, index) => (
-              <div key={index} className="exercise-input">
-                <Form.Control type="text" value={exercise.name} placeholder="Exercise Name" onChange={(e) => handleExerciseChange(index, "name", e.target.value)} />
-                <Button variant="danger" size="sm" onClick={() => handleRemoveExercise(index)}>
-                  <FaTrash />
-                </Button>
-              </div>
-            ))}
-            <Button variant="secondary" className="mt-2" onClick={handleAddExercise}>
-              <FaPlus /> Add Exercise
-            </Button>
-          </Form>
+          <Form.Group>
+            <Form.Label>Notes for {activeRow?.user_email}</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={6}
+              value={notesText}
+              onChange={(e) => setNotesText(e.target.value)}
+              placeholder="Write detailed notes or a plan for the client's AI training…"
+            />
+            <div className="small text-muted mt-2">
+              Tips: capture goals, blockers, plan, or anything to remember next time.
+            </div>
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleSaveProgram}>Save Program</Button>
+          <Button variant="outline-secondary" onClick={closeNotes}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleSaveNotes}>
+            Save Notes
+          </Button>
         </Modal.Footer>
       </Modal>
-    </Container>
+    </div>
   );
 };
 

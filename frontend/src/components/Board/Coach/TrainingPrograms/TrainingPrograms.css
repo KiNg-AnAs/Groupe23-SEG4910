@@ -1,172 +1,118 @@
-/* General Container */
 .training-programs-container {
-    padding: 50px 20px;
-    color: white;
-    text-align: center;
-  }
-  
-  /* Section Title */
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    color: #f8f9fa;
-  }
-  
-  /* Header Row (Buttons & Actions) */
-  .programs-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Programs Table */
-  .programs-table {
-    margin-top: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-  }
-  
-  .programs-table th,
-  .programs-table td {
-    text-align: center;
-    vertical-align: middle;
-    padding: 12px;
-    color: #000000;
-    border: 1px solid #ddd;
-  }
-  
-  .programs-table th {
-    background: #343a40;
-    color: white;
-  }
-  
-  .programs-table tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.05);
-  }
-  
-  /* Buttons */
-  button {
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  button:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Modal Styling */
-  .modal-header {
-    background: #212529;
-    color: white;
-    border-bottom: none;
-  }
-  
-  .modal-body {
-    background: #2c2f33;
-    color: white;
-  }
-  
-  .modal-footer {
-    background: #212529;
-    border-top: none;
-  }
-  
-  /* Form Inputs */
-  .form-control {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    margin-bottom: 10px;
-  }
-  
-  .form-control::placeholder {
-    color: #bbb;
-  }
-  
-  /* Exercise Input Section */
-  .exercise-input {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .exercise-input input {
-    flex-grow: 1;
-    margin-right: 10px;
-  }
-  
-  /* Dropdowns */
-  .dropdown-menu {
-    background: #212529;
-    color: white;
-  }
-  
-  .dropdown-item {
-    color: white;
-    transition: background 0.3s ease-in-out;
-  }
-  
-  .dropdown-item:hover {
-    background: #495057;
-    color: white;
-  }
-  
-  /* Icons in Dashboard */
-  .dashboard-icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #17a2b8;
-  }
-  
-  /* Card Styling */
-  .dashboard-card {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  
-  .dashboard-card:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.15);
-  }
-  
-  /* Assign Program to Client Section */
-  .assignment-section {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .programs-header {
-      flex-direction: column;
-      text-align: center;
-      gap: 15px;
-    }
-  
-    .assignment-section {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .dashboard-card {
-      margin-bottom: 15px;
-    }
-  
-    .exercise-input {
-      flex-direction: column;
-    }
-  
-    .exercise-input input {
-      width: 100%;
-      margin-bottom: 5px;
-    }
-  }
-  
+  padding: 2rem;
+  color: #f0f0f0;
+}
+
+.training-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.training-header h2 {
+  font-size: 1.8rem;
+  color: #00d8ff;
+}
+
+.training-header p {
+  color: #cfcfcf;
+}
+
+.training-icon {
+  font-size: 2.5rem;
+  color: #00d8ff;
+  margin-bottom: 0.5rem;
+}
+
+.training-table {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  color: #f0f0f0;
+}
+
+.training-table th {
+  background-color: #2a2a2a;
+  color: #00d8ff;
+  text-align: center;
+}
+
+.training-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.status-badge.pending {
+  background-color: #444;
+  color: #ffb347;
+}
+
+.status-badge.done {
+  background-color: #28a745;
+  color: white;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #aaa;
+  margin-top: 2rem;
+}
+
+.refresh-btn {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Modal styles */
+.confirm-modal .modal-content,
+.notes-modal .modal-content {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  color: #f0f0f0;
+  border-radius: 12px;
+}
+
+.confirm-modal .modal-title,
+.notes-modal .modal-title {
+  color: #00d8ff;
+  font-weight: 600;
+}
+
+.status-highlight {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.modal-note {
+  color: #bbb;
+  font-size: 0.9rem;
+}
+
+.notes-modal textarea {
+  background-color: #2b2b2b;
+  border: 1px solid #444;
+  color: #fff;
+  resize: none;
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+.notes-modal textarea:focus {
+  border-color: #00d8ff;
+  outline: none;
+  box-shadow: 0 0 6px #00d8ff55;
+}

@@ -7,9 +7,6 @@ import "./CoachDashboard.css";
 import ClientManagement from "../ClientManagement/ClientManagement";
 import TrainingPrograms from "../TrainingPrograms/TrainingPrograms";
 import BookingManagement from "../BookingManagement/BookingManagement";
-import ProgressTracking from "../ProgressTracking/ProgressTracking";
-// import Messaging from "../Messaging/Messaging";
-import Payments from "../Payments/Payments";
 
 const CoachDashboard = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -78,63 +75,10 @@ const CoachDashboard = () => {
           </Col>
         </Row>
 
-        <Row className="dashboard-options">
-          <Col md={3}>
-            <Card className="dashboard-card">
-              <Card.Body>
-                <FaChartLine className="dashboard-icon" />
-                <h4>Progress Tracking</h4>
-                <p>Monitor client performance & fitness stats.</p>
-                <Button
-                  variant="info"
-                  onClick={() => handleSectionToggle("progress")}
-                >
-                  {activeSection === "progress" ? "Hide" : "Track Progress"}
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-            <Card className="dashboard-card">
-              <Card.Body>
-                <FaComment className="dashboard-icon" />
-                <h4>Messaging</h4>
-                <p>Communicate with your clients via chat or video calls.</p>
-                <Button
-                  variant="dark"
-                  onClick={() => handleSectionToggle("messaging")}
-                >
-                  {activeSection === "messaging" ? "Hide" : "Open Chat"}
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-            <Card className="dashboard-card">
-              <Card.Body>
-                <FaCommentsDollar className="dashboard-icon" />
-                <h4>Payments & Earnings</h4>
-                <p>Manage client subscriptions and earnings.</p>
-                <Button
-                  variant="secondary"
-                  onClick={() => handleSectionToggle("payments")}
-                >
-                  {activeSection === "payments" ? "Hide" : "View Payments"}
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
         {/* Dynamic Section Rendering */}
        {activeSection === "clients" && <ClientManagement />}
        {activeSection === "training" && <TrainingPrograms />}
-        {activeSection === "bookings" && <BookingManagement />}
-        {activeSection === "progress" && <ProgressTracking />}
-        {/* {activeSection === "messaging" && <Messaging />}  */}
-        {activeSection === "payments" && <Payments />}
+       {activeSection === "bookings" && <BookingManagement />}
       </Container>
     </section>
   );

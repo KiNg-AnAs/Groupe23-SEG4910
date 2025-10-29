@@ -1,9 +1,9 @@
+// src/context/AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const AuthContext = createContext();
-
-const audience = "http://localhost:8000";
+const audience = "http://localhost:8000"; // Update if you deploy
 
 export const AuthProvider = ({ children }) => {
   const {
@@ -11,63 +11,142 @@ export const AuthProvider = ({ children }) => {
     logout,
     user,
     isAuthenticated,
-    getAccessTokenSilently
+    getAccessTokenSilently,
   } = useAuth0();
 
   const [isCoach, setIsCoach] = useState(false);
+  const [userData, setUserData] = useState(null); // plan + add_ons + identity
 
+  /**
+   * Authenticated fetch helper:
+   * - Always asks for JSON (Accept header)
+   * - Merges headers
+   * - Throws detailed errors for non-2xx
+   * - Parses JSON only when content-type is JSON
+   */
   const fetchWithAuth = async (endpoint, options = {}) => {
     try {
       const token = await getAccessTokenSilently({ audience });
+      // Uncomment for debugging/Postman copying:
+      console.log("ACCESS TOKEN:", token);
 
-      const response = await fetch(endpoint, {
+      const resp = await fetch(endpoint, {
         ...options,
         headers: {
-          ...options.headers,
+          Accept: "application/json",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          ...(options.headers || {}),
         },
       });
 
-      console.log("JWT Token:", token);
-      return response.json();
+      if (!resp.ok) {
+        const ct = resp.headers.get("content-type") || "";
+        const body = ct.includes("application/json")
+          ? await resp.json().catch(() => ({}))
+          : await resp.text().catch(() => "");
+        const msg =
+          typeof body === "string"
+            ? body
+            : body?.detail || body?.error || JSON.stringify(body);
+        throw new Error(`HTTP ${resp.status}: ${msg || "Request failed"}`);
+      }
 
+      if (resp.status === 204) return null;
+
+      const ct = resp.headers.get("content-type") || "";
+      if (ct.includes("application/json")) {
+        return await resp.json();
+      }
+      // Fallback (rare): text response
+      return await resp.text();
     } catch (error) {
       console.error("API Request Failed:", error);
       throw error;
     }
   };
 
+  // Load "is coach" flag
   useEffect(() => {
     const fetchRole = async () => {
-      if (isAuthenticated) {
-        try {
-          const token = await getAccessTokenSilently({ audience });
-          const response = await fetch("http://localhost:8000/is-coach/", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          const data = await response.json();
-          setIsCoach(data.is_coach);
-        } catch (error) {
-          console.error("Error fetching coach role:", error);
+      if (!isAuthenticated) return;
+      try {
+        const token = await getAccessTokenSilently({ audience });
+        const resp = await fetch("http://localhost:8000/is-coach/", {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!resp.ok) {
+          // If backend returns HTML (e.g., 403), avoid .json() crash
+          const maybeText = await resp.text().catch(() => "");
+          console.error("is-coach error:", resp.status, maybeText);
+          setIsCoach(false);
+          return;
         }
+
+        const data = await resp.json();
+        setIsCoach(!!data?.is_coach);
+      } catch (error) {
+        console.error("Error fetching coach role:", error);
+        setIsCoach(false);
       }
     };
 
     fetchRole();
   }, [isAuthenticated, getAccessTokenSilently]);
 
+  // Load user detail (plan + add-ons) after login
+  const fetchUserData = async () => {
+    if (!isAuthenticated) return;
+
+    try {
+      const data = await fetchWithAuth("http://localhost:8000/user-detail/");
+
+      // Transform backend add-ons array -> { ebook: 1, ai: 0, zoom: 2 }
+      const formattedAddons = {};
+      for (const addon of data.addons || []) {
+        const { addon_type, quantity } = addon;
+        formattedAddons[addon_type] = quantity;
+      }
+
+      setUserData({
+        plan: data.subscription_plan || "none",
+        add_ons: formattedAddons,
+        username: data.username,
+        email: data.email,
+        role: data.role,
+      });
+    } catch (error) {
+      console.error("Failed to fetch user detail:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchUserData();
+    } else {
+      setUserData(null);
+      setIsCoach(false);
+    }
+  }, [isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <AuthContext.Provider
       value={{
+        // Auth0
         user,
         isAuthenticated,
         loginWithRedirect,
         logout,
-        fetchWithAuth,
         getAccessTokenSilently,
+        // App
+        fetchWithAuth,
         isCoach,
+        userData,
+        fetchUserData,
       }}
     >
       {children}

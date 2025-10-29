@@ -60,13 +60,13 @@ const NavigationBar = ({ cartItems }) => {
             )}
 
            {/* Show Coach Dashboard only for authenticated coaches */}
-            {isAuthenticated && (
+            {isAuthenticated && isCoach && (
               <Nav.Link as={Link} to="/coach-dashboard">Coach Dashboard</Nav.Link>
             )}
 
             {/* Cart Icon */}
 
-            {isAuthenticated && (
+            {isAuthenticated &&  (
                 <Nav.Link as={Link} to="/cart" className="cart-icon">
                 <FaShoppingCart />
                 {cartItems.length > 0 && <span className="cart-badge">{cartItems.length}</span>}

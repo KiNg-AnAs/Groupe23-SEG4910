@@ -1,219 +1,287 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Button, Table, Modal, Form } from "react-bootstrap";
-import { FaCheck, FaTimes, FaCalendarAlt, FaPlus } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { Table, Button, Spinner, Alert, Modal, Form } from "react-bootstrap";
+import { FaCheckCircle, FaSync, FaVideo, FaPen } from "react-icons/fa";
+import { useAuth } from "../../../../context/AuthContext";
 import "./BookingManagement.css";
 
-// Dummy API for fetching & confirming bookings
-const fetchBookings = () => {
-  return JSON.parse(localStorage.getItem("bookings")) || [];
-};
-
-const saveBookings = (bookings) => {
-  localStorage.setItem("bookings", JSON.stringify(bookings));
-};
-
-const sendEmailConfirmation = (clientEmail, sessionDetails) => {
-  console.log(`📧 Email sent to ${clientEmail}:`, sessionDetails);
-  alert(`Confirmation email sent to ${clientEmail}`);
-};
-
-const availableHours = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
-const sessionTypes = ["1-on-1 Zoom Consultation", "AI Training Plan Review", "Private Coaching", "Group Coaching"];
-
 const BookingManagement = () => {
+  const { fetchWithAuth } = useAuth();
+
   const [bookings, setBookings] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [newBooking, setNewBooking] = useState({
-    clientName: "",
-    email: "",
-    date: "",
-    time: "",
-    sessionType: sessionTypes[0],
-  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [confirmShow, setConfirmShow] = useState(false);
+  const [confirmBooking, setConfirmBooking] = useState(null);
+  const [updating, setUpdating] = useState(false);
 
-  //  Fetch bookings on load
-  useEffect(() => {
-    setBookings(fetchBookings());
-  }, []);
+  const [editNotes, setEditNotes] = useState("");
+  const [editDate, setEditDate] = useState("");
 
-  //  Handle Booking Confirmation
-  const confirmBooking = (bookingId) => {
-    const updatedBookings = bookings.map((booking) =>
-      booking.id === bookingId ? { ...booking, confirmed: true } : booking
-    );
-
-    setBookings(updatedBookings);
-    saveBookings(updatedBookings);
-
-    // Send Email Confirmation (I will Replace with actual email API)
-    const confirmedBooking = updatedBookings.find((b) => b.id === bookingId);
-    sendEmailConfirmation(confirmedBooking.email, confirmedBooking);
+  // --------------------------
+  // Fetch all bookings
+  // --------------------------
+  const loadBookings = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const data = await fetchWithAuth("http://localhost:8000/coach/bookings/");
+      setBookings(Array.isArray(data) ? data : []);
+    } catch (e) {
+      console.error("Error loading bookings:", e);
+      setError("Failed to load Zoom bookings.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  //  Handle Booking Creation
-  const handleCreateBooking = () => {
-    if (!newBooking.clientName || !newBooking.email || !newBooking.date || !newBooking.time) {
-      alert("Please fill out all fields.");
-      return;
-    }
+  useEffect(() => {
+    loadBookings();
+  }, []);
 
-    // Check if slot is already booked
-    const isSlotTaken = bookings.some(
-      (booking) => booking.date === newBooking.date && booking.time === newBooking.time
+  // --------------------------
+  // Open modal for editing
+  // --------------------------
+  const openEditModal = (booking) => {
+    setSelectedBooking(booking);
+    setEditNotes(booking.notes || "");
+    setEditDate(
+      booking.scheduled_date
+        ? new Date(booking.scheduled_date).toISOString().slice(0, 16)
+        : ""
     );
+    setModalShow(true);
+  };
 
-    if (isSlotTaken) {
-      alert("This time slot is already booked. Please choose another time.");
-      return;
+  const closeEditModal = () => {
+    setModalShow(false);
+    setSelectedBooking(null);
+  };
+
+  // --------------------------
+  // Save modal edits
+  // --------------------------
+  const saveBookingChanges = async () => {
+    if (!selectedBooking) return;
+    setUpdating(true);
+    try {
+      await fetchWithAuth(
+        `http://localhost:8000/coach/bookings/${selectedBooking.id}/`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            scheduled_date: editDate || null,
+            notes: editNotes,
+          }),
+        }
+      );
+
+      setBookings((prev) =>
+        prev.map((b) =>
+          b.id === selectedBooking.id
+            ? { ...b, notes: editNotes, scheduled_date: editDate }
+            : b
+        )
+      );
+      setModalShow(false);
+    } catch (e) {
+      console.error("Failed to save booking:", e);
+      alert("Failed to save booking changes.");
+    } finally {
+      setUpdating(false);
     }
+  };
 
-    const updatedBookings = [
-      ...bookings,
-      { ...newBooking, id: Date.now(), confirmed: false },
-    ];
+  // --------------------------
+  // Confirmation modal for completion
+  // --------------------------
+  const confirmComplete = async () => {
+    if (!confirmBooking) return;
+    setUpdating(true);
+    try {
+      const data = await fetchWithAuth(
+        `http://localhost:8000/coach/bookings/${confirmBooking.id}/`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: "Completed" }),
+        }
+      );
 
-    setBookings(updatedBookings);
-    saveBookings(updatedBookings);
-    setShowModal(false);
+      // Update UI immediately based on remaining quantity
+      setBookings((prev) =>
+        prev
+          .map((b) => {
+            if (b.id === confirmBooking.id) {
+              const newQty =
+                typeof data.remaining_quantity === "number"
+                  ? data.remaining_quantity
+                  : Math.max(b.quantity - 1, 0);
+              const newStatus =
+                data.status || (newQty > 0 ? "Pending" : "Completed");
+              return {
+                ...b,
+                quantity: newQty,
+                status: newStatus,
+                last_updated: new Date().toISOString(),
+              };
+            }
+            return b;
+          })
+          // Remove the row only when quantity reaches 0
+          .filter((b) => b.quantity > 0)
+      );
+
+      setConfirmShow(false);
+    } catch (e) {
+      console.error("Failed to complete booking:", e);
+      alert("Failed to mark booking as completed.");
+    } finally {
+      setUpdating(false);
+    }
   };
 
   return (
-    <section className="booking-management-section">
-      <Container>
-        <h2 className="section-title">
-          <FaCalendarAlt /> Manage Client Bookings
-        </h2>
-        <p className="section-description">View, create, and confirm training sessions.</p>
+    <div className="booking-container">
+      <div className="booking-header">
+        <FaVideo className="booking-icon" />
+        <h2>Zoom Booking Management</h2>
+        <p>Manage and complete your client Zoom session bookings.</p>
+      </div>
 
-        {/*  Create Booking Button */}
-        <Button variant="primary" className="mb-3" onClick={() => setShowModal(true)}>
-          <FaPlus /> Create Booking
-        </Button>
+      {error && <Alert variant="danger">{error}</Alert>}
 
-        {/*  Booking Table */}
-        <Table striped bordered hover variant="dark" responsive className="booking-table">
+      {loading ? (
+        <div className="loading-state">
+          <Spinner animation="border" />
+          <span>Loading Zoom bookings…</span>
+        </div>
+      ) : bookings.length === 0 ? (
+        <p className="empty-msg">No active Zoom bookings found.</p>
+      ) : (
+        <Table bordered hover responsive className="booking-table">
           <thead>
             <tr>
-              <th>Client</th>
-              <th>Email</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Type</th>
+              <th>#</th>
+              <th>Client Email</th>
+              <th>Quantity</th>
               <th>Status</th>
-              <th>Actions</th>
+              <th>Notes</th>
+              <th>Last Updated</th>
+              <th className="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {bookings.length > 0 ? (
-              bookings.map((booking) => (
-                <tr key={booking.id}>
-                  <td>{booking.clientName}</td>
-                  <td>{booking.email}</td>
-                  <td>{booking.date}</td>
-                  <td>{booking.time}</td>
-                  <td>{booking.sessionType}</td>
-                  <td>
-                    <span className={booking.confirmed ? "status-confirmed" : "status-pending"}>
-                      {booking.confirmed ? "Confirmed" : "Pending"}
-                    </span>
-                  </td>
-                  <td>
-                    {!booking.confirmed ? (
-                      <Button
-                        variant="success"
-                        size="sm"
-                        onClick={() => confirmBooking(booking.id)}
-                      >
-                        <FaCheck /> Confirm
-                      </Button>
-                    ) : (
-                      <Button variant="secondary" size="sm" disabled>
-                        Confirmed
-                      </Button>
-                    )}
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="7" className="text-center">
-                  No bookings available.
+            {bookings.map((b, i) => (
+              <tr key={b.id}>
+                <td>{i + 1}</td>
+                <td>{b.user_email}</td>
+                <td>{b.quantity}</td>
+                <td>
+                  <span
+                    className={`status-badge ${
+                      b.status === "Completed" ? "done" : "pending"
+                    }`}
+                  >
+                    {b.status}
+                  </span>
+                </td>
+                <td>
+                  <Button
+                    variant="outline-primary"
+                    size="sm"
+                    onClick={() => openEditModal(b)}
+                  >
+                    <FaPen /> Edit
+                  </Button>
+                </td>
+                <td>{new Date(b.last_updated).toLocaleString()}</td>
+                <td className="text-center">
+                  <Button
+                    variant="success"
+                    size="sm"
+                    disabled={updating || b.status === "Completed"}
+                    onClick={() => {
+                      setConfirmBooking(b);
+                      setConfirmShow(true);
+                    }}
+                  >
+                    <FaCheckCircle className="me-1" /> Complete
+                  </Button>
                 </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </Table>
+      )}
 
-        {/*  Create Booking Modal */}
-        <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Create New Booking</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>Client Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={newBooking.clientName}
-                  onChange={(e) => setNewBooking({ ...newBooking, clientName: e.target.value })}
-                />
-              </Form.Group>
+      <div className="refresh-btn">
+        <Button variant="secondary" onClick={loadBookings} disabled={loading}>
+          <FaSync className="me-1" /> Refresh
+        </Button>
+      </div>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Client Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={newBooking.email}
-                  onChange={(e) => setNewBooking({ ...newBooking, email: e.target.value })}
-                />
-              </Form.Group>
+      {/* ---------------------- Notes Modal ---------------------- */}
+      <Modal show={modalShow} onHide={closeEditModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Booking</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group className="mb-3">
+            <Form.Label>Scheduled Date</Form.Label>
+            <Form.Control
+              type="datetime-local"
+              value={editDate}
+              onChange={(e) => setEditDate(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Notes</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={editNotes}
+              onChange={(e) => setEditNotes(e.target.value)}
+              placeholder="Add session details or preparation notes..."
+            />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeEditModal}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={saveBookingChanges} disabled={updating}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Session Type</Form.Label>
-                <Form.Select
-                  value={newBooking.sessionType}
-                  onChange={(e) => setNewBooking({ ...newBooking, sessionType: e.target.value })}
-                >
-                  {sessionTypes.map((type, index) => (
-                    <option key={index}>{type}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={newBooking.date}
-                  onChange={(e) => setNewBooking({ ...newBooking, date: e.target.value })}
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Time</Form.Label>
-                <Form.Select
-                  value={newBooking.time}
-                  onChange={(e) => setNewBooking({ ...newBooking, time: e.target.value })}
-                >
-                  {availableHours.map((time, index) => (
-                    <option key={index}>{time}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Cancel
-            </Button>
-            <Button variant="success" onClick={handleCreateBooking}>
-              Create Booking
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </Container>
-    </section>
+      {/* ---------------------- Confirmation Modal ---------------------- */}
+      <Modal show={confirmShow} onHide={() => setConfirmShow(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Mark Booking as Completed</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            Are you sure you want to mark this booking as{" "}
+            <strong>Completed</strong>?
+          </p>
+          <p className="small text-muted">
+            This will consume one Zoom add-on from the client’s balance.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setConfirmShow(false)}>
+            Cancel
+          </Button>
+          <Button variant="success" onClick={confirmComplete} disabled={updating}>
+            Confirm
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 };
 

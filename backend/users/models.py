@@ -3,6 +3,9 @@ from django.utils import timezone
 from datetime import timedelta
 from django.contrib.postgres.fields import JSONField  
 from django.db.models import JSONField 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 # Main User Table (Clients & Coaches)
 class User(models.Model):
@@ -129,3 +132,99 @@ class AddOn(models.Model):
 
     def __str__(self):
         return f"{self.user.username or self.user.email} - {self.addon_type} x{self.quantity} ({self.status})"
+
+
+# ----------------------------------------------------
+# Coach Bookings (ai_trainings)
+# ----------------------------------------------------
+class CoachTrainingProgress(models.Model):
+    STATUS_CHOICES = [
+        ("Pending", "Pending"),
+        ("Done", "Done"),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ai_trainings")
+    coach = models.ForeignKey(User, on_delete=models.CASCADE, related_name="assigned_ai_clients")
+    addon = models.OneToOneField(AddOn, on_delete=models.CASCADE, related_name="training_progress")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pending")
+    notes = models.TextField(blank=True, null=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "coach_training_progress"
+        ordering = ["-last_updated"]
+
+    def __str__(self):
+        return f"{self.user.email} ({self.status})"
+
+
+# ----------------------------------------------------
+# Coach Bookings (Zoom Add-On Tracking)
+# ----------------------------------------------------
+class CoachBooking(models.Model):
+    STATUS_CHOICES = [
+        ("Pending", "Pending"),
+        ("Completed", "Completed"),
+    ]
+
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="zoom_bookings")
+    coach = models.ForeignKey("users.User", on_delete=models.SET_NULL, null=True, related_name="coach_zoom_bookings")
+    addon = models.ForeignKey("users.AddOn", on_delete=models.CASCADE, related_name="zoom_bookings")
+    scheduled_date = models.DateTimeField(null=True, blank=True)
+    completion_date = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pending")
+    notes = models.TextField(blank=True, null=True)
+
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"ZoomBooking({self.user.email}, {self.status})"
+
+# --------------------------------------------------------------------
+# Automatic synchronization of add-ons to coach tables
+# --------------------------------------------------------------------
+@receiver(post_save, sender=AddOn)
+def auto_create_ai_training_progress(sender, instance, created, **kwargs):
+    """
+    Whenever an AI Add-On is purchased (created in users_addons),
+    automatically create a CoachTrainingProgress record.
+    """
+    if instance.addon_type == "ai" and instance.status == "active":
+        from users.models import CoachTrainingProgress, User
+
+        coach = User.objects.filter(role="coach").first()
+        if not coach:
+            return
+
+        # Create only if no record exists for this AddOn
+        if not CoachTrainingProgress.objects.filter(addon=instance).exists():
+            CoachTrainingProgress.objects.create(
+                user=instance.user,
+                coach=coach,
+                addon=instance,
+                status="Pending",
+                notes=""
+            )
+
+
+@receiver(post_save, sender=AddOn)
+def auto_create_zoom_booking(sender, instance, created, **kwargs):
+    """
+    Whenever a Zoom Add-On is purchased (created in users_addons),
+    automatically create a CoachBooking record.
+    """
+    if instance.addon_type == "zoom" and instance.status == "active":
+        from users.models import CoachBooking, User
+
+        coach = User.objects.filter(role="coach").first()
+        if not coach:
+            return
+
+        if not CoachBooking.objects.filter(addon=instance).exists():
+            CoachBooking.objects.create(
+                user=instance.user,
+                coach=coach,
+                addon=instance,
+                status="Pending"
+            )

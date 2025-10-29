@@ -1,70 +1,62 @@
-/* General Section */
-.booking-management-section {
-    padding: 50px 20px;
-    text-align: center;
-    color: white;
-  }
-  
-  /* Section Title */
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Section Description */
-  .section-description {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    opacity: 0.8;
-  }
-  
-  /* Booking Table */
-  .booking-table {
-    margin-top: 20px;
-  }
-  
-  .booking-table th,
-  .booking-table td {
-    text-align: center;
-    padding: 12px;
-  }
-  
-  .booking-table th {
-    background: #343a40;
-    color: white;
-  }
-  
-  .booking-table tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.05);
-  }
-  
-  /* Status Labels */
-  .status-confirmed {
-    color: #28a745;
-    font-weight: bold;
-  }
-  
-  .status-pending {
-    color: #ffc107;
-    font-weight: bold;
-  }
-  
-  /* Buttons */
-  button {
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  button:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    .booking-table th,
-    .booking-table td {
-      font-size: 0.9rem;
-      padding: 10px;
-    }
-  }
-  
+.booking-container {
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.booking-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.booking-header h2 {
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.booking-icon {
+  font-size: 2.5rem;
+  color: #0d6efd;
+}
+
+.booking-table th,
+.booking-table td {
+  vertical-align: middle !important;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.done {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: #555;
+  padding: 1.5rem;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+.refresh-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
