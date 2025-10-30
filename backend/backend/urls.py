@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from users.views import (
     get_user_info,
     get_user_subscription,
@@ -34,10 +34,13 @@ from users.views import (
     coach_training_update,
     coach_list_bookings,
     coach_update_booking,
+    create_checkout_session,
+    stripe_webhook,
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", include("users.urls")),
     path('user-info/', get_user_info, name='user-info'),
     path('user-subscription/', get_user_subscription, name='user-subscription'),
     path('set-username/', set_username, name='set-username'),
@@ -56,4 +59,6 @@ urlpatterns = [
     path("coach/training/<int:user_id>/", coach_training_update, name="coach-training-update"),
     path("coach/bookings/", coach_list_bookings, name="coach-list-bookings"),
     path("coach/bookings/<int:user_id>/", coach_update_booking, name="coach-update-booking"),
+    path("create-checkout-session/", create_checkout_session, name="create-checkout-session"),
+    path('stripe_webhook', stripe_webhook, name='stripe_webhook'),
 ]

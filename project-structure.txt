@@ -3,6 +3,7 @@
 ├── Project_overview.md
 ├── README.md
 ├── backend
+│   ├── .DS_Store
 │   ├── Dockerfile
 │   ├── backend
 │   │   ├── __init__.py
@@ -17,8 +18,17 @@
 │       ├── admin.py
 │       ├── apps.py
 │       ├── authentication.py
+│       ├── management
+│       │   └── commands
+│       │       ├── sync_ai_training.py
+│       │       └── sync_zoom_bookings.py
 │       ├── migrations
 │       │   ├── 0001_initial.py
+│       │   ├── 0002_addon.py
+│       │   ├── 0003_user_add_ons.py
+│       │   ├── 0004_coachbooking_coachtrainingprogress.py
+│       │   ├── 0005_alter_coachtrainingprogress_options_and_more.py
+│       │   ├── 0006_coachbooking.py
 │       │   └── __init__.py
 │       ├── models.py
 │       ├── tests.py
@@ -73,6 +83,7 @@
 │       │   │   └── img9.jpg
 │       │   ├── Board
 │       │   │   ├── Client
+│       │   │   │   ├── .DS_Store
 │       │   │   │   ├── AICoaching
 │       │   │   │   │   ├── AICoaching.css
 │       │   │   │   │   ├── AICoaching.js
@@ -84,6 +95,7 @@
 │       │   │   │   │   └── data
 │       │   │   │   │       └── exercises.json
 │       │   │   │   ├── Dashboard
+│       │   │   │   │   ├── .DS_Store
 │       │   │   │   │   ├── Dashboard.css
 │       │   │   │   │   └── Dashboard.js
 │       │   │   │   └── NutritionGuide
@@ -100,15 +112,6 @@
 │       │   │       ├── CoachDashboard
 │       │   │       │   ├── CoachDashboard.css
 │       │   │       │   └── CoachDashboard.js
-│       │   │       ├── Messaging
-│       │   │       │   ├── Messaging.css
-│       │   │       │   └── Messaging.js
-│       │   │       ├── Payments
-│       │   │       │   ├── Payments.css
-│       │   │       │   └── Payments.js
-│       │   │       ├── ProgressTracking
-│       │   │       │   ├── ProgressTracking.css
-│       │   │       │   └── ProgressTracking.js
 │       │   │       └── TrainingPrograms
 │       │   │           ├── TrainingPrograms.css
 │       │   │           └── TrainingPrograms.js
@@ -139,9 +142,6 @@
 │       │       ├── AddOns
 │       │       │   ├── AddOns.css
 │       │       │   └── AddOns.js
-│       │       ├── Booking
-│       │       │   ├── Booking.css
-│       │       │   └── Booking.js
 │       │       ├── Cart
 │       │       │   ├── Cart.css
 │       │       │   └── Cart.js
@@ -160,4 +160,4 @@
 │       └── setupTests.js
 └── project-structure.txt
 
-42 directories, 119 files
+40 directories, 121 files

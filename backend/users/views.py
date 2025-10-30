@@ -8,6 +8,14 @@ from django.utils import timezone
 from datetime import timedelta
 from rest_framework import status
 import json
+import stripe
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+import stripe
+from django.http import HttpResponse
+from django.db import transaction
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def _require_coach(request):
     """Raise 403 if the authenticated user is not a coach."""
@@ -149,14 +157,17 @@ def save_user_profile(request):
 def user_detail(request):
     """
     GET  -> Returns the current authenticated user's full database row
-    PUT/PATCH -> Updates username, role, subscription_plan, and add_ons
+    PUT/PATCH -> Updates username, role, and allows plan downgrade only.
+                 Purchases and upgrades are now handled via Stripe webhook.
     """
-
     auth0_id = request.user.payload.get("sub")
     user = User.objects.filter(auth0_id=auth0_id).first()
     if not user:
         return JsonResponse({"error": "User not found"}, status=404)
 
+    # -------------------------------
+    # PUT / PATCH  -> basic profile updates
+    # -------------------------------
     if request.method in ["PUT", "PATCH"]:
         data = request.data
         username = data.get("username")
@@ -164,43 +175,36 @@ def user_detail(request):
         subscription_plan = data.get("subscription_plan")
         add_ons = data.get("add_ons", {})
 
-        # Update basic user info
+        # --- 1️⃣ Basic info updates ---
         if username is not None:
             user.username = username
         if role is not None:
             user.role = role
 
-        # Handle subscription plan logic
-        if subscription_plan is not None and subscription_plan != user.subscription_plan:
-            # Update plan on user table
-            user.subscription_plan = subscription_plan
+        # --- 2️⃣ Downgrade handling only ---
+        # Stripe webhook is now responsible for upgrades
+        if subscription_plan is not None:
+            # Allow only downgrades to 'none' or 'basic'
+            if subscription_plan in ["none", "basic"]:
+                user.subscription_plan = subscription_plan
+                # Expire any active subscriptions
+                Subscription.objects.filter(user=user, status="active").update(status="expired")
+            else:
+                # ignore upgrade attempts here (handled by Stripe)
+                pass
 
-            # Create a new Subscription record (start today, end in 1 year)
-            Subscription.objects.create(
-                user=user,
-                plan=subscription_plan,
-                start_date=timezone.now(),
-                end_date=timezone.now() + timedelta(days=365),
-                status="active",
-            )
-
-        # Handle add-ons creation logic
+        # --- 3️⃣ Add-ons updates ---
+        # Regular users can't manually purchase via PATCH anymore.
+        # This remains for coach/admin or data fixes if needed.
         for addon_type, qty in (add_ons or {}).items():
+            qty = int(qty)
             if qty <= 0:
                 continue
-
-            # E-Book: allow only 1 total (prevent duplicates)
+            # E-Book: prevent duplicates
             if addon_type == "ebook":
-                existing_ebook = AddOn.objects.filter(user=user, addon_type="ebook").first()
-                if existing_ebook:
-                    continue  # Skip if already purchased
-
-            # Set expiration for zoom & ai (1 year)
-            end_date = None
-            if addon_type in ["zoom", "ai"]:
-                end_date = timezone.now() + timedelta(days=365)
-
-            # Create new AddOn record
+                if AddOn.objects.filter(user=user, addon_type="ebook", status__in=["active", "used"]).exists():
+                    continue
+            end_date = timezone.now() + timedelta(days=30)
             AddOn.objects.create(
                 user=user,
                 addon_type=addon_type,
@@ -213,7 +217,9 @@ def user_detail(request):
         user.save()
         return Response({"message": "User updated successfully"})
 
-    # GET -> return full user info
+    # -------------------------------
+    # GET -> return complete profile
+    # -------------------------------
     addons_list = AddOn.objects.filter(user=user)
     addons_data = [
         {
@@ -226,8 +232,11 @@ def user_detail(request):
         for a in addons_list
     ]
 
-    # Also fetch subscription info if exists
-    subscription = Subscription.objects.filter(user=user, status="active").order_by("-start_date").first()
+    subscription = (
+        Subscription.objects.filter(user=user, status="active")
+        .order_by("-start_date")
+        .first()
+    )
     subscription_data = None
     if subscription:
         subscription_data = {
@@ -248,7 +257,6 @@ def user_detail(request):
         "addons": addons_data,
         "created_at": user.created_at,
     })
-
 
 # --------------------------------------------------------------------
 #  Downgrade Plan (Dashboard-only action)
@@ -665,7 +673,6 @@ def coach_list_bookings(request):
 #  PATCH /coach/bookings/<int:user_id>/
 # --------------------------------------------------------------------
 @api_view(["PATCH"])
-@permission_classes([IsAuthenticated])
 def coach_update_booking(request, user_id: int):
     """
     Allows the coach to update or complete a Zoom booking for a client.
@@ -746,3 +753,160 @@ def coach_update_booking(request, user_id: int):
     # Regular updates (not completion)
     booking.save(update_fields=["scheduled_date", "notes", "updated_at"])
     return Response({"message": "Booking updated successfully."})
+
+
+
+
+@csrf_exempt  
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_checkout_session(request):
+    """
+    1. Frontend sends: { total, plan, add_ons }
+    2. We create a Stripe Checkout Session
+    3. We store *all* needed info in session.metadata
+    4. Webhook will read it and update DB *after* payment is confirmed
+    """
+    data = request.data
+    total = float(data.get("total", 0))
+    plan = data.get("plan", "none")
+    add_ons = data.get("add_ons", {})
+
+    # get current user
+    auth0_id = request.user.payload.get("sub")
+    email = request.user.payload.get("email")
+
+    try:
+        # VERY IMPORTANT: put ALL business info in metadata
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            mode="payment",
+            line_items=[
+                {
+                    "price_data": {
+                        "currency": "usd",
+                        "product_data": {
+                            "name": f"PerfoEvolution purchase ({plan})"
+                        },
+                        "unit_amount": int(total * 100),
+                    },
+                    "quantity": 1,
+                }
+            ],
+            customer_email=email,  # so webhook can find user by email
+            success_url="http://localhost:3000/payment-success",
+            cancel_url="http://localhost:3000/payment-cancel",
+            metadata={
+                "auth0_id": auth0_id or "",
+                "email": email or "",
+                "plan": plan,
+                # store add-ons as json string
+                "add_ons": json.dumps(add_ons),
+                # you can also store "billing_period": "monthly"
+                "billing_period": "monthly" if plan in ["basic", "advanced"] else "",
+            },
+        )
+        return Response({"url": checkout_session.url})
+    except Exception as e:
+        return Response({"error": str(e)}, status=400)
+
+
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META.get("HTTP_STRIPE_SIGNATURE")
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+        )
+    except Exception as e:
+        print("[STRIPE WEBHOOK ERROR]", e)
+        return HttpResponse(status=400)
+
+    if event["type"] == "checkout.session.completed":
+        session = event["data"]["object"]
+        print("[WEBHOOK] Received checkout.session.completed")
+
+        metadata = session.get("metadata", {}) or {}
+        plan = metadata.get("plan", "none")
+        add_ons_raw = metadata.get("add_ons", "{}")
+        billing_period = metadata.get("billing_period", "monthly")
+
+        try:
+            addons = json.loads(add_ons_raw)
+        except json.JSONDecodeError:
+            addons = {}
+
+        email = metadata.get("email") or session.get("customer_email")
+        auth0_id = metadata.get("auth0_id")
+
+        user = None
+        if auth0_id:
+            user = User.objects.filter(auth0_id=auth0_id).first()
+        if not user and email:
+            user = User.objects.filter(email=email).first()
+
+        if not user:
+            print("[WEBHOOK] No user found for:", email)
+            return HttpResponse(status=200)
+
+        try:
+            with transaction.atomic():
+                # --- Update subscription ---
+                if plan in ["basic", "advanced"]:
+                    Subscription.objects.filter(user=user, status="active").update(status="expired")
+                    start_date = timezone.now()
+                    end_date = start_date + timedelta(days=30)
+                    Subscription.objects.create(
+                        user=user,
+                        plan=plan,
+                        start_date=start_date,
+                        end_date=end_date,
+                        status="active",
+                    )
+                    user.subscription_plan = plan
+
+                # --- Update add-ons ---
+                user_addons_dict = user.add_ons or {}
+                for key, qty in addons.items():
+                    qty = int(qty)
+                    if qty <= 0:
+                        continue
+                    if key == "ebook":
+                        exists = AddOn.objects.filter(
+                            user=user, addon_type="ebook", status__in=["active", "used"]
+                        ).exists()
+                        if not exists:
+                            AddOn.objects.create(
+                                user=user,
+                                addon_type="ebook",
+                                quantity=1,
+                                start_date=timezone.now(),
+                                end_date=None,
+                                status="active",
+                            )
+                            user_addons_dict["ebook"] = 1
+                        continue
+                    end_date = timezone.now() + timedelta(days=30)
+                    AddOn.objects.create(
+                        user=user,
+                        addon_type=key,
+                        quantity=qty,
+                        start_date=timezone.now(),
+                        end_date=end_date,
+                        status="active",
+                    )
+                    user_addons_dict[key] = user_addons_dict.get(key, 0) + qty
+
+                user.add_ons = user_addons_dict
+                user.save(update_fields=["subscription_plan", "add_ons"])
+
+                print(f"[WEBHOOK] ✅ Updated user {user.email}: plan={plan}, addons={user_addons_dict}")
+        except Exception as e:
+            print("[WEBHOOK ERROR during DB update]", e)
+            return HttpResponse(status=500)
+
+    return HttpResponse(status=200)

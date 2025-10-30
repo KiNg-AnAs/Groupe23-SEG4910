@@ -5,6 +5,10 @@ from django.contrib.postgres.fields import JSONField
 from django.db.models import JSONField 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 
 
 # Main User Table (Clients & Coaches)
@@ -180,6 +184,25 @@ class CoachBooking(models.Model):
 
     def __str__(self):
         return f"ZoomBooking({self.user.email}, {self.status})"
+    
+
+class Subscription(models.Model):
+    PLAN_CHOICES = [
+        ("none", "None"),
+        ("basic", "Basic"),
+        ("advanced", "Advanced"),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="subscriptions")
+    plan = models.CharField(max_length=10, choices=PLAN_CHOICES)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    status = models.CharField(max_length=10, default="active")  # active | expired
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.email} - {self.plan} ({self.status})"
+
 
 # --------------------------------------------------------------------
 # Automatic synchronization of add-ons to coach tables
@@ -228,3 +251,4 @@ def auto_create_zoom_booking(sender, instance, created, **kwargs):
                 addon=instance,
                 status="Pending"
             )
+

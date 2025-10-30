@@ -15,6 +15,9 @@ import Dashboard from "./components/Board/Client/Dashboard/Dashboard";
 import OnboardingForm from "./components/Onboarding/OnboardingForm/OnboardingForm";
 import AddOns from "./components/Shared/AddOns/AddOns";
 import CoachDashboard from "./components/Board/Coach/CoachDashboard/CoachDashboard";
+import PaymentSuccess from "./components/Shared/Payment/PaymentSuccess";
+import PaymentCancel from "./components/Shared/Payment/PaymentCancel";
+
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -95,6 +98,9 @@ function App() {
             <Route path="/coach-dashboard" element={<CoachDashboard />} />
           <Route path="/coach-dashboard" element={<CoachDashboard />} /> 
             <Route path="/coach-dashboard" element={<CoachDashboard />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-cancel" element={<PaymentCancel />} />
+
           </Routes>
         </AuthProvider>
       </Router>

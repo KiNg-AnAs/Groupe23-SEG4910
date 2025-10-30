@@ -5,37 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
 const plans = [
-  {
-    key: "basic",
-    title: "Basic Plan",
-    price: 29,
-    description: "AI-Generated Training Plans + Workout Tracking",
-  },
-  {
-    key: "advanced",
-    title: "Advanced Plan",
-    price: 39,
-    description:
-      "Everything in Basic + Nutrition Plan + E-Book + Custom Coaching",
-  },
+  { key: "basic", title: "Basic Plan", price: 29, description: "AI-Generated Training Plans + Workout Tracking" },
+  { key: "advanced", title: "Advanced Plan", price: 39, description: "Everything in Basic + Nutrition Plan + E-Book + Custom Coaching" },
 ];
 
 const availableAddOns = [
-  {
-    key: "ebook",
-    title: "E-Book",
-    price: 29.99,
-  },
-  {
-    key: "zoom",
-    title: "1-on-1 Zoom Consultation",
-    price: 49.99,
-  },
-  {
-    key: "ai",
-    title: "Coach Custom AI Training Plan",
-    price: 99.99,
-  },
+  { key: "ebook", title: "E-Book", price: 29.99 },
+  { key: "zoom", title: "1-on-1 Zoom Consultation", price: 49.99 },
+  { key: "ai", title: "Coach Custom AI Training Plan", price: 99.99 },
 ];
 
 const Cart = () => {
@@ -48,7 +25,7 @@ const Cart = () => {
   const [userAddOns, setUserAddOns] = useState({});
   const [loading, setLoading] = useState(true);
 
-  // Get current user plan + add-ons from backend
+  // ✅ Fetch current user details
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -64,7 +41,7 @@ const Cart = () => {
     fetchUserDetails();
   }, [fetchWithAuth]);
 
-  // Load from localStorage if user was building cart
+  // Load from localStorage (if user previously had items in cart)
   useEffect(() => {
     const storedPlan = localStorage.getItem("cart_plan");
     const storedAddOns = localStorage.getItem("cart_addons");
@@ -72,17 +49,14 @@ const Cart = () => {
     if (storedAddOns) setSelectedAddOns(JSON.parse(storedAddOns));
   }, []);
 
-  // Save to localStorage
+  // Save cart state to localStorage
   useEffect(() => {
     localStorage.setItem("cart_plan", JSON.stringify(selectedPlan));
     localStorage.setItem("cart_addons", JSON.stringify(selectedAddOns));
   }, [selectedPlan, selectedAddOns]);
 
   const handleAddOnChange = (key, value) => {
-    setSelectedAddOns((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    setSelectedAddOns((prev) => ({ ...prev, [key]: value }));
   };
 
   const handlePlanChange = (planKey) => {
@@ -96,46 +70,40 @@ const Cart = () => {
 
   const calculateTotal = () => {
     const planPrice = selectedPlan ? selectedPlan.price : 0;
-    const addOnsTotal = Object.entries(selectedAddOns).reduce(
-      (sum, [key, qty]) => {
-        const addOn = availableAddOns.find((a) => a.key === key);
-        return sum + (addOn ? addOn.price * qty : 0);
-      },
-      0
-    );
+    const addOnsTotal = Object.entries(selectedAddOns).reduce((sum, [key, qty]) => {
+      const addOn = availableAddOns.find((a) => a.key === key);
+      return sum + (addOn ? addOn.price * qty : 0);
+    }, 0);
     return (planPrice + addOnsTotal).toFixed(2);
   };
 
+  // ✅ Stripe checkout
   const handleCheckout = async () => {
     try {
-      const payload = {};
-
-      if (selectedPlan && selectedPlan.key !== userPlan) {
-        payload.subscription_plan = selectedPlan.key;
-      }
-
-      // Filter only purchased (qty > 0) add-ons
       const updatedAddOns = {};
       for (const [key, qty] of Object.entries(selectedAddOns)) {
-        if (qty > 0) {
-          updatedAddOns[key] = (userAddOns[key] || 0) + qty;
-        }
+        if (qty > 0) updatedAddOns[key] = qty;
       }
 
-      if (Object.keys(updatedAddOns).length > 0) {
-        payload.add_ons = updatedAddOns;
-      }
+      const totalAmount = calculateTotal();
 
-      await fetchWithAuth("http://localhost:8000/user-detail/", {
-        method: "PATCH",
+      const data = await fetchWithAuth("http://localhost:8000/create-checkout-session/", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          total: totalAmount,
+          plan: selectedPlan ? selectedPlan.key : "none",
+          add_ons: updatedAddOns,
+        }),
       });
 
-      localStorage.removeItem("cart_plan");
-      localStorage.removeItem("cart_addons");
-
-      navigate("/dashboard");
+      if (data.url) {
+        // Store cart before redirecting
+        localStorage.setItem("cart_in_progress", "true");
+        window.location.href = data.url;
+      } else {
+        alert("Payment session could not be created. Please try again.");
+      }
     } catch (error) {
       console.error("Checkout failed:", error);
       alert("Something went wrong during checkout. Please try again.");
@@ -143,7 +111,6 @@ const Cart = () => {
   };
 
   const alreadyHasEbook = (userAddOns["ebook"] || 0) >= 1;
-
   const getPlanLabel = (planKey) => {
     const plan = plans.find((p) => p.key === planKey);
     return plan ? plan.title : "None";
@@ -168,7 +135,7 @@ const Cart = () => {
           <strong>Current Plan:</strong> {getPlanLabel(userPlan)}
         </div>
 
-        {/* STEP 1: Plan Selection */}
+        {/* Step 1: Plan Selection */}
         <div className="step-header" data-step="①">
           Choose Your Plan
         </div>
@@ -218,7 +185,7 @@ const Cart = () => {
           </Form>
         </div>
 
-        {/* STEP 2: Add-Ons */}
+        {/* Step 2: Add-ons */}
         <div className="step-header" data-step="②">
           Add-Ons
         </div>
@@ -228,8 +195,7 @@ const Cart = () => {
             return (
               <div className="addon-item" key={addOn.key}>
                 <div className="addon-name">
-                  {addOn.title} -{" "}
-                  <span className="addon-price">${addOn.price}</span>
+                  {addOn.title} - <span className="addon-price">${addOn.price}</span>
                 </div>
                 <Form.Control
                   type="number"
@@ -244,23 +210,20 @@ const Cart = () => {
                   }}
                   className="addon-quantity"
                 />
-                {disabled && (
-                  <div className="addon-note text-warning">Already purchased</div>
-                )}
+                {disabled && <div className="addon-note text-warning">Already purchased</div>}
               </div>
             );
           })}
         </div>
 
-        {/* STEP 3: Summary */}
+        {/* Step 3: Summary */}
         <div className="step-header" data-step="③">
           Summary
         </div>
         <div className="summary-card">
           {selectedPlan ? (
             <p>
-              <strong>Plan:</strong> {selectedPlan.title} - $
-              {selectedPlan.price}/month
+              <strong>Plan:</strong> {selectedPlan.title} - ${selectedPlan.price}/month
             </p>
           ) : (
             <p>
@@ -274,8 +237,7 @@ const Cart = () => {
               const addOn = availableAddOns.find((a) => a.key === key);
               return (
                 <p key={key}>
-                  <strong>{addOn.title}</strong> × {qty} = $
-                  {(addOn.price * qty).toFixed(2)}
+                  <strong>{addOn.title}</strong> × {qty} = ${(addOn.price * qty).toFixed(2)}
                 </p>
               );
             })}
@@ -285,10 +247,7 @@ const Cart = () => {
           <Button
             className="checkout-btn"
             onClick={handleCheckout}
-            disabled={
-              !selectedPlan &&
-              Object.values(selectedAddOns).every((qty) => qty === 0)
-            }
+            disabled={!selectedPlan && Object.values(selectedAddOns).every((qty) => qty === 0)}
           >
             Proceed to Checkout
           </Button>

@@ -1,0 +1,31 @@
+.payment-page {
+  text-align: center;
+  margin-top: 250px;
+  padding: 2rem;
+}
+
+.payment-page h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #2e7d32; /* green success tone */
+}
+
+.payment-page p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.payment-page button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.payment-page button:hover {
+  background-color: #256628;
+}
