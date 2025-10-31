@@ -30,17 +30,19 @@ from users.views import (
     coach_list_clients,
     coach_update_client_profile,
     coach_delete_client,
-    coach_training_list, 
+    coach_training_list,
     coach_training_update,
     coach_list_bookings,
     coach_update_booking,
     create_checkout_session,
     stripe_webhook,
 )
+from ai_program_generator.views import generate_ai_program
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("users.urls")),
+    path("api/program/generate", generate_ai_program, name="generate_training_program"),
     path('user-info/', get_user_info, name='user-info'),
     path('user-subscription/', get_user_subscription, name='user-subscription'),
     path('set-username/', set_username, name='set-username'),
