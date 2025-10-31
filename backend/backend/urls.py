@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from users.views import (
     get_user_info,
     get_user_subscription,
@@ -28,9 +28,11 @@ from users.views import (
     downgrade_plan,
     get_user_addons,
 )
+from ai_program_generator.views import generate_ai_program
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/program/generate", generate_ai_program, name="generate_training_program"),
     path('user-info/', get_user_info, name='user-info'),
     path('user-subscription/', get_user_subscription, name='user-subscription'),
     path('set-username/', set_username, name='set-username'),
