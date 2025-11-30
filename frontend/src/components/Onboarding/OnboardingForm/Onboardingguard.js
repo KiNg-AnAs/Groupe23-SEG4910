@@ -7,7 +7,7 @@ import "./Onboardingguard.css";
 
 const OnboardingGuard = ({ children }) => {
   const { fetchWithAuth } = useAuth();
-  const [profileStatus, setProfileStatus] = useState("loading"); // loading, incomplete, complete, update_needed
+  const [profileStatus, setProfileStatus] = useState("loading");
   const [userProfile, setUserProfile] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showUpdatePrompt, setShowUpdatePrompt] = useState(false);
@@ -20,9 +20,14 @@ const OnboardingGuard = ({ children }) => {
     try {
       const response = await fetchWithAuth("http://localhost:8000/user-detail/");
       
+      console.log("📊 User detail response:", response);
+      console.log("👤 User ID:", response.id);
+      console.log("📋 Profile data:", response.profile);
+      
       if (response.profile) {
         const profile = response.profile;
-
+        
+        // Check if profile has all required fields
         const isComplete = 
           profile.age &&
           profile.height_cm &&
@@ -33,12 +38,15 @@ const OnboardingGuard = ({ children }) => {
           profile.daily_activity_level &&
           profile.sleep_hours;
 
-        if (isComplete) {
-          const lastUpdated = new Date(profile.updated_at || profile.created_at);
-          const daysSinceUpdate = Math.floor(
-            (Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60 * 24)
-          );
+        console.log("✅ Profile complete:", isComplete);
 
+        if (isComplete) {
+          // Check if profile needs weekly update
+          const lastUpdated = new Date(profile.created_at);
+          const daysSinceUpdate = Math.floor((Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60 * 24));
+          
+          console.log("📅 Days since profile creation:", daysSinceUpdate);
+          
           if (daysSinceUpdate >= 7) {
             setProfileStatus("update_needed");
             setUserProfile(profile);
@@ -48,21 +56,19 @@ const OnboardingGuard = ({ children }) => {
             setUserProfile(profile);
           }
         } else {
+          console.log("⚠️ Profile incomplete - missing required fields");
           setProfileStatus("incomplete");
-          setUserProfile(profile); // profile exists but incomplete
-          setShowModal(true);
+          setUserProfile(profile);
         }
       } else {
-        // No existing UserProfile in database
+        console.log("❌ No profile found - profile is null");
         setProfileStatus("incomplete");
-        setUserProfile(null); // IMPORTANT -> means never completed before
-        setShowModal(false); // modal only opens when clicking the button
+        setUserProfile(null);
       }
     } catch (error) {
       console.error("Failed to check profile status", error);
       setProfileStatus("incomplete");
       setUserProfile(null);
-      setShowModal(false);
     }
   };
 
@@ -78,48 +84,41 @@ const OnboardingGuard = ({ children }) => {
     setShowUpdatePrompt(false);
   };
 
-  // --------------------------
-  // LOADING SCREEN
-  // --------------------------
+  // Loading state
   if (profileStatus === "loading") {
     return (
       <div className="onboarding-guard-loading">
-        <Spinner animation="border" variant="primary" />
+        <Spinner animation="border" variant="light" />
         <p className="mt-3">Loading your profile...</p>
       </div>
     );
   }
 
-  // --------------------------
-  // INCOMPLETE PROFILE (BLOCKING)
-  // --------------------------
+  // Incomplete profile - Show overlay OR modal (not both)
   if (profileStatus === "incomplete") {
-    const userNeverCompletedForm = !userProfile; // TRUE if no DB row exists
-
     return (
       <>
-        {/* Dim background */}
-        <div className="dashboard-overlay">
-          <div className="overlay-content">
-            <FaExclamationTriangle className="warning-icon" />
-            <h3>Profile Required</h3>
-            <p>Complete your profile to access your dashboard</p>
-
-            {/* NEW BUTTON — ONLY IF USER NEVER FILLED THE FORM */}
-            {userNeverCompletedForm && (
+        {/* Show overlay ONLY when modal is NOT open */}
+        {!showModal && (
+          <div className="dashboard-overlay">
+            <div className="overlay-content">
+              <FaExclamationTriangle className="warning-icon" />
+              <h3>Profile Required</h3>
+              <p>You need to complete your fitness profile to access the dashboard</p>
               <button
-                className="btn btn-outline-light mt-3"
+                className="btn btn-light btn-lg mt-4"
                 onClick={() => setShowModal(true)}
               >
-                Go to Onboarding Form
+                Complete Your Profile Now
               </button>
-            )}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Modal for onboarding */}
+        {/* Onboarding Modal - Shows when button is clicked */}
         <Modal
           show={showModal}
+          onHide={() => setShowModal(false)}
           backdrop="static"
           keyboard={false}
           size="lg"
@@ -138,14 +137,12 @@ const OnboardingGuard = ({ children }) => {
     );
   }
 
-  // --------------------------
-  // WEEKLY UPDATE PROMPT
-  // --------------------------
+  // Weekly update prompt
   if (showUpdatePrompt) {
     return (
       <>
         {children}
-
+        
         <Modal
           show={showUpdatePrompt}
           onHide={handleSkipUpdate}
@@ -161,8 +158,7 @@ const OnboardingGuard = ({ children }) => {
           </Modal.Header>
           <Modal.Body>
             <Alert variant="info">
-              It's been over a week since you last updated your profile.
-              Keeping your stats current helps us provide better recommendations!
+              It's been over a week since you created your profile. Keeping your stats current helps us provide better recommendations!
             </Alert>
             <div className="d-grid gap-2">
               <button
@@ -201,9 +197,7 @@ const OnboardingGuard = ({ children }) => {
     );
   }
 
-  // --------------------------
-  // PROFILE COMPLETE → RENDER APP
-  // --------------------------
+  // Profile is complete - render dashboard
   return <>{children}</>;
 };
 

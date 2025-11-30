@@ -235,6 +235,7 @@ const Dashboard = ({ userData, addToCart }) => {
   };
 
   return (
+    
     <section className="client-dashboard-wrapper">
       <Container className="client-dashboard-container">
         {/* Hero Section */}

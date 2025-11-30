@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Modal, Badge } from "react-bootstrap";
 import { useAuth } from "../../../context/AuthContext";
 import OnboardingForm from "./OnboardingForm";
+import "./Profilecompletedview.css";
+
 import { 
   FaUser, 
   FaRuler, 
@@ -12,7 +14,10 @@ import {
   FaRunning, 
   FaBed, 
   FaCheckCircle,
-  FaEdit
+  FaEdit,
+  FaHeartbeat,
+  FaFire,
+  FaClock
 } from "react-icons/fa";
 
 const ProfileCompletedView = () => {
@@ -41,18 +46,17 @@ const ProfileCompletedView = () => {
   const handleProfileUpdate = (updatedProfile) => {
     setProfile(updatedProfile);
     setShowEditModal(false);
-    // Reload to refresh all components
     window.location.reload();
   };
 
   const getTimeSinceUpdate = () => {
-    if (!profile?.updated_at && !profile?.created_at) return "";
-    const lastUpdated = new Date(profile.updated_at || profile.created_at);
+    if (!profile?.created_at) return "";
+    const lastUpdated = new Date(profile.created_at);
     const daysSince = Math.floor((Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60 * 24));
     
-    if (daysSince === 0) return "Updated today";
-    if (daysSince === 1) return "Updated yesterday";
-    return `Updated ${daysSince} days ago`;
+    if (daysSince === 0) return "Created today";
+    if (daysSince === 1) return "Created yesterday";
+    return `Created ${daysSince} days ago`;
   };
 
   const getBMI = () => {
@@ -63,14 +67,34 @@ const ProfileCompletedView = () => {
   };
 
   const getBMICategory = (bmi) => {
-    if (bmi < 18.5) return { text: "Underweight", variant: "info" };
-    if (bmi < 25) return { text: "Normal", variant: "success" };
-    if (bmi < 30) return { text: "Overweight", variant: "warning" };
-    return { text: "Obese", variant: "danger" };
+    if (bmi < 18.5) return { text: "Underweight", variant: "info", color: "#17a2b8" };
+    if (bmi < 25) return { text: "Normal", variant: "success", color: "#28a745" };
+    if (bmi < 30) return { text: "Overweight", variant: "warning", color: "#ffc107" };
+    return { text: "Obese", variant: "danger", color: "#dc3545" };
+  };
+
+  const formatGoal = (goal) => {
+    if (!goal) return "";
+    return goal.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+  };
+
+  const formatLevel = (level) => {
+    if (!level) return "";
+    return level.charAt(0).toUpperCase() + level.slice(1);
+  };
+
+  const formatActivity = (activity) => {
+    if (!activity) return "";
+    return activity.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
   };
 
   if (loading) {
-    return <div className="text-center p-5">Loading profile...</div>;
+    return (
+      <div className="pcv-profile-loading">
+        <div className="pcv-spinner"></div>
+        <p>Loading your profile...</p>
+      </div>
+    );
   }
 
   if (!profile) {
@@ -81,194 +105,219 @@ const ProfileCompletedView = () => {
   const bmiCategory = bmi ? getBMICategory(bmi) : null;
 
   return (
-    <section className="profile-completed-section">
-      <Container>
-        <div className="profile-header">
-          <div>
-            <h2 className="profile-title">
-              <FaCheckCircle className="me-2 text-success" />
+    <section className="pcv-profile-completed-section">
+      <Container className="pcv-profile-container">
+        
+        {/* Top Bar with Title and Button */}
+        <div className="pcv-top-bar">
+          <div className="pcv-title-section">
+            <h1 className="pcv-page-title">
+              <FaCheckCircle className="pcv-title-icon" />
               Your Fitness Profile
-            </h2>
-            <p className="profile-subtitle">{getTimeSinceUpdate()}</p>
+            </h1>
+            <p className="pcv-page-subtitle">
+              <FaClock className="me-2" />
+              {getTimeSinceUpdate()}
+            </p>
           </div>
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={() => setShowEditModal(true)}
-            className="edit-profile-btn"
-          >
+          <Button className="pcv-edit-btn" onClick={() => setShowEditModal(true)}>
             <FaEdit className="me-2" />
-            Update Profile
+            Edit Profile
           </Button>
         </div>
 
-        <Row className="g-4">
-          {/* Physical Stats Card */}
-          <Col md={6} lg={4}>
-            <Card className="profile-stat-card">
+        {/* Stats Grid */}
+        <Row className="pcv-stats-row g-4">
+          
+          {/* Left Column - Physical Stats */}
+          <Col lg={4} md={6}>
+            <Card className="pcv-card pcv-physical-card">
               <Card.Body>
-                <h5 className="stat-card-title">
-                  <FaUser className="me-2" />
-                  Physical Stats
-                </h5>
-                
-                <div className="stat-item">
-                  <div className="stat-label">
-                    <FaUser className="me-2 text-primary" />
-                    Age
+                <div className="pcv-card-header">
+                  <div className="pcv-icon-badge pcv-badge-blue">
+                    <FaUser />
                   </div>
-                  <div className="stat-value">{profile.age} years</div>
+                  <h3 className="pcv-card-title">Physical Stats</h3>
                 </div>
 
-                <div className="stat-item">
-                  <div className="stat-label">
-                    <FaRuler className="me-2 text-info" />
-                    Height
+                <div className="pcv-info-list">
+                  <div className="pcv-info-row">
+                    <div className="pcv-info-label">
+                      <FaHeartbeat className="pcv-label-icon" />
+                      Age
+                    </div>
+                    <div className="pcv-info-value">{profile.age} <span>years</span></div>
                   </div>
-                  <div className="stat-value">{profile.height_cm} cm</div>
-                </div>
 
-                <div className="stat-item">
-                  <div className="stat-label">
-                    <FaWeight className="me-2 text-warning" />
-                    Weight
+                  <div className="pcv-info-row">
+                    <div className="pcv-info-label">
+                      <FaRuler className="pcv-label-icon" />
+                      Height
+                    </div>
+                    <div className="pcv-info-value">{profile.height_cm} <span>cm</span></div>
                   </div>
-                  <div className="stat-value">{profile.weight_kg} kg</div>
-                </div>
 
-                {profile.body_fat_percentage && (
-                  <div className="stat-item">
-                    <div className="stat-label">Body Fat</div>
-                    <div className="stat-value">{profile.body_fat_percentage}%</div>
+                  <div className="pcv-info-row">
+                    <div className="pcv-info-label">
+                      <FaWeight className="pcv-label-icon" />
+                      Weight
+                    </div>
+                    <div className="pcv-info-value">{profile.weight_kg} <span>kg</span></div>
                   </div>
-                )}
 
-                {bmi && (
-                  <div className="stat-item bmi-item">
-                    <div className="stat-label">BMI</div>
-                    <div className="stat-value">
-                      {bmi}
-                      {bmiCategory && (
-                        <Badge bg={bmiCategory.variant} className="ms-2">
+                  {profile.body_fat_percentage && (
+                    <div className="pcv-info-row">
+                      <div className="pcv-info-label">
+                        <FaFire className="pcv-label-icon" />
+                        Body Fat
+                      </div>
+                      <div className="pcv-info-value">{profile.body_fat_percentage} <span>%</span></div>
+                    </div>
+                  )}
+
+                  {bmi && (
+                    <div className="pcv-info-row pcv-bmi-row">
+                      <div className="pcv-info-label">
+                        <FaHeartbeat className="pcv-label-icon" />
+                        BMI
+                      </div>
+                      <div className="pcv-info-value">
+                        {bmi}
+                        <Badge 
+                          className="ms-2 pcv-bmi-badge" 
+                          style={{ backgroundColor: bmiCategory.color }}
+                        >
                           {bmiCategory.text}
                         </Badge>
-                      )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          {/* Middle Column - Fitness Goals */}
+          <Col lg={4} md={6}>
+            <Card className="pcv-card pcv-goals-card">
+              <Card.Body>
+                <div className="pcv-card-header">
+                  <div className="pcv-icon-badge pcv-badge-purple">
+                    <FaDumbbell />
+                  </div>
+                  <h3 className="pcv-card-title">Fitness Goals</h3>
+                </div>
+
+                <div className="pcv-info-list">
+                  <div className="pcv-info-row">
+                    <div className="pcv-info-label">
+                      <FaDumbbell className="pcv-label-icon" />
+                      Fitness Level
+                    </div>
+                    <div className="pcv-info-value">{formatLevel(profile.fitness_level)}</div>
+                  </div>
+
+                  <div className="pcv-info-row">
+                    <div className="pcv-info-label">
+                      <FaBullseye className="pcv-label-icon" />
+                      Primary Goal
+                    </div>
+                    <div className="pcv-info-value">{formatGoal(profile.primary_goal)}</div>
+                  </div>
+
+                  <div className="pcv-info-row">
+                    <div className="pcv-info-label">
+                      <FaCalendar className="pcv-label-icon" />
+                      Workout Frequency
+                    </div>
+                    <div className="pcv-info-value">{profile.workout_frequency}</div>
+                  </div>
+
+                  {profile.body_type && (
+                    <div className="pcv-info-row">
+                      <div className="pcv-info-label">
+                        <FaUser className="pcv-label-icon" />
+                        Body Type
+                      </div>
+                      <div className="pcv-info-value">{formatLevel(profile.body_type)}</div>
+                    </div>
+                  )}
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          {/* Right Column - Lifestyle */}
+          <Col lg={4} md={12}>
+            <Card className="pcv-card pcv-lifestyle-card">
+              <Card.Body>
+                <div className="pcv-card-header">
+                  <div className="pcv-icon-badge pcv-badge-green">
+                    <FaBed />
+                  </div>
+                  <h3 className="pcv-card-title">Lifestyle</h3>
+                </div>
+
+                <div className="pcv-info-list">
+                  <div className="pcv-info-row">
+                    <div className="pcv-info-label">
+                      <FaRunning className="pcv-label-icon" />
+                      Daily Activity
+                    </div>
+                    <div className="pcv-info-value">{formatActivity(profile.daily_activity_level)}</div>
+                  </div>
+
+                  <div className="pcv-info-row">
+                    <div className="pcv-info-label">
+                      <FaBed className="pcv-label-icon" />
+                      Sleep Hours
+                    </div>
+                    <div className="pcv-info-value">{profile.sleep_hours} <span>hrs/night</span></div>
+                  </div>
+
+                  <div className="pcv-tip-box">
+                    <div className="pcv-tip-icon">💡</div>
+                    <div className="pcv-tip-content">
+                      <strong>Tip:</strong> Aim for 7–9 hours of sleep and stay active daily for optimal results!
                     </div>
                   </div>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
-
-          {/* Fitness Goals Card */}
-          <Col md={6} lg={4}>
-            <Card className="profile-stat-card">
-              <Card.Body>
-                <h5 className="stat-card-title">
-                  <FaDumbbell className="me-2" />
-                  Fitness Goals
-                </h5>
-
-                <div className="stat-item">
-                  <div className="stat-label">
-                    <FaDumbbell className="me-2 text-danger" />
-                    Fitness Level
-                  </div>
-                  <div className="stat-value">
-                    <Badge bg="secondary" className="level-badge">
-                      {profile.fitness_level}
-                    </Badge>
-                  </div>
-                </div>
-
-                <div className="stat-item">
-                  <div className="stat-label">
-                    <FaBullseye className="me-2 text-success" />
-                    Primary Goal
-                  </div>
-                  <div className="stat-value">{profile.primary_goal}</div>
-                </div>
-
-                <div className="stat-item">
-                  <div className="stat-label">
-                    <FaCalendar className="me-2 text-primary" />
-                    Workout Frequency
-                  </div>
-                  <div className="stat-value">{profile.workout_frequency}</div>
-                </div>
-
-                {profile.body_type && (
-                  <div className="stat-item">
-                    <div className="stat-label">Body Type</div>
-                    <div className="stat-value">{profile.body_type}</div>
-                  </div>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
-
-          {/* Lifestyle Card */}
-          <Col md={12} lg={4}>
-            <Card className="profile-stat-card">
-              <Card.Body>
-                <h5 className="stat-card-title">
-                  <FaBed className="me-2" />
-                  Lifestyle
-                </h5>
-
-                <div className="stat-item">
-                  <div className="stat-label">
-                    <FaRunning className="me-2 text-info" />
-                    Daily Activity
-                  </div>
-                  <div className="stat-value">{profile.daily_activity_level}</div>
-                </div>
-
-                <div className="stat-item">
-                  <div className="stat-label">
-                    <FaBed className="me-2 text-primary" />
-                    Sleep Hours
-                  </div>
-                  <div className="stat-value">{profile.sleep_hours} hours/night</div>
-                </div>
-
-                <div className="lifestyle-tips">
-                  <small className="text-muted">
-                    💡 Tip: Aim for 7-9 hours of sleep and stay active throughout the day for optimal results!
-                  </small>
                 </div>
               </Card.Body>
             </Card>
           </Col>
+
         </Row>
 
-        {/* Additional Info */}
-        <Card className="profile-summary-card mt-4">
+        {/* Bottom Info Card */}
+        <Card className="pcv-bottom-card">
           <Card.Body>
-            <h5 className="mb-3">
-              <FaCheckCircle className="me-2 text-success" />
-              Profile Complete!
-            </h5>
-            <p className="mb-2">
-              Your profile is helping us deliver personalized workout plans and nutrition guidance tailored to your goals.
-            </p>
-            <small className="text-muted">
-              We recommend updating your profile weekly to track your progress and adjust recommendations.
-            </small>
+            <div className="pcv-bottom-content">
+              <div className="pcv-bottom-icon">
+                <FaCheckCircle />
+              </div>
+              <div className="pcv-bottom-text">
+                <h4>Profile Complete!</h4>
+                <p>Your profile helps us deliver personalized workout plans and nutrition guidance tailored to your goals.</p>
+              </div>
+            </div>
           </Card.Body>
         </Card>
+
       </Container>
 
       {/* Edit Modal */}
-      <Modal
-        show={showEditModal}
-        onHide={() => setShowEditModal(false)}
-        size="lg"
+      <Modal 
+        show={showEditModal} 
+        onHide={() => setShowEditModal(false)} 
+        size="lg" 
         centered
-        className="profile-edit-modal"
+        className="pcv-modal"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Update Your Profile</Modal.Title>
+        <Modal.Header closeButton className="pcv-modal-header">
+          <Modal.Title>
+            <FaEdit className="me-2" />
+            Update Your Profile
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-0">
           <OnboardingForm
@@ -278,6 +327,7 @@ const ProfileCompletedView = () => {
           />
         </Modal.Body>
       </Modal>
+
     </section>
   );
 };

@@ -63,6 +63,20 @@
   .overlay-content p {
     font-size: 1.1rem;
     opacity: 0.9;
+    margin-bottom: 0;
+  }
+  
+  .overlay-content .btn {
+    font-weight: 600;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .overlay-content .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
   }
   
   /* Onboarding Modal */

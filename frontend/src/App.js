@@ -13,8 +13,7 @@ import Cart from "./components/Shared/Cart/Cart";
 import Footer from "./components/Shared/Footer/Footer";
 import Dashboard from "./components/Board/Client/Dashboard/Dashboard";
 import OnboardingForm from "./components/Onboarding/OnboardingForm/OnboardingForm";
-import Onboardingguard from "./components/Onboarding/OnboardingForm/Onboardingguard";
-import Profilecompletedview from "./components/Onboarding/OnboardingForm/Profilecompletedview";
+import Onboardingguard from "../src/components/Onboarding/OnboardingForm/Onboardingguard";
 import AddOns from "./components/Shared/AddOns/AddOns";
 import CoachDashboard from "./components/Board/Coach/CoachDashboard/CoachDashboard";
 import PaymentSuccess from "./components/Shared/Payment/PaymentSuccess";
@@ -77,7 +76,7 @@ function App() {
                 </>
               }
             />
-            <Route path="/dashboard" element={<Dashboard addToCart={addToCart} />} />
+            <Route path="/dashboard" element={<Onboardingguard><Dashboard addToCart={addToCart} /></Onboardingguard>} />
             <Route path="/add-ons" element={<AddOns addToCart={addToCart} />} />
           <Route path="/add-ons" element={<AddOns addToCart={addToCart} />} /> 
             <Route path="/add-ons" element={<AddOns addToCart={addToCart} />} />

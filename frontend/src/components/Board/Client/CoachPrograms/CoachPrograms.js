@@ -7,7 +7,8 @@ const CoachPrograms = () => {
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState("amateur");
   const [programs, setPrograms] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showProgramModal, setShowProgramModal] = useState(false);
+  const [showExerciseModal, setShowExerciseModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [animateCards, setAnimateCards] = useState(false);
 
@@ -27,18 +28,15 @@ const CoachPrograms = () => {
     setTimeout(() => setAnimateCards(true), 100);
   }, []);
 
-  const toggleExercises = (program) => {
-    if (selectedProgram === program) {
-      setSelectedProgram(null);
-    } else {
-      setSelectedProgram(program);
-      setSelectedLevel("amateur");
-    }
+  const openProgramModal = (program) => {
+    setSelectedProgram(program);
+    setSelectedLevel("amateur");
+    setShowProgramModal(true);
   };
 
   const handleExerciseClick = (exercise) => {
     setSelectedExercise(exercise);
-    setShowModal(true);
+    setShowExerciseModal(true);
   };
 
   const getDifficultyColor = (difficulty) => {
@@ -111,7 +109,7 @@ const CoachPrograms = () => {
           {programs.map((program, index) => (
             <Col xs={12} md={6} lg={4} key={index} className="program-col">
               <Card 
-                className={`modern-program-card ${animateCards ? 'card-animate' : ''} ${selectedProgram === program ? 'card-active' : ''}`}
+                className={`modern-program-card ${animateCards ? 'card-animate' : ''}`}
                 style={{ 
                   animationDelay: `${index * 0.1}s`,
                   background: program.color
@@ -146,75 +144,10 @@ const CoachPrograms = () => {
                   {/* View Button */}
                   <Button
                     className="view-program-btn"
-                    onClick={() => toggleExercises(program)}
+                    onClick={() => openProgramModal(program)}
                   >
-                    {selectedProgram === program ? (
-                      <>
-                        <span>Hide Exercises</span> ▲
-                      </>
-                    ) : (
-                      <>
-                        <span>View Exercises</span> ▼
-                      </>
-                    )}
+                    <span>View Exercises</span> 👁️
                   </Button>
-
-                  {/* Expanded Exercise List */}
-                  {selectedProgram === program && (
-                    <div className="expanded-exercises">
-                      {/* Level Selector */}
-                      <div className="level-selector">
-                        <button
-                          className={`level-btn ${selectedLevel === "amateur" ? "active" : ""}`}
-                          onClick={() => setSelectedLevel("amateur")}
-                        >
-                          🎯 Amateur Level
-                        </button>
-                        <button
-                          className={`level-btn ${selectedLevel === "pro" ? "active" : ""}`}
-                          onClick={() => setSelectedLevel("pro")}
-                        >
-                          🔥 Pro Level
-                        </button>
-                      </div>
-
-                      {/* Exercise Cards */}
-                      <div className="exercise-cards-grid">
-                        {(selectedLevel === "amateur" ? program.amateurExercises : program.proExercises).map((exercise, idx) => (
-                          <div 
-                            key={idx} 
-                            className="exercise-mini-card"
-                            onClick={() => handleExerciseClick(exercise)}
-                          >
-                            <div className="exercise-image-container">
-                              <img 
-                                src={exercise.image} 
-                                alt={exercise.name}
-                                className="exercise-image"
-                                onError={(e) => {
-                                  e.target.src = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop";
-                                }}
-                              />
-                              <div className="exercise-overlay">
-                                <span className="view-details-text">👁️ View Details</span>
-                              </div>
-                            </div>
-                            
-                            <div className="exercise-mini-info">
-                              <h6 className="exercise-mini-title">{exercise.name}</h6>
-                              <div className="exercise-mini-meta">
-                                <Badge bg={getDifficultyColor(exercise.difficulty)} className="mini-badge">
-                                  {exercise.difficulty}
-                                </Badge>
-                                <span className="sets-display">📊 {exercise.sets}</span>
-                              </div>
-                              <div className="muscle-group">💪 {exercise.muscle}</div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </Card.Body>
               </Card>
             </Col>
@@ -222,10 +155,86 @@ const CoachPrograms = () => {
         </Row>
       </Container>
 
+      {/* Program Exercises Modal */}
+      <Modal 
+        show={showProgramModal} 
+        onHide={() => setShowProgramModal(false)}
+        size="xl"
+        centered
+        className="program-exercises-modal"
+      >
+        {selectedProgram && (
+          <>
+            <Modal.Header closeButton className="program-modal-header">
+              <Modal.Title className="program-modal-title">
+                <span className="program-modal-icon">{selectedProgram.icon}</span>
+                {selectedProgram.title}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="program-modal-body">
+              {/* Level Selector */}
+              <div className="modal-level-selector">
+                <button
+                  className={`modal-level-btn ${selectedLevel === "amateur" ? "active" : ""}`}
+                  onClick={() => setSelectedLevel("amateur")}
+                >
+                  🎯 Amateur Level ({selectedProgram.amateurExercises.length} exercises)
+                </button>
+                <button
+                  className={`modal-level-btn ${selectedLevel === "pro" ? "active" : ""}`}
+                  onClick={() => setSelectedLevel("pro")}
+                >
+                  🔥 Pro Level ({selectedProgram.proExercises.length} exercises)
+                </button>
+              </div>
+
+              {/* Exercises Grid */}
+              <Row className="modal-exercises-grid g-3">
+                {(selectedLevel === "amateur" ? selectedProgram.amateurExercises : selectedProgram.proExercises).map((exercise, idx) => (
+                  <Col xs={12} sm={6} md={4} lg={3} key={idx}>
+                    <div 
+                      className="modal-exercise-card"
+                      onClick={() => handleExerciseClick(exercise)}
+                    >
+                      <div className="modal-exercise-image-container">
+                        <img 
+                          src={exercise.image} 
+                          alt={exercise.name}
+                          className="modal-exercise-image"
+                          onError={(e) => {
+                            e.target.src = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop";
+                          }}
+                        />
+                        <div className="modal-exercise-overlay">
+                          <span className="modal-view-text">👁️ Details</span>
+                        </div>
+                      </div>
+                      
+                      <div className="modal-exercise-info">
+                        <h6 className="modal-exercise-title">{exercise.name}</h6>
+                        <div className="modal-exercise-meta">
+                          <Badge bg={getDifficultyColor(exercise.difficulty)} className="modal-mini-badge">
+                            {exercise.difficulty}
+                          </Badge>
+                        </div>
+                        <div className="modal-exercise-details">
+                          <span className="modal-detail-item">📊 {exercise.sets}</span>
+                          <span className="modal-detail-item">💪 {exercise.muscle}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </Modal.Body>
+          </>
+        )}
+      </Modal>
+
       {/* Exercise Detail Modal */}
       <Modal 
-        show={showModal} 
-        onHide={() => setShowModal(false)}
+        show={showExerciseModal} 
+        onHide={() => setShowExerciseModal(false)}
         size="lg"
         centered
         className="exercise-detail-modal"
@@ -307,7 +316,7 @@ const CoachPrograms = () => {
               </Row>
             </Modal.Body>
             <Modal.Footer className="modal-footer-custom">
-              <Button variant="secondary" onClick={() => setShowModal(false)} className="close-modal-btn">
+              <Button variant="secondary" onClick={() => setShowExerciseModal(false)} className="close-modal-btn">
                 Close
               </Button>
             </Modal.Footer>

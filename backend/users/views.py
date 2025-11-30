@@ -156,9 +156,8 @@ def save_user_profile(request):
 @permission_classes([IsAuthenticated])
 def user_detail(request):
     """
-    GET  -> Returns the current authenticated user's full database row
+    GET  -> Returns the current authenticated user's full database row INCLUDING profile
     PUT/PATCH -> Updates username, role, and allows plan downgrade only.
-                 Purchases and upgrades are now handled via Stripe webhook.
     """
     auth0_id = request.user.payload.get("sub")
     user = User.objects.filter(auth0_id=auth0_id).first()
@@ -175,32 +174,20 @@ def user_detail(request):
         subscription_plan = data.get("subscription_plan")
         add_ons = data.get("add_ons", {})
 
-        # --- 1️⃣ Basic info updates ---
         if username is not None:
             user.username = username
         if role is not None:
             user.role = role
 
-        # --- 2️⃣ Downgrade handling only ---
-        # Stripe webhook is now responsible for upgrades
         if subscription_plan is not None:
-            # Allow only downgrades to 'none' or 'basic'
             if subscription_plan in ["none", "basic"]:
                 user.subscription_plan = subscription_plan
-                # Expire any active subscriptions
                 Subscription.objects.filter(user=user, status="active").update(status="expired")
-            else:
-                # ignore upgrade attempts here (handled by Stripe)
-                pass
 
-        # --- 3️⃣ Add-ons updates ---
-        # Regular users can't manually purchase via PATCH anymore.
-        # This remains for coach/admin or data fixes if needed.
         for addon_type, qty in (add_ons or {}).items():
             qty = int(qty)
             if qty <= 0:
                 continue
-            # E-Book: prevent duplicates
             if addon_type == "ebook":
                 if AddOn.objects.filter(user=user, addon_type="ebook", status__in=["active", "used"]).exists():
                     continue
@@ -219,7 +206,49 @@ def user_detail(request):
 
     # -------------------------------
     # GET -> return complete profile
+    # USING EXACT SAME CODE AS coach_list_clients
     # -------------------------------
+    
+    # Latest active subscription
+    sub = (
+        Subscription.objects
+        .filter(user=user, status="active")
+        .order_by("-start_date")
+        .first()
+    )
+    sub_data = None
+    if sub:
+        sub_data = {
+            "plan": sub.plan,
+            "start_date": sub.start_date,
+            "end_date": sub.end_date,
+            "status": sub.status,
+        }
+
+    # Profile - EXACT SAME CODE AS coach_list_clients
+    prof = UserProfile.objects.filter(user=user).first()
+    prof_data = None
+    if prof:
+        prof_data = {
+            "age": prof.age,
+            "height_cm": prof.height_cm,
+            "weight_kg": prof.weight_kg,
+            "fitness_level": prof.fitness_level,
+            "primary_goal": prof.primary_goal,
+            "workout_frequency": prof.workout_frequency,
+            "daily_activity_level": prof.daily_activity_level,
+            "sleep_hours": prof.sleep_hours,
+            "body_fat_percentage": prof.body_fat_percentage,
+            "body_type": prof.body_type,
+            "created_at": prof.created_at,
+        }
+    
+    # Debug logging
+    print(f"🔍 DEBUG - User ID: {user.id}")
+    print(f"🔍 DEBUG - Profile found: {prof}")
+    print(f"🔍 DEBUG - Profile data: {prof_data}")
+
+    # Add-ons (active only)
     addons_list = AddOn.objects.filter(user=user)
     addons_data = [
         {
@@ -232,20 +261,6 @@ def user_detail(request):
         for a in addons_list
     ]
 
-    subscription = (
-        Subscription.objects.filter(user=user, status="active")
-        .order_by("-start_date")
-        .first()
-    )
-    subscription_data = None
-    if subscription:
-        subscription_data = {
-            "plan": subscription.plan,
-            "start_date": subscription.start_date,
-            "end_date": subscription.end_date,
-            "status": subscription.status,
-        }
-
     return Response({
         "id": user.id,
         "auth0_id": user.auth0_id,
@@ -253,11 +268,11 @@ def user_detail(request):
         "username": user.username,
         "role": user.role,
         "subscription_plan": user.subscription_plan,
-        "subscription_details": subscription_data,
+        "subscription_details": sub_data,
         "addons": addons_data,
+        "profile": prof_data,
         "created_at": user.created_at,
     })
-
 # --------------------------------------------------------------------
 #  Downgrade Plan (Dashboard-only action)
 # --------------------------------------------------------------------

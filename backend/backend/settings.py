@@ -95,7 +95,7 @@ DATABASES = {
         'USER': 'django_user',
         'PASSWORD': 'perfoevolutionpassword',
         'HOST': 'host.docker.internal',
-        'PORT': '5432',  # Default PostgreSQL port
+        'PORT': '5433',  # Default PostgreSQL port
     }
 }
 
