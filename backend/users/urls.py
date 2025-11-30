@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from ai_program_generator.views import generate_ai_program
 
 urlpatterns = [
     # ----- User endpoints -----
