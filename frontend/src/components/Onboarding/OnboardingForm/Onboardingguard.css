@@ -1,0 +1,102 @@
+/* Loading State */
+.onboarding-guard-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+  
+  .onboarding-guard-loading p {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  /* Blocking Overlay */
+  .dashboard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(102, 126, 234, 0.5) 100%);
+    backdrop-filter: blur(10px);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .overlay-content {
+    text-align: center;
+    color: white;
+    max-width: 500px;
+    padding: 2rem;
+  }
+  
+  .warning-icon {
+    font-size: 5rem;
+    color: #ff9d00;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+  
+  .overlay-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .overlay-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  
+  /* Onboarding Modal */
+  .onboarding-modal .modal-content {
+    background: transparent;
+    border: none;
+  }
+  
+  .onboarding-modal .modal-body {
+    padding: 0;
+  }
+  
+  /* Update Prompt Modal */
+  .update-prompt-modal .modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+  }
+  
+  .update-prompt-modal .modal-title {
+    font-weight: 700;
+  }
+  
+  .update-prompt-modal .btn-close {
+    filter: brightness(0) invert(1);
+  }
+  
+  .update-prompt-modal .alert {
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .update-prompt-modal .btn-lg {
+    padding: 0.85rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+  }

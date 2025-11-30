@@ -12,6 +12,17 @@ import {
   Alert,
   Badge,
 } from "react-bootstrap";
+import { 
+  FaRocket, 
+  FaDumbbell, 
+  FaStar, 
+  FaAppleAlt, 
+  FaLock, 
+  FaCrown,
+  FaCheckCircle,
+  FaBolt,
+  FaTrophy
+} from "react-icons/fa";
 import { useAuth } from "../../../../context/AuthContext";
 import CoachPrograms from "../CoachPrograms/CoachPrograms";
 import AddOns from "../../../Shared/AddOns/AddOns";
@@ -19,34 +30,19 @@ import AICoaching from "../AICoaching/AICoaching";
 import NutritionGuide from "../NutritionGuide/NutritionGuide";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
-
-/**
- * NOTE TO FUTURE-US:
- * - We intentionally keep this file structure the same as the user's original, just adding:
- *   1) A big title showing current plan & add-ons.
- *   2) Auto-fetch of plan/add-ons from /user-detail/ (we were already calling it).
- *   3) Access gating logic:
- *      - plan=none: everything locked; allow Premium Add-Ons only if the user already owns at least one add-on.
- *      - plan=basic: AI + Coach Programs allowed; Nutrition/Add-Ons only if purchased; otherwise prompt upgrade/cart.
- *      - plan=advanced: everything allowed.
- * - When we split this later, we can move helpers and locked-card overlays out.
- */
+import OnboardingGuard from "../../../Onboarding/OnboardingForm/Onboardingguard";
+import ProfileCompletedView from "../../../Onboarding/OnboardingForm/Profilecompletedview";
 
 const Dashboard = ({ userData, addToCart }) => {
   const { user, fetchWithAuth } = useAuth();
   const navigate = useNavigate();
-
   const userName = user?.name?.split(" ")[0] || "User";
-
-  // ---------------------------------------------------------------------------
-  // State (kept as-is from your original, plus a few derived helpers)
-  // ---------------------------------------------------------------------------
+  
   const [activeSection, setActiveSection] = useState(null);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showPlanModal, setShowPlanModal] = useState(false);
   const [lockedSection, setLockedSection] = useState("");
-
-  // User DB row & edit state
+  
   const [userInfo, setUserInfo] = useState(null);
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(true);
@@ -56,9 +52,6 @@ const Dashboard = ({ userData, addToCart }) => {
   const [downgrading, setDowngrading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  // ---------------------------------------------------------------------------
-  // Fetch: /user-detail/
-  // ---------------------------------------------------------------------------
   useEffect(() => {
     const fetchUserRow = async () => {
       try {
@@ -75,27 +68,15 @@ const Dashboard = ({ userData, addToCart }) => {
     fetchUserRow();
   }, [fetchWithAuth]);
 
-  // ---------------------------------------------------------------------------
-  // Normalized "effective" plan and add-ons
-  // - Back-end returns: subscription_plan (string) and addons (list of records)
-  // - We also accept the prop userData?.plan to preserve previous behavior.
-  // ---------------------------------------------------------------------------
   const effectivePlan = useMemo(() => {
-    // Prefer server truth; fall back to prop (none/basic/advanced)
     const fromServer = userInfo?.subscription_plan;
     const fromProp = userData?.plan;
     return (fromServer || fromProp || "none").toLowerCase();
   }, [userInfo?.subscription_plan, userData?.plan]);
 
   const normalizedAddOns = useMemo(() => {
-    /**
-     * We aggregate active add-ons by type into a dictionary, e.g.:
-     *   { ebook: 1, ai: 2, zoom: 0 }
-     * Using only status === "active".
-     */
     const map = { ebook: 0, ai: 0, zoom: 0 };
     const list = Array.isArray(userInfo?.addons) ? userInfo.addons : [];
-
     for (const a of list) {
       const type = (a?.addon_type || "").toLowerCase();
       const qty = Number(a?.quantity || 0);
@@ -107,9 +88,6 @@ const Dashboard = ({ userData, addToCart }) => {
     return map;
   }, [userInfo?.addons]);
 
-  // ---------------------------------------------------------------------------
-  // Save username (unchanged logic)
-  // ---------------------------------------------------------------------------
   const handleSaveUsername = async () => {
     setSaving(true);
     setError("");
@@ -128,9 +106,6 @@ const Dashboard = ({ userData, addToCart }) => {
     }
   };
 
-  // ---------------------------------------------------------------------------
-  // Downgrade plan (unchanged semantics)
-  // ---------------------------------------------------------------------------
   const handleDowngradePlan = async (targetPlan = "none") => {
     setDowngrading(true);
     setError("");
@@ -153,75 +128,24 @@ const Dashboard = ({ userData, addToCart }) => {
       setDowngrading(false);
     }
   };
-  
-  // ---------------------------------------------------------------------------
-  // Display helpers
-  // ---------------------------------------------------------------------------
-  const getPlanDisplay = () => {
-    if (effectivePlan === "basic") return "Your plan is: Basic";
-    if (effectivePlan === "advanced") return "Your plan is: Advanced";
-    return "You don't have a plan yet.";
-  };
 
-  // Big banner subtitle with add-on chips (new)
-  const renderPlanBanner = () => {
-    const chips = [];
-    if (normalizedAddOns.ebook > 0) chips.push(<Badge key="ebook" bg="secondary" className="ms-2">E-Book × {normalizedAddOns.ebook}</Badge>);
-    if (normalizedAddOns.ai > 0) chips.push(<Badge key="ai" bg="secondary" className="ms-2">AI Plan × {normalizedAddOns.ai}</Badge>);
-    if (normalizedAddOns.zoom > 0) chips.push(<Badge key="zoom" bg="secondary" className="ms-2">Zoom × {normalizedAddOns.zoom}</Badge>);
-
-    return (
-      <div className="mb-3">
-        <h1 className="display-6 fw-semibold" style={{ marginBottom: 8 }}>
-          {effectivePlan === "none" ? "No Plan" : effectivePlan === "basic" ? "Basic Plan" : "Advanced Plan"}
-        </h1>
-        <div className="plan-banner">
-          {chips.length > 0 ? <>Active Add-Ons: {chips}</> : <>No add-ons yet.</>}
-        </div>
-      </div>
-    );
-  };
-
-  // ---------------------------------------------------------------------------
-  // Access policy (new): section-level authorization
-  // Rules you requested:
-  // - plan = none:
-  //    * lock all sections
-  //    * allow Premium Add-Ons ONLY if the user already owns at least 1 add-on
-  // - plan = basic:
-  //    * allow AI + Coach programs
-  //    * for Nutrition Guide & Add-Ons section -> require purchase (i.e., must own at least 1 relevant add-on)
-  // - plan = advanced:
-  //    * allow everything
-  //
-  // Mapping decisions:
-  //  - "ai-coaching"     -> requires basic OR advanced
-  //  - "coach-programs"  -> requires basic OR advanced
-  //  - "nutrition-guide" -> advanced
-  //  - "add-ons"         -> advanced OR (owns any add-on: ebook/ai/zoom)
-  // ---------------------------------------------------------------------------
   const ownsAnyAddon = normalizedAddOns.ebook > 0 || normalizedAddOns.ai > 0 || normalizedAddOns.zoom > 0;
 
   const canAccess = (section) => {
     if (effectivePlan === "advanced") return true;
-
     if (effectivePlan === "basic") {
       if (section === "ai-coaching") return true;
       if (section === "coach-programs") return true;
       if (section === "nutrition-guide") return false;
-      if (section === "add-ons") return ownsAnyAddon; // can open only if user owns add-ons
+      if (section === "add-ons") return ownsAnyAddon;
       return false;
     }
-
-    // plan = none
-    if (section === "add-ons") return ownsAnyAddon; // only if owns any add-on already
+    if (section === "add-ons") return ownsAnyAddon;
     return false;
   };
 
   const whyLocked = (section) => {
-    // Returns "none" (needs plan), "upgrade" (needs advanced), or "purchase" (needs relevant add-on)
     if (effectivePlan === "advanced") return null;
-
     if (effectivePlan === "basic") {
       if (section === "nutrition-guide") {
         return normalizedAddOns.ebook > 0 ? null : "purchase";
@@ -229,20 +153,15 @@ const Dashboard = ({ userData, addToCart }) => {
       if (section === "add-ons") {
         return ownsAnyAddon ? null : "purchase";
       }
-      return null; // ai/coaching allowed
+      return null;
     }
-
-    // plan = none
     if (section === "add-ons") {
       return ownsAnyAddon ? null : "none";
     }
     return "none";
   };
 
-  // ---------------------------------------------------------------------------
-  // Section toggle (changed to call canAccess/whyLocked)
-  // ---------------------------------------------------------------------------
-  const toggleSection = (section /*, requiredPlan was removed intentionally */) => {
+  const toggleSection = (section) => {
     if (canAccess(section)) {
       setActiveSection((prev) => (prev === section ? null : section));
       return;
@@ -252,17 +171,12 @@ const Dashboard = ({ userData, addToCart }) => {
     if (reason === "upgrade") {
       setShowUpgradeModal(true);
     } else if (reason === "purchase") {
-      // Send to cart to purchase the needed add-on OR allow message
-      setShowPlanModal(true); // reuse plan modal text; we’ll adjust wording below when rendered
+      setShowPlanModal(true);
     } else {
-      // reason === "none" or fallback
       setShowPlanModal(true);
     }
   };
 
-  // ---------------------------------------------------------------------------
-  // CTA handlers (unchanged)
-  // ---------------------------------------------------------------------------
   const handleUpgrade = () => {
     addToCart("plan", "advanced");
     navigate("/cart");
@@ -274,13 +188,15 @@ const Dashboard = ({ userData, addToCart }) => {
     setShowPlanModal(false);
   };
 
-  // ---------------------------------------------------------------------------
-  // Small helper to show context-aware modal body text (for "plan required" modal)
-  // ---------------------------------------------------------------------------
+  const getPlanBadgeColor = () => {
+    if (effectivePlan === "advanced") return "client-badge-advanced";
+    if (effectivePlan === "basic") return "client-badge-basic";
+    return "client-badge-none";
+  };
+
   const planModalBody = () => {
     const reason = whyLocked(lockedSection);
     if (effectivePlan === "basic" && reason === "purchase") {
-      // e.g., Nutrition needs ebook; Add-Ons section needs any add-on owned
       if (lockedSection === "nutrition-guide") {
         return (
           <>
@@ -299,7 +215,6 @@ const Dashboard = ({ userData, addToCart }) => {
       }
       return <>Please complete the required purchase from the Cart.</>;
     }
-
     if (effectivePlan === "none") {
       if (lockedSection === "add-ons") {
         return (
@@ -316,375 +231,325 @@ const Dashboard = ({ userData, addToCart }) => {
         </>
       );
     }
-
-    // Fallback (shouldn’t normally hit)
     return <>Please select/upgrade your plan to unlock this feature.</>;
   };
 
-  // ---------------------------------------------------------------------------
-  // UI
-  // ---------------------------------------------------------------------------
   return (
-    <section className="dashboard-container-section">
-      <Container className="dashboard-container">
-        {/* Big greeting */}
-        <h2 className="dashboard-title">Welcome, {userName}!</h2>
+    <section className="client-dashboard-wrapper">
+      <Container className="client-dashboard-container">
+        {/* Hero Section */}
+        <div className="client-dashboard-hero">
+          <div className="client-hero-badge">
+            <FaTrophy className="client-badge-icon" />
+            <span>Member Dashboard</span>
+          </div>
+          <h1 className="client-dashboard-title">
+            Welcome Back, {userName}! 💪
+          </h1>
+          <p className="client-dashboard-subtitle">
+            Your personalized fitness journey starts here
+          </p>
+        </div>
 
-        {/* NEW: Big plan banner with add-on chips */}
-        {renderPlanBanner()}
+        {/* Plan Status Banner */}
+        <div className="client-plan-banner">
+          <div className={`client-plan-badge ${getPlanBadgeColor()}`}>
+            <FaCrown className="me-2" />
+            {effectivePlan === "none" ? "No Active Plan" : effectivePlan === "basic" ? "Basic Plan" : "Advanced Plan"}
+          </div>
+          {(normalizedAddOns.ebook > 0 || normalizedAddOns.ai > 0 || normalizedAddOns.zoom > 0) && (
+            <div className="client-addons-chips">
+              <span className="client-addons-label">Active Add-Ons:</span>
+              {normalizedAddOns.ebook > 0 && (
+                <Badge bg="secondary" className="client-addon-chip">
+                  📚 E-Book × {normalizedAddOns.ebook}
+                </Badge>
+              )}
+              {normalizedAddOns.ai > 0 && (
+                <Badge bg="secondary" className="client-addon-chip">
+                  🤖 AI × {normalizedAddOns.ai}
+                </Badge>
+              )}
+              {normalizedAddOns.zoom > 0 && (
+                <Badge bg="secondary" className="client-addon-chip">
+                  🎥 Zoom × {normalizedAddOns.zoom}
+                </Badge>
+              )}
+            </div>
+          )}
+        </div>
 
         {successMessage && (
-          <Alert
-            variant="success"
-            onClose={() => setSuccessMessage("")}
-            dismissible
-          >
+          <Alert variant="success" onClose={() => setSuccessMessage("")} dismissible className="client-alert">
             {successMessage}
           </Alert>
         )}
-        {error && <Alert variant="danger">{error}</Alert>}
+        {error && <Alert variant="danger" className="client-alert">{error}</Alert>}
 
-        <p className="dashboard-intro">
-          Choose an option below to start your personalized fitness journey.
-        </p>
-
-        <Row className="dashboard-options">
+        {/* Feature Cards */}
+        <Row className="client-dashboard-cards-row">
           {/* AI Coaching */}
-          <Col md={4}>
-            <Card className="dashboard-card">
-              <Card.Body>
-                <h4>AI-Powered Coaching</h4>
-                <p>
-                  Get a personalized AI-generated plan for weight loss & muscle
-                  gain.
+          <Col lg={6} className="client-dashboard-col">
+            <Card className={`client-feature-card ${!canAccess("ai-coaching") ? "client-card-locked" : ""} ${activeSection === "ai-coaching" ? "client-card-active" : ""}`}>
+              <div className="client-card-glow client-card-glow-1"></div>
+              <Card.Body onClick={() => toggleSection("ai-coaching")} style={{ cursor: "pointer" }}>
+                <div className="client-card-icon-wrapper client-icon-ai">
+                  {canAccess("ai-coaching") ? <FaRocket className="client-card-icon" /> : <FaLock className="client-card-icon" />}
+                </div>
+                <h3 className="client-card-title">AI-Powered Coaching</h3>
+                <p className="client-card-description">
+                  Get a personalized AI-generated plan for weight loss & muscle gain
                 </p>
-                <Button
-                  variant="primary"
-                  onClick={() => toggleSection("ai-coaching")}
-                  aria-expanded={activeSection === "ai-coaching"}
-                  disabled={!canAccess("ai-coaching")}
-                >
-                  {activeSection === "ai-coaching"
-                    ? "Hide AI Coaching"
-                    : canAccess("ai-coaching")
-                    ? "Start AI Coaching"
-                    : "Locked"}
-                </Button>
-                {!canAccess("ai-coaching") && (
-                  <div className="locked-text">
-                    Requires <strong>Basic</strong> or <strong>Advanced</strong>{" "}
-                    plan.
+                {canAccess("ai-coaching") && (
+                  <div className="client-card-features">
+                    <div className="client-feature-item">
+                      <FaCheckCircle className="client-feature-icon" />
+                      <span>Custom Workouts</span>
+                    </div>
+                    <div className="client-feature-item">
+                      <FaCheckCircle className="client-feature-icon" />
+                      <span>Progress Tracking</span>
+                    </div>
                   </div>
                 )}
+                {!canAccess("ai-coaching") && (
+                  <div className="client-locked-badge">
+                    <FaLock className="me-2" />
+                    Requires Basic or Advanced Plan
+                  </div>
+                )}
+                <Button className="client-card-action-btn" disabled={!canAccess("ai-coaching")}>
+                  {activeSection === "ai-coaching" ? "Close" : "Launch AI Coach"}
+                  <FaBolt className="client-btn-icon" />
+                </Button>
               </Card.Body>
             </Card>
           </Col>
 
           {/* Coach Programs */}
-          <Col md={4}>
-            <Card className="dashboard-card">
-              <Card.Body>
-                <h4>Coach Programs</h4>
-                <p>
-                  Access structured training programs designed by Coach Rayane.
+          <Col lg={6} className="client-dashboard-col">
+            <Card className={`client-feature-card ${!canAccess("coach-programs") ? "client-card-locked" : ""} ${activeSection === "coach-programs" ? "client-card-active" : ""}`}>
+              <div className="client-card-glow client-card-glow-2"></div>
+              <Card.Body onClick={() => toggleSection("coach-programs")} style={{ cursor: "pointer" }}>
+                <div className="client-card-icon-wrapper client-icon-coach">
+                  {canAccess("coach-programs") ? <FaDumbbell className="client-card-icon" /> : <FaLock className="client-card-icon" />}
+                </div>
+                <h3 className="client-card-title">Coach Programs</h3>
+                <p className="client-card-description">
+                  Access structured training programs designed by Coach Rayane
                 </p>
-                <Button
-                  variant="success"
-                  onClick={() => toggleSection("coach-programs")}
-                  aria-expanded={activeSection === "coach-programs"}
-                  disabled={!canAccess("coach-programs")}
-                >
-                  {activeSection === "coach-programs"
-                    ? "Hide Programs"
-                    : canAccess("coach-programs")
-                    ? "Browse Programs"
-                    : "Locked"}
-                </Button>
-                {!canAccess("coach-programs") && (
-                  <div className="locked-text">
-                    Requires <strong>Basic</strong> or <strong>Advanced</strong>{" "}
-                    plan.
+                {canAccess("coach-programs") && (
+                  <div className="client-card-features">
+                    <div className="client-feature-item">
+                      <FaCheckCircle className="client-feature-icon" />
+                      <span>Expert Designed</span>
+                    </div>
+                    <div className="client-feature-item">
+                      <FaCheckCircle className="client-feature-icon" />
+                      <span>Proven Results</span>
+                    </div>
                   </div>
                 )}
+                {!canAccess("coach-programs") && (
+                  <div className="client-locked-badge">
+                    <FaLock className="me-2" />
+                    Requires Basic or Advanced Plan
+                  </div>
+                )}
+                <Button className="client-card-action-btn" disabled={!canAccess("coach-programs")}>
+                  {activeSection === "coach-programs" ? "Close" : "Browse Programs"}
+                  <FaBolt className="client-btn-icon" />
+                </Button>
               </Card.Body>
             </Card>
           </Col>
 
           {/* Premium Add-Ons */}
-          <Col md={4}>
-            <Card className="dashboard-card">
-              <Card.Body>
-                <h4>Premium Add-Ons</h4>
-                <p>Upgrade your training with 1-on-1 coaching, E-Book, and more.</p>
-                <Button
-                  variant="warning"
-                  onClick={() => toggleSection("add-ons")}
-                  aria-expanded={activeSection === "add-ons"}
-                  disabled={!canAccess("add-ons")}
-                >
-                  {activeSection === "add-ons"
-                    ? "Hide Add-Ons"
-                    : canAccess("add-ons")
-                    ? "Explore Add-Ons"
-                    : "Locked"}
-                </Button>
-                {!canAccess("add-ons") && (
-                  <div className="locked-text">
-                    {effectivePlan === "advanced" ? null : effectivePlan === "basic" ? (
-                      <>Visible here when you own an add-on (Zoom/AI/E-Book).</>
-                    ) : (
-                      <>Requires a plan & purchase from Cart.</>
-                    )}
+          <Col lg={6} className="client-dashboard-col">
+            <Card className={`client-feature-card ${!canAccess("add-ons") ? "client-card-locked" : ""} ${activeSection === "add-ons" ? "client-card-active" : ""}`}>
+              <div className="client-card-glow client-card-glow-3"></div>
+              <Card.Body onClick={() => toggleSection("add-ons")} style={{ cursor: "pointer" }}>
+                <div className="client-card-icon-wrapper client-icon-addons">
+                  {canAccess("add-ons") ? <FaStar className="client-card-icon" /> : <FaLock className="client-card-icon" />}
+                </div>
+                <h3 className="client-card-title">Premium Add-Ons</h3>
+                <p className="client-card-description">
+                  Upgrade your training with 1-on-1 coaching, E-Book, and more
+                </p>
+                {canAccess("add-ons") && (
+                  <div className="client-card-features">
+                    <div className="client-feature-item">
+                      <FaCheckCircle className="client-feature-icon" />
+                      <span>Zoom Sessions</span>
+                    </div>
+                    <div className="client-feature-item">
+                      <FaCheckCircle className="client-feature-icon" />
+                      <span>Exclusive Content</span>
+                    </div>
                   </div>
                 )}
+                {!canAccess("add-ons") && (
+                  <div className="client-locked-badge">
+                    <FaLock className="me-2" />
+                    {effectivePlan === "basic" ? "Purchase Add-Ons to Unlock" : "Requires Plan"}
+                  </div>
+                )}
+                <Button className="client-card-action-btn" disabled={!canAccess("add-ons")}>
+                  {activeSection === "add-ons" ? "Close" : "Explore Add-Ons"}
+                  <FaBolt className="client-btn-icon" />
+                </Button>
               </Card.Body>
             </Card>
           </Col>
 
           {/* Nutrition Guide */}
-          <Col md={4}>
-            <Card className="dashboard-card">
-              <Card.Body>
-                <h4>Basic Nutrition Guide</h4>
-                <p>Get expert nutrition advice to enhance your fitness goals.</p>
-                <Button
-                  variant="info"
-                  onClick={() => toggleSection("nutrition-guide")}
-                  aria-expanded={activeSection === "nutrition-guide"}
-                  disabled={!canAccess("nutrition-guide")}
-                >
-                  {activeSection === "nutrition-guide"
-                    ? "Hide Guide"
-                    : canAccess("nutrition-guide")
-                    ? "View Nutrition Guide"
-                    : "Locked"}
-                </Button>
-                {!canAccess("nutrition-guide") && (
-                  <div className="locked-text">
-                    {effectivePlan === "basic" ? (
-                      <>
-                        Requires <strong>E-Book</strong> add-on or{" "}
-                        <strong>Advanced</strong> plan.
-                      </>
-                    ) : (
-                      <>Requires <strong>Advanced</strong> plan.</>
-                    )}
+          <Col lg={6} className="client-dashboard-col">
+            <Card className={`client-feature-card ${!canAccess("nutrition-guide") ? "client-card-locked" : ""} ${activeSection === "nutrition-guide" ? "client-card-active" : ""}`}>
+              <div className="client-card-glow client-card-glow-4"></div>
+              <Card.Body onClick={() => toggleSection("nutrition-guide")} style={{ cursor: "pointer" }}>
+                <div className="client-card-icon-wrapper client-icon-nutrition">
+                  {canAccess("nutrition-guide") ? <FaAppleAlt className="client-card-icon" /> : <FaLock className="client-card-icon" />}
+                </div>
+                <h3 className="client-card-title">Nutrition Guide</h3>
+                <p className="client-card-description">
+                  Get expert nutrition advice to enhance your fitness goals
+                </p>
+                {canAccess("nutrition-guide") && (
+                  <div className="client-card-features">
+                    <div className="client-feature-item">
+                      <FaCheckCircle className="client-feature-icon" />
+                      <span>Meal Plans</span>
+                    </div>
+                    <div className="client-feature-item">
+                      <FaCheckCircle className="client-feature-icon" />
+                      <span>Macro Tracking</span>
+                    </div>
                   </div>
                 )}
+                {!canAccess("nutrition-guide") && (
+                  <div className="client-locked-badge">
+                    <FaLock className="me-2" />
+                    {effectivePlan === "basic" ? "Requires E-Book or Advanced" : "Requires Advanced Plan"}
+                  </div>
+                )}
+                <Button className="client-card-action-btn" disabled={!canAccess("nutrition-guide")}>
+                  {activeSection === "nutrition-guide" ? "Close" : "View Guide"}
+                  <FaBolt className="client-btn-icon" />
+                </Button>
               </Card.Body>
             </Card>
           </Col>
         </Row>
 
-        {/* Collapsible Sections (unchanged children) */}
-        <Collapse in={activeSection === "ai-coaching"}>
-          <div id="ai-coaching">
-            <AICoaching />
-          </div>
-        </Collapse>
-
-        <Collapse in={activeSection === "coach-programs"}>
-          <div id="coach-programs">
-            <CoachPrograms />
-          </div>
-        </Collapse>
-
-        <Collapse in={activeSection === "add-ons"}>
-          <div id="add-ons">
-          <AddOns
-            addToCart={addToCart}
-            ownedAddOns={normalizedAddOns || {}}
-            showOwnedOnly={true}
-            plan={effectivePlan}
-          />
-          </div>
-        </Collapse>
-
-        <Collapse in={activeSection === "nutrition-guide"}>
-          <div id="nutrition-guide">
-            <NutritionGuide />
-          </div>
-        </Collapse>
-
-      {/* Plan Management Buttons */}
-      {/* ✅ Upgrade button for users with No Plan */}
-      {(!effectivePlan || effectivePlan === "none") && (
-        <div className="mb-4">
-          <Button variant="success" onClick={handleUpgrade}>
-            Upgrade to Basic or Advanced
-          </Button>
+        {/* Plan Management Buttons */}
+        <div className="client-plan-actions">
+          {(!effectivePlan || effectivePlan === "none") && (
+            <Button variant="success" size="lg" onClick={handleUpgrade} className="client-upgrade-btn">
+              <FaCrown className="me-2" /> Upgrade to Premium
+            </Button>
+          )}
+          {effectivePlan === "basic" && (
+            <>
+              <Button variant="success" size="lg" onClick={handleUpgrade} className="client-upgrade-btn">
+                <FaCrown className="me-2" /> Upgrade to Advanced
+              </Button>
+              <Button variant="outline-danger" onClick={() => setDowngradeModal(true)} className="client-downgrade-btn">
+                Downgrade Plan
+              </Button>
+            </>
+          )}
+          {effectivePlan === "advanced" && (
+            <Button variant="outline-danger" onClick={() => setDowngradeModal(true)} className="client-downgrade-btn">
+              Downgrade Plan
+            </Button>
+          )}
         </div>
-      )}
 
-      {effectivePlan === "basic" && (
-        <div
-          className="mb-4 d-flex justify-content-center align-items-center gap-3"
-          style={{ marginTop: "1rem" }}
-        >
-          <Button variant="success" onClick={handleUpgrade}>
-            Upgrade to Advanced
-          </Button>
-          <Button
-            variant="outline-danger"
-            onClick={() => setDowngradeModal(true)}
-          >
-            Downgrade to None
-          </Button>
+        {/* Collapsible Sections */}
+        <div className="client-sections-container">
+          <Collapse in={activeSection === "ai-coaching"}>
+            <div className="client-section-content">
+              <AICoaching />
+            </div>
+          </Collapse>
+          <Collapse in={activeSection === "coach-programs"}>
+            <div className="client-section-content">
+              <CoachPrograms />
+            </div>
+          </Collapse>
+          <Collapse in={activeSection === "add-ons"}>
+            <div className="client-section-content">
+              <AddOns
+                addToCart={addToCart}
+                ownedAddOns={normalizedAddOns || {}}
+                showOwnedOnly={true}
+                plan={effectivePlan}
+              />
+            </div>
+          </Collapse>
+          <Collapse in={activeSection === "nutrition-guide"}>
+            <div className="client-section-content">
+              <NutritionGuide />
+            </div>
+          </Collapse>
         </div>
-      )}
-
-      {effectivePlan === "advanced" && (
-        <div className="mb-4">
-          <Button
-            variant="outline-danger"
-            onClick={() => setDowngradeModal(true)}
-          >
-            Downgrade Plan
-          </Button>
-        </div>
-      )}
-
-
-
-        {/* Editable Database Row (unchanged) Testing
-        <Card className="mt-5">
-          <Card.Body>
-            <h4>Your Database Row</h4>
-
-            {loading && <Spinner animation="border" />}
-            {error && <Alert variant="danger">{error}</Alert>}
-
-            {userInfo && (
-              <>
-                <p>
-                  <strong>Email:</strong> {userInfo.email}
-                </p>
-                <p>
-                  <strong>Subscription:</strong>{" "}
-                  {userInfo.subscription_plan || "none"}
-                </p>
-
-                <Form.Group controlId="username">
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </Form.Group>
-
-                <Button
-                  variant="primary"
-                  className="mt-3"
-                  onClick={handleSaveUsername}
-                  disabled={saving}
-                >
-                  {saving ? (
-                    <Spinner animation="border" size="sm" />
-                  ) : (
-                    "Save Changes"
-                  )}
-                </Button>
-              </>
-            )}
-          </Card.Body>
-        </Card>*/}
       </Container>
 
-      {/* Downgrade Confirmation Modal (unchanged) */}
-      <Modal show={downgradeModal} onHide={() => setDowngradeModal(false)} centered>
-        <Modal.Header closeButton>
+      {/* Modals */}
+      <Modal show={downgradeModal} onHide={() => setDowngradeModal(false)} centered className="client-modal">
+        <Modal.Header closeButton className="client-modal-header">
           <Modal.Title>Confirm Downgrade</Modal.Title>
         </Modal.Header>
-
-        {effectivePlan === "advanced" ? (
-          <Modal.Body>
-            You are currently on the <strong>Advanced Plan</strong>.  
-            Choose how you want to downgrade:
-          </Modal.Body>
-        ) : (
-          <Modal.Body>
-            Are you sure you want to downgrade to <strong>None</strong>?  
-            You will lose access to all premium features.
-          </Modal.Body>
-        )}
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setDowngradeModal(false)}>
-            Cancel
-          </Button>
-
+        <Modal.Body className="client-modal-body">
+          {effectivePlan === "advanced" ? (
+            <>You are currently on the <strong>Advanced Plan</strong>. Choose how you want to downgrade:</>
+          ) : (
+            <>Are you sure you want to downgrade to <strong>None</strong>? You will lose access to all premium features.</>
+          )}
+        </Modal.Body>
+        <Modal.Footer className="client-modal-footer">
+          <Button variant="secondary" onClick={() => setDowngradeModal(false)}>Cancel</Button>
           {effectivePlan === "advanced" ? (
             <>
-              <Button
-                variant="warning"
-                onClick={() => handleDowngradePlan("basic")}
-                disabled={downgrading}
-              >
+              <Button variant="warning" onClick={() => handleDowngradePlan("basic")} disabled={downgrading}>
                 {downgrading ? <Spinner animation="border" size="sm" /> : "Downgrade to Basic"}
               </Button>
-              <Button
-                variant="danger"
-                onClick={() => handleDowngradePlan("none")}
-                disabled={downgrading}
-              >
+              <Button variant="danger" onClick={() => handleDowngradePlan("none")} disabled={downgrading}>
                 {downgrading ? <Spinner animation="border" size="sm" /> : "Downgrade to None"}
               </Button>
             </>
           ) : (
-            <Button
-              variant="danger"
-              onClick={() => handleDowngradePlan("none")}
-              disabled={downgrading}
-            >
+            <Button variant="danger" onClick={() => handleDowngradePlan("none")} disabled={downgrading}>
               {downgrading ? <Spinner animation="border" size="sm" /> : "Confirm Downgrade"}
             </Button>
           )}
         </Modal.Footer>
       </Modal>
 
-
-      {/* Upgrade Modal*/}
-      <Modal
-        show={showUpgradeModal}
-        onHide={() => setShowUpgradeModal(false)}
-        centered
-      >
-        <Modal.Header closeButton>
+      <Modal show={showUpgradeModal} onHide={() => setShowUpgradeModal(false)} centered className="client-modal">
+        <Modal.Header closeButton className="client-modal-header">
           <Modal.Title>Upgrade Required</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="client-modal-body">
           This feature is available with the <strong>Advanced Plan</strong>.
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowUpgradeModal(false)}
-          >
-            Cancel
-          </Button>
-          <Button variant="success" onClick={handleUpgrade}>
-            Upgrade
-          </Button>
+        <Modal.Footer className="client-modal-footer">
+          <Button variant="secondary" onClick={() => setShowUpgradeModal(false)}>Cancel</Button>
+          <Button variant="success" onClick={handleUpgrade}>Upgrade</Button>
         </Modal.Footer>
       </Modal>
 
-      {/* Plan/Cart Modal (context-aware body) */}
-      <Modal
-        show={showPlanModal}
-        onHide={() => setShowPlanModal(false)}
-        centered
-      >
-        <Modal.Header closeButton>
+      <Modal show={showPlanModal} onHide={() => setShowPlanModal(false)} centered className="client-modal">
+        <Modal.Header closeButton className="client-modal-header">
           <Modal.Title>Action Required</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{planModalBody()}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleViewPlans}>
-            Go to Cart
-          </Button>
+        <Modal.Body className="client-modal-body">{planModalBody()}</Modal.Body>
+        <Modal.Footer className="client-modal-footer">
+          <Button variant="primary" onClick={handleViewPlans}>Go to Cart</Button>
         </Modal.Footer>
       </Modal>
+
+      <ProfileCompletedView />
     </section>
   );
 };

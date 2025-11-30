@@ -1,18 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Badge, Spinner, Card } from "react-bootstrap";
+import { 
+  FaShoppingCart, 
+  FaCrown, 
+  FaRocket, 
+  FaCheckCircle,
+  FaTrash,
+  FaStar,
+  FaBolt,
+  FaTimes
+} from "react-icons/fa";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
 const plans = [
-  { key: "basic", title: "Basic Plan", price: 29, description: "AI-Generated Training Plans + Workout Tracking" },
-  { key: "advanced", title: "Advanced Plan", price: 39, description: "Everything in Basic + Nutrition Plan + E-Book + Custom Coaching" },
+  { 
+    key: "basic", 
+    title: "Basic Plan", 
+    price: 29, 
+    description: "AI Training + Tracking",
+    icon: <FaRocket />
+  },
+  { 
+    key: "advanced", 
+    title: "Advanced Plan", 
+    price: 39, 
+    description: "Everything + Nutrition + E-Book",
+    icon: <FaCrown />
+  },
 ];
 
 const availableAddOns = [
-  { key: "ebook", title: "E-Book", price: 29.99 },
-  { key: "zoom", title: "1-on-1 Zoom Consultation", price: 49.99 },
-  { key: "ai", title: "Coach Custom AI Training Plan", price: 99.99 },
+  { 
+    key: "ebook", 
+    title: "E-Book", 
+    price: 29.99,
+    icon: "📚"
+  },
+  { 
+    key: "zoom", 
+    title: "1-on-1 Zoom", 
+    price: 49.99,
+    icon: "🎥"
+  },
+  { 
+    key: "ai", 
+    title: "Custom AI Plan", 
+    price: 99.99,
+    icon: "🤖"
+  },
 ];
 
 const Cart = () => {
@@ -24,8 +61,8 @@ const Cart = () => {
   const [userPlan, setUserPlan] = useState("none");
   const [userAddOns, setUserAddOns] = useState({});
   const [loading, setLoading] = useState(true);
+  const [processing, setProcessing] = useState(false);
 
-  // ✅ Fetch current user details
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -41,7 +78,6 @@ const Cart = () => {
     fetchUserDetails();
   }, [fetchWithAuth]);
 
-  // Load from localStorage (if user previously had items in cart)
   useEffect(() => {
     const storedPlan = localStorage.getItem("cart_plan");
     const storedAddOns = localStorage.getItem("cart_addons");
@@ -49,7 +85,6 @@ const Cart = () => {
     if (storedAddOns) setSelectedAddOns(JSON.parse(storedAddOns));
   }, []);
 
-  // Save cart state to localStorage
   useEffect(() => {
     localStorage.setItem("cart_plan", JSON.stringify(selectedPlan));
     localStorage.setItem("cart_addons", JSON.stringify(selectedAddOns));
@@ -60,12 +95,16 @@ const Cart = () => {
   };
 
   const handlePlanChange = (planKey) => {
-    if (planKey === "none") {
-      setSelectedPlan(null);
-    } else {
-      const chosen = plans.find((p) => p.key === planKey);
-      setSelectedPlan(chosen);
-    }
+    const chosen = plans.find((p) => p.key === planKey);
+    setSelectedPlan(chosen);
+  };
+
+  const removePlan = () => {
+    setSelectedPlan(null);
+  };
+
+  const removeAddOn = (key) => {
+    setSelectedAddOns((prev) => ({ ...prev, [key]: 0 }));
   };
 
   const calculateTotal = () => {
@@ -77,8 +116,8 @@ const Cart = () => {
     return (planPrice + addOnsTotal).toFixed(2);
   };
 
-  // ✅ Stripe checkout
   const handleCheckout = async () => {
+    setProcessing(true);
     try {
       const updatedAddOns = {};
       for (const [key, qty] of Object.entries(selectedAddOns)) {
@@ -98,161 +137,267 @@ const Cart = () => {
       });
 
       if (data.url) {
-        // Store cart before redirecting
         localStorage.setItem("cart_in_progress", "true");
         window.location.href = data.url;
       } else {
         alert("Payment session could not be created. Please try again.");
+        setProcessing(false);
       }
     } catch (error) {
       console.error("Checkout failed:", error);
       alert("Something went wrong during checkout. Please try again.");
+      setProcessing(false);
     }
   };
 
   const alreadyHasEbook = (userAddOns["ebook"] || 0) >= 1;
-  const getPlanLabel = (planKey) => {
-    const plan = plans.find((p) => p.key === planKey);
-    return plan ? plan.title : "None";
+  const cartItemCount = () => {
+    let count = selectedPlan ? 1 : 0;
+    count += Object.values(selectedAddOns).reduce((sum, qty) => sum + qty, 0);
+    return count;
   };
+
+  const cartHasItems = selectedPlan || Object.values(selectedAddOns).some(qty => qty > 0);
 
   if (loading) {
     return (
-      <div className="cart-section">
-        <div className="cart-section-container">
-          <h3 className="text-center">Loading your cart...</h3>
+      <section className="cart-wrapper">
+        <div className="cart-loading">
+          <Spinner animation="border" variant="light" />
+          <p>Loading cart...</p>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <section className="cart-section">
-      <div className="cart-section-container">
-        <h2 className="section-title">🛒 Your Cart</h2>
-
-        <div className="current-plan-display mb-3">
-          <strong>Current Plan:</strong> {getPlanLabel(userPlan)}
-        </div>
-
-        {/* Step 1: Plan Selection */}
-        <div className="step-header" data-step="①">
-          Choose Your Plan
-        </div>
-        <div className="plan-card">
-          <Form>
-            {userPlan === "none" && (
-              <>
-                {plans.map((plan) => (
-                  <Form.Check
-                    key={plan.key}
-                    type="radio"
-                    label={`${plan.title} - $${plan.price}/month`}
-                    name="plan"
-                    id={plan.key}
-                    checked={selectedPlan?.key === plan.key}
-                    onChange={() => handlePlanChange(plan.key)}
-                  />
-                ))}
-                <Form.Check
-                  type="radio"
-                  label="None (just buy add-ons)"
-                  name="plan"
-                  id="none"
-                  checked={!selectedPlan}
-                  onChange={() => handlePlanChange("none")}
-                />
-              </>
-            )}
-
-            {userPlan === "basic" && (
-              <>
-                <div className="text-success mb-2">You are already a Basic user.</div>
-                <Form.Check
-                  type="radio"
-                  label={`Upgrade to Advanced Plan - $${plans[1].price}/month`}
-                  name="plan"
-                  id="advanced"
-                  checked={selectedPlan?.key === "advanced"}
-                  onChange={() => handlePlanChange("advanced")}
-                />
-              </>
-            )}
-
-            {userPlan === "advanced" && (
-              <div className="text-success">You are already an Advanced user.</div>
-            )}
-          </Form>
-        </div>
-
-        {/* Step 2: Add-ons */}
-        <div className="step-header" data-step="②">
-          Add-Ons
-        </div>
-        <div className="plan-card">
-          {availableAddOns.map((addOn) => {
-            const disabled = addOn.key === "ebook" && alreadyHasEbook;
-            return (
-              <div className="addon-item" key={addOn.key}>
-                <div className="addon-name">
-                  {addOn.title} - <span className="addon-price">${addOn.price}</span>
-                </div>
-                <Form.Control
-                  type="number"
-                  min="0"
-                  max={addOn.key === "ebook" ? 1 : 5}
-                  disabled={disabled}
-                  value={selectedAddOns[addOn.key] || 0}
-                  onChange={(e) => {
-                    const value = parseInt(e.target.value) || 0;
-                    if (addOn.key === "ebook" && value > 1) return;
-                    handleAddOnChange(addOn.key, value);
-                  }}
-                  className="addon-quantity"
-                />
-                {disabled && <div className="addon-note text-warning">Already purchased</div>}
+    <section className="cart-wrapper">
+      <Container className="cart-container">
+        <Row className="g-4">
+          {/* Left Side - Available Items */}
+          <Col lg={7}>
+            <div className="cart-section-card">
+              <div className="cart-section-header">
+                <h2 className="cart-section-title">
+                  <FaShoppingCart className="me-2" />
+                  Available Plans & Add-Ons
+                </h2>
+                <Badge bg="info" className="cart-current-badge">
+                  Current: {userPlan === "none" ? "No Plan" : userPlan === "basic" ? "Basic" : "Advanced"}
+                </Badge>
               </div>
-            );
-          })}
-        </div>
 
-        {/* Step 3: Summary */}
-        <div className="step-header" data-step="③">
-          Summary
-        </div>
-        <div className="summary-card">
-          {selectedPlan ? (
-            <p>
-              <strong>Plan:</strong> {selectedPlan.title} - ${selectedPlan.price}/month
-            </p>
-          ) : (
-            <p>
-              <strong>Plan:</strong> None
-            </p>
-          )}
+              {/* Plans Section */}
+              <div className="cart-items-section">
+                <h4 className="cart-subsection-title">Membership Plans</h4>
+                
+                {userPlan === "none" && (
+                  <div className="cart-plan-options">
+                    {plans.map((plan) => (
+                      <div
+                        key={plan.key}
+                        className={`cart-plan-option ${selectedPlan?.key === plan.key ? 'cart-selected' : ''}`}
+                        onClick={() => handlePlanChange(plan.key)}
+                      >
+                        <div className="cart-plan-icon-circle">{plan.icon}</div>
+                        <div className="cart-plan-info">
+                          <h5>{plan.title}</h5>
+                          <p>{plan.description}</p>
+                        </div>
+                        <div className="cart-plan-price-tag">
+                          ${plan.price}<span>/mo</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-          {Object.entries(selectedAddOns)
-            .filter(([_, qty]) => qty > 0)
-            .map(([key, qty]) => {
-              const addOn = availableAddOns.find((a) => a.key === key);
-              return (
-                <p key={key}>
-                  <strong>{addOn.title}</strong> × {qty} = ${(addOn.price * qty).toFixed(2)}
-                </p>
-              );
-            })}
+                {userPlan === "basic" && (
+                  <div className="cart-plan-options">
+                    <div
+                      className={`cart-plan-option cart-upgrade-option ${selectedPlan?.key === 'advanced' ? 'cart-selected' : ''}`}
+                      onClick={() => handlePlanChange("advanced")}
+                    >
+                      <Badge bg="success" className="cart-upgrade-label">Upgrade</Badge>
+                      <div className="cart-plan-icon-circle"><FaCrown /></div>
+                      <div className="cart-plan-info">
+                        <h5>Advanced Plan</h5>
+                        <p>Unlock all premium features</p>
+                      </div>
+                      <div className="cart-plan-price-tag">
+                        ${plans[1].price}<span>/mo</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
-          <div className="summary-total">Total: ${calculateTotal()}</div>
+                {userPlan === "advanced" && (
+                  <div className="cart-plan-maxed-state">
+                    <FaCrown className="cart-maxed-icon" />
+                    <p>You have the Advanced Plan - all features unlocked!</p>
+                  </div>
+                )}
+              </div>
 
-          <Button
-            className="checkout-btn"
-            onClick={handleCheckout}
-            disabled={!selectedPlan && Object.values(selectedAddOns).every((qty) => qty === 0)}
-          >
-            Proceed to Checkout
-          </Button>
-        </div>
-      </div>
+              {/* Add-Ons Section */}
+              <div className="cart-items-section mt-4">
+                <h4 className="cart-subsection-title">Premium Add-Ons</h4>
+                
+                <div className="cart-addon-options">
+                  {availableAddOns.map((addon) => {
+                    const disabled = addon.key === "ebook" && alreadyHasEbook;
+                    const qty = selectedAddOns[addon.key] || 0;
+
+                    return (
+                      <div key={addon.key} className={`cart-addon-option ${disabled ? 'cart-disabled' : ''}`}>
+                        <div className="cart-addon-left">
+                          <span className="cart-addon-emoji">{addon.icon}</span>
+                          <div className="cart-addon-info">
+                            <h6>{addon.title}</h6>
+                            <span className="cart-addon-price-small">${addon.price}</span>
+                          </div>
+                        </div>
+                        
+                        {disabled ? (
+                          <Badge bg="secondary">Owned</Badge>
+                        ) : (
+                          <div className="cart-qty-controls">
+                            <Button
+                              size="sm"
+                              variant="outline-light"
+                              onClick={() => handleAddOnChange(addon.key, Math.max(0, qty - 1))}
+                              disabled={qty === 0}
+                            >
+                              -
+                            </Button>
+                            <span className="cart-qty-display">{qty}</span>
+                            <Button
+                              size="sm"
+                              variant="outline-light"
+                              onClick={() => {
+                                const max = addon.key === "ebook" ? 1 : 1;
+                                handleAddOnChange(addon.key, Math.min(qty + 1, max));
+                              }}
+                            >
+                              +
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </Col>
+
+          {/* Right Side - Cart Summary */}
+          <Col lg={5}>
+            <div className="cart-summary-card">
+              <div className="cart-summary-header">
+                <h3 className="cart-summary-title">Order Summary</h3>
+                <Badge bg="warning" className="cart-items-count">
+                  {cartItemCount()} {cartItemCount() === 1 ? 'item' : 'items'}
+                </Badge>
+              </div>
+
+              <div className="cart-summary-body">
+                {!cartHasItems ? (
+                  <div className="cart-empty-state">
+                    <FaShoppingCart className="cart-empty-icon" />
+                    <p>Your cart is empty</p>
+                    <small>Select a plan or add-ons to continue</small>
+                  </div>
+                ) : (
+                  <>
+                    <div className="cart-summary-items">
+                      {selectedPlan && (
+                        <div className="cart-summary-item">
+                          <div className="cart-item-details">
+                            <div className="cart-item-icon">
+                              {selectedPlan.key === 'basic' ? <FaRocket /> : <FaCrown />}
+                            </div>
+                            <div className="cart-item-text">
+                              <span className="cart-item-name">{selectedPlan.title}</span>
+                              <span className="cart-item-period">/month</span>
+                            </div>
+                          </div>
+                          <div className="cart-item-right">
+                            <span className="cart-item-price">${selectedPlan.price}</span>
+                            <Button
+                              size="sm"
+                              variant="link"
+                              className="cart-remove-btn"
+                              onClick={removePlan}
+                            >
+                              <FaTimes />
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+
+                      {Object.entries(selectedAddOns)
+                        .filter(([_, qty]) => qty > 0)
+                        .map(([key, qty]) => {
+                          const addon = availableAddOns.find((a) => a.key === key);
+                          return (
+                            <div key={key} className="cart-summary-item">
+                              <div className="cart-item-details">
+                                <div className="cart-item-icon-emoji">{addon.icon}</div>
+                                <div className="cart-item-text">
+                                  <span className="cart-item-name">{addon.title}</span>
+                                  <span className="cart-item-qty">× {qty}</span>
+                                </div>
+                              </div>
+                              <div className="cart-item-right">
+                                <span className="cart-item-price">${(addon.price * qty).toFixed(2)}</span>
+                                <Button
+                                  size="sm"
+                                  variant="link"
+                                  className="cart-remove-btn"
+                                  onClick={() => removeAddOn(key)}
+                                >
+                                  <FaTimes />
+                                </Button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                    </div>
+
+                    <div className="cart-summary-divider"></div>
+
+                    <div className="cart-summary-total">
+                      <span className="cart-total-label">Total</span>
+                      <span className="cart-total-amount">${calculateTotal()}</span>
+                    </div>
+
+                    <Button
+                      className="cart-checkout-btn"
+                      onClick={handleCheckout}
+                      disabled={processing}
+                    >
+                      {processing ? (
+                        <>
+                          <Spinner animation="border" size="sm" className="me-2" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <FaBolt className="me-2" />
+                          Checkout Now
+                        </>
+                      )}
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
+
+
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

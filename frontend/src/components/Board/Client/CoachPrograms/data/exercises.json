@@ -1,125 +1,1664 @@
 {
-    "Strength & Hypertrophy": {
-      "amateur": [
-        "Squats - 3x12",
-        "Bench Press - 3x10",
-        "Deadlifts - 3x8",
-        "Leg Press - 3x15",
-        "Bicep Curls - 3x12",
-        "Tricep Dips - 3x12",
-        "Lat Pulldown - 3x10",
-        "Calf Raises - 3x15"
-      ],
-      "pro": [
-        "Back Squats - 5x5",
-        "Incline Bench Press - 4x8",
-        "Romanian Deadlifts - 4x6",
-        "Hack Squats - 4x10",
-        "Weighted Pull-Ups - 4x8",
-        "Overhead Shoulder Press - 4x10",
-        "Barbell Rows - 4x8",
-        "Hammer Curls - 3x10"
-      ]
-    },
-    "Endurance & Conditioning": {
-      "amateur": [
-        "Jump Rope - 5 min",
-        "Burpees - 3x12",
-        "Mountain Climbers - 3x30 sec",
-        "Rowing Machine - 5 min",
-        "High Knees - 3x40 sec",
-        "Jumping Jacks - 4x30 sec",
-        "Treadmill Walk - 10 min"
-      ],
-      "pro": [
-        "Sprint Intervals - 6x30 sec",
-        "Plyometric Box Jumps - 4x12",
-        "Battle Ropes - 4x20 sec",
-        "Rowing Machine - 15 min",
-        "Hill Sprints - 5x40m",
-        "Skater Jumps - 4x20 sec",
-        "Tire Flips - 3x8"
-      ]
-    },
-    "Sport-Specific Training": {
-      "amateur": [
-        "Lateral Lunges - 3x10",
-        "Sprint Drills - 5x50m",
-        "Single-Leg Hops - 3x15",
-        "Medicine Ball Throws - 4x10",
-        "Agility Ladder - 3 drills",
-        "Wall Pass Drills - 3x10"
-      ],
-      "pro": [
-        "Agility Ladder - 4 drills",
-        "High-Knee Sprints - 4x30m",
-        "Depth Jumps - 3x10",
-        "Reaction Drills - 4x10",
-        "Sprint Starts - 5x40m",
-        "Sled Push - 4x20m"
-      ]
-    },
-    "Mobility & Flexibility": {
-      "amateur": [
-        "Seated Hamstring Stretch - 3x30 sec",
-        "Cat-Cow Stretch - 3x10",
-        "Child’s Pose - 3x30 sec",
-        "Standing Quad Stretch - 3x20 sec",
-        "Hip Flexor Stretch - 3x30 sec"
-      ],
-      "pro": [
-        "Pigeon Pose - 4x30 sec",
-        "Deep Squat Hold - 4x40 sec",
-        "Resistance Band Shoulder Mobility - 4x15",
-        "Frog Stretch - 3x30 sec",
-        "Active Thoracic Stretch - 3x15"
-      ]
-    },
-    "Off-Season & In-Season Training": {
-      "amateur": [
-        "Bodyweight Squats - 3x15",
-        "Jump Lunges - 3x12",
-        "Core Twists - 3x15",
-        "Resistance Band Work - 3x12",
-        "Box Step-Ups - 3x10"
-      ],
-      "pro": [
-        "Depth Drops - 4x8",
-        "Explosive Plyometric Jumps - 4x10",
-        "Sprint Starts - 5x50m",
-        "Single-Leg Balance Drills - 3x10",
-        "Lateral Box Jumps - 4x12"
-      ]
-    },
-    "Explosiveness & Power": {
-      "amateur": [
-        "Jump Squats - 3x10",
-        "Med Ball Slams - 4x12",
-        "Broad Jumps - 3x8",
-        "Box Jumps - 3x10",
-        "Battle Ropes - 3x15 sec"
-      ],
-      "pro": [
-        "Olympic Lifts - 4x5",
-        "Depth Jumps - 3x10",
-        "Explosive Step-Ups - 4x12",
-        "Triple Jumps - 4x8",
-        "Sled Sprints - 5x20m"
-      ]
-    },
-    "Injury Prevention & Recovery": {
-      "amateur": [
-        "Foam Rolling - 5 min",
-        "Shoulder Rotations - 3x15",
-        "Hip Bridges - 3x12",
-        "Core Stability Planks - 3x30 sec",
-        "Wall Angels - 3x15"
-      ],
-      "pro": [
-        "Deep Tissue Foam Rolling - 5 min",
-        "Resistance Band Activation - 4x12",
-        "Single-Leg Stability Drills - 3x10",
-        "Plyometric Stability Drills - 3x10"
-      ]
-    }
+  "Strength & Hypertrophy": {
+    "icon": "💪",
+    "color": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    "description": "Build massive muscle and raw strength with progressive overload",
+    "category": "strength",
+    "amateur": [
+      {
+        "name": "Barbell Squats",
+        "sets": "3x12",
+        "rest": "90s",
+        "muscle": "Quads, Glutes, Hamstrings",
+        "difficulty": "Intermediate",
+        "equipment": "Barbell, Squat Rack",
+        "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=ultWZbUMPL8",
+        "calories": "120-150 per set",
+        "tips": [
+          "Keep chest up and core braced",
+          "Knees track over toes",
+          "Depth: thighs parallel to ground",
+          "Drive through heels on ascent"
+        ],
+        "commonMistakes": [
+          "Knees caving inward",
+          "Rounding lower back",
+          "Not reaching proper depth"
+        ]
+      },
+      {
+        "name": "Bench Press",
+        "sets": "3x10",
+        "rest": "2min",
+        "muscle": "Chest, Triceps, Shoulders",
+        "difficulty": "Intermediate",
+        "equipment": "Barbell, Bench",
+        "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=rT7DgCr-3pg",
+        "calories": "100-130 per set",
+        "tips": [
+          "Lower bar to mid-chest",
+          "Elbows at 45-degree angle",
+          "Press explosively upward",
+          "Keep shoulder blades retracted"
+        ],
+        "commonMistakes": [
+          "Bouncing bar off chest",
+          "Flaring elbows too wide",
+          "Lifting hips off bench"
+        ]
+      },
+      {
+        "name": "Deadlifts",
+        "sets": "3x8",
+        "rest": "3min",
+        "muscle": "Back, Hamstrings, Glutes",
+        "difficulty": "Advanced",
+        "equipment": "Barbell, Plates",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=op9kVnSso6Q",
+        "calories": "150-200 per set",
+        "tips": [
+          "Maintain neutral spine throughout",
+          "Bar stays close to body",
+          "Drive through heels",
+          "Hinge at hips, not lower back"
+        ],
+        "commonMistakes": [
+          "Rounding the back",
+          "Bar drifting away from body",
+          "Starting with hips too low"
+        ]
+      },
+      {
+        "name": "Leg Press",
+        "sets": "3x15",
+        "rest": "90s",
+        "muscle": "Quads, Glutes",
+        "difficulty": "Beginner",
+        "equipment": "Leg Press Machine",
+        "image": "https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=IZxyjW7MPJQ",
+        "calories": "90-120 per set",
+        "tips": [
+          "Feet shoulder-width apart",
+          "Lower until 90-degree angle",
+          "Don't lock out knees at top",
+          "Control the descent"
+        ],
+        "commonMistakes": [
+          "Locking out knees",
+          "Lower back lifting off pad",
+          "Partial range of motion"
+        ]
+      },
+      {
+        "name": "Dumbbell Bicep Curls",
+        "sets": "3x12",
+        "rest": "60s",
+        "muscle": "Biceps",
+        "difficulty": "Beginner",
+        "equipment": "Dumbbells",
+        "image": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=ykJmrZ5v0Oo",
+        "calories": "50-70 per set",
+        "tips": [
+          "Keep elbows stationary",
+          "Full range of motion",
+          "Supinate wrists at top",
+          "Control the negative"
+        ],
+        "commonMistakes": [
+          "Swinging the weights",
+          "Moving elbows forward",
+          "Using momentum"
+        ]
+      },
+      {
+        "name": "Tricep Dips",
+        "sets": "3x12",
+        "rest": "75s",
+        "muscle": "Triceps, Chest",
+        "difficulty": "Intermediate",
+        "equipment": "Dip Bars or Bench",
+        "image": "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=2z8JmcrW-As",
+        "calories": "60-80 per set",
+        "tips": [
+          "Lean slightly forward",
+          "Lower until 90-degree angle",
+          "Press through palms",
+          "Keep core engaged"
+        ],
+        "commonMistakes": [
+          "Going too deep",
+          "Shrugging shoulders",
+          "Flaring elbows out"
+        ]
+      },
+      {
+        "name": "Lat Pulldown",
+        "sets": "3x10",
+        "rest": "90s",
+        "muscle": "Lats, Upper Back",
+        "difficulty": "Beginner",
+        "equipment": "Cable Machine",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=CAwf7n6Luuc",
+        "calories": "70-90 per set",
+        "tips": [
+          "Pull to upper chest",
+          "Squeeze shoulder blades together",
+          "Slight lean back",
+          "Control the eccentric"
+        ],
+        "commonMistakes": [
+          "Using too much momentum",
+          "Pulling behind neck",
+          "Not fully extending arms"
+        ]
+      },
+      {
+        "name": "Standing Calf Raises",
+        "sets": "3x15",
+        "rest": "60s",
+        "muscle": "Calves (Gastrocnemius)",
+        "difficulty": "Beginner",
+        "equipment": "Smith Machine or Calf Machine",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=gwLzBJYoWlI",
+        "calories": "40-60 per set",
+        "tips": [
+          "Full range of motion",
+          "Pause at top",
+          "Stretch at bottom",
+          "Control the movement"
+        ],
+        "commonMistakes": [
+          "Bouncing at bottom",
+          "Not going through full ROM",
+          "Bending knees"
+        ]
+      }
+    ],
+    "pro": [
+      {
+        "name": "Back Squats (Heavy)",
+        "sets": "5x5",
+        "rest": "3-4min",
+        "muscle": "Quads, Glutes, Core",
+        "difficulty": "Advanced",
+        "equipment": "Barbell, Squat Rack",
+        "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=SW_C1A-rejs",
+        "calories": "180-220 per set",
+        "tips": [
+          "Work at 80-85% 1RM",
+          "Explosive concentric phase",
+          "Brace core hard",
+          "Full depth squat"
+        ],
+        "commonMistakes": [
+          "Good morning squats",
+          "Losing tightness",
+          "Inadequate warm-up"
+        ]
+      },
+      {
+        "name": "Incline Bench Press",
+        "sets": "4x8",
+        "rest": "2-3min",
+        "muscle": "Upper Chest, Shoulders",
+        "difficulty": "Advanced",
+        "equipment": "Barbell, Incline Bench",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=SrqOu55lrYU",
+        "calories": "120-150 per set",
+        "tips": [
+          "30-45 degree incline",
+          "Touch upper chest",
+          "Drive feet into ground",
+          "Explosive press"
+        ],
+        "commonMistakes": [
+          "Incline too steep",
+          "Not controlling descent",
+          "Insufficient upper chest activation"
+        ]
+      },
+      {
+        "name": "Romanian Deadlifts",
+        "sets": "4x6",
+        "rest": "2-3min",
+        "muscle": "Hamstrings, Glutes, Lower Back",
+        "difficulty": "Advanced",
+        "equipment": "Barbell",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=CQp5I9KgdXM",
+        "calories": "140-180 per set",
+        "tips": [
+          "Slight knee bend maintained",
+          "Hinge at hips",
+          "Feel stretch in hamstrings",
+          "Keep bar close to legs"
+        ],
+        "commonMistakes": [
+          "Squatting the weight",
+          "Rounding back",
+          "Bar drifting away"
+        ]
+      },
+      {
+        "name": "Hack Squats",
+        "sets": "4x10",
+        "rest": "2min",
+        "muscle": "Quads, Glutes",
+        "difficulty": "Intermediate",
+        "equipment": "Hack Squat Machine",
+        "image": "https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=0tn5K9NlCfo",
+        "calories": "130-160 per set",
+        "tips": [
+          "Feet forward on platform",
+          "Deep squat position",
+          "Drive through heels",
+          "Controlled tempo"
+        ],
+        "commonMistakes": [
+          "Feet too close together",
+          "Not going deep enough",
+          "Bouncing at bottom"
+        ]
+      },
+      {
+        "name": "Weighted Pull-Ups",
+        "sets": "4x8",
+        "rest": "2-3min",
+        "muscle": "Lats, Biceps, Core",
+        "difficulty": "Advanced",
+        "equipment": "Pull-up Bar, Weight Belt",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=tB3X4TjTIes",
+        "calories": "100-140 per set",
+        "tips": [
+          "Full hang at bottom",
+          "Pull chest to bar",
+          "Control the descent",
+          "Add weight progressively"
+        ],
+        "commonMistakes": [
+          "Kipping or swinging",
+          "Partial range of motion",
+          "Not engaging lats"
+        ]
+      },
+      {
+        "name": "Overhead Shoulder Press",
+        "sets": "4x10",
+        "rest": "2min",
+        "muscle": "Shoulders, Triceps",
+        "difficulty": "Intermediate",
+        "equipment": "Barbell",
+        "image": "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=QAQ64hK4Xxs",
+        "calories": "90-120 per set",
+        "tips": [
+          "Press straight overhead",
+          "Keep core tight",
+          "Full lockout at top",
+          "Bar path close to face"
+        ],
+        "commonMistakes": [
+          "Leaning back excessively",
+          "Not locking out",
+          "Bar path too forward"
+        ]
+      },
+      {
+        "name": "Barbell Rows",
+        "sets": "4x8",
+        "rest": "2min",
+        "muscle": "Upper Back, Lats, Biceps",
+        "difficulty": "Intermediate",
+        "equipment": "Barbell",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=FWJR5Ve8bnQ",
+        "calories": "100-130 per set",
+        "tips": [
+          "Pull to lower chest",
+          "Keep torso stable",
+          "Squeeze at top",
+          "Lead with elbows"
+        ],
+        "commonMistakes": [
+          "Using momentum",
+          "Standing too upright",
+          "Not retracting shoulder blades"
+        ]
+      },
+      {
+        "name": "Hammer Curls",
+        "sets": "3x10",
+        "rest": "90s",
+        "muscle": "Biceps, Brachialis, Forearms",
+        "difficulty": "Beginner",
+        "equipment": "Dumbbells",
+        "image": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=zC3nLlEvin4",
+        "calories": "60-80 per set",
+        "tips": [
+          "Neutral grip throughout",
+          "Keep elbows tucked",
+          "Squeeze at top",
+          "Control the negative"
+        ],
+        "commonMistakes": [
+          "Rotating wrists",
+          "Swinging weights",
+          "Using too much weight"
+        ]
+      }
+    ]
+  },
+  "Endurance & Conditioning": {
+    "icon": "🏃",
+    "color": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+    "description": "Boost cardiovascular fitness and stamina for peak performance",
+    "category": "cardio",
+    "amateur": [
+      {
+        "name": "Jump Rope",
+        "sets": "5 min",
+        "rest": "60s",
+        "muscle": "Full Body, Calves",
+        "difficulty": "Beginner",
+        "equipment": "Jump Rope",
+        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=FJmRQ5iTXKE",
+        "calories": "70-100",
+        "tips": [
+          "Light bounces on toes",
+          "Elbows close to body",
+          "Wrists do the work",
+          "Stay on balls of feet"
+        ],
+        "commonMistakes": [
+          "Jumping too high",
+          "Using arms instead of wrists",
+          "Landing on heels"
+        ]
+      },
+      {
+        "name": "Burpees",
+        "sets": "3x12",
+        "rest": "60s",
+        "muscle": "Full Body",
+        "difficulty": "Intermediate",
+        "equipment": "None (Bodyweight)",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=TU8QYVW0gDU",
+        "calories": "100-150 per set",
+        "tips": [
+          "Smooth transition",
+          "Full plank position",
+          "Explosive jump",
+          "Land softly"
+        ],
+        "commonMistakes": [
+          "Sagging hips in plank",
+          "Not fully extending on jump",
+          "Rushing the movement"
+        ]
+      },
+      {
+        "name": "Mountain Climbers",
+        "sets": "3x30s",
+        "rest": "45s",
+        "muscle": "Core, Shoulders, Legs",
+        "difficulty": "Beginner",
+        "equipment": "None (Bodyweight)",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=nmwgirgXLYM",
+        "calories": "80-100 per set",
+        "tips": [
+          "Maintain plank position",
+          "Drive knees to chest",
+          "Fast pace",
+          "Keep hips level"
+        ],
+        "commonMistakes": [
+          "Hips too high",
+          "Not bringing knee far enough",
+          "Letting shoulders shift"
+        ]
+      },
+      {
+        "name": "Rowing Machine",
+        "sets": "5 min",
+        "rest": "2min",
+        "muscle": "Back, Legs, Core",
+        "difficulty": "Beginner",
+        "equipment": "Rowing Machine",
+        "image": "https://images.unsplash.com/photo-1520877880798-5ee004e3f11e?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=zQ82RYAQOY0",
+        "calories": "60-80",
+        "tips": [
+          "Legs, core, then arms",
+          "Drive through heels",
+          "Keep back straight",
+          "Smooth rhythm"
+        ],
+        "commonMistakes": [
+          "All arms, no legs",
+          "Rounding the back",
+          "Incorrect sequence"
+        ]
+      },
+      {
+        "name": "High Knees",
+        "sets": "3x40s",
+        "rest": "30s",
+        "muscle": "Hip Flexors, Quads, Calves",
+        "difficulty": "Beginner",
+        "equipment": "None (Bodyweight)",
+        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=8opcQdC-V-U",
+        "calories": "90-120 per set",
+        "tips": [
+          "Drive knees to waist level",
+          "Stay on toes",
+          "Pump arms",
+          "Fast tempo"
+        ],
+        "commonMistakes": [
+          "Not bringing knees high enough",
+          "Landing on heels",
+          "Leaning back"
+        ]
+      },
+      {
+        "name": "Jumping Jacks",
+        "sets": "4x30s",
+        "rest": "30s",
+        "muscle": "Full Body",
+        "difficulty": "Beginner",
+        "equipment": "None (Bodyweight)",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=c4DAnQ6DtF8",
+        "calories": "50-70 per set",
+        "tips": [
+          "Land softly",
+          "Full range of motion",
+          "Stay light on feet",
+          "Coordinate arms and legs"
+        ],
+        "commonMistakes": [
+          "Heavy landing",
+          "Incomplete arm raises",
+          "Poor coordination"
+        ]
+      },
+      {
+        "name": "Treadmill Incline Walk",
+        "sets": "10 min",
+        "rest": "N/A",
+        "muscle": "Legs, Glutes, Core",
+        "difficulty": "Beginner",
+        "equipment": "Treadmill",
+        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=xqKTCYnN49Y",
+        "calories": "80-120",
+        "tips": [
+          "12-15% incline",
+          "Moderate pace (3-4 mph)",
+          "Don't hold handrails",
+          "Upright posture"
+        ],
+        "commonMistakes": [
+          "Holding onto rails",
+          "Leaning forward",
+          "Going too fast"
+        ]
+      }
+    ],
+    "pro": [
+      {
+        "name": "Sprint Intervals (HIIT)",
+        "sets": "6x30s",
+        "rest": "90s",
+        "muscle": "Legs, Cardiovascular System",
+        "difficulty": "Advanced",
+        "equipment": "Track or Treadmill",
+        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=5xSmEp3alcg",
+        "calories": "150-200 per set",
+        "tips": [
+          "All-out effort",
+          "Drive knees high",
+          "Pump arms hard",
+          "Full recovery between sets"
+        ],
+        "commonMistakes": [
+          "Not going hard enough",
+          "Insufficient rest",
+          "Poor running form"
+        ]
+      },
+      {
+        "name": "Plyometric Box Jumps",
+        "sets": "4x12",
+        "rest": "2min",
+        "muscle": "Legs, Glutes, Power",
+        "difficulty": "Advanced",
+        "equipment": "Plyo Box (24-30 inches)",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=NBY9-kTuHEk",
+        "calories": "120-160 per set",
+        "tips": [
+          "Explosive jump",
+          "Land softly",
+          "Full hip extension",
+          "Step down, don't jump"
+        ],
+        "commonMistakes": [
+          "Jumping down",
+          "Not fully standing up on box",
+          "Landing too hard"
+        ]
+      },
+      {
+        "name": "Battle Ropes",
+        "sets": "4x20s",
+        "rest": "40s",
+        "muscle": "Arms, Shoulders, Core",
+        "difficulty": "Intermediate",
+        "equipment": "Battle Ropes",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=5gMy4ArKDcQ",
+        "calories": "100-140 per set",
+        "tips": [
+          "Athletic stance",
+          "Powerful waves",
+          "Keep tension throughout",
+          "Breathe rhythmically"
+        ],
+        "commonMistakes": [
+          "Standing too upright",
+          "Small waves",
+          "Holding breath"
+        ]
+      },
+      {
+        "name": "Rowing Machine Intervals",
+        "sets": "15 min",
+        "rest": "Built-in",
+        "muscle": "Full Body",
+        "difficulty": "Advanced",
+        "equipment": "Rowing Machine",
+        "image": "https://images.unsplash.com/photo-1520877880798-5ee004e3f11e?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=WOXmWT7Uo5k",
+        "calories": "180-250",
+        "tips": [
+          "1 min hard / 1 min easy",
+          "Target 500m pace",
+          "Maintain form under fatigue",
+          "Power from legs"
+        ],
+        "commonMistakes": [
+          "All upper body",
+          "Inconsistent pace",
+          "Poor breathing"
+        ]
+      },
+      {
+        "name": "Hill Sprints",
+        "sets": "5x40m",
+        "rest": "3min",
+        "muscle": "Legs, Glutes, Cardio",
+        "difficulty": "Advanced",
+        "equipment": "Hill (10-15% grade)",
+        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=kL6yAoVW_hQ",
+        "calories": "140-180 per set",
+        "tips": [
+          "Drive knees up",
+          "Lean into hill",
+          "Short powerful strides",
+          "Walk back down"
+        ],
+        "commonMistakes": [
+          "Overstriding",
+          "Not enough forward lean",
+          "Inadequate recovery"
+        ]
+      },
+      {
+        "name": "Skater Jumps",
+        "sets": "4x20s",
+        "rest": "60s",
+        "muscle": "Legs, Glutes, Balance",
+        "difficulty": "Intermediate",
+        "equipment": "None (Bodyweight)",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=qT8j2vkLc2M",
+        "calories": "90-120 per set",
+        "tips": [
+          "Lateral power",
+          "Land on one foot",
+          "Touch ground with hand",
+          "Explosive pushoff"
+        ],
+        "commonMistakes": [
+          "Small jumps",
+          "Not landing balanced",
+          "Poor arm swing"
+        ]
+      },
+      {
+        "name": "Tire Flips",
+        "sets": "3x8",
+        "rest": "2-3min",
+        "muscle": "Full Body, Functional",
+        "difficulty": "Advanced",
+        "equipment": "Large Tire (400+ lbs)",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=nBKly-jJYnU",
+        "calories": "180-240 per set",
+        "tips": [
+          "Deadlift position",
+          "Explosive hip drive",
+          "Push when vertical",
+          "Neutral spine"
+        ],
+        "commonMistakes": [
+          "Rounding back",
+          "All arms, no legs",
+          "Not getting under tire"
+        ]
+      }
+    ]
+  },
+  "Sport-Specific Training": {
+    "icon": "⚽",
+    "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+    "description": "Athlete-focused drills for game-day dominance",
+    "category": "athletic",
+    "amateur": [
+      {
+        "name": "Lateral Lunges",
+        "sets": "3x10 each",
+        "rest": "60s",
+        "muscle": "Quads, Adductors, Glutes",
+        "difficulty": "Beginner",
+        "equipment": "None or Dumbbells",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=BqCYCJak6iI",
+        "calories": 90,
+        "tips": "Step wide, keep torso upright, push through heel"
+      },
+      {
+        "name": "Sprint Drills",
+        "sets": "5x50m",
+        "rest": "90s",
+        "muscle": "Full Body",
+        "difficulty": "Intermediate",
+        "equipment": "Track/Field",
+        "image": "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 150,
+        "tips": "Drive knees high, pump arms, explosive starts"
+      },
+      {
+        "name": "Single-Leg Hops",
+        "sets": "3x15 each",
+        "rest": "45s",
+        "muscle": "Calves, Quads, Stabilizers",
+        "difficulty": "Intermediate",
+        "equipment": "None",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 80,
+        "tips": "Land softly, control balance, quick ground contact"
+      },
+      {
+        "name": "Medicine Ball Throws",
+        "sets": "4x10",
+        "rest": "60s",
+        "muscle": "Core, Shoulders, Chest",
+        "difficulty": "Beginner",
+        "equipment": "Medicine Ball (4-6kg)",
+        "image": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 100,
+        "tips": "Rotate hips, throw explosively, follow through"
+      },
+      {
+        "name": "Agility Ladder Drills",
+        "sets": "3 drills x 3 rounds",
+        "rest": "60s",
+        "muscle": "Legs, Coordination",
+        "difficulty": "Intermediate",
+        "equipment": "Agility Ladder",
+        "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 120,
+        "tips": "Quick feet, stay on toes, maintain rhythm"
+      },
+      {
+        "name": "Wall Pass Drills",
+        "sets": "3x10 each side",
+        "rest": "45s",
+        "muscle": "Legs, Core",
+        "difficulty": "Beginner",
+        "equipment": "Ball, Wall",
+        "image": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 70,
+        "tips": "Accurate passes, quick reception, pivot smoothly"
+      }
+    ],
+    "pro": [
+      {
+        "name": "Advanced Agility Ladder",
+        "sets": "4 drills x 4 rounds",
+        "rest": "45s",
+        "muscle": "Legs, Coordination",
+        "difficulty": "Advanced",
+        "equipment": "Agility Ladder",
+        "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 180,
+        "tips": "Maximum speed, complex patterns, minimal errors"
+      },
+      {
+        "name": "High-Knee Sprints",
+        "sets": "4x30m",
+        "rest": "120s",
+        "muscle": "Hip Flexors, Quads",
+        "difficulty": "Advanced",
+        "equipment": "Track",
+        "image": "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 140,
+        "tips": "Knees to chest height, rapid turnover, arm drive"
+      },
+      {
+        "name": "Depth Jumps",
+        "sets": "3x10",
+        "rest": "120s",
+        "muscle": "Full Legs, Power",
+        "difficulty": "Advanced",
+        "equipment": "Plyo Box (24-36\")",
+        "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 130,
+        "tips": "Land and explode immediately, minimal ground time"
+      },
+      {
+        "name": "Reaction Drills",
+        "sets": "4x10",
+        "rest": "60s",
+        "muscle": "Full Body, Neural",
+        "difficulty": "Advanced",
+        "equipment": "Cones, Partner",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 110,
+        "tips": "Focus on visual cue, instant response, change direction"
+      },
+      {
+        "name": "Sprint Starts",
+        "sets": "5x40m",
+        "rest": "180s",
+        "muscle": "Full Body",
+        "difficulty": "Advanced",
+        "equipment": "Track, Starting Blocks",
+        "image": "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 150,
+        "tips": "Explosive first step, drive phase, gradual upright"
+      },
+      {
+        "name": "Sled Push",
+        "sets": "4x20m",
+        "rest": "150s",
+        "muscle": "Legs, Core, Shoulders",
+        "difficulty": "Advanced",
+        "equipment": "Prowler Sled (heavy load)",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 200,
+        "tips": "Low body angle, powerful leg drive, steady pace"
+      }
+    ]
+  },
+  "Mobility & Flexibility": {
+    "icon": "🧘",
+    "color": "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+    "description": "Unlock your body's full range of motion",
+    "category": "recovery",
+    "amateur": [
+      {
+        "name": "Seated Hamstring Stretch",
+        "sets": "3x30s each",
+        "rest": "15s",
+        "muscle": "Hamstrings",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 20,
+        "tips": "Reach forward gently, keep back straight, breathe deep"
+      },
+      {
+        "name": "Cat-Cow Stretch",
+        "sets": "3x10",
+        "rest": "20s",
+        "muscle": "Spine, Core",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 25,
+        "tips": "Smooth transitions, full spine articulation, sync breath"
+      },
+      {
+        "name": "Child's Pose",
+        "sets": "3x30s",
+        "rest": "15s",
+        "muscle": "Back, Shoulders, Hips",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 15,
+        "tips": "Sink hips to heels, arms extended, relax completely"
+      },
+      {
+        "name": "Standing Quad Stretch",
+        "sets": "3x20s each",
+        "rest": "15s",
+        "muscle": "Quadriceps",
+        "difficulty": "Beginner",
+        "equipment": "None",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 20,
+        "tips": "Pull heel to glute, keep knees together, balance"
+      },
+      {
+        "name": "Hip Flexor Stretch",
+        "sets": "3x30s each",
+        "rest": "15s",
+        "muscle": "Hip Flexors",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 25,
+        "tips": "Lunge position, push hips forward, upright torso"
+      }
+    ],
+    "pro": [
+      {
+        "name": "Pigeon Pose",
+        "sets": "4x30s each",
+        "rest": "20s",
+        "muscle": "Hip Rotators, Glutes",
+        "difficulty": "Advanced",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 30,
+        "tips": "Fold forward slowly, relax into stretch, breathe"
+      },
+      {
+        "name": "Deep Squat Hold",
+        "sets": "4x40s",
+        "rest": "30s",
+        "muscle": "Ankles, Hips, Legs",
+        "difficulty": "Intermediate",
+        "equipment": "None",
+        "image": "https://images.unsplash.com/photo-1518310952931-b1de897abd40?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 35,
+        "tips": "Heels down, chest up, knees out, hold position"
+      },
+      {
+        "name": "Resistance Band Shoulder Mobility",
+        "sets": "4x15",
+        "rest": "30s",
+        "muscle": "Shoulders, Upper Back",
+        "difficulty": "Intermediate",
+        "equipment": "Resistance Band",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 40,
+        "tips": "Wide grip, overhead passes, controlled movement"
+      },
+      {
+        "name": "Frog Stretch",
+        "sets": "3x30s",
+        "rest": "20s",
+        "muscle": "Hip Adductors, Groin",
+        "difficulty": "Advanced",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 30,
+        "tips": "Knees wide, push hips back, relax into deep stretch"
+      },
+      {
+        "name": "Active Thoracic Stretch",
+        "sets": "3x15",
+        "rest": "20s",
+        "muscle": "Upper Back, Shoulders",
+        "difficulty": "Intermediate",
+        "equipment": "Foam Roller",
+        "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 25,
+        "tips": "Roller under upper back, extend overhead, rotate"
+      }
+    ]
+  },
+  "Off-Season & In-Season Training": {
+    "icon": "📅",
+    "color": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    "description": "Periodized training for peak performance",
+    "category": "periodization",
+    "amateur": [
+      {
+        "name": "Bodyweight Squats",
+        "sets": "3x15",
+        "rest": "45s",
+        "muscle": "Quads, Glutes",
+        "difficulty": "Beginner",
+        "equipment": "None",
+        "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 60,
+        "tips": "Full depth, chest up, weight on heels"
+      },
+      {
+        "name": "Jump Lunges",
+        "sets": "3x12",
+        "rest": "60s",
+        "muscle": "Legs, Power",
+        "difficulty": "Intermediate",
+        "equipment": "None",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 110,
+        "tips": "Explosive switch, soft landing, maintain balance"
+      },
+      {
+        "name": "Core Twists",
+        "sets": "3x15 each",
+        "rest": "30s",
+        "muscle": "Obliques, Core",
+        "difficulty": "Beginner",
+        "equipment": "Medicine Ball optional",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 50,
+        "tips": "Rotate from torso, keep hips stable, controlled"
+      },
+      {
+        "name": "Resistance Band Work",
+        "sets": "3x12",
+        "rest": "45s",
+        "muscle": "Full Body",
+        "difficulty": "Beginner",
+        "equipment": "Resistance Bands",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 70,
+        "tips": "Maintain tension, full range, various directions"
+      },
+      {
+        "name": "Box Step-Ups",
+        "sets": "3x10 each",
+        "rest": "60s",
+        "muscle": "Quads, Glutes",
+        "difficulty": "Beginner",
+        "equipment": "Box or Bench",
+        "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 80,
+        "tips": "Drive through heel, full extension, controlled descent"
+      }
+    ],
+    "pro": [
+      {
+        "name": "Depth Drops",
+        "sets": "4x8",
+        "rest": "120s",
+        "muscle": "Full Legs, Reactive",
+        "difficulty": "Advanced",
+        "equipment": "Plyo Box (18-24\")",
+        "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 120,
+        "tips": "Step off, absorb landing, minimal ground contact"
+      },
+      {
+        "name": "Explosive Plyometric Jumps",
+        "sets": "4x10",
+        "rest": "90s",
+        "muscle": "Full Body Power",
+        "difficulty": "Advanced",
+        "equipment": "None or Box",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 140,
+        "tips": "Maximum height, quick rebound, arm swing"
+      },
+      {
+        "name": "Sprint Starts",
+        "sets": "5x50m",
+        "rest": "180s",
+        "muscle": "Full Body",
+        "difficulty": "Advanced",
+        "equipment": "Track",
+        "image": "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 160,
+        "tips": "Explosive acceleration, proper mechanics, max effort"
+      },
+      {
+        "name": "Single-Leg Balance Drills",
+        "sets": "3x10 each",
+        "rest": "45s",
+        "muscle": "Stabilizers, Proprioception",
+        "difficulty": "Intermediate",
+        "equipment": "Balance Pad optional",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 40,
+        "tips": "Eyes closed progression, stable core, micro-adjustments"
+      },
+      {
+        "name": "Lateral Box Jumps",
+        "sets": "4x12",
+        "rest": "90s",
+        "muscle": "Legs, Lateral Power",
+        "difficulty": "Advanced",
+        "equipment": "Plyo Box",
+        "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 130,
+        "tips": "Side to side, stick landing, explosive push-off"
+      }
+    ]
+  },
+  "Explosiveness & Power": {
+    "icon": "💥",
+    "color": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+    "description": "Unleash explosive athletic power",
+    "category": "power",
+    "amateur": [
+      {
+        "name": "Jump Squats",
+        "sets": "3x10",
+        "rest": "60s",
+        "muscle": "Legs, Power",
+        "difficulty": "Intermediate",
+        "equipment": "None or Light Weight",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 100,
+        "tips": "Squat deep, explode up, soft landing"
+      },
+      {
+        "name": "Medicine Ball Slams",
+        "sets": "4x12",
+        "rest": "45s",
+        "muscle": "Full Body, Core",
+        "difficulty": "Beginner",
+        "equipment": "Slam Ball (10-20lbs)",
+        "image": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 110,
+        "tips": "Overhead reach, powerful slam, hip hinge"
+      },
+      {
+        "name": "Broad Jumps",
+        "sets": "3x8",
+        "rest": "90s",
+        "muscle": "Legs, Horizontal Power",
+        "difficulty": "Intermediate",
+        "equipment": "None",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 90,
+        "tips": "Arm swing, explosive jump, stick landing"
+      },
+      {
+        "name": "Box Jumps",
+        "sets": "3x10",
+        "rest": "90s",
+        "muscle": "Legs, Vertical Power",
+        "difficulty": "Intermediate",
+        "equipment": "Plyo Box (20-24\")",
+        "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 120,
+        "tips": "Full hip extension, land softly, step down"
+      },
+      {
+        "name": "Battle Ropes",
+        "sets": "3x15s",
+        "rest": "45s",
+        "muscle": "Arms, Core, Cardio",
+        "difficulty": "Beginner",
+        "equipment": "Battle Ropes",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 80,
+        "tips": "Alternating waves, athletic stance, constant tension"
+      }
+    ],
+    "pro": [
+      {
+        "name": "Olympic Lifts (Clean & Jerk)",
+        "sets": "4x5",
+        "rest": "180s",
+        "muscle": "Full Body, Explosive",
+        "difficulty": "Advanced",
+        "equipment": "Barbell, Plates",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 200,
+        "tips": "Technical precision, triple extension, catch position"
+      },
+      {
+        "name": "Depth Jumps",
+        "sets": "3x10",
+        "rest": "150s",
+        "muscle": "Legs, Reactive Strength",
+        "difficulty": "Advanced",
+        "equipment": "Plyo Box (24-36\")",
+        "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 140,
+        "tips": "Minimal ground contact, maximum rebound, amortization"
+      },
+      {
+        "name": "Explosive Step-Ups",
+        "sets": "4x12 each",
+        "rest": "60s",
+        "muscle": "Legs, Unilateral Power",
+        "difficulty": "Advanced",
+        "equipment": "Box, Dumbbells",
+        "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 150,
+        "tips": "Drive knee up explosively, full extension, control"
+      },
+      {
+        "name": "Triple Jumps",
+        "sets": "4x8",
+        "rest": "120s",
+        "muscle": "Legs, Horizontal Power",
+        "difficulty": "Advanced",
+        "equipment": "Track or Open Space",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 130,
+        "tips": "Hop, step, jump sequence, rhythmic, distance focus"
+      },
+      {
+        "name": "Sled Sprints",
+        "sets": "5x20m",
+        "rest": "180s",
+        "muscle": "Legs, Power Endurance",
+        "difficulty": "Advanced",
+        "equipment": "Prowler Sled (moderate load)",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 180,
+        "tips": "Low body angle, powerful strides, max speed"
+      }
+    ]
+  },
+  "Injury Prevention & Recovery": {
+    "icon": "🛡️",
+    "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+    "description": "Stay healthy and resilient long-term",
+    "category": "recovery",
+    "amateur": [
+      {
+        "name": "Foam Rolling",
+        "sets": "5 min",
+        "rest": "As needed",
+        "muscle": "Full Body",
+        "difficulty": "Beginner",
+        "equipment": "Foam Roller",
+        "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 30,
+        "tips": "Slow rolls, pause on tender spots, relax muscles"
+      },
+      {
+        "name": "Shoulder Rotations",
+        "sets": "3x15",
+        "rest": "20s",
+        "muscle": "Rotator Cuff",
+        "difficulty": "Beginner",
+        "equipment": "Light Dumbbells or Band",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 25,
+        "tips": "Controlled motion, internal/external rotation, light weight"
+      },
+      {
+        "name": "Hip Bridges",
+        "sets": "3x12",
+        "rest": "30s",
+        "muscle": "Glutes, Lower Back",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 40,
+        "tips": "Squeeze glutes at top, neutral spine, controlled tempo"
+      },
+      {
+        "name": "Core Stability Planks",
+        "sets": "3x30s",
+        "rest": "30s",
+        "muscle": "Core, Stabilizers",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 35,
+        "tips": "Straight line, engage core, breathe normally"
+      },
+      {
+        "name": "Wall Angels",
+        "sets": "3x15",
+        "rest": "20s",
+        "muscle": "Shoulders, Upper Back",
+        "difficulty": "Beginner",
+        "equipment": "Wall",
+        "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 20,
+        "tips": "Back flat on wall, arms slide up/down, scapula control"
+      }
+    ],
+    "pro": [
+      {
+        "name": "Deep Tissue Foam Rolling",
+        "sets": "5 min",
+        "rest": "As needed",
+        "muscle": "Full Body",
+        "difficulty": "Intermediate",
+        "equipment": "High-Density Foam Roller",
+        "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 40,
+        "tips": "Apply sustained pressure, breathe through discomfort, 30s per spot"
+      },
+      {
+        "name": "Resistance Band Activation",
+        "sets": "4x12",
+        "rest": "30s",
+        "muscle": "Glutes, Hips, Shoulders",
+        "difficulty": "Intermediate",
+        "equipment": "Resistance Bands (various)",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 50,
+        "tips": "Focus on muscle activation, controlled tempo, multiple angles"
+      },
+      {
+        "name": "Single-Leg Stability Drills",
+        "sets": "3x10 each",
+        "rest": "45s",
+        "muscle": "Ankle, Knee, Hip Stabilizers",
+        "difficulty": "Advanced",
+        "equipment": "Balance Pad, Bosu Ball",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 60,
+        "tips": "Progress to unstable surfaces, eyes closed variations, reach patterns"
+      },
+      {
+        "name": "Plyometric Stability Drills",
+        "sets": "3x10",
+        "rest": "60s",
+        "muscle": "Full Body, Reactive Stability",
+        "difficulty": "Advanced",
+        "equipment": "Plyo Box, Balance Equipment",
+        "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 100,
+        "tips": "Land with control, immediate stabilization, deceleration focus"
+      },
+      {
+        "name": "Dynamic Stretching Protocol",
+        "sets": "10 min routine",
+        "rest": "Continuous",
+        "muscle": "Full Body",
+        "difficulty": "Intermediate",
+        "equipment": "None",
+        "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 45,
+        "tips": "Leg swings, arm circles, walking lunges, torso rotations"
+      },
+      {
+        "name": "Myofascial Release Techniques",
+        "sets": "8 min",
+        "rest": "As needed",
+        "muscle": "Fascia, Connective Tissue",
+        "difficulty": "Advanced",
+        "equipment": "Lacrosse Ball, Massage Tools",
+        "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 35,
+        "tips": "Target trigger points, slow circular motions, 60-90s per area"
+      }
+    ]
+  },
+  "Core & Stability": {
+    "icon": "🎯",
+    "color": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+    "description": "Build an unbreakable foundation",
+    "category": "strength",
+    "amateur": [
+      {
+        "name": "Plank Hold",
+        "sets": "3x30s",
+        "rest": "45s",
+        "muscle": "Core, Shoulders",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 35,
+        "tips": "Straight line head to heels, squeeze glutes, neutral spine"
+      },
+      {
+        "name": "Dead Bug",
+        "sets": "3x12",
+        "rest": "30s",
+        "muscle": "Core, Hip Flexors",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 40,
+        "tips": "Press lower back to floor, opposite arm and leg, controlled tempo"
+      },
+      {
+        "name": "Bird Dog",
+        "sets": "3x10 each",
+        "rest": "30s",
+        "muscle": "Core, Lower Back, Glutes",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 45,
+        "tips": "Don't rotate hips, extend fully, hold 2-3 seconds"
+      },
+      {
+        "name": "Russian Twists",
+        "sets": "3x20",
+        "rest": "45s",
+        "muscle": "Obliques, Core",
+        "difficulty": "Intermediate",
+        "equipment": "Medicine Ball optional",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 60,
+        "tips": "Lean back 45 degrees, rotate from torso, feet off ground"
+      },
+      {
+        "name": "Mountain Climbers",
+        "sets": "3x30s",
+        "rest": "60s",
+        "muscle": "Core, Cardio",
+        "difficulty": "Intermediate",
+        "equipment": "None",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 80,
+        "tips": "High plank position, drive knees to chest, maintain tempo"
+      },
+      {
+        "name": "Bicycle Crunches",
+        "sets": "3x20",
+        "rest": "30s",
+        "muscle": "Abs, Obliques",
+        "difficulty": "Beginner",
+        "equipment": "Yoga Mat",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 55,
+        "tips": "Opposite elbow to knee, fully extend other leg, controlled pace"
+      }
+    ],
+    "pro": [
+      {
+        "name": "Ab Wheel Rollouts",
+        "sets": "4x12",
+        "rest": "90s",
+        "muscle": "Core, Shoulders, Back",
+        "difficulty": "Advanced",
+        "equipment": "Ab Wheel",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 100,
+        "tips": "Full extension, control the rollback, brace core hard"
+      },
+      {
+        "name": "Dragon Flags",
+        "sets": "3x8",
+        "rest": "120s",
+        "muscle": "Full Core, Hip Flexors",
+        "difficulty": "Advanced",
+        "equipment": "Bench",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 120,
+        "tips": "Shoulders stay on bench, lower with control, straight body line"
+      },
+      {
+        "name": "Pallof Press",
+        "sets": "4x15 each",
+        "rest": "45s",
+        "muscle": "Core, Anti-Rotation",
+        "difficulty": "Intermediate",
+        "equipment": "Cable Machine or Band",
+        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 70,
+        "tips": "Resist rotation, press straight out, hold 2 seconds"
+      },
+      {
+        "name": "Turkish Get-Ups",
+        "sets": "3x5 each",
+        "rest": "90s",
+        "muscle": "Full Body, Core Stability",
+        "difficulty": "Advanced",
+        "equipment": "Kettlebell or Dumbbell",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 110,
+        "tips": "Eyes on weight, slow controlled movement, master technique"
+      },
+      {
+        "name": "Hanging Leg Raises",
+        "sets": "4x12",
+        "rest": "60s",
+        "muscle": "Lower Abs, Hip Flexors",
+        "difficulty": "Advanced",
+        "equipment": "Pull-up Bar",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 90,
+        "tips": "Don't swing, lift knees to chest, control the descent"
+      },
+      {
+        "name": "L-Sit Hold",
+        "sets": "4x20s",
+        "rest": "60s",
+        "muscle": "Core, Hip Flexors, Triceps",
+        "difficulty": "Advanced",
+        "equipment": "Parallettes or Dip Bars",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 80,
+        "tips": "Legs parallel to ground, shoulders down, lock elbows"
+      }
+    ]
+  },
+  "Olympic Lifting": {
+    "icon": "🏋️",
+    "color": "linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%)",
+    "description": "Master explosive technical lifts",
+    "category": "power",
+    "amateur": [
+      {
+        "name": "Hang Power Clean",
+        "sets": "4x5",
+        "rest": "120s",
+        "muscle": "Full Body, Power",
+        "difficulty": "Intermediate",
+        "equipment": "Barbell, Plates",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 150,
+        "tips": "Start at knee level, explosive hip extension, catch in quarter squat"
+      },
+      {
+        "name": "Push Press",
+        "sets": "4x8",
+        "rest": "90s",
+        "muscle": "Shoulders, Legs, Core",
+        "difficulty": "Intermediate",
+        "equipment": "Barbell",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 130,
+        "tips": "Dip and drive through legs, press overhead, lock out"
+      },
+      {
+        "name": "Front Squat",
+        "sets": "4x6",
+        "rest": "120s",
+        "muscle": "Quads, Core",
+        "difficulty": "Intermediate",
+        "equipment": "Barbell",
+        "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 140,
+        "tips": "Elbows high, chest up, full depth, upright torso"
+      },
+      {
+        "name": "Romanian Deadlift",
+        "sets": "3x10",
+        "rest": "90s",
+        "muscle": "Hamstrings, Glutes, Lower Back",
+        "difficulty": "Beginner",
+        "equipment": "Barbell",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 120,
+        "tips": "Slight knee bend, hinge at hips, bar close to legs"
+      },
+      {
+        "name": "Overhead Squat",
+        "sets": "3x8",
+        "rest": "120s",
+        "muscle": "Full Body, Stability",
+        "difficulty": "Advanced",
+        "equipment": "Barbell or PVC Pipe",
+        "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 110,
+        "tips": "Arms locked, wide grip, chest up, mobility required"
+      }
+    ],
+    "pro": [
+      {
+        "name": "Full Snatch",
+        "sets": "5x3",
+        "rest": "180s",
+        "muscle": "Full Body, Explosive Power",
+        "difficulty": "Advanced",
+        "equipment": "Barbell, Bumper Plates",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 200,
+        "tips": "Wide grip, triple extension, catch in deep squat, stand up"
+      },
+      {
+        "name": "Clean & Jerk",
+        "sets": "5x2",
+        "rest": "180s",
+        "muscle": "Full Body, Power",
+        "difficulty": "Advanced",
+        "equipment": "Barbell, Bumper Plates",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 210,
+        "tips": "Explosive pull, front rack catch, dip and drive for jerk"
+      },
+      {
+        "name": "Snatch Pull",
+        "sets": "4x5",
+        "rest": "120s",
+        "muscle": "Back, Traps, Legs",
+        "difficulty": "Advanced",
+        "equipment": "Barbell",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 160,
+        "tips": "Wide grip, explosive shrug, stay over bar, full extension"
+      },
+      {
+        "name": "Clean Pull",
+        "sets": "4x5",
+        "rest": "120s",
+        "muscle": "Back, Traps, Legs",
+        "difficulty": "Advanced",
+        "equipment": "Barbell",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 165,
+        "tips": "Shoulder-width grip, explosive triple extension, shrug high"
+      },
+      {
+        "name": "Jerk from Blocks",
+        "sets": "4x4",
+        "rest": "120s",
+        "muscle": "Shoulders, Legs, Core",
+        "difficulty": "Advanced",
+        "equipment": "Barbell, Jerk Blocks",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 145,
+        "tips": "Fast dip, powerful drive, split or power position, lock out"
+      },
+      {
+        "name": "Hang Snatch",
+        "sets": "5x3",
+        "rest": "150s",
+        "muscle": "Full Body, Power",
+        "difficulty": "Advanced",
+        "equipment": "Barbell, Bumper Plates",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "videoUrl": "https://www.youtube.com/watch?v=example",
+        "calories": 180,
+        "tips": "Start above knee, explosive hip, fast turnover, deep catch"
+      }
+    ]
+  }
 }

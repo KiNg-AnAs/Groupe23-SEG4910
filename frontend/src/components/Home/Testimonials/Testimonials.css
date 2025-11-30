@@ -7,10 +7,10 @@
 }
 
 /*  Section Title */
-.section-title {
+.section-titles {
     font-size: 2.8rem;
     font-weight: bold;
-    text-align: center;
+    text-align: center !important;
     margin-bottom: 50px;
     background: linear-gradient(90deg, #00c6ff, #0072ff);
     -webkit-background-clip: text;

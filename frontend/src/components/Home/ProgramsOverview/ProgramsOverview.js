@@ -26,7 +26,7 @@ const ProgramsOverview = ({ addToCart }) => {
   return (
     <section id="programs" className="programs-section">
       <Container>
-        <h2 className="section-title">Coach's Personalized Training Programs</h2>
+        <h2 className="section-titles">Coach's Personalized Training Programs</h2>
 
         {/* Programs Carousel */}
         <Carousel indicators={false} interval={null} className="programs-carousel">

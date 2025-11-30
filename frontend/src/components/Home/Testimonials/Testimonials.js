@@ -30,7 +30,7 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="testimonials-section">
       <Container>
-        <h2 className="section-title">What Legends & Peers Say</h2>
+        <h2 className="section-titles">What Legends & Peers Say</h2>
         <Carousel
           indicators={false}
           controls={false}

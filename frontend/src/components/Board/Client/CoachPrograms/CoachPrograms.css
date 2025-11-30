@@ -1,42 +1,726 @@
-.coach-programs-section {
-    color: white;
-    padding: 60px 0;
+/* ============================================
+   COACH PROGRAMS - SCOPED STYLES
+   All classes prefixed with coach- or program-
+   ============================================ */
+
+   .coach-programs-wrapper {
+    min-height: 100vh;
+    padding: 80px 0;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .coach-programs-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255, 77, 109, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  .coach-programs-container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* ============================================
+     HERO HEADER SECTION
+     ============================================ */
+  
+  .coach-hero-header {
     text-align: center;
+    margin-bottom: 60px;
+    animation: fadeInDown 0.8s ease-out;
   }
   
-  .coach-title {
-    font-size: 2.5rem;
-    font-weight: bold;
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .coach-hero-content {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 50px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+  
+  .coach-main-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 20px;
+    letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
   }
   
-  .coach-description {
-    font-size: 1.2rem;
-    opacity: 0.9;
+  .title-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  
+  .coach-main-subtitle {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 40px;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  
+  .coach-stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+  
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(245, 87, 108, 0.5);
+  }
+  
+  .stat-label {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  
+  /* ============================================
+     PROGRAM CARDS GRID
+     ============================================ */
+  
+  .programs-grid {
+    margin-top: 40px;
+  }
+  
+  .program-col {
     margin-bottom: 30px;
   }
   
-  .program-cards {
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 15px;
-    border-radius: 12px;
+  .modern-program-card {
+    position: relative;
+    border: none;
+    border-radius: 25px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .modern-program-card.card-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  
+  .modern-program-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    transition: background 0.3s ease;
+  }
+  
+  .modern-program-card:hover::before {
+    background: rgba(0, 0, 0, 0.15);
+  }
+  
+  .modern-program-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+  
+  .card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .modern-program-card:hover .card-glow {
+    opacity: 1;
+  }
+  
+  .modern-card-body {
+    position: relative;
+    z-index: 3;
+    padding: 30px;
+  }
+  
+  /* ============================================
+     CARD HEADER SECTION
+     ============================================ */
+  
+  .card-header-section {
     text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .program-icon-large {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .program-title-modern {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.5px;
+  }
+  
+  .program-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  
+  .category-badge {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* ============================================
+     EXERCISE COUNT SECTION
+     ============================================ */
+  
+  .exercise-count-section {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .count-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .count-emoji {
+    font-size: 1.8rem;
+  }
+  
+  .count-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* ============================================
+     VIEW PROGRAM BUTTON
+     ============================================ */
+  
+  .view-program-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .view-program-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  /* ============================================
+     EXPANDED EXERCISES SECTION
+     ============================================ */
+  
+  .expanded-exercises {
+    margin-top: 25px;
+    animation: slideDown 0.4s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      max-height: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      max-height: 2000px;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ============================================
+     LEVEL SELECTOR
+     ============================================ */
+  
+  .level-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 15px;
+  }
+  
+  .level-btn {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .level-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .level-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+  }
+  
+  /* ============================================
+     EXERCISE MINI CARDS GRID
+     ============================================ */
+  
+  .exercise-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .exercise-mini-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+  
+  .exercise-mini-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .exercise-image-container {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+  
+  .exercise-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .exercise-mini-card:hover .exercise-image {
+    transform: scale(1.1);
+  }
+  
+  .exercise-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .exercise-mini-card:hover .exercise-overlay {
+    opacity: 1;
+  }
+  
+  .view-details-text {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* ============================================
+     EXERCISE MINI INFO
+     ============================================ */
+  
+  .exercise-mini-info {
+    padding: 18px;
+  }
+  
+  .exercise-mini-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .exercise-mini-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .mini-badge {
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .sets-display {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 10px;
+  }
+  
+  .muscle-group {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 500;
+    margin-top: 8px;
+  }
+  
+  /* ============================================
+     MODAL STYLES
+     ============================================ */
+  
+  .exercise-detail-modal .modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    overflow: hidden;
+  }
+  
+  .modal-header-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-bottom: none;
+    padding: 25px 30px;
+  }
+  
+  .modal-title-custom {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .modal-title-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+  }
+  
+  .modal-body-custom {
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-image-container {
+    border-radius: 20px;
+    overflow: hidden;
     margin-bottom: 20px;
-    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
   }
   
-  .program-cards:hover {
-    transform: scale(1.05);
+  .modal-exercise-image {
+    width: 100%;
+    height: auto;
+    display: block;
   }
   
-  .view-exercises-btn {
-    margin-top: 10px;
+  .video-link-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
   
-  .exercise-list {
-    margin-top: 15px;
-    text-align: left;
+  .video-link-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+    color: #ffffff;
+    text-decoration: none;
   }
   
+  .exercise-details-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+  }
   
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .detail-row:last-child {
+    border-bottom: none;
+  }
+  
+  .detail-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .detail-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  
+  .detail-badge {
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .tips-section {
+    margin-top: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+  }
+  
+  .tips-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+  
+  .tips-text {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .modal-footer-custom {
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 30px;
+  }
+  
+  .close-modal-btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+  
+  .close-modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* ============================================
+     RESPONSIVE DESIGN
+     ============================================ */
+  
+  @media (max-width: 768px) {
+    .coach-main-title {
+      font-size: 2.2rem;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .title-icon {
+      font-size: 2rem;
+    }
+    
+    .coach-main-subtitle {
+      font-size: 1.1rem;
+    }
+    
+    .coach-stats-bar {
+      gap: 30px;
+    }
+    
+    .stat-number {
+      font-size: 2.2rem;
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+    }
+    
+    .program-icon-large {
+      font-size: 3rem;
+    }
+    
+    .program-title-modern {
+      font-size: 1.3rem;
+    }
+    
+    .exercise-cards-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .level-selector {
+      flex-direction: column;
+    }
+    
+    .modal-title-custom {
+      font-size: 1.4rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .coach-hero-content {
+      padding: 30px 20px;
+    }
+    
+    .coach-main-title {
+      font-size: 1.8rem;
+    }
+    
+    .modern-card-body {
+      padding: 20px;
+    }
+    
+    .exercise-count-section {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }

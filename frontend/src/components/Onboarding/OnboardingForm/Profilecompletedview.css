@@ -1,0 +1,223 @@
+/* Profile Section */
+.profile-completed-section {
+    padding: 2rem 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  }
+  
+  /* Header */
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .profile-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
+  }
+  
+  .profile-subtitle {
+    color: #718096;
+    font-size: 0.95rem;
+    margin: 0.25rem 0 0 0;
+  }
+  
+  .edit-profile-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .edit-profile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+  
+  /* Stat Cards */
+  .profile-stat-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+  
+  .profile-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  .stat-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  
+  /* Stat Items */
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f7fafc;
+  }
+  
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+  
+  .stat-label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .stat-value {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .level-badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+  }
+  
+  /* BMI Item */
+  .bmi-item {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    border: none;
+  }
+  
+  .bmi-item .stat-value {
+    font-size: 1.3rem;
+  }
+  
+  /* Lifestyle Tips */
+  .lifestyle-tips {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f7fafc;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+  }
+  
+  /* Summary Card */
+  .profile-summary-card {
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  }
+  
+  .profile-summary-card h5 {
+    color: white;
+    font-weight: 700;
+  }
+  
+  .profile-summary-card p {
+    margin-bottom: 0.5rem;
+    opacity: 0.95;
+  }
+  
+  .profile-summary-card small {
+    opacity: 0.8;
+  }
+  
+  /* Edit Modal */
+  .profile-edit-modal .modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .profile-edit-modal .modal-title {
+    font-weight: 700;
+  }
+  
+  .profile-edit-modal .btn-close {
+    filter: brightness(0) invert(1);
+  }
+  
+  .profile-edit-modal .modal-content {
+    border-radius: 16px;
+    border: none;
+    overflow: hidden;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .profile-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .edit-profile-btn {
+      width: 100%;
+    }
+  
+    .profile-title {
+      font-size: 1.5rem;
+    }
+  
+    .stat-card-title {
+      font-size: 1.1rem;
+    }
+  
+    .stat-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .profile-stat-card {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .profile-stat-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  
+  .profile-stat-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .profile-stat-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }

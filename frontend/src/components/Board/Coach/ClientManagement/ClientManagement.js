@@ -1,14 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  Container, Row, Col, Button, Table, Modal, Form, InputGroup
+  Container, Row, Col, Button, Table, Modal, Form, InputGroup, Badge, Card
 } from "react-bootstrap";
-import { FaSearch, FaEye, FaTrash, FaUserCircle, FaEdit, FaSave, FaTimes } from "react-icons/fa";
+import { 
+  FaSearch, FaEye, FaTrash, FaUserCircle, FaEdit, FaSave, FaTimes, 
+  FaUsers, FaChartLine, FaDumbbell, FaHeartbeat, FaCalendarAlt
+} from "react-icons/fa";
 import { useAuth } from "../../../../context/AuthContext";
 import "./ClientManagement.css";
 
 const ClientManagement = () => {
   const { fetchWithAuth } = useAuth();
-
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -46,14 +48,13 @@ const ClientManagement = () => {
   }, [searchTerm]);
 
   const handleViewProfile = (client) => {
-    // Deep copy to allow edits without mutating main array
     setSelectedClient(JSON.parse(JSON.stringify(client)));
     setIsEditing(false);
     setShowProfileModal(true);
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Delete this client?")) return;
+    if (!window.confirm("Are you sure you want to delete this client?")) return;
     try {
       await fetchWithAuth(`http://localhost:8000/coach/clients/${id}/`, {
         method: "DELETE",
@@ -66,7 +67,6 @@ const ClientManagement = () => {
 
   const handleSaveProfile = async () => {
     if (!selectedClient || !selectedClient.id) return;
-
     try {
       const body = selectedClient.profile || {};
       await fetchWithAuth(
@@ -87,6 +87,7 @@ const ClientManagement = () => {
   };
 
   const fmtPlan = (p) => (p ? p.charAt(0).toUpperCase() + p.slice(1) : "None");
+  
   const fmtAddons = (a) =>
     a ? `E-Book×${a.ebook || 0} · AI×${a.ai || 0} · Zoom×${a.zoom || 0}` : "—";
 
@@ -99,167 +100,367 @@ const ClientManagement = () => {
     }));
   };
 
+  const getPlanBadgeVariant = (plan) => {
+    if (!plan) return "secondary";
+    const p = plan.toLowerCase();
+    if (p.includes("advanced")) return "warning";
+    if (p.includes("basic")) return "info";
+    return "primary";
+  };
+
+  const getInitials = (email) => {
+    if (!email) return "??";
+    return email.substring(0, 2).toUpperCase();
+  };
+
+  // Stats calculations
+  const totalClients = clients.length;
+  const premiumClients = clients.filter(c => 
+    c.subscription_plan && c.subscription_plan.toLowerCase().includes("advanced")
+  ).length;
+  const activeClients = clients.filter(c => c.subscription_plan && c.subscription_plan !== "none").length;
+
   return (
-    <Container className="client-mgmt">
-      <div className="page-head">
-        <FaUserCircle className="head-icon" />
-        <h2>Client Management</h2>
-        <p className="sub">View or manage your clients’ training profiles.</p>
-      </div>
+    <div className="client-mgmt-wrapper">
+      <Container className="client-mgmt-container">
+        {/* Hero Header */}
+        <div className="client-mgmt-hero">
+          <div className="hero-content">
+            <div className="hero-icon-wrapper">
+              <FaUsers className="hero-icon" />
+            </div>
+            <h1 className="hero-title">Client Management</h1>
+            <p className="hero-subtitle">Monitor, manage, and engage with your training clients</p>
+          </div>
+        </div>
 
-      <Row className="toolbar">
-        <Col md={8}>
-          <InputGroup>
-            <InputGroup.Text><FaSearch /></InputGroup.Text>
-            <Form.Control
-              placeholder="Search clients by email…"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </InputGroup>
-        </Col>
-      </Row>
+        {/* Stats Cards */}
+        <Row className="stats-row mb-4">
+          <Col md={4}>
+            <Card className="stat-card stat-card-1">
+              <Card.Body>
+                <div className="stat-icon-wrapper">
+                  <FaUsers className="stat-icon" />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{totalClients}</div>
+                  <div className="stat-label">Total Clients</div>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4}>
+            <Card className="stat-card stat-card-2">
+              <Card.Body>
+                <div className="stat-icon-wrapper">
+                  <FaChartLine className="stat-icon" />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{activeClients}</div>
+                  <div className="stat-label">Active Subscriptions</div>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4}>
+            <Card className="stat-card stat-card-3">
+              <Card.Body>
+                <div className="stat-icon-wrapper">
+                  <FaDumbbell className="stat-icon" />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{premiumClients}</div>
+                  <div className="stat-label">Advanced Members</div>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
 
-      {error && <div className="error-banner">{error}</div>}
-      {loading && <div className="loading-row">Loading clients…</div>}
+        {/* Search Bar */}
+        <Card className="search-card mb-4">
+          <Card.Body>
+            <InputGroup className="search-input-group">
+              <InputGroup.Text className="search-icon-wrapper">
+                <FaSearch className="search-icon" />
+              </InputGroup.Text>
+              <Form.Control
+                className="search-input"
+                placeholder="Search clients by email or name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </InputGroup>
+          </Card.Body>
+        </Card>
 
-      <Table striped bordered hover responsive className="client-table">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Subscription</th>
-            <th>Add-Ons</th>
-            <th className="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!loading && filtered.length === 0 && (
-            <tr>
-              <td colSpan={4} className="empty">No clients found.</td>
-            </tr>
-          )}
-          {filtered.map((c) => (
-            <tr key={c.id}>
-              <td>{c.email}</td>
-              <td>{fmtPlan(c.subscription_plan)}</td>
-              <td>{fmtAddons(c.addons)}</td>
-              <td className="text-center">
-                <Button
-                  size="sm"
-                  variant="info"
-                  className="me-2"
-                  onClick={() => handleViewProfile(c)}
-                >
-                  <FaEye />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="danger"
-                  onClick={() => handleDelete(c.id)}
-                >
-                  <FaTrash />
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+        {/* Error Banner */}
+        {error && (
+          <div className="client-error-banner">
+            <span>⚠️ {error}</span>
+          </div>
+        )}
 
-      {/* Profile Modal (View/Edit) */}
-      <Modal
-        show={showProfileModal}
-        onHide={() => setShowProfileModal(false)}
-        centered
-        size="lg"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Client Profile Details{" "}
+        {/* Loading State */}
+        {loading && (
+          <div className="client-loading-container">
+            <div className="loading-spinner"></div>
+            <p>Loading clients...</p>
+          </div>
+        )}
+
+        {/* Clients Table */}
+        <Card className="table-card">
+          <Card.Body className="p-0">
+            <div className="table-responsive">
+              <Table className="modern-client-table mb-0">
+                <thead>
+                  <tr>
+                    <th>Client</th>
+                    <th>Subscription</th>
+                    <th>Add-Ons</th>
+                    <th className="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!loading && filtered.length === 0 && (
+                    <tr>
+                      <td colSpan={4} className="empty-state">
+                        <div className="empty-content">
+                          <FaUserCircle className="empty-icon" />
+                          <p>No clients found</p>
+                          <small>Try adjusting your search criteria</small>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                  {filtered.map((c) => (
+                    <tr key={c.id} className="client-row">
+                      <td>
+                        <div className="client-info">
+                          <div className="client-avatar">
+                            {getInitials(c.email)}
+                          </div>
+                          <div className="client-details">
+                            <div className="client-email">{c.email}</div>
+                            <div className="client-meta">ID: {c.id}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <Badge 
+                          bg={getPlanBadgeVariant(c.subscription_plan)}
+                          className="plan-badge"
+                        >
+                          {fmtPlan(c.subscription_plan)}
+                        </Badge>
+                      </td>
+                      <td>
+                        <span className="addons-text">{fmtAddons(c.addons)}</span>
+                      </td>
+                      <td className="text-center">
+                        <div className="action-buttons">
+                          <Button
+                            size="sm"
+                            variant="outline-primary"
+                            className="action-btn view-btn"
+                            onClick={() => handleViewProfile(c)}
+                            title="View Profile"
+                          >
+                            <FaEye />
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline-danger"
+                            className="action-btn delete-btn"
+                            onClick={() => handleDelete(c.id)}
+                            title="Delete Client"
+                          >
+                            <FaTrash />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          </Card.Body>
+        </Card>
+
+        {/* Profile Modal */}
+        <Modal
+          show={showProfileModal}
+          onHide={() => setShowProfileModal(false)}
+          centered
+          size="lg"
+          className="client-profile-modal"
+        >
+          <Modal.Header closeButton className="modal-header-custom">
+            <Modal.Title className="modal-title-custom">
+              <FaUserCircle className="me-2" />
+              Client Profile
+            </Modal.Title>
             {selectedClient && (
               <Button
-                variant={isEditing ? "secondary" : "outline-primary"}
+                variant={isEditing ? "outline-light" : "outline-primary"}
                 size="sm"
-                className="ms-3"
+                className="edit-toggle-btn"
                 onClick={() => setIsEditing((prev) => !prev)}
               >
-                {isEditing ? <><FaTimes /> Cancel</> : <><FaEdit /> Edit</>}
+                {isEditing ? (
+                  <>
+                    <FaTimes className="me-1" /> Cancel
+                  </>
+                ) : (
+                  <>
+                    <FaEdit className="me-1" /> Edit
+                  </>
+                )}
               </Button>
             )}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedClient ? (
-            <>
-              <Row>
-                <Col md={6}>
-                  <Form.Group className="mb-2">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={selectedClient.email || "—"}
-                      disabled
-                    />
-                  </Form.Group>
-                </Col>
-                <Col md={6}>
-                  <Form.Group className="mb-2">
-                    <Form.Label>Subscription</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={fmtPlan(selectedClient.subscription_plan)}
-                      disabled
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
+          </Modal.Header>
+          <Modal.Body className="modal-body-custom">
+            {selectedClient ? (
+              <>
+                {/* Basic Info Section */}
+                <div className="profile-section">
+                  <h5 className="section-title">
+                    <FaUserCircle className="me-2" />
+                    Account Information
+                  </h5>
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group className="mb-3 modern-form-group">
+                        <Form.Label>Email Address</Form.Label>
+                        <Form.Control
+                          type="text"
+                          value={selectedClient.email || "—"}
+                          disabled
+                          className="modern-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group className="mb-3 modern-form-group">
+                        <Form.Label>Subscription Plan</Form.Label>
+                        <Form.Control
+                          type="text"
+                          value={fmtPlan(selectedClient.subscription_plan)}
+                          disabled
+                          className="modern-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
 
-              {selectedClient.profile ? (
-                <>
-                  {[
-                    ["age", "Age"],
-                    ["height_cm", "Height (cm)"],
-                    ["weight_kg", "Weight (kg)"],
-                    ["fitness_level", "Fitness Level"],
-                    ["primary_goal", "Primary Goal"],
-                    ["workout_frequency", "Workout Frequency"],
-                    ["daily_activity_level", "Daily Activity Level"],
-                    ["sleep_hours", "Sleep Hours"],
-                    ["body_fat_percentage", "Body Fat (%)"],
-                    ["body_type", "Body Type"],
-                  ].map(([field, label]) => (
-                    <Form.Group key={field} className="mb-2">
-                      <Form.Label>{label}</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={selectedClient.profile[field] ?? ""}
-                        onChange={(e) =>
-                          handleFieldChange(field, e.target.value)
-                        }
-                        disabled={!isEditing}
-                      />
-                    </Form.Group>
-                  ))}
-                </>
-              ) : (
-                <div>No profile information available for this user.</div>
-              )}
-            </>
-          ) : (
-            <div>No data loaded.</div>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          {isEditing && (
-            <Button variant="primary" onClick={handleSaveProfile}>
-              <FaSave className="me-2" /> Save Changes
+                {/* Profile Details Section */}
+                {selectedClient.profile ? (
+                  <>
+                    <div className="profile-section">
+                      <h5 className="section-title">
+                        <FaDumbbell className="me-2" />
+                        Physical Profile
+                      </h5>
+                      <Row>
+                        {[
+                          ["age", "Age", "years"],
+                          ["height_cm", "Height", "cm"],
+                          ["weight_kg", "Weight", "kg"],
+                          ["body_fat_percentage", "Body Fat", "%"],
+                          ["body_type", "Body Type", ""],
+                          ["sleep_hours", "Sleep Hours", "hrs/night"],
+                        ].map(([field, label, unit]) => (
+                          <Col md={6} key={field}>
+                            <Form.Group className="mb-3 modern-form-group">
+                              <Form.Label>{label}</Form.Label>
+                              <InputGroup>
+                                <Form.Control
+                                  type="text"
+                                  value={selectedClient.profile[field] ?? ""}
+                                  onChange={(e) =>
+                                    handleFieldChange(field, e.target.value)
+                                  }
+                                  disabled={!isEditing}
+                                  className="modern-input"
+                                />
+                                {unit && (
+                                  <InputGroup.Text className="unit-label">
+                                    {unit}
+                                  </InputGroup.Text>
+                                )}
+                              </InputGroup>
+                            </Form.Group>
+                          </Col>
+                        ))}
+                      </Row>
+                    </div>
+
+                    <div className="profile-section">
+                      <h5 className="section-title">
+                        <FaChartLine className="me-2" />
+                        Training Information
+                      </h5>
+                      <Row>
+                        {[
+                          ["fitness_level", "Fitness Level"],
+                          ["primary_goal", "Primary Goal"],
+                          ["workout_frequency", "Workout Frequency"],
+                          ["daily_activity_level", "Daily Activity Level"],
+                        ].map(([field, label]) => (
+                          <Col md={6} key={field}>
+                            <Form.Group className="mb-3 modern-form-group">
+                              <Form.Label>{label}</Form.Label>
+                              <Form.Control
+                                type="text"
+                                value={selectedClient.profile[field] ?? ""}
+                                onChange={(e) =>
+                                  handleFieldChange(field, e.target.value)
+                                }
+                                disabled={!isEditing}
+                                className="modern-input"
+                              />
+                            </Form.Group>
+                          </Col>
+                        ))}
+                      </Row>
+                    </div>
+                  </>
+                ) : (
+                  <div className="no-profile-data">
+                    <FaHeartbeat className="no-data-icon" />
+                    <p>No profile information available for this client</p>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="no-profile-data">
+                <p>No data loaded</p>
+              </div>
+            )}
+          </Modal.Body>
+          <Modal.Footer className="modal-footer-custom">
+            {isEditing && (
+              <Button 
+                variant="success" 
+                onClick={handleSaveProfile}
+                className="save-btn"
+              >
+                <FaSave className="me-2" /> Save Changes
+              </Button>
+            )}
+            <Button 
+              variant="secondary" 
+              onClick={() => setShowProfileModal(false)}
+              className="close-btn"
+            >
+              Close
             </Button>
-          )}
-          <Button variant="secondary" onClick={() => setShowProfileModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
+          </Modal.Footer>
+        </Modal>
+      </Container>
+    </div>
   );
 };
 

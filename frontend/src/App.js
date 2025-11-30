@@ -13,6 +13,8 @@ import Cart from "./components/Shared/Cart/Cart";
 import Footer from "./components/Shared/Footer/Footer";
 import Dashboard from "./components/Board/Client/Dashboard/Dashboard";
 import OnboardingForm from "./components/Onboarding/OnboardingForm/OnboardingForm";
+import Onboardingguard from "./components/Onboarding/OnboardingForm/Onboardingguard";
+import Profilecompletedview from "./components/Onboarding/OnboardingForm/Profilecompletedview";
 import AddOns from "./components/Shared/AddOns/AddOns";
 import CoachDashboard from "./components/Board/Coach/CoachDashboard/CoachDashboard";
 import PaymentSuccess from "./components/Shared/Payment/PaymentSuccess";

@@ -99,7 +99,7 @@ const AddOns = ({ addToCart, ownedAddOns = {}, showOwnedOnly = false, plan = "no
   return (
     <section id="addons-section" className="addons-section">
       <Container>
-        <h2 className="section-title">Premium Add-Ons</h2>
+        <h2 className="section-titles">Premium Add-Ons</h2>
 
         {!hasAnyVisible && showOwnedOnly && (
           <Alert variant="info">No purchased add-ons available.</Alert>

@@ -72,7 +72,7 @@ const Plans = ({ cartItem, setCartItem }) => {
   return (
     <section id="plans" className="plans-section">
       <Container>
-        <h2 className="section-title">Choose Your Plan</h2>
+        <h2 className="section-titles">Choose Your Plan</h2>
         <Row className="justify-content-center">
           {plans.map((plan, index) => (
             <Col
