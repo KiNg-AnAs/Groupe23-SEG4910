@@ -38,7 +38,7 @@ const OnboardingGuard = ({ children }) => {
           profile.daily_activity_level &&
           profile.sleep_hours;
 
-        console.log("✅ Profile complete:", isComplete);
+        console.log("Profile complete:", isComplete);
 
         if (isComplete) {
           // Check if profile needs weekly update
@@ -56,12 +56,12 @@ const OnboardingGuard = ({ children }) => {
             setUserProfile(profile);
           }
         } else {
-          console.log("⚠️ Profile incomplete - missing required fields");
+          console.log("Profile incomplete - missing required fields");
           setProfileStatus("incomplete");
           setUserProfile(profile);
         }
       } else {
-        console.log("❌ No profile found - profile is null");
+        console.log("No profile found - profile is null");
         setProfileStatus("incomplete");
         setUserProfile(null);
       }

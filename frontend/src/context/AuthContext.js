@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const AuthContext = createContext();
-const audience = "http://localhost:8000"; // Update if you deploy
+const audience = "http://localhost:8000"; // we will change it once deployed
 
 export const AuthProvider = ({ children }) => {
   const {
@@ -27,8 +27,8 @@ export const AuthProvider = ({ children }) => {
   const fetchWithAuth = async (endpoint, options = {}) => {
     try {
       const token = await getAccessTokenSilently({ audience });
-      // Uncomment for debugging/Postman copying:
-      console.log("ACCESS TOKEN:", token);
+      // test for debugging/Postman:
+      // console.log("ACCESS TOKEN:", token);
 
       const resp = await fetch(endpoint, {
         ...options,
@@ -58,7 +58,6 @@ export const AuthProvider = ({ children }) => {
       if (ct.includes("application/json")) {
         return await resp.json();
       }
-      // Fallback (rare): text response
       return await resp.text();
     } catch (error) {
       console.error("API Request Failed:", error);
@@ -131,7 +130,7 @@ export const AuthProvider = ({ children }) => {
       setUserData(null);
       setIsCoach(false);
     }
-  }, [isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]); 
 
   return (
     <AuthContext.Provider

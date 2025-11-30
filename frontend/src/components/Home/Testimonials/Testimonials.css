@@ -43,7 +43,6 @@
     transform: scale(1.05);
 }
 
-/*  Side Testimonials (Hidden on Small Screens) */
 .left-testimonial,
 .right-testimonial {
     background: rgba(255, 255, 255, 0.15);

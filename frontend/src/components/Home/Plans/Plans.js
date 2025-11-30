@@ -39,18 +39,18 @@ const Plans = ({ cartItem, setCartItem }) => {
   const { isAuthenticated, loginWithRedirect, fetchWithAuth } = useAuth();
 
   const handleAddToCart = async (plan) => {
-    // 🔹 Step 1: If not logged in, store plan and redirect to Auth0
+    //  Step 1: If not logged in, store plan and redirect to Auth0
     if (!isAuthenticated) {
-      sessionStorage.setItem("redirectPlan", JSON.stringify(plan)); // 🆕 added
+      sessionStorage.setItem("redirectPlan", JSON.stringify(plan));
       return loginWithRedirect();
     }
 
     try {
-      // 🔹 Step 2: Fetch current subscription plan from backend
+      //  Step 2: Fetch current subscription plan from backend
       const data = await fetchWithAuth("http://localhost:8000/subscription/");
       const currentPlan = data.subscription_plan;
 
-      // 🔹 Step 3: Prevent same-plan or downgrade purchase
+      //  Step 3: Prevent same-plan or downgrade purchase
       const planPriority = { none: 0, basic: 1, advanced: 2 };
       const selectedPriority = planPriority[plan.planKey];
       const userPriority = planPriority[currentPlan];
@@ -60,7 +60,7 @@ const Plans = ({ cartItem, setCartItem }) => {
         return;
       }
 
-      // 🔹 Step 4: Proceed to checkout (Stripe)
+      //  Step 4: Proceed to checkout (Stripe)
       setCartItem(plan);
       window.location.href = plan.paymentLink;
     } catch (err) {

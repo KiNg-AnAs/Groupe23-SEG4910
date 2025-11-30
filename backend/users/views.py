@@ -206,7 +206,6 @@ def user_detail(request):
 
     # -------------------------------
     # GET -> return complete profile
-    # USING EXACT SAME CODE AS coach_list_clients
     # -------------------------------
     
     # Latest active subscription
@@ -225,7 +224,7 @@ def user_detail(request):
             "status": sub.status,
         }
 
-    # Profile - EXACT SAME CODE AS coach_list_clients
+    # Profile
     prof = UserProfile.objects.filter(user=user).first()
     prof_data = None
     if prof:
@@ -371,7 +370,7 @@ def coach_list_clients(request):
                 "status": sub.status,
             }
 
-        # profile (optional)
+        # profile 
         prof = UserProfile.objects.filter(user=u).first()
         prof_data = None
         if prof:
@@ -433,7 +432,7 @@ def coach_update_client_profile(request, user_id: int):
 
     data = request.data or {}
 
-    # Optional: update client's plan (and create a new subscription record)
+    # update client's plan (and create a new subscription record)
     new_plan = data.get("subscription_plan", None)
     if new_plan is not None and new_plan != client.subscription_plan:
         client.subscription_plan = new_plan
@@ -480,7 +479,6 @@ def coach_update_client_profile(request, user_id: int):
         prof.save()
 
     return Response({"message": "Client profile updated successfully"})
-
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
@@ -551,7 +549,6 @@ def coach_training_list(request):
         })
 
     return Response(rows)
-
 
 # --------------------------------------------------------------------
 #  PATCH /coach/training/<int:user_id>/
@@ -769,9 +766,6 @@ def coach_update_booking(request, user_id: int):
     booking.save(update_fields=["scheduled_date", "notes", "updated_at"])
     return Response({"message": "Booking updated successfully."})
 
-
-
-
 @csrf_exempt  
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -792,7 +786,7 @@ def create_checkout_session(request):
     email = request.user.payload.get("email")
 
     try:
-        # VERY IMPORTANT: put ALL business info in metadata
+        # ALL business info in metadata
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             mode="payment",
@@ -824,9 +818,6 @@ def create_checkout_session(request):
         return Response({"url": checkout_session.url})
     except Exception as e:
         return Response({"error": str(e)}, status=400)
-
-
-
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -919,7 +910,7 @@ def stripe_webhook(request):
                 user.add_ons = user_addons_dict
                 user.save(update_fields=["subscription_plan", "add_ons"])
 
-                print(f"[WEBHOOK] ✅ Updated user {user.email}: plan={plan}, addons={user_addons_dict}")
+                print(f"[WEBHOOK] Updated user {user.email}: plan={plan}, addons={user_addons_dict}")
         except Exception as e:
             print("[WEBHOOK ERROR during DB update]", e)
             return HttpResponse(status=500)

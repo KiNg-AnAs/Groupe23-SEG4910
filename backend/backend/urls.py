@@ -52,11 +52,9 @@ urlpatterns = [
     path('user-detail/', user_detail, name='user-detail'),
     path("downgrade-plan/", downgrade_plan, name="downgrade-plan"),
     path('user-addons/', get_user_addons, name='user-addons'),
-    # ----------------- Coach: Client Management -----------------
     path("coach/clients/", coach_list_clients, name="coach-list-clients"),
     path("coach/clients/<int:user_id>/profile/", coach_update_client_profile, name="coach-update-client-profile"),
     path("coach/clients/<int:user_id>/", coach_delete_client, name="coach-delete-client"),
-    # NEW AI Training management routes
     path("coach/training/", coach_training_list, name="coach-training-list"),
     path("coach/training/<int:user_id>/", coach_training_update, name="coach-training-update"),
     path("coach/bookings/", coach_list_bookings, name="coach-list-bookings"),

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useAuth } from "../../../context/AuthContext"; // Import Auth Context
+import { useAuth } from "../../../context/AuthContext"; 
 import { useNavigate } from "react-router-dom";
 import "./BestProgramSection.css";
 import img15 from "../../Assets/img15.jpg"; 

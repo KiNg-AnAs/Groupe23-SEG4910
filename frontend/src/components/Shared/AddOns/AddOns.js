@@ -47,20 +47,20 @@ const AddOns = ({ addToCart, ownedAddOns = {}, showOwnedOnly = false, plan = "no
   const [infoMessage, setInfoMessage] = useState("");
   const { isAuthenticated, loginWithRedirect } = useAuth();
 
-  // ✅ Normalize and automatically grant access for Advanced plan
+  // Normalize and automatically grant access for Advanced plan
   const normalizedAddOns = { ...(ownedAddOns || {}) };
   if (plan?.toLowerCase() === "advanced") {
     normalizedAddOns.ebook = Math.max(normalizedAddOns.ebook || 0, 1);
   }
 
-  // ✅ Filter after normalization
+  // Filter after normalization
   const visibleAddons = showOwnedOnly
     ? premiumAddons.filter((a) => (normalizedAddOns[a.id] || 0) > 0)
     : premiumAddons;
 
   const hasAnyVisible = visibleAddons.length > 0;
 
-  // ✅ Purchase (redirect to cart)
+  // Purchase (redirect to cart)
   const handlePurchase = (addon) => {
     if (!isAuthenticated) {
       sessionStorage.setItem("redirectAddon", JSON.stringify(addon));
@@ -70,7 +70,7 @@ const AddOns = ({ addToCart, ownedAddOns = {}, showOwnedOnly = false, plan = "no
     window.location.href = "/cart";
   };
 
-  // ✅ Book Now → always redirect to cart
+  // Book Now → always redirect to cart
   const handleBookNow = (addon) => {
     if (!isAuthenticated) {
       sessionStorage.setItem("redirectAddon", JSON.stringify(addon));
@@ -80,7 +80,7 @@ const AddOns = ({ addToCart, ownedAddOns = {}, showOwnedOnly = false, plan = "no
     window.location.href = "/cart";
   };
 
-  // ✅ Info modal for purchased add-ons
+  // Info modal for purchased add-ons
   const handlePurchasedInfo = (addonId) => {
     if (addonId === "ai") {
       setInfoMessage(

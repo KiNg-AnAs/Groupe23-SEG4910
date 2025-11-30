@@ -201,7 +201,7 @@
     .programs-carousel .carousel-control-prev,
     .programs-carousel .carousel-control-next {
         top: auto;
-        bottom: -40px; /* Position below the carousel */
+        bottom: -40px; 
         left: 45%;
         transform: translateX(-50%);
         width: auto;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel, Container, Button, Row, Col } from "react-bootstrap";
-import { useAuth } from "../../../context/AuthContext"; // Import Auth Context
+import { useAuth } from "../../../context/AuthContext"; 
 import { useNavigate } from "react-router-dom";
 import "./HeroSection.css"; // Import CSS file
 import img1 from "../../Assets/img1.jpg";

@@ -7,7 +7,7 @@ import "./OnboardingForm.css";
 import { useAuth } from "../../../context/AuthContext";
 import { FaUser, FaDumbbell, FaBed, FaCheckCircle, FaArrowRight, FaArrowLeft, FaFire } from "react-icons/fa";
 
-// EXACT SAME VALIDATION SCHEMA - NO CHANGES
+// VALIDATION SCHEMA
 const schema = yup.object().shape({
   age: yup.number().required("Age is required").min(10, "Minimum age is 10"),
   height: yup.number().required("Height is required").min(50, "Height too low"),
@@ -66,7 +66,6 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
         <Formik
           validationSchema={schema}
           onSubmit={async (values) => {
-            // EXACT SAME SUBMIT LOGIC - NO CHANGES
             try {
               const res = await fetchWithAuth("http://localhost:8000/save-profile/", {
                 method: "POST",
@@ -331,9 +330,9 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 className="form-input"
                               >
                                 <option value="">Select your body type</option>
-                                <option value="Ectomorph">🍃 Ectomorph (Lean & Slim)</option>
-                                <option value="Mesomorph">💪 Mesomorph (Athletic & Muscular)</option>
-                                <option value="Endomorph">🍎 Endomorph (Broad & Higher Fat Storage)</option>
+                                <option value="Ectomorph">Ectomorph (Lean & Slim)</option>
+                                <option value="Mesomorph">Mesomorph (Athletic & Muscular)</option>
+                                <option value="Endomorph">Endomorph (Broad & Higher Fat Storage)</option>
                               </Form.Select>
                               <Form.Text className="text-muted">This helps personalize your nutrition plan</Form.Text>
                             </Form.Group>

@@ -20,7 +20,7 @@ const PaymentSuccess = () => {
     const refreshUserData = async () => {
       try {
         const res = await fetchWithAuth("http://localhost:8000/user-detail/");
-        console.log("✅ Updated user data after payment:", res);
+        console.log("Updated user data after payment:", res);
         setUserData(res);
         
         // Clear local cart data

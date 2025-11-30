@@ -40,7 +40,7 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <Carousel.Item key={index}>
               <div className="testimonials-wrapper">
-                {/* Left Side Testimonial (Hidden on Small Screens) */}
+                {/* Left Side Testimonial*/}
                 <div className="testimonial-card left-testimonial">
                   <img
                     src={testimonials[(index + testimonials.length - 1) % testimonials.length].image}
@@ -67,7 +67,7 @@ const Testimonials = () => {
                   <p className="testimonial-text">"{testimonial.text}"</p>
                 </div>
 
-                {/* Right Side Testimonial (Hidden on Small Screens) */}
+                {/* Right Side Testimonial*/}
                 <div className="testimonial-card right-testimonial">
                   <img
                     src={testimonials[(index + 1) % testimonials.length].image}
