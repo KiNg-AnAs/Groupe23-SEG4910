@@ -10,13 +10,15 @@ import {
   FaArrowRight,
   FaStar,
   FaTrophy,
-  FaFireAlt
+  FaFireAlt,
+  FaEdit
 } from "react-icons/fa";
 import { useAuth } from "../../../../context/AuthContext";
 import "./CoachDashboard.css";
 
 import ClientManagement from "../ClientManagement/ClientManagement";
 import TrainingPrograms from "../TrainingPrograms/TrainingPrograms";
+import CustomizedTrainingPrograms from "../CustomizedTrainingPrograms/CustomizedTrainingPrograms";
 import BookingManagement from "../BookingManagement/BookingManagement";
 
 const CoachDashboard = () => {
@@ -122,9 +124,10 @@ const CoachDashboard = () => {
           </div>
         </div>
 
-        {/* Main Action Cards */}
+        {/* Main Action Cards - NOW WITH 4 CARDS */}
         <Row className="dashboard-cards-row">
-          <Col lg={4} md={6} className="dashboard-col">
+          {/* Card 1: Client Management */}
+          <Col lg={3} md={6} className="dashboard-col">
             <Card 
               className={`modern-dashboard-card card-clients ${activeSection === "clients" ? "active" : ""}`}
               onClick={() => handleSectionToggle("clients")}
@@ -136,7 +139,7 @@ const CoachDashboard = () => {
                 </div>
                 <h3 className="card-title">Client Management</h3>
                 <p className="card-description">
-                  View profiles, track progress, and manage your entire client roster
+                  View profiles, track progress, and manage your client roster
                 </p>
                 <div className="card-stats">
                   <div className="card-stat">
@@ -145,49 +148,73 @@ const CoachDashboard = () => {
                   </div>
                 </div>
                 <Button className="card-action-btn">
-                  <span>{activeSection === "clients" ? "Close" : "Open Dashboard"}</span>
+                  <span>{activeSection === "clients" ? "Close" : "Open"}</span>
                   <FaArrowRight className="btn-icon" />
                 </Button>
               </Card.Body>
             </Card>
           </Col>
 
-          <Col lg={4} md={6} className="dashboard-col">
+          {/* Card 2: AI Training Programs */}
+          <Col lg={3} md={6} className="dashboard-col">
             <Card 
-              className={`modern-dashboard-card card-training ${activeSection === "training" ? "active" : ""}`}
-              onClick={() => handleSectionToggle("training")}
+              className={`modern-dashboard-card card-ai ${activeSection === "ai-programs" ? "active" : ""}`}
+              onClick={() => handleSectionToggle("ai-programs")}
             >
               <div className="card-glow card-glow-2"></div>
               <Card.Body>
                 <div className="card-icon-wrapper">
                   <FaRobot className="card-icon" />
                 </div>
-                <h3 className="card-title">AI Training Programs</h3>
+                <h3 className="card-title">AI Programs</h3>
                 <p className="card-description">
-                  Manage AI-powered workout plans and monitor training progress
+                  Monitor AI-generated training programs for your clients
                 </p>
-
                 <Button className="card-action-btn">
-                  <span>{activeSection === "training" ? "Close" : "Open Dashboard"}</span>
+                  <span>{activeSection === "ai-programs" ? "Close" : "Open"}</span>
                   <FaArrowRight className="btn-icon" />
                 </Button>
               </Card.Body>
             </Card>
           </Col>
 
-          <Col lg={4} md={6} className="dashboard-col">
+          {/* Card 3: Customized Training Programs */}
+          <Col lg={3} md={6} className="dashboard-col">
+            <Card 
+              className={`modern-dashboard-card card-training ${activeSection === "custom-programs" ? "active" : ""}`}
+              onClick={() => handleSectionToggle("custom-programs")}
+            >
+              <div className="card-glow card-glow-3"></div>
+              <Card.Body>
+                <div className="card-icon-wrapper">
+                  <FaEdit className="card-icon" />
+                </div>
+                <h3 className="card-title">Custom Programs</h3>
+                <p className="card-description">
+                  Create and manage personalized training programs manually
+                </p>
+                <Button className="card-action-btn">
+                  <span>{activeSection === "custom-programs" ? "Close" : "Open"}</span>
+                  <FaArrowRight className="btn-icon" />
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          {/* Card 4: Zoom Bookings */}
+          <Col lg={3} md={6} className="dashboard-col">
             <Card 
               className={`modern-dashboard-card card-bookings ${activeSection === "bookings" ? "active" : ""}`}
               onClick={() => handleSectionToggle("bookings")}
             >
-              <div className="card-glow card-glow-3"></div>
+              <div className="card-glow card-glow-4"></div>
               <Card.Body>
                 <div className="card-icon-wrapper">
                   <FaVideo className="card-icon" />
                 </div>
                 <h3 className="card-title">Zoom Bookings</h3>
                 <p className="card-description">
-                  Schedule, manage, and conduct 1-on-1 video coaching sessions
+                  Schedule and manage 1-on-1 video coaching sessions
                 </p>
                 <div className="card-stats">
                   <div className="card-stat">
@@ -196,7 +223,7 @@ const CoachDashboard = () => {
                   </div>
                 </div>
                 <Button className="card-action-btn">
-                  <span>{activeSection === "bookings" ? "Close" : "Open Dashboard"}</span>
+                  <span>{activeSection === "bookings" ? "Close" : "Open"}</span>
                   <FaArrowRight className="btn-icon" />
                 </Button>
               </Card.Body>
@@ -211,9 +238,14 @@ const CoachDashboard = () => {
               <ClientManagement />
             </div>
           )}
-          {activeSection === "training" && (
+          {activeSection === "ai-programs" && (
             <div className="section-fade-in">
               <TrainingPrograms />
+            </div>
+          )}
+          {activeSection === "custom-programs" && (
+            <div className="section-fade-in">
+              <CustomizedTrainingPrograms />
             </div>
           )}
           {activeSection === "bookings" && (
