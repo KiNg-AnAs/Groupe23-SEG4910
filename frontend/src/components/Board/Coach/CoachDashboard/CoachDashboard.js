@@ -166,12 +166,7 @@ const CoachDashboard = () => {
                 <p className="card-description">
                   Manage AI-powered workout plans and monitor training progress
                 </p>
-                <div className="card-stats">
-                  <div className="card-stat">
-                    <FaDumbbell className="me-1" />
-                    <span>{stats.totalPrograms} Sessions</span>
-                  </div>
-                </div>
+
                 <Button className="card-action-btn">
                   <span>{activeSection === "training" ? "Close" : "Open Dashboard"}</span>
                   <FaArrowRight className="btn-icon" />

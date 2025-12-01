@@ -1,324 +1,304 @@
-// TrainingPrograms.js
 import React, { useEffect, useState } from "react";
-import { Container, Table, Button, Spinner, Alert, Modal, Form, Card, Row, Col, Badge } from "react-bootstrap";
-import { FaCheckCircle, FaSync, FaRobot, FaPen, FaDumbbell, FaChartLine, FaClock, FaBrain } from "react-icons/fa";
+import { Container, Row, Col, Card, Button, Modal, Badge, Spinner, Alert } from "react-bootstrap";
+import { FaEye, FaDumbbell, FaBed, FaFire, FaTrophy, FaSync, FaCalendarAlt } from "react-icons/fa";
 import { useAuth } from "../../../../context/AuthContext";
 import "./TrainingPrograms.css";
 
 const TrainingPrograms = () => {
   const { fetchWithAuth } = useAuth();
-  const [trainings, setTrainings] = useState([]);
+  const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [updating, setUpdating] = useState(false);
-  
-  // notes modal
-  const [showNotes, setShowNotes] = useState(false);
-  const [activeRow, setActiveRow] = useState(null);
-  const [notesText, setNotesText] = useState("");
 
-  const openNotes = (row) => {
-    setActiveRow(row);
-    setNotesText(row.notes || "");
-    setShowNotes(true);
-  };
+  // Program viewing modal
+  const [showProgram, setShowProgram] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState(null);
+  const [loadingProgram, setLoadingProgram] = useState(false);
 
-  const closeNotes = () => {
-    setShowNotes(false);
-    setActiveRow(null);
-    setNotesText("");
-  };
-
-  const loadTrainings = async () => {
+  // Load all clients who have AI programs
+  const loadClients = async () => {
     setLoading(true);
     setError("");
     try {
-      const data = await fetchWithAuth("http://localhost:8000/coach/training/");
-      setTrainings(Array.isArray(data) ? data : []);
+      const data = await fetchWithAuth("http://localhost:8000/coach/clients/?limit=50&offset=0");
+      const clientList = Array.isArray(data?.results) ? data.results : [];
+      setClients(clientList);
     } catch (e) {
-      console.error("Error loading training data:", e);
-      setError("Failed to load training progress list.");
+      console.error("Error loading clients:", e);
+      setError("Failed to load client list. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadTrainings();
+    loadClients();
   }, []);
 
-  const handleMarkDone = async (userId) => {
-    const ok = window.confirm(
-      "Confirm completion?\n\nThis will consume 1 AI training unit for this client."
-    );
-    if (!ok) return;
+  // View a client's program
+  const handleViewProgram = async (clientId, clientEmail) => {
+    setShowProgram(true);
+    setLoadingProgram(true);
+    setSelectedProgram(null);
 
-    setUpdating(true);
     try {
-      const resp = await fetchWithAuth(`http://localhost:8000/coach/training/${userId}/`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "Done" }),
-      });
-      const remaining = Number(resp?.remaining_quantity ?? 0);
-      if (remaining > 0) {
-        setTrainings((prev) =>
-          prev.map((t) =>
-            t.id === userId ? { ...t, quantity: remaining, last_updated: new Date().toISOString() } : t
-          )
-        );
-      } else {
-        setTrainings((prev) => prev.filter((t) => t.id !== userId));
-      }
+      const url = `http://localhost:8000/api/coach/clients/${clientId}/program/`;
+      const program = await fetchWithAuth(url);
+      setSelectedProgram({ ...program, client_email: clientEmail });
     } catch (e) {
-      console.error("Update failed:", e);
+      console.error("Failed to load program:", e);
+      setSelectedProgram({
+        error: "This client hasn't generated an AI program yet.",
+        client_email: clientEmail
+      });
     } finally {
-      setUpdating(false);
+      setLoadingProgram(false);
     }
   };
 
-  const handleSaveNotes = async () => {
-    if (!activeRow) return;
-    try {
-      await fetchWithAuth(`http://localhost:8000/coach/training/${activeRow.id}/`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ notes: notesText }),
-      });
-      setTrainings((prev) =>
-        prev.map((t) =>
-          t.id === activeRow.id ? { ...t, notes: notesText, last_updated: new Date().toISOString() } : t
-        )
-      );
-      closeNotes();
-    } catch (e) {
-      console.error("Failed to update notes:", e);
-      alert("Failed to save notes.");
-    }
+  const closeProgramModal = () => {
+    setShowProgram(false);
+    setSelectedProgram(null);
   };
 
-  // Stats calculations
-  const totalPrograms = trainings.length;
-  const totalSessions = trainings.reduce((sum, t) => sum + t.quantity, 0);
-  const activeClients = new Set(trainings.map(t => t.user_email)).size;
-
+  // Helper functions
   const getInitials = (email) => {
     if (!email) return "??";
+    const parts = email.split("@")[0].split(".");
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
     return email.substring(0, 2).toUpperCase();
   };
 
+  const getDayIcon = (focus) => {
+    const lowerFocus = focus?.toLowerCase() || "";
+    if (lowerFocus.includes("rest") || lowerFocus.includes("recovery")) return <FaBed />;
+    if (lowerFocus.includes("cardio") || lowerFocus.includes("hiit")) return <FaFire />;
+    return <FaDumbbell />;
+  };
+
+  const getDifficultyColor = (difficulty) => {
+    const lower = difficulty?.toLowerCase() || "";
+    if (lower === "beginner") return "success";
+    if (lower === "intermediate") return "warning";
+    if (lower === "advanced") return "danger";
+    return "info";
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    });
+  };
+
   return (
-    <div className="training-mgmt-wrapper">
-      <Container className="training-mgmt-container">
-        {/* Hero Header */}
-        <div className="training-mgmt-hero">
-          <div className="hero-content">
-            <div className="hero-icon-wrapper">
-              <FaRobot className="hero-icon" />
+    <div className="coach-client-programs-wrapper">
+      <Container className="coach-client-programs-container">
+
+        {/* Header */}
+        <div className="coach-programs-header">
+          <div className="coach-header-content">
+            <FaTrophy className="coach-header-icon" />
+            <div>
+              <h1 className="coach-header-title">Client AI Programs</h1>
+              <p className="coach-header-subtitle">View and monitor your clients' AI-generated training programs</p>
             </div>
-            <h1 className="hero-title">AI Training Programs</h1>
-            <p className="hero-subtitle">Monitor and manage clients' AI-powered training sessions</p>
           </div>
+          <Button
+            variant="outline-light"
+            onClick={loadClients}
+            disabled={loading}
+            className="coach-refresh-btn"
+          >
+            <FaSync className={loading ? "coach-spinning" : ""} /> Refresh
+          </Button>
         </div>
 
-        {/* Stats Cards */}
-        <Row className="stats-row mb-4">
-          <Col md={4}>
-            <Card className="stat-card stat-card-1">
-              <Card.Body>
-                <div className="stat-icon-wrapper">
-                  <FaBrain className="stat-icon" />
-                </div>
-                <div className="stat-content">
-                  <div className="stat-number">{totalPrograms}</div>
-                  <div className="stat-label">Active Programs</div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card className="stat-card stat-card-2">
-              <Card.Body>
-                <div className="stat-icon-wrapper">
-                  <FaDumbbell className="stat-icon" />
-                </div>
-                <div className="stat-content">
-                  <div className="stat-number">{totalSessions}</div>
-                  <div className="stat-label">Total Sessions</div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card className="stat-card stat-card-3">
-              <Card.Body>
-                <div className="stat-icon-wrapper">
-                  <FaChartLine className="stat-icon" />
-                </div>
-                <div className="stat-content">
-                  <div className="stat-number">{activeClients}</div>
-                  <div className="stat-label">Active Clients</div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        {/* Error Banner */}
+        {/* Error Alert */}
         {error && (
-          <div className="training-error-banner">
-            <span>⚠️ {error}</span>
-          </div>
+          <Alert variant="danger" className="coach-error-alert" onClose={() => setError("")} dismissible>
+            {error}
+          </Alert>
         )}
 
         {/* Loading State */}
         {loading && (
-          <div className="training-loading-container">
-            <div className="loading-spinner"></div>
-            <p>Loading training programs...</p>
+          <div className="coach-loading-state">
+            <Spinner animation="border" variant="primary" />
+            <p>Loading clients...</p>
           </div>
         )}
 
-        {/* Training Programs Table */}
-        <Card className="table-card">
-          <Card.Body className="p-0">
-            <div className="table-responsive">
-              <Table className="modern-training-table mb-0">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Client</th>
-                    <th>Sessions</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                    <th>Last Updated</th>
-                    <th className="text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {!loading && trainings.length === 0 && (
-                    <tr>
-                      <td colSpan={7} className="empty-state">
-                        <div className="empty-content">
-                          <FaRobot className="empty-icon" />
-                          <p>No active training programs</p>
-                          <small>Training programs will appear here when clients start AI sessions</small>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                  {trainings.map((t, i) => (
-                    <tr key={t.id} className="training-row">
-                      <td>{i + 1}</td>
-                      <td>
-                        <div className="client-info">
-                          <div className="client-avatar">
-                            {getInitials(t.user_email)}
-                          </div>
-                          <div className="client-details">
-                            <div className="client-email">{t.user_email}</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <Badge bg="info" className="quantity-badge">
-                          {t.quantity} remaining
-                        </Badge>
-                      </td>
-                      <td>
-                        <Badge bg="warning" className="status-badge">
-                          Pending
-                        </Badge>
-                      </td>
-                      <td>
-                        <Button
-                          variant="outline-primary"
-                          size="sm"
-                          className="notes-btn"
-                          onClick={() => openNotes(t)}
-                        >
-                          <FaPen className="me-1" /> Edit
-                        </Button>
-                      </td>
-                      <td>
-                        <div className="timestamp">
-                          <FaClock className="me-1" />
-                          {new Date(t.last_updated).toLocaleString()}
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          variant="success"
-                          size="sm"
-                          disabled={updating}
-                          className="complete-btn"
-                          onClick={() => handleMarkDone(t.id)}
-                        >
-                          <FaCheckCircle className="me-1" /> Complete
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          </Card.Body>
-        </Card>
+        {/* Client Cards Grid */}
+        {!loading && clients.length === 0 && (
+          <div className="coach-empty-state">
+            <FaTrophy className="coach-empty-icon" />
+            <h3>No Clients Yet</h3>
+            <p>Clients with AI programs will appear here</p>
+          </div>
+        )}
 
-        {/* Refresh Button */}
-        <div className="refresh-section">
-          <Button 
-            variant="outline-light" 
-            onClick={loadTrainings} 
-            disabled={loading}
-            className="refresh-btn"
-          >
-            <FaSync className={`me-2 ${loading ? 'spinning' : ''}`} /> 
-            Refresh Data
-          </Button>
-        </div>
+        {!loading && clients.length > 0 && (
+          <Row className="coach-clients-grid">
+            {clients.map((client) => (
+              <Col lg={4} md={6} key={client.id} className="mb-4">
+                <Card className="coach-client-card">
+                  <Card.Body>
+                    <div className="coach-client-card-header">
+                      <div className="coach-client-avatar-large">
+                        {getInitials(client.email)}
+                      </div>
+                      <div className="coach-client-info">
+                        <h5 className="coach-client-name">{client.email}</h5>
+                      </div>
+                    </div>
 
-        {/* Notes Modal */}
-        <Modal 
-          show={showNotes} 
-          onHide={closeNotes} 
-          centered 
-          size="lg"
-          className="training-notes-modal"
+                    <div className="coach-client-card-footer">
+                      <Button
+                        variant="primary"
+                        className="coach-view-program-btn"
+                        onClick={() => handleViewProgram(client.id, client.email)}
+                      >
+                        <FaEye className="me-2" /> View AI Program
+                      </Button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
+
+        {/* Program Modal */}
+        <Modal
+          show={showProgram}
+          onHide={closeProgramModal}
+          size="xl"
+          centered
+          className="coach-program-modal"
         >
-          <Modal.Header closeButton className="modal-header-custom">
-            <Modal.Title className="modal-title-custom">
-              <FaPen className="me-2" />
-              Coach Notes
+          <Modal.Header closeButton className="coach-program-modal-header">
+            <Modal.Title>
+              <FaTrophy className="me-2" />
+              {selectedProgram?.client_email}'s Training Program
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body className="modal-body-custom">
-            <Form.Group>
-              <Form.Label className="notes-label">
-                Notes for {activeRow?.user_email}
-              </Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={8}
-                value={notesText}
-                onChange={(e) => setNotesText(e.target.value)}
-                placeholder="Write detailed notes or a plan for the client's AI training…"
-                className="notes-textarea"
-              />
-              <div className="notes-hint">
-                💡 Tips: capture goals, blockers, progress, or anything to remember for next session
+
+          <Modal.Body className="coach-program-modal-body">
+            {loadingProgram && (
+              <div className="coach-modal-loading">
+                <Spinner animation="border" variant="primary" />
+                <p>Loading program...</p>
               </div>
-            </Form.Group>
+            )}
+
+            {selectedProgram?.error && (
+              <Alert variant="warning" className="text-center">
+                <FaDumbbell className="mb-3" style={{ fontSize: "3rem" }} />
+                <h5>{selectedProgram.error}</h5>
+                <p className="mb-0">Ask the client to generate their program from the AI Coaching page.</p>
+              </Alert>
+            )}
+
+            {selectedProgram && !selectedProgram.error && !loadingProgram && (
+              <div className="coach-program-content">
+
+                {/* Program Info */}
+                <div className="coach-program-info-card">
+                  <Row>
+                    <Col md={6}>
+                      <div className="coach-info-item">
+                        <strong>Goal:</strong>
+                        <span className="ms-2">{selectedProgram.program_summary?.goal || "N/A"}</span>
+                      </div>
+                    </Col>
+                    <Col md={3}>
+                      <div className="coach-info-item">
+                        <strong>Difficulty:</strong>
+                        <Badge
+                          bg={getDifficultyColor(selectedProgram.program_summary?.difficulty)}
+                          className="ms-2"
+                        >
+                          {selectedProgram.program_summary?.difficulty || "N/A"}
+                        </Badge>
+                      </div>
+                    </Col>
+                    <Col md={3}>
+                      <div className="coach-info-item">
+                        <FaCalendarAlt className="me-2" />
+                        {formatDate(selectedProgram.created_at)}
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+
+                {/* 7-Day Program */}
+                <div className="coach-week-program">
+                  <h5 className="coach-week-title">7-Day Training Schedule</h5>
+                  <Row>
+                    {selectedProgram.week_plan?.map((day, index) => (
+                      <Col lg={6} key={index} className="mb-3">
+                        <Card className={`coach-day-card ${day.is_rest_day ? "coach-rest-day" : ""}`}>
+                          <Card.Body>
+                            <div className="coach-day-header">
+                              <div className="coach-day-icon">
+                                {day.is_rest_day ? <FaBed /> : getDayIcon(day.focus)}
+                              </div>
+                              <div>
+                                <h6 className="coach-day-name">{day.day_name}</h6>
+                                <p className="coach-day-focus">{day.focus}</p>
+                              </div>
+                            </div>
+
+                            {day.is_rest_day ? (
+                              <div className="coach-rest-content">
+                                <FaBed className="coach-rest-icon" />
+                                <p>Rest & Recovery</p>
+                              </div>
+                            ) : (
+                              <div className="coach-exercises-list">
+                                {day.sessions?.map((exercise, idx) => (
+                                  <div key={idx} className="coach-exercise-item">
+                                    <div className="coach-exercise-number">{idx + 1}</div>
+                                    <div className="coach-exercise-details">
+                                      <div className="coach-exercise-name">{exercise.exercise_name}</div>
+                                      <div className="coach-exercise-specs">
+                                        <span className="coach-spec-badge">{exercise.sets} sets</span>
+                                        <span className="coach-spec-badge">{exercise.reps}</span>
+                                        <span className="coach-spec-badge coach-intensity">{exercise.intensity}</span>
+                                      </div>
+                                      {exercise.notes && (
+                                        <div className="coach-exercise-notes">
+                                          💡 {exercise.notes}
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
+                </div>
+              </div>
+            )}
           </Modal.Body>
-          <Modal.Footer className="modal-footer-custom">
-            <Button variant="outline-secondary" onClick={closeNotes} className="cancel-btn">
-              Cancel
-            </Button>
-            <Button variant="primary" onClick={handleSaveNotes} className="save-notes-btn">
-              <FaPen className="me-2" /> Save Notes
+
+          <Modal.Footer className="coach-program-modal-footer">
+            <Button variant="secondary" onClick={closeProgramModal}>
+              Close
             </Button>
           </Modal.Footer>
         </Modal>
+
       </Container>
     </div>
   );

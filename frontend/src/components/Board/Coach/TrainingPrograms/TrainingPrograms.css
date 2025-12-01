@@ -1,679 +1,704 @@
 /* ============================================
-   TRAINING PROGRAMS - SCOPED MODERN STYLES
-   Matching ClientManagement aesthetic
+   WRAPPER & CONTAINER
    ============================================ */
 
-   .training-mgmt-wrapper {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-    padding: 60px 0;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .training-mgmt-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-  }
-  
-  .training-mgmt-container {
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* ============================================
-     HERO HEADER
-     ============================================ */
-  
-  .training-mgmt-hero {
-    text-align: center;
-    margin-bottom: 50px;
-    animation: fadeInDown 0.6s ease-out;
-  }
-  
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .hero-content {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border-radius: 25px;
-    padding: 40px 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-  }
-  
-  .hero-icon-wrapper {
-    display: inline-block;
-    margin-bottom: 20px;
-  }
-  
-  .hero-icon {
-    font-size: 4rem;
-    color: #00d4ff;
-    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  .hero-title {
-    font-size: 3rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 15px;
-    letter-spacing: -1px;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 300;
-    letter-spacing: 0.5px;
-  }
-  
-  /* ============================================
-     STATS CARDS
-     ============================================ */
-  
-  .stats-row {
-    animation: fadeInUp 0.8s ease-out 0.2s both;
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .stat-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 20px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
+.coach-client-programs-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.coach-client-programs-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.coach-client-programs-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.coach-programs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  animation: coachFadeInDown 0.6s ease-out;
+}
+
+@keyframes coachFadeInDown {
+  from {
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transform: translateY(-30px);
   }
-  
-  .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .stat-card:hover::before {
+  to {
     opacity: 1;
+    transform: translateY(0);
   }
-  
-  .stat-card-1:hover {
-    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+}
+
+.coach-header-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.coach-header-icon {
+  font-size: 3.5rem;
+  color: #00d4ff;
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
+  animation: coachFloat 3s ease-in-out infinite;
+}
+
+@keyframes coachFloat {
+  0%, 100% {
+    transform: translateY(0);
   }
-  
-  .stat-card-2:hover {
-    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+  50% {
+    transform: translateY(-10px);
   }
-  
-  .stat-card-3:hover {
-    box-shadow: 0 15px 40px rgba(240, 147, 251, 0.3);
+}
+
+.coach-header-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.coach-header-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  margin: 5px 0 0 0;
+  font-weight: 300;
+}
+
+.coach-refresh-btn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  padding: 12px 30px;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.coach-refresh-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+}
+
+.coach-spinning {
+  animation: coachSpin 1s linear infinite;
+}
+
+@keyframes coachSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   ERROR & LOADING
+   ============================================ */
+
+.coach-error-alert {
+  background: linear-gradient(135deg, rgba(255, 82, 82, 0.2) 0%, rgba(255, 107, 107, 0.1) 100%) !important;
+  border: 1px solid rgba(255, 82, 82, 0.3) !important;
+  color: #ff5252 !important;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  animation: coachSlideIn 0.4s ease-out;
+}
+
+@keyframes coachSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
   }
-  
-  .stat-card .card-body {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    position: relative;
-    z-index: 1;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  .stat-icon-wrapper {
-    width: 70px;
-    height: 70px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.08);
-    flex-shrink: 0;
+}
+
+.coach-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  animation: coachFadeIn 0.4s ease-out;
+}
+
+@keyframes coachFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.coach-loading-state p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+.coach-empty-state {
+  text-align: center;
+  padding: 100px 20px;
+  animation: coachFadeIn 0.6s ease-out;
+}
+
+.coach-empty-icon {
+  font-size: 5rem;
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+}
+
+.coach-empty-state h3 {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.coach-empty-state p {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.1rem;
+}
+
+/* ============================================
+   CLIENT CARDS GRID
+   ============================================ */
+
+.coach-clients-grid {
+  animation: coachFadeInUp 0.8s ease-out;
+}
+
+@keyframes coachFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  
-  .stat-card-1 .stat-icon-wrapper {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 195, 255, 0.1) 100%);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .stat-card-2 .stat-icon-wrapper {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.coach-client-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.coach-client-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.coach-client-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.coach-client-card:hover::before {
+  opacity: 1;
+}
+
+.coach-client-card .card-body {
+  padding: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.coach-client-card-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.coach-client-avatar-large {
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.coach-client-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.coach-client-name {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coach-client-card-footer {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.coach-view-program-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  padding: 12px 20px;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.coach-view-program-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+/* ============================================
+   PROGRAM MODAL
+   ============================================ */
+
+.coach-program-modal .modal-content {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+}
+
+.coach-program-modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-bottom: none;
+  padding: 25px 30px;
+}
+
+.coach-program-modal-header .modal-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.coach-program-modal-header .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.coach-program-modal-body {
+  padding: 30px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Custom scrollbar for modal */
+.coach-program-modal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.coach-program-modal-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.coach-program-modal-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.3);
+  border-radius: 10px;
+}
+
+.coach-program-modal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.5);
+}
+
+.coach-modal-loading {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.coach-modal-loading p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 20px;
+  font-size: 1.1rem;
+}
+
+/* ============================================
+   PROGRAM CONTENT
+   ============================================ */
+
+.coach-program-content {
+  animation: coachFadeIn 0.5s ease-out;
+}
+
+.coach-program-info-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.coach-info-item {
+  color: #ffffff;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.coach-info-item strong {
+  color: #00d4ff;
+  margin-right: 10px;
+}
+
+.coach-week-program {
+  margin-top: 20px;
+}
+
+.coach-week-title {
+  color: #00d4ff;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============================================
+   DAY CARDS
+   ============================================ */
+
+.coach-day-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.coach-day-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.coach-day-card.coach-rest-day {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.05) 100%);
+  border-color: rgba(255, 193, 7, 0.2);
+}
+
+.coach-day-card.coach-rest-day:hover {
+  box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
+}
+
+.coach-day-card .card-body {
+  padding: 20px;
+}
+
+.coach-day-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.coach-day-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.coach-rest-day .coach-day-icon {
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+.coach-day-name {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.coach-day-focus {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 3px 0 0 0;
+}
+
+/* ============================================
+   REST DAY CONTENT
+   ============================================ */
+
+.coach-rest-content {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.coach-rest-icon {
+  font-size: 4rem;
+  color: #ffc107;
+  margin-bottom: 15px;
+  animation: coachSway 3s ease-in-out infinite;
+}
+
+@keyframes coachSway {
+  0%, 100% {
+    transform: rotate(-5deg);
   }
-  
-  .stat-card-3 .stat-icon-wrapper {
-    background: linear-gradient(135deg, rgba(240, 147, 251, 0.2) 0%, rgba(245, 87, 108, 0.1) 100%);
+  50% {
+    transform: rotate(5deg);
   }
-  
-  .stat-icon {
+}
+
+.coach-rest-content p {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* ============================================
+   EXERCISES LIST
+   ============================================ */
+
+.coach-exercises-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.coach-exercise-item {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.coach-exercise-item:hover {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.coach-exercise-number {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.coach-exercise-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.coach-exercise-name {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.coach-exercise-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.coach-spec-badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.coach-spec-badge.coach-intensity {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border: none;
+  box-shadow: 0 3px 10px rgba(240, 147, 251, 0.3);
+}
+
+.coach-exercise-notes {
+  background: rgba(255, 193, 7, 0.15);
+  border-left: 3px solid #ffc107;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: #ffc107;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   MODAL FOOTER
+   ============================================ */
+
+.coach-program-modal-footer {
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 30px;
+}
+
+.coach-program-modal-footer button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.coach-program-modal-footer button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 992px) {
+  .coach-header-title {
     font-size: 2rem;
-    color: #00d4ff;
   }
-  
-  .stat-card-2 .stat-icon {
-    color: #667eea;
+
+  .coach-header-subtitle {
+    font-size: 1rem;
   }
-  
-  .stat-card-3 .stat-icon {
-    color: #f093fb;
+
+  .coach-header-icon {
+    font-size: 3rem;
   }
-  
-  .stat-content {
-    flex: 1;
+}
+
+@media (max-width: 768px) {
+  .coach-client-programs-wrapper {
+    padding: 30px 0;
   }
-  
-  .stat-number {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #ffffff;
-    line-height: 1;
-    margin-bottom: 5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .stat-label {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.6);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-  }
-  
-  /* ============================================
-     ERROR & LOADING
-     ============================================ */
-  
-  .training-error-banner {
-    background: linear-gradient(135deg, rgba(255, 82, 82, 0.2) 0%, rgba(255, 107, 107, 0.1) 100%);
-    border: 1px solid rgba(255, 82, 82, 0.3);
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 25px;
-    color: #ff5252;
-    font-weight: 600;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    animation: slideIn 0.4s ease-out;
-  }
-  
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  .training-loading-container {
-    display: flex;
+
+  .coach-programs-header {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 20px;
-    animation: fadeIn 0.4s ease-out;
+    align-items: flex-start;
+    gap: 20px;
   }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+
+  .coach-header-content {
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
   }
-  
-  .loading-spinner {
+
+  .coach-refresh-btn {
+    width: 100%;
+  }
+
+  .coach-client-card-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .coach-program-modal-body {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .coach-header-title {
+    font-size: 1.6rem;
+  }
+
+  .coach-client-avatar-large {
     width: 60px;
     height: 60px;
-    border: 4px solid rgba(0, 212, 255, 0.2);
-    border-top-color: #00d4ff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 20px;
-  }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-  
-  .training-loading-container p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.1rem;
-    font-weight: 500;
-  }
-  
-  /* ============================================
-     TABLE CARD
-     ============================================ */
-  
-  .table-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-    animation: fadeInUp 0.8s ease-out 0.4s both;
-    margin-bottom: 30px;
-  }
-  
-  .modern-training-table {
-    color: #ffffff !important;
-    margin: 0;
-  }
-  
-  .modern-training-table thead {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(102, 126, 234, 0.15) 100%);
-    border-bottom: 2px solid rgba(0, 212, 255, 0.3);
-  }
-  
-  .modern-training-table thead th {
-    color: #00d4ff !important;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.85rem;
-    padding: 20px 15px;
-    border: none;
-    white-space: nowrap;
-  }
-  
-  .modern-training-table tbody {
-    background: transparent;
-  }
-  
-  .training-row {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-  }
-  
-  .training-row:hover {
-    background: rgba(0, 212, 255, 0.05);
-    transform: scale(1.01);
-  }
-  
-  .modern-training-table td {
-    padding: 20px 15px;
-    vertical-align: middle;
-    border: none;
-  }
-  
-  .client-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .client-avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 0.9rem;
-    color: #ffffff;
-    flex-shrink: 0;
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-  }
-  
-  .client-details {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .client-email {
-    font-weight: 600;
-    font-size: 1rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .quantity-badge {
-    font-size: 0.85rem;
-    padding: 8px 16px;
-    border-radius: 12px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%) !important;
-    border: none;
-    box-shadow: 0 3px 10px rgba(23, 162, 184, 0.3);
-  }
-  
-  .status-badge {
-    font-size: 0.85rem;
-    padding: 8px 16px;
-    border-radius: 12px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%) !important;
-    border: none;
-    color: #000000 !important;
-    box-shadow: 0 3px 10px rgba(255, 193, 7, 0.3);
-  }
-  
-  .notes-btn {
-    border-color: #667eea !important;
-    color: #667eea !important;
-    background: rgba(102, 126, 234, 0.1) !important;
-    border-width: 2px;
-    padding: 6px 14px;
-    font-weight: 600;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-  
-  .notes-btn:hover {
-    background: #667eea !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-  }
-  
-  .timestamp {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.9rem;
-  }
-  
-  .complete-btn {
-    background: linear-gradient(135deg, #00c853 0%, #00e676 100%) !important;
-    border: none !important;
-    padding: 8px 16px;
-    font-weight: 700;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    color: #ffffff !important;
-  }
-  
-  .complete-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 200, 83, 0.4);
-  }
-  
-  .complete-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .empty-state {
-    padding: 80px 20px !important;
-  }
-  
-  .empty-content {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.5);
-  }
-  
-  .empty-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .empty-content p {
     font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: rgba(255, 255, 255, 0.6);
   }
-  
-  .empty-content small {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.4);
+
+  .coach-program-info-card {
+    padding: 20px;
   }
-  
-  /* ============================================
-     REFRESH SECTION
-     ============================================ */
-  
-  .refresh-section {
-    text-align: center;
-    animation: fadeInUp 0.8s ease-out 0.5s both;
+
+  .coach-exercise-item {
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  .refresh-btn {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    color: #ffffff !important;
-    padding: 12px 30px;
-    font-weight: 700;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+
+  .coach-exercise-number {
+    align-self: flex-start;
   }
-  
-  .refresh-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-  }
-  
-  .refresh-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .spinning {
-    animation: spin 1s linear infinite;
-  }
-  
-  /* ============================================
-     MODAL STYLES
-     ============================================ */
-  
-  .training-notes-modal .modal-content {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    border: 2px solid rgba(0, 212, 255, 0.3);
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-header-custom {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-bottom: none;
-    padding: 25px 30px;
-  }
-  
-  .modal-title-custom {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    margin: 0;
-  }
-  
-  .modal-body-custom {
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.2);
-  }
-  
-  .notes-label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #00d4ff;
-    margin-bottom: 15px;
-    display: block;
-  }
-  
-  .notes-textarea {
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
-    border-radius: 12px !important;
-    padding: 15px !important;
-    font-size: 1rem !important;
-    resize: vertical;
-    transition: all 0.3s ease;
-  }
-  
-  .notes-textarea:focus {
-    border-color: #00d4ff !important;
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3) !important;
-    background: rgba(0, 0, 0, 0.4) !important;
-    outline: none !important;
-  }
-  
-  .notes-textarea::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
-  
-  .notes-hint {
-    margin-top: 12px;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-style: italic;
-  }
-  
-  .modal-footer-custom {
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px 30px;
-    display: flex;
-    gap: 15px;
-  }
-  
-  .cancel-btn {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: #ffffff !important;
-    padding: 12px 30px;
-    font-weight: 600;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-  
-  .cancel-btn:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    transform: translateY(-2px);
-  }
-  
-  .save-notes-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    border: none !important;
-    color: #ffffff !important;
-    padding: 12px 30px;
-    font-weight: 700;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-  
-  .save-notes-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-  }
-  
-  /* ============================================
-     RESPONSIVE DESIGN
-     ============================================ */
-  
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 2rem;
-    }
-  
-    .hero-subtitle {
-      font-size: 1rem;
-    }
-  
-    .stat-number {
-      font-size: 2rem;
-    }
-  
-    .stat-label {
-      font-size: 0.8rem;
-    }
-  
-    .stat-card .card-body {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .modern-training-table {
-      font-size: 0.85rem;
-    }
-  
-    .client-avatar {
-      width: 40px;
-      height: 40px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .training-mgmt-wrapper {
-      padding: 30px 0;
-    }
-  
-    .hero-content {
-      padding: 25px 20px;
-    }
-  
-    .hero-title {
-      font-size: 1.6rem;
-    }
-  
-    .modal-footer-custom {
-      flex-direction: column;
-    }
-  
-    .cancel-btn,
-    .save-notes-btn {
-      width: 100%;
-    }
-  }
+}

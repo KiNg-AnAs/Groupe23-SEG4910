@@ -1,67 +1,571 @@
+/* ===================================
+   AI Coaching Section - Modern Design
+   =================================== */
+
 .ai-coaching-section {
-    color: white;
-    padding: 80px 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 3rem 0;
+}
+
+/* ===================================
+   Loading State
+   =================================== */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.loading-container .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #667eea;
+}
+
+.loading-container p {
+  font-size: 1.1rem;
+  color: #2d3748;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* ===================================
+   No Program State
+   =================================== */
+
+.no-program-container {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.no-program-icon {
+  font-size: 6rem;
+  color: #667eea;
+  margin-bottom: 2rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.no-program-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.no-program-text {
+  font-size: 1.2rem;
+  color: #718096;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.generate-program-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 1.25rem 3.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.generate-program-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.generate-program-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.info-text {
+  color: #718096;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* ===================================
+   Program Header Card
+   =================================== */
+
+.program-header-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 25px;
+  padding: 2.5rem 3rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 15px 50px rgba(102, 126, 234, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  animation: slideDown 0.6s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+}
+
+.trophy-badge {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: #ffd700;
+  backdrop-filter: blur(10px);
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.program-main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.program-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0.5rem 0 0.25rem 0;
+  font-size: 1rem;
+}
+
+.program-date {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.regenerate-btn {
+  background: white;
+  color: #667eea;
+  border: none;
+  padding: 0.85rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.regenerate-btn:hover {
+  background: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================================
+   Summary Card
+   =================================== */
+
+.summary-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.6s ease 0.2s backwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.program-goal {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.difficulty-badge {
+  font-size: 1.1rem;
+  padding: 0.6rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ===================================
+   Training Week Grid
+   =================================== */
+
+.training-week-grid {
+  animation: fadeInUp 0.6s ease 0.4s backwards;
+}
+
+/* ===================================
+   Training Day Cards
+   =================================== */
+
+.training-day-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  overflow: hidden;
+  background: white;
+}
+
+.training-day-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+}
+
+.training-day-card.rest-day {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.training-day-card.rest-day .day-header {
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+.day-icon {
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: white;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+  flex-shrink: 0;
+}
+
+.training-day-card.rest-day .day-icon {
+  background: linear-gradient(135deg, #ff9d00 0%, #ff5400 100%);
+}
+
+.day-info {
+  flex: 1;
+}
+
+.day-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
+}
+
+.training-day-card.rest-day .day-name {
+  color: #744210;
+}
+
+.day-focus {
+  font-size: 0.95rem;
+  color: #718096;
+  margin: 0.35rem 0 0 0;
+  text-transform: capitalize;
+}
+
+.training-day-card.rest-day .day-focus {
+  color: #955922;
+}
+
+/* ===================================
+   Rest Day Content
+   =================================== */
+
+.rest-day-content {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.rest-icon {
+  font-size: 3.5rem;
+  color: #955922;
+  margin-bottom: 1.25rem;
+  animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.rest-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #744210;
+  margin-bottom: 0.5rem;
+}
+
+.rest-text {
+  color: #955922;
+  font-size: 0.95rem;
+}
+
+/* ===================================
+   Exercises Container
+   =================================== */
+
+.exercises-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.exercise-item {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 1.25rem;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  border-left: 4px solid #667eea;
+}
+
+.exercise-item:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  transform: translateX(8px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.exercise-number {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.exercise-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2d3748;
+  text-transform: capitalize;
+}
+
+.exercise-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail-badge {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.sets-badge {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.reps-badge {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.intensity-badge {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.exercise-notes {
+  font-size: 0.9rem;
+  color: #718096;
+  font-style: italic;
+  padding: 0.6rem 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  margin-top: 0.5rem;
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+
+@media (max-width: 991px) {
+  .program-header-card {
+    flex-direction: column;
     text-align: center;
   }
-  
-  .ai-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
   }
-  
-  .ai-description {
+
+  .header-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .program-main-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-coaching-section {
+    padding: 2rem 0;
+  }
+
+  .program-header-card {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .trophy-badge {
+    width: 65px;
+    height: 65px;
+    font-size: 2rem;
+  }
+
+  .program-main-title {
+    font-size: 1.5rem;
+  }
+
+  .program-goal {
+    font-size: 1.3rem;
+  }
+
+  .day-name {
     font-size: 1.2rem;
-    margin-bottom: 40px;
-    opacity: 0.8;
   }
-  
-  .training-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
+
+  .no-program-icon {
+    font-size: 4.5rem;
+  }
+
+  .no-program-title {
+    font-size: 2rem;
+  }
+
+  .generate-program-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .program-header-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .trophy-badge {
+    width: 55px;
+    height: 55px;
+    font-size: 1.5rem;
+  }
+
+  .program-main-title {
+    font-size: 1.3rem;
+  }
+
+  .program-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .regenerate-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .exercise-details {
+    flex-direction: column;
+  }
+
+  .detail-badge {
+    display: block;
     text-align: center;
-    color: white;
-    padding: 20px;
-    transition: transform 0.3s ease-in-out;
   }
-  
-  .training-card.completed {
-    background: rgba(0, 255, 0, 0.2);
-    border: 2px solid #00ff00;
+
+  .no-program-container {
+    padding: 2rem 1rem;
   }
-  
-  .training-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .workout-type {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #ff9d00;
-  }
-  
-  .exercise-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .exercise-list li {
+
+  .generate-program-btn {
+    padding: 1rem 2rem;
     font-size: 1rem;
-    margin: 5px 0;
-    padding: 5px 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
   }
-  
-  .video-container {
-    margin-top: 10px;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  @media (max-width: 768px) {
-    .training-card {
-      margin-bottom: 20px;
-    }
-  }
-  
+}
