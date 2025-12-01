@@ -10,11 +10,17 @@ from .models import AIProgram, ProgramDay, Exercise
 from django.db import transaction
 from django.conf import settings
 import requests
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import status
+from ai_program_generator.models import AIProgram
+from django.contrib.auth import get_user_model
 
 
 def get_ollama_url():
-    """Get Ollama URL from settings or use default."""
-    return getattr(settings, "OLLAMA_URL", "http://host.docker.internal:11434")
+    """Get Ollama URL from environment variable."""
+    ollama_url = os.getenv("OLLAMA_URL", "http://ollama:11434")
+    #return ollama_url
+    return "http://host.docker.internal:11434"
 
 
 def validate_program_json(data):
@@ -164,7 +170,7 @@ User Profile:
     }}
 
     IMPORTANT: 
-    - Training days MUST normally have 6 exercices
+    - Training days MUST  have 4-5 exercices
     - Include 2-3 rest days in the week
     - Keep notes short (under 10 words) or empty
     - Respond with ONLY the JSON object, nothing else
@@ -179,11 +185,13 @@ User Profile:
                 "prompt": prompt,
                 "stream": False,
                 "options": {
-                    "num_predict": -1,
+                    "num_predict": 2500,
                     "temperature": 0.3,
+                    "top_p": 0.9,
+                    "top_k": 40
                 }
             },
-            timeout=120  # 2 minutes timeout for large responses
+            timeout=240  # 4 minutes timeout for large responses
         )
 
         if ollama_resp.status_code != 200:
@@ -402,3 +410,80 @@ def set_active_program(request, program_id):
     program.save()
 
     return Response({"success": True, "message": f"Program {program_id} is now active"})
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_client_program(request, client_id):
+    """
+    Coach views a client's AI program
+    GET /api/coach/clients/<client_id>/program/
+    """
+    try:
+        # Get client
+        client = User.objects.get(id=client_id)
+
+        # Get their most recent AI program (with related data)
+        program = (
+            AIProgram.objects
+            .filter(user=client)
+            .prefetch_related('days__exercises')
+            .order_by('-created_at')
+            .first()
+        )
+
+        if not program:
+            return Response(
+                {"error": "This client has not generated an AI program yet"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # Build program_summary from model fields
+        program_summary = {
+            "goal": program.goal,
+            "difficulty": program.difficulty
+        }
+
+        # Build week_plan from related ProgramDay and Exercise models
+        week_plan = []
+        for day in program.days.all():
+            day_data = {
+                "day_name": day.day_name,
+                "focus": day.focus,
+                "is_rest_day": day.is_rest_day,
+                "sessions": []
+            }
+
+            # Add exercises for this day
+            for exercise in day.exercises.all():
+                day_data["sessions"].append({
+                    "exercise_name": exercise.exercise_name,
+                    "sets": str(exercise.sets),
+                    "reps": exercise.reps,
+                    "intensity": exercise.intensity,
+                    "notes": exercise.notes or ""
+                })
+
+            week_plan.append(day_data)
+
+        # Return the constructed response
+        return Response({
+            "id": program.id,
+            "created_at": program.created_at.isoformat(),
+            "program_summary": program_summary,
+            "week_plan": week_plan
+        }, status=status.HTTP_200_OK)
+
+    except User.DoesNotExist:
+        return Response(
+            {"error": "Client not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    except Exception as e:
+        print(f" Error loading program: {e}")
+        import traceback
+        traceback.print_exc()
+        return Response(
+            {"error": str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

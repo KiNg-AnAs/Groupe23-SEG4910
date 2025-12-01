@@ -37,7 +37,7 @@ from users.views import (
     create_checkout_session,
     stripe_webhook,
 )
-from ai_program_generator.views import generate_ai_program, get_active_program, get_program_history, set_active_program
+from ai_program_generator.views import generate_ai_program, get_active_program, get_program_history, set_active_program,get_client_program
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -45,7 +45,8 @@ urlpatterns = [
     path("api/program/generate", generate_ai_program, name="generate_training_program"),
     path("api/program/active", get_active_program, name="get_active_program"),
     path("api/program/history",get_program_history, name="get_program_history"),
-    path("api/program/set-active/<int:program_id>",set_active_program, name="set_active_program"),
+    path("api/program/set-active/<int:program_id>", set_active_program, name="set_active_program"),
+    path("api/coach/clients/<int:client_id>/program/", get_client_program, name='coach-client-program'),
     path('user-info/', get_user_info, name='user-info'),
     path('user-subscription/', get_user_subscription, name='user-subscription'),
     path('set-username/', set_username, name='set-username'),
