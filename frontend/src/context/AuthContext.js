@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
    */
   const fetchWithAuth = async (endpoint, options = {}) => {
     try {
-      const token = await getAccessTokenSilently({ AUTH0_AUDIENCE });
+      const token = await getAccessTokenSilently({ audience: AUTH0_AUDIENCE });
 
       const resp = await fetch(endpoint, {
         ...options,
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     const fetchRole = async () => {
       if (!isAuthenticated) return;
       try {
-        const token = await getAccessTokenSilently({ AUTH0_AUDIENCE });
+        const token = await getAccessTokenSilently({ audience: AUTH0_AUDIENCE });
         const resp = await fetch(`${API_URL}/is-coach/`, {
           headers: {
             Accept: "application/json",
