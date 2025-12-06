@@ -26,6 +26,7 @@ import "./App.css";
 
 const domain = "dev-w3nk36t6hbc8zq2s.us.auth0.com";
 const clientId = "ei1rDUHUcXjRgy2PBpTbsfasfQ8f7JIA";
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -51,7 +52,7 @@ function App() {
       clientId={clientId}
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: "http://localhost:8000"
+        audience: `${API_URL}/`
       }}
     >
       <Router>
@@ -116,7 +117,7 @@ function AuthSyncer() {
   useEffect(() => {
     const syncUser = async () => {
       try {
-        const res = await fetchWithAuth("http://localhost:8000/auth0-login/", {
+        const res = await fetchWithAuth(`${API_URL}/auth0-login/`, {
           method: "POST",
         });
         console.log("User synced:", res);

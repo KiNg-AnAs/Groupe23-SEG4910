@@ -4,6 +4,8 @@ import { FaStar, FaDumbbell } from "react-icons/fa";
 import "./Plans.css";
 import { useAuth } from "../../../context/AuthContext";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const plans = [
   {
     title: "Basic Plan",
@@ -47,7 +49,7 @@ const Plans = ({ cartItem, setCartItem }) => {
 
     try {
       //  Step 2: Fetch current subscription plan from backend
-      const data = await fetchWithAuth("http://localhost:8000/subscription/");
+      const data = await fetchWithAuth(`${API_URL}/subscription/`);
       const currentPlan = data.subscription_plan;
 
       //  Step 3: Prevent same-plan or downgrade purchase

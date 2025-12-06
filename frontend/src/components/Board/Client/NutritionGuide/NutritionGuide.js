@@ -68,6 +68,8 @@ const daysOfWeek = [
   "Sunday",
 ];
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const NutritionGuide = () => {
   const { fetchWithAuth } = useAuth();
 
@@ -109,7 +111,7 @@ const NutritionGuide = () => {
     const loadUserProfile = async () => {
       try {
         const response = await fetchWithAuth(
-          "http://localhost:8000/user-detail/"
+          `${API_URL}/user-detail/`
         );
         if (response.profile) {
           const profile = response.profile;

@@ -9,6 +9,8 @@ import {
 import { useAuth } from "../../../../context/AuthContext";
 import "./ClientManagement.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const ClientManagement = () => {
   const { fetchWithAuth } = useAuth();
   const [clients, setClients] = useState([]);
@@ -24,8 +26,8 @@ const ClientManagement = () => {
     setError("");
     try {
       const url = q
-        ? `http://localhost:8000/coach/clients/?q=${encodeURIComponent(q)}&limit=50&offset=0`
-        : `http://localhost:8000/coach/clients/?limit=50&offset=0`;
+        ? `${API_URL}/coach/clients/?q=${encodeURIComponent(q)}&limit=50&offset=0`
+        : `${API_URL}/coach/clients/?limit=50&offset=0`;
       const data = await fetchWithAuth(url);
       const rows = Array.isArray(data?.results) ? data.results : [];
       setClients(rows);
@@ -56,7 +58,7 @@ const ClientManagement = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this client?")) return;
     try {
-      await fetchWithAuth(`http://localhost:8000/coach/clients/${id}/`, {
+      await fetchWithAuth(`${API_URL}/coach/clients/${id}/`, {
         method: "DELETE",
       });
       await loadClients(searchTerm.trim());
@@ -70,14 +72,13 @@ const ClientManagement = () => {
     try {
       const body = selectedClient.profile || {};
       await fetchWithAuth(
-        `http://localhost:8000/coach/clients/${selectedClient.id}/profile/`,
+        `${API_URL}/coach/clients/${selectedClient.id}/profile/`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         }
       );
-      alert("Profile updated successfully.");
       setIsEditing(false);
       setShowProfileModal(false);
       await loadClients(searchTerm.trim());

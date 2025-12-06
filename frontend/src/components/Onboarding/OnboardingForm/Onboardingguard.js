@@ -5,6 +5,8 @@ import OnboardingForm from "./OnboardingForm";
 import { FaExclamationTriangle } from "react-icons/fa";
 import "./Onboardingguard.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const OnboardingGuard = ({ children }) => {
   const { fetchWithAuth } = useAuth();
   const [profileStatus, setProfileStatus] = useState("loading");
@@ -18,7 +20,7 @@ const OnboardingGuard = ({ children }) => {
 
   const checkProfileStatus = async () => {
     try {
-      const response = await fetchWithAuth("http://localhost:8000/user-detail/");
+      const response = await fetchWithAuth(`${API_URL}/user-detail/`);
       
       console.log("📊 User detail response:", response);
       console.log("👤 User ID:", response.id);

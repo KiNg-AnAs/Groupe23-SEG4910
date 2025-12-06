@@ -17,8 +17,11 @@ RUN pip install --upgrade pip && \
 # Copy Django app code
 COPY backend/ .
 
+# Collect static files
+RUN python manage.py collectstatic --no-input || true
+
 # Expose port (for gunicorn)
 EXPOSE 8000
 
 # Start Django with gunicorn
-CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000","--timeout","180","--workers","2"]
+CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "240", "--workers", "2"]

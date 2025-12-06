@@ -4,6 +4,8 @@ import { FaEye, FaDumbbell, FaBed, FaFire, FaTrophy, FaSync, FaCalendarAlt } fro
 import { useAuth } from "../../../../context/AuthContext";
 import "./TrainingPrograms.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const TrainingPrograms = () => {
   const { fetchWithAuth } = useAuth();
   const [clients, setClients] = useState([]);
@@ -20,7 +22,7 @@ const TrainingPrograms = () => {
     setLoading(true);
     setError("");
     try {
-      const data = await fetchWithAuth("http://localhost:8000/coach/clients/?limit=50&offset=0");
+      const data = await fetchWithAuth(`${API_URL}/coach/clients/?limit=50&offset=0`);
       const clientList = Array.isArray(data?.results) ? data.results : [];
       setClients(clientList);
     } catch (e) {
@@ -42,7 +44,7 @@ const TrainingPrograms = () => {
     setSelectedProgram(null);
 
     try {
-      const url = `http://localhost:8000/api/coach/clients/${clientId}/program/`;
+      const url = `${API_URL}/api/coach/clients/${clientId}/program/`;
       const program = await fetchWithAuth(url);
       setSelectedProgram({ ...program, client_email: clientEmail });
     } catch (e) {

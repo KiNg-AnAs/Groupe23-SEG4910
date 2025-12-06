@@ -10,6 +10,8 @@ import {
 } from "react-icons/fa";
 import "./PaymentSuccess.css"; 
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const PaymentSuccess = () => {
   const { fetchWithAuth } = useAuth();
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const refreshUserData = async () => {
       try {
-        const res = await fetchWithAuth("http://localhost:8000/user-detail/");
+        const res = await fetchWithAuth(`${API_URL}/user-detail/`);
         console.log("Updated user data after payment:", res);
         setUserData(res);
         

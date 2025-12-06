@@ -21,20 +21,21 @@ STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
 STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
 
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-xs^7pfv02$zy0y__m17m)p==5_b+!jcd*-l39om+-bxer+g*b-"
 
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -89,14 +90,11 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'perfoevolution_db',
-        'USER': 'django_user',
-        'PASSWORD': 'perfoevolutionpassword',
-        'HOST': 'host.docker.internal',
-        'PORT': '5433',  # Default PostgreSQL port
-    }
+    'default': dj_database_url.config(
+        default=f"postgresql://django_user:perfoevolutionpassword@host.docker.internal:5433/perfoevolution_db",
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 
@@ -159,12 +157,20 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
+CORS_ALLOWED_ORIGINS = os.getenv(
+    'CORS_ALLOWED_ORIGINS',
+    'http://localhost:3000,http://localhost:3001'
+).split(',')
+
 # Configure Django to Use JWT for Authentication
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "users.authentication.Auth0JSONWebTokenAuthentication",
     ),
 }
+
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # JWT Settings (Use Auth0)
 SIMPLE_JWT = {
@@ -174,3 +180,6 @@ SIMPLE_JWT = {
 
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

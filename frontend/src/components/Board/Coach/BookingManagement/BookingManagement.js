@@ -4,6 +4,8 @@ import { FaCheckCircle, FaSync, FaVideo, FaPen, FaCalendarAlt, FaClock, FaUsers 
 import { useAuth } from "../../../../context/AuthContext";
 import "./BookingManagement.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const BookingManagement = () => {
   const { fetchWithAuth } = useAuth();
 
@@ -24,7 +26,7 @@ const BookingManagement = () => {
     setLoading(true);
     setError("");
     try {
-      const data = await fetchWithAuth("http://localhost:8000/coach/bookings/");
+      const data = await fetchWithAuth(`${API_URL}/coach/bookings/`);
       setBookings(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error("Error loading bookings:", e);
@@ -61,7 +63,7 @@ const BookingManagement = () => {
     setUpdating(true);
     try {
       await fetchWithAuth(
-        `http://localhost:8000/coach/bookings/${selectedBooking.id}/`,
+        `${API_URL}/coach/bookings/${confirmBooking.id}/`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -94,7 +96,7 @@ const BookingManagement = () => {
     setUpdating(true);
     try {
       const data = await fetchWithAuth(
-        `http://localhost:8000/coach/bookings/${confirmBooking.id}/`,
+        `${API_URL}/coach/bookings/${confirmBooking.id}/`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

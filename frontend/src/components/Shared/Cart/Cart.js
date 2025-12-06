@@ -14,6 +14,8 @@ import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const plans = [
   { 
     key: "basic", 
@@ -66,7 +68,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await fetchWithAuth("http://localhost:8000/user-detail/");
+        const res = await fetchWithAuth(`${API_URL}/user-detail/`);
         setUserPlan(res.subscription_plan || "none");
         setUserAddOns(res.add_ons || {});
       } catch (error) {
@@ -126,7 +128,7 @@ const Cart = () => {
 
       const totalAmount = calculateTotal();
 
-      const data = await fetchWithAuth("http://localhost:8000/create-checkout-session/", {
+      const data = await fetchWithAuth(`${API_URL}/create-checkout-session/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

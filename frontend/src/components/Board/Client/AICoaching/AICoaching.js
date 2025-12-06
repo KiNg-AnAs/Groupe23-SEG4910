@@ -4,6 +4,7 @@ import { useAuth } from "../../../../context/AuthContext";
 import { FaDumbbell, FaFire, FaBed, FaCheckCircle, FaTrophy, FaRedo, FaInfoCircle } from "react-icons/fa";
 import "./AICoaching.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 const AICoaching = () => {
   const { fetchWithAuth } = useAuth();
   const [activeProgram, setActiveProgram] = useState(null);
@@ -20,7 +21,7 @@ const AICoaching = () => {
     setLoading(true);
     setError("");
     try {
-      const data = await fetchWithAuth("http://localhost:8000/api/program/active");
+      const data = await fetchWithAuth(`${API_URL}/api/program/active`);
       setActiveProgram(data);
     } catch (err) {
       if (err.message?.includes("404") || err.message?.includes("No active program")) {
@@ -37,7 +38,7 @@ const AICoaching = () => {
     setGenerating(true);
     setError("");
     try {
-      const data = await fetchWithAuth("http://localhost:8000/api/program/generate", {
+      const data = await fetchWithAuth(`${API_URL}/api/program/generate`, {
         method: "POST",
       });
 

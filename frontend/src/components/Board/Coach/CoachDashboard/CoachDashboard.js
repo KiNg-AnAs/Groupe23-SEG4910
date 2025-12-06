@@ -21,6 +21,8 @@ import TrainingPrograms from "../TrainingPrograms/TrainingPrograms";
 import CustomizedTrainingPrograms from "../CustomizedTrainingPrograms/CustomizedTrainingPrograms";
 import BookingManagement from "../BookingManagement/BookingManagement";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const CoachDashboard = () => {
   const { fetchWithAuth } = useAuth();
   const [activeSection, setActiveSection] = useState(null);
@@ -40,16 +42,16 @@ const CoachDashboard = () => {
     const fetchStats = async () => {
       try {
         // Fetch clients
-        const clientsData = await fetchWithAuth("http://localhost:8000/coach/clients/?limit=1000&offset=0");
+        const clientsData = await fetchWithAuth(`${API_URL}/coach/clients/?limit=1000&offset=0`);
         const clientCount = Array.isArray(clientsData?.results) ? clientsData.results.length : 0;
 
         // Fetch training programs
-        const trainingData = await fetchWithAuth("http://localhost:8000/coach/training/");
+        const trainingData = await fetchWithAuth(`${API_URL}/coach/training/`);
         const trainingArray = Array.isArray(trainingData) ? trainingData : [];
         const totalTrainingSessions = trainingArray.reduce((sum, t) => sum + (t.quantity || 0), 0);
 
         // Fetch bookings
-        const bookingsData = await fetchWithAuth("http://localhost:8000/coach/bookings/");
+        const bookingsData = await fetchWithAuth(`${API_URL}/coach/bookings/`);
         const bookingsArray = Array.isArray(bookingsData) ? bookingsData : [];
         const totalBookingSessions = bookingsArray.reduce((sum, b) => sum + (b.quantity || 0), 0);
 

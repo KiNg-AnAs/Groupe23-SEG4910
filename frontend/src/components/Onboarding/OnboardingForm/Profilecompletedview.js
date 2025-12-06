@@ -20,6 +20,8 @@ import {
   FaClock
 } from "react-icons/fa";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const ProfileCompletedView = () => {
   const { fetchWithAuth } = useAuth();
   const [profile, setProfile] = useState(null);
@@ -32,7 +34,7 @@ const ProfileCompletedView = () => {
 
   const loadProfile = async () => {
     try {
-      const response = await fetchWithAuth("http://localhost:8000/user-detail/");
+      const response = await fetchWithAuth(`${API_URL}/user-detail/`);
       if (response.profile) {
         setProfile(response.profile);
       }

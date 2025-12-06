@@ -33,6 +33,7 @@ import { useNavigate } from "react-router-dom";
 import OnboardingGuard from "../../../Onboarding/OnboardingForm/Onboardingguard";
 import ProfileCompletedView from "../../../Onboarding/OnboardingForm/Profilecompletedview";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 const Dashboard = ({ userData, addToCart }) => {
   const { user, fetchWithAuth } = useAuth();
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ const Dashboard = ({ userData, addToCart }) => {
   useEffect(() => {
     const fetchUserRow = async () => {
       try {
-        const data = await fetchWithAuth("http://localhost:8000/user-detail/");
+        const data = await fetchWithAuth(`${API_URL}/user-detail/`);
         setUserInfo(data);
         setUsername(data.username || "");
       } catch (err) {
@@ -92,7 +93,7 @@ const Dashboard = ({ userData, addToCart }) => {
     setSaving(true);
     setError("");
     try {
-      await fetchWithAuth("http://localhost:8000/user-detail/", {
+      await fetchWithAuth(`${API_URL}/user-detail/`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username }),
@@ -110,7 +111,7 @@ const Dashboard = ({ userData, addToCart }) => {
     setDowngrading(true);
     setError("");
     try {
-      await fetchWithAuth("http://localhost:8000/user-detail/", {
+      await fetchWithAuth(`${API_URL}/user-detail/`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subscription_plan: targetPlan }),

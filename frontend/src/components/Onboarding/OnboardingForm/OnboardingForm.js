@@ -7,6 +7,8 @@ import "./OnboardingForm.css";
 import { useAuth } from "../../../context/AuthContext";
 import { FaUser, FaDumbbell, FaBed, FaCheckCircle, FaArrowRight, FaArrowLeft, FaFire } from "react-icons/fa";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 // VALIDATION SCHEMA
 const schema = yup.object().shape({
   age: yup.number().required("Age is required").min(10, "Minimum age is 10"),
@@ -67,7 +69,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
           validationSchema={schema}
           onSubmit={async (values) => {
             try {
-              const res = await fetchWithAuth("http://localhost:8000/save-profile/", {
+              const res = await fetchWithAuth(`${API_URL}/save-profile/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(values)

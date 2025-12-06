@@ -3,7 +3,9 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const AuthContext = createContext();
-const audience = "http://localhost:8000"; // we will change it once deployed
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+const audience = API_URL;
 
 export const AuthProvider = ({ children }) => {
   const {
@@ -15,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   } = useAuth0();
 
   const [isCoach, setIsCoach] = useState(false);
-  const [userData, setUserData] = useState(null); // plan + add_ons + identity
+  const [userData, setUserData] = useState(null);
 
   /**
    * Authenticated fetch helper:
@@ -27,8 +29,6 @@ export const AuthProvider = ({ children }) => {
   const fetchWithAuth = async (endpoint, options = {}) => {
     try {
       const token = await getAccessTokenSilently({ audience });
-      // test for debugging/Postman:
-      // console.log("ACCESS TOKEN:", token);
 
       const resp = await fetch(endpoint, {
         ...options,
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
       if (!isAuthenticated) return;
       try {
         const token = await getAccessTokenSilently({ audience });
-        const resp = await fetch("http://localhost:8000/is-coach/", {
+        const resp = await fetch(`${API_URL}/is-coach/`, {
           headers: {
             Accept: "application/json",
             Authorization: `Bearer ${token}`,
@@ -79,7 +79,6 @@ export const AuthProvider = ({ children }) => {
         });
 
         if (!resp.ok) {
-          // If backend returns HTML (e.g., 403), avoid .json() crash
           const maybeText = await resp.text().catch(() => "");
           console.error("is-coach error:", resp.status, maybeText);
           setIsCoach(false);
@@ -102,7 +101,7 @@ export const AuthProvider = ({ children }) => {
     if (!isAuthenticated) return;
 
     try {
-      const data = await fetchWithAuth("http://localhost:8000/user-detail/");
+      const data = await fetchWithAuth(`${API_URL}/user-detail/`);
 
       // Transform backend add-ons array -> { ebook: 1, ai: 0, zoom: 2 }
       const formattedAddons = {};
@@ -130,7 +129,7 @@ export const AuthProvider = ({ children }) => {
       setUserData(null);
       setIsCoach(false);
     }
-  }, [isAuthenticated]); 
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider

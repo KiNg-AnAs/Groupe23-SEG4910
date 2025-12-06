@@ -5,6 +5,8 @@ import { FaCheckCircle, FaSync, FaRobot, FaPen, FaDumbbell, FaChartLine, FaClock
 import { useAuth } from "../../../../context/AuthContext";
 import "./CustomizedTrainingPrograms.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const TrainingPrograms = () => {
   const { fetchWithAuth } = useAuth();
   const [trainings, setTrainings] = useState([]);
@@ -33,7 +35,7 @@ const TrainingPrograms = () => {
     setLoading(true);
     setError("");
     try {
-      const data = await fetchWithAuth("http://localhost:8000/coach/training/");
+      const data = await fetchWithAuth(`${API_URL}/coach/training/`);
       setTrainings(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error("Error loading training data:", e);
@@ -55,7 +57,7 @@ const TrainingPrograms = () => {
 
     setUpdating(true);
     try {
-      const resp = await fetchWithAuth(`http://localhost:8000/coach/training/${userId}/`, {
+      const resp = await fetchWithAuth(`${API_URL}/coach/training/${userId}/`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "Done" }),
@@ -80,7 +82,7 @@ const TrainingPrograms = () => {
   const handleSaveNotes = async () => {
     if (!activeRow) return;
     try {
-      await fetchWithAuth(`http://localhost:8000/coach/training/${activeRow.id}/`, {
+      await fetchWithAuth(`${API_URL}/coach/training/${activeRow.id}/`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ notes: notesText }),

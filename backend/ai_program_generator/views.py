@@ -118,7 +118,7 @@ User Profile:
     CRITICAL REQUIREMENTS:
     1. Return ONLY valid JSON (no markdown, no explanations)
     2. Include EXACTLY 7 days (Monday-Sunday)
-    3. Each TRAINING day must have AT LEAST 4 exercises
+    3. Each TRAINING day must have AT LEAST 5 exercises
     4. Rest days should have "is_rest_day": true and empty sessions
     5. Use lowercase for difficulty: "beginner", "intermediate", or "advanced"
 
@@ -170,7 +170,8 @@ User Profile:
     }}
 
     IMPORTANT: 
-    - Training days MUST  have 4-5 exercices
+    - Make sure to take in consideration the user data and his goal
+    - Training days MUST  have 5 exercices
     - Include 2-3 rest days in the week
     - Keep notes short (under 10 words) or empty
     - Respond with ONLY the JSON object, nothing else
@@ -185,13 +186,13 @@ User Profile:
                 "prompt": prompt,
                 "stream": False,
                 "options": {
-                    "num_predict": 2500,
+                    "num_predict": 3500,
                     "temperature": 0.3,
                     "top_p": 0.9,
                     "top_k": 40
                 }
             },
-            timeout=240  # 4 minutes timeout for large responses
+            timeout=180  # 3 minutes timeout for large responses
         )
 
         if ollama_resp.status_code != 200:
