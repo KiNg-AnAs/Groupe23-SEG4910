@@ -5,7 +5,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 const AuthContext = createContext();
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
-const audience = API_URL;
+
+const AUTH0_AUDIENCE =
+  process.env.REACT_APP_AUTH0_AUDIENCE || "http://localhost:8000";
+
 
 export const AuthProvider = ({ children }) => {
   const {
@@ -28,7 +31,7 @@ export const AuthProvider = ({ children }) => {
    */
   const fetchWithAuth = async (endpoint, options = {}) => {
     try {
-      const token = await getAccessTokenSilently({ audience });
+      const token = await getAccessTokenSilently({ AUTH0_AUDIENCE });
 
       const resp = await fetch(endpoint, {
         ...options,
@@ -70,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     const fetchRole = async () => {
       if (!isAuthenticated) return;
       try {
-        const token = await getAccessTokenSilently({ audience });
+        const token = await getAccessTokenSilently({ AUTH0_AUDIENCE });
         const resp = await fetch(`${API_URL}/is-coach/`, {
           headers: {
             Accept: "application/json",
