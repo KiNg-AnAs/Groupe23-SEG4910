@@ -48,7 +48,7 @@ const ProfileCompletedView = () => {
   const handleProfileUpdate = (updatedProfile) => {
     setProfile(updatedProfile);
     setShowEditModal(false);
-    window.location.reload();
+    //window.location.reload();
   };
 
   const getTimeSinceUpdate = () => {

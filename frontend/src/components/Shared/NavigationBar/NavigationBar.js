@@ -208,13 +208,20 @@ const NavigationBar = ({ cartItems }) => {
                     {user?.name?.split(" ")[0] || "User"}
                   </span>
                 </div>
-                <Button 
-                  variant="outline-light" 
-                  className="navbar-logout-btn"
-                  onClick={() => logout({ returnTo: window.location.origin })}
-                >
-                  Logout
-                </Button>
+                <Button
+                    variant="outline-light"
+                    className="navbar-logout-btn"
+                    onClick={() =>
+                      logout({
+                        logoutParams: {
+                          returnTo: window.location.origin,
+                        },
+                      })
+                    }
+            >
+              Logout
+            </Button>
+
               </div>
             ) : (
               <Button 

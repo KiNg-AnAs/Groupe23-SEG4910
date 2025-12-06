@@ -79,7 +79,7 @@ const OnboardingGuard = ({ children }) => {
     setProfileStatus("complete");
     setShowModal(false);
     setShowUpdatePrompt(false);
-    window.location.reload();
+    //window.location.reload();
   };
 
   const handleSkipUpdate = () => {
