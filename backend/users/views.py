@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 import stripe
 from django.http import HttpResponse
 from django.db import transaction
+from django.conf import settings
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -803,8 +804,8 @@ def create_checkout_session(request):
                 }
             ],
             customer_email=email,  # so webhook can find user by email
-            success_url="http://localhost:3000/payment-success",
-            cancel_url="http://localhost:3000/payment-cancel",
+            success_url=f"{settings.FRONTEND_URL}/payment-success",
+            cancel_url = f"{settings.FRONTEND_URL}/payment-cancel",
             metadata={
                 "auth0_id": auth0_id or "",
                 "email": email or "",
