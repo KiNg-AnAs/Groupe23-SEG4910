@@ -28,9 +28,13 @@ const domain = "dev-w3nk36t6hbc8zq2s.us.auth0.com";
 const clientId = "ei1rDUHUcXjRgy2PBpTbsfasfQ8f7JIA";
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
+const AUTH0_AUDIENCE =
+  process.env.REACT_APP_AUTH0_AUDIENCE || "http://localhost:8000";
+
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [cartItem, setCartItem] = useState(null);
+
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
@@ -52,7 +56,7 @@ function App() {
       clientId={clientId}
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: `${API_URL}/`
+        audience:  AUTH0_AUDIENCE,
       }}
     >
       <Router>
