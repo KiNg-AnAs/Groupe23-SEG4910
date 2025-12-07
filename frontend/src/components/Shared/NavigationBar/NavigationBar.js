@@ -23,6 +23,7 @@ const NavigationBar = ({ cartItems }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   // Detect scroll for navbar background effect
   useEffect(() => {
@@ -33,29 +34,48 @@ const NavigationBar = ({ cartItems }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close navbar when route changes (for Link clicks)
+  useEffect(() => {
+    setExpanded(false);
+  }, [location]);
+
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
+      setExpanded(false); // Close navbar after clicking
     } else {
       navigate("/");
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       }, 500);
+      setExpanded(false); // Close navbar after clicking
     }
   };
 
   const isActive = (path) => location.pathname === path;
 
+  // Handle navbar toggle
+  const handleToggle = () => {
+    setExpanded(!expanded);
+  };
+
+  // Close navbar
+  const closeNavbar = () => {
+    setExpanded(false);
+  };
+
   return (
     <Navbar 
       expand="lg" 
       fixed="top" 
+      expanded={expanded}
+      onToggle={handleToggle}
       className={`navbar-custom ${scrolled ? 'navbar-scrolled' : ''}`}
     >
       <Container>
         {/* Brand Logo */}
-        <Navbar.Brand as={Link} to="/" className="navbar-brand-custom">
+        <Navbar.Brand as={Link} to="/" className="navbar-brand-custom" onClick={closeNavbar}>
           <div className="navbar-logo-wrapper">
             <FaDumbbell className="navbar-logo-icon" />
             <div className="navbar-logo-glow"></div>
@@ -150,6 +170,7 @@ const NavigationBar = ({ cartItems }) => {
                   as={Link} 
                   to="/onboarding"
                   className={`navbar-link-custom ${isActive('/onboarding') ? 'active' : ''}`}
+                  onClick={closeNavbar}
                 >
                   <FaUser className="navbar-link-icon" />
                   <span>Onboarding</span>
@@ -159,6 +180,7 @@ const NavigationBar = ({ cartItems }) => {
                   as={Link} 
                   to="/dashboard"
                   className={`navbar-link-custom ${isActive('/dashboard') ? 'active' : ''}`}
+                  onClick={closeNavbar}
                 >
                   <FaTachometerAlt className="navbar-link-icon" />
                   <span>Dashboard</span>
@@ -172,6 +194,7 @@ const NavigationBar = ({ cartItems }) => {
                 as={Link} 
                 to="/coach-dashboard"
                 className={`navbar-link-custom navbar-link-coach ${isActive('/coach-dashboard') ? 'active' : ''}`}
+                onClick={closeNavbar}
               >
                 <FaChalkboardTeacher className="navbar-link-icon" />
                 <span>Coach</span>
@@ -187,6 +210,7 @@ const NavigationBar = ({ cartItems }) => {
                 as={Link} 
                 to="/cart" 
                 className={`navbar-cart-link ${isActive('/cart') ? 'active' : ''}`}
+                onClick={closeNavbar}
               >
                 <div className="navbar-cart-wrapper">
                   <FaShoppingCart className="navbar-cart-icon" />
@@ -209,24 +233,27 @@ const NavigationBar = ({ cartItems }) => {
                   </span>
                 </div>
                 <Button
-                    variant="outline-light"
-                    className="navbar-logout-btn"
-                    onClick={() =>
-                      logout({
-                        logoutParams: {
-                          returnTo: window.location.origin,
-                        },
-                      })
-                    }
-            >
-              Logout
-            </Button>
-
+                  variant="outline-light"
+                  className="navbar-logout-btn"
+                  onClick={() => {
+                    closeNavbar();
+                    logout({
+                      logoutParams: {
+                        returnTo: window.location.origin,
+                      },
+                    });
+                  }}
+                >
+                  Logout
+                </Button>
               </div>
             ) : (
               <Button 
                 className="navbar-login-btn" 
-                onClick={loginWithRedirect}
+                onClick={() => {
+                  closeNavbar();
+                  loginWithRedirect();
+                }}
               >
                 <FaUser className="me-2" />
                 Login

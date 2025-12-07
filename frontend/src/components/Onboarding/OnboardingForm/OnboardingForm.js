@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Card, ProgressBar } from "react-bootstrap";
 import * as yup from "yup";
@@ -9,12 +9,12 @@ import { FaUser, FaDumbbell, FaBed, FaCheckCircle, FaArrowRight, FaArrowLeft, Fa
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
-// VALIDATION SCHEMA
+// VALIDATION SCHEMA - Body Fat is now REQUIRED
 const schema = yup.object().shape({
   age: yup.number().required("Age is required").min(10, "Minimum age is 10"),
   height: yup.number().required("Height is required").min(50, "Height too low"),
   weight: yup.number().required("Weight is required").min(30, "Weight too low"),
-  bodyFat: yup.number().min(5, "Too low").max(50, "Too high").nullable(), 
+  bodyFat: yup.number().required("Body fat percentage is required").min(5, "Too low").max(50, "Too high"),
   fitnessLevel: yup.string().required("Please select your fitness level"),
   goal: yup.string().required("Please select your primary goal"),
   frequency: yup.string().required("Please select workout frequency"),
@@ -31,21 +31,54 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
   const navigate = useNavigate();
   const { fetchWithAuth } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
+  const [loadedProfile, setLoadedProfile] = useState(null);
   const totalSteps = 3;
+
+  // Load existing profile data on mount
+  useEffect(() => {
+    const loadProfile = async () => {
+      // If existingProfile is passed as prop, use it
+      if (existingProfile) {
+        setLoadedProfile(existingProfile);
+        return;
+      }
+
+      // Otherwise, fetch from API
+      try {
+        const response = await fetchWithAuth(`${API_URL}/user-detail/`);
+        if (response.profile) {
+          setLoadedProfile(response.profile);
+        }
+      } catch (error) {
+        console.error("Failed to load profile", error);
+      }
+    };
+
+    loadProfile();
+  }, [existingProfile, fetchWithAuth]);
 
   // Calculate progress percentage
   const getProgress = () => {
     return (currentStep / totalSteps) * 100;
   };
 
-  // Step validation
+  // Step validation - check both values AND errors
   const isStep1Valid = (values, errors) => {
-    return values.age && values.height && values.weight && !errors.age && !errors.height && !errors.weight;
+    const hasValues = values.age && values.height && values.weight && values.bodyFat;
+    const hasNoErrors = !errors.age && !errors.height && !errors.weight && !errors.bodyFat;
+    return hasValues && hasNoErrors;
   };
 
   const isStep2Valid = (values, errors) => {
-    return values.fitnessLevel && values.goal && values.frequency && 
-           !errors.fitnessLevel && !errors.goal && !errors.frequency;
+    const hasValues = values.fitnessLevel && values.goal && values.frequency;
+    const hasNoErrors = !errors.fitnessLevel && !errors.goal && !errors.frequency;
+    return hasValues && hasNoErrors;
+  };
+
+  const isStep3Valid = (values, errors) => {
+    const hasValues = values.activityLevel && values.sleepHours;
+    const hasNoErrors = !errors.activityLevel && !errors.sleepHours;
+    return hasValues && hasNoErrors;
   };
 
   const stepTitles = [
@@ -53,6 +86,48 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
     { number: 2, title: "Fitness Goals", icon: <FaDumbbell /> },
     { number: 3, title: "Lifestyle", icon: <FaBed /> }
   ];
+
+  // Map backend values to frontend display values
+  const mapFitnessLevel = (level) => {
+    if (!level) return "";
+    const mapping = {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate", 
+      "advanced": "Advanced"
+    };
+    return mapping[level.toLowerCase()] || level;
+  };
+
+  const mapGoal = (goal) => {
+    if (!goal) return "";
+    const mapping = {
+      "muscle_gain": "Muscle Gain",
+      "fat_loss": "Fat Loss",
+      "endurance": "Endurance"
+    };
+    return mapping[goal.toLowerCase()] || goal;
+  };
+
+  const mapActivityLevel = (activity) => {
+    if (!activity) return "";
+    const mapping = {
+      "sedentary": "Sedentary",
+      "lightly_active": "Lightly Active",
+      "active": "Active",
+      "very_active": "Very Active"
+    };
+    return mapping[activity.toLowerCase()] || activity;
+  };
+
+  const mapBodyType = (bodyType) => {
+    if (!bodyType) return "";
+    const mapping = {
+      "ectomorph": "Ectomorph",
+      "mesomorph": "Mesomorph",
+      "endomorph": "Endomorph"
+    };
+    return mapping[bodyType.toLowerCase()] || bodyType;
+  };
 
   return (
     <section className="onboarding-container-section">
@@ -66,6 +141,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
         </div>
 
         <Formik
+          enableReinitialize={true}
           validationSchema={schema}
           onSubmit={async (values) => {
             try {
@@ -77,7 +153,9 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
               console.log("Profile Saved:", res);
               
               if (onComplete) {
-                onComplete(res); // Call callback if in modal mode
+                // Reload the profile data after save
+                const updatedProfile = await fetchWithAuth(`${API_URL}/user-detail/`);
+                onComplete(updatedProfile.profile);
               } else {
                 navigate("/dashboard");
               }
@@ -86,19 +164,19 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
             }
           }}
           initialValues={{
-            age: existingProfile?.age || "",
-            height: existingProfile?.height_cm || "",
-            weight: existingProfile?.weight_kg || "",
-            bodyFat: existingProfile?.body_fat_percentage || "",
-            fitnessLevel: existingProfile?.fitness_level || "",
-            goal: existingProfile?.primary_goal || "",
-            frequency: existingProfile?.workout_frequency || "",
-            activityLevel: existingProfile?.daily_activity_level || "",
-            sleepHours: existingProfile?.sleep_hours || "",
-            bodyType: existingProfile?.body_type || "",
+            age: loadedProfile?.age || "",
+            height: loadedProfile?.height_cm || "",
+            weight: loadedProfile?.weight_kg || "",
+            bodyFat: loadedProfile?.body_fat_percentage || "",
+            fitnessLevel: mapFitnessLevel(loadedProfile?.fitness_level) || "",
+            goal: mapGoal(loadedProfile?.primary_goal) || "",
+            frequency: loadedProfile?.workout_frequency || "",
+            activityLevel: mapActivityLevel(loadedProfile?.daily_activity_level) || "",
+            sleepHours: loadedProfile?.sleep_hours || "",
+            bodyType: mapBodyType(loadedProfile?.body_type) || "",
           }}
         >
-          {({ handleSubmit, handleChange, values, touched, errors, setTouched }) => (
+          {({ handleSubmit, handleChange, values, touched, errors, setTouched, setFieldTouched }) => (
             <div className="onboarding-wizard">
               {/* Progress Bar */}
               <div className="progress-section">
@@ -144,6 +222,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 placeholder="25"
                                 value={values.age}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('age', true)}
                                 isInvalid={touched.age && errors.age}
                                 className="form-input"
                               />
@@ -159,6 +238,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 placeholder="175"
                                 value={values.height}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('height', true)}
                                 isInvalid={touched.height && errors.height}
                                 className="form-input"
                               />
@@ -174,6 +254,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 placeholder="70"
                                 value={values.weight}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('weight', true)}
                                 isInvalid={touched.weight && errors.weight}
                                 className="form-input"
                               />
@@ -185,18 +266,19 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                         <Row className="mb-3">
                           <Col md={12}>
                             <Form.Group controlId="bodyFat">
-                              <Form.Label>Body Fat % <span className="optional-badge">(Optional)</span></Form.Label>
+                              <Form.Label>Body Fat % *</Form.Label>
                               <Form.Control
                                 type="number"
                                 name="bodyFat"
                                 placeholder="15"
                                 value={values.bodyFat}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('bodyFat', true)}
                                 isInvalid={touched.bodyFat && errors.bodyFat}
                                 className="form-input"
                               />
                               <Form.Control.Feedback type="invalid">{errors.bodyFat}</Form.Control.Feedback>
-                              <Form.Text className="text-muted">Don't know? You can skip this for now.</Form.Text>
+                              <Form.Text className="text-muted">Enter your estimated body fat percentage (5-50%)</Form.Text>
                             </Form.Group>
                           </Col>
                         </Row>
@@ -220,6 +302,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 name="fitnessLevel"
                                 value={values.fitnessLevel}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('fitnessLevel', true)}
                                 isInvalid={touched.fitnessLevel && errors.fitnessLevel}
                                 className="form-input"
                               >
@@ -238,6 +321,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 name="goal"
                                 value={values.goal}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('goal', true)}
                                 isInvalid={touched.goal && errors.goal}
                                 className="form-input"
                               >
@@ -259,6 +343,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 name="frequency"
                                 value={values.frequency}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('frequency', true)}
                                 isInvalid={touched.frequency && errors.frequency}
                                 className="form-input"
                               >
@@ -291,6 +376,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 name="activityLevel"
                                 value={values.activityLevel}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('activityLevel', true)}
                                 isInvalid={touched.activityLevel && errors.activityLevel}
                                 className="form-input"
                               >
@@ -312,6 +398,7 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                                 placeholder="7"
                                 value={values.sleepHours}
                                 onChange={handleChange}
+                                onBlur={() => setFieldTouched('sleepHours', true)}
                                 isInvalid={touched.sleepHours && errors.sleepHours}
                                 className="form-input"
                               />
@@ -360,14 +447,23 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                         <Button
                           variant="primary"
                           onClick={() => {
-                            // Validate current step before proceeding
+                            // Mark all fields in current step as touched
                             if (currentStep === 1) {
-                              setTouched({ age: true, height: true, weight: true });
+                              setTouched({ 
+                                age: true, 
+                                height: true, 
+                                weight: true,
+                                bodyFat: true 
+                              });
                               if (isStep1Valid(values, errors)) {
                                 setCurrentStep(currentStep + 1);
                               }
                             } else if (currentStep === 2) {
-                              setTouched({ fitnessLevel: true, goal: true, frequency: true });
+                              setTouched({ 
+                                fitnessLevel: true, 
+                                goal: true, 
+                                frequency: true 
+                              });
                               if (isStep2Valid(values, errors)) {
                                 setCurrentStep(currentStep + 1);
                               }
@@ -383,6 +479,13 @@ const OnboardingForm = ({ existingProfile = null, isModal = false, onComplete = 
                       {currentStep === totalSteps && (
                         <Button
                           type="submit"
+                          onClick={() => {
+                            // Mark step 3 fields as touched before submit
+                            setTouched({ 
+                              activityLevel: true, 
+                              sleepHours: true 
+                            });
+                          }}
                           className="nav-btn submit-btn ms-auto"
                         >
                           <FaCheckCircle className="me-2" />

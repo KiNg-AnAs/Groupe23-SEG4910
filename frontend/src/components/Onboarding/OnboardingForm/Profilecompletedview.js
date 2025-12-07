@@ -45,10 +45,13 @@ const ProfileCompletedView = () => {
     }
   };
 
-  const handleProfileUpdate = (updatedProfile) => {
+  const handleProfileUpdate = async (updatedProfile) => {
+    // Update the local state immediately with the new profile
     setProfile(updatedProfile);
     setShowEditModal(false);
-    //window.location.reload();
+    
+    // Optionally reload from server to ensure sync
+    await loadProfile();
   };
 
   const getTimeSinceUpdate = () => {
