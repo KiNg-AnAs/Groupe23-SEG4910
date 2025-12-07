@@ -5,7 +5,7 @@
    .booking-mgmt-wrapper {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-    padding: 60px 0;
+    padding: 100px 0 60px;
     position: relative;
     overflow: hidden;
   }
@@ -303,10 +303,16 @@
     animation: fadeInUp 0.8s ease-out 0.4s both;
     margin-bottom: 30px;
   }
+
+  .table-card .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   
   .modern-booking-table {
     color: #ffffff !important;
     margin: 0;
+    min-width: 800px;
   }
   
   .modern-booking-table thead {
@@ -336,7 +342,6 @@
   
   .booking-row:hover {
     background: rgba(0, 212, 255, 0.05);
-    transform: scale(1.01);
   }
   
   .modern-booking-table td {
@@ -417,6 +422,7 @@
     font-weight: 600;
     border-radius: 10px;
     transition: all 0.3s ease;
+    white-space: nowrap;
   }
   
   .schedule-btn:hover {
@@ -441,6 +447,7 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     color: #ffffff !important;
+    white-space: nowrap;
   }
   
   .complete-btn:hover:not(:disabled) {
@@ -571,6 +578,7 @@
     padding: 12px 15px !important;
     font-size: 1rem !important;
     transition: all 0.3s ease;
+    cursor: pointer;
   }
   
   .modern-input:focus {
@@ -578,6 +586,18 @@
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.3) !important;
     background: rgba(0, 0, 0, 0.4) !important;
     outline: none !important;
+  }
+
+  /* Fix for datetime input calendar picker */
+  .modern-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .modern-input::-webkit-calendar-picker-indicator:hover {
+    background: rgba(255, 255, 255, 1);
   }
   
   .notes-textarea {
@@ -728,14 +748,32 @@
   /* ============================================
      RESPONSIVE DESIGN
      ============================================ */
+
+  @media (max-width: 992px) {
+    .booking-mgmt-wrapper {
+      padding: 120px 0 60px;
+    }
+
+    .modern-booking-table {
+      font-size: 0.9rem;
+    }
+  }
   
   @media (max-width: 768px) {
+    .booking-mgmt-wrapper {
+      padding: 140px 0 50px;
+    }
+
     .hero-title {
       font-size: 2rem;
     }
   
     .hero-subtitle {
       font-size: 1rem;
+    }
+
+    .hero-content {
+      padding: 30px 20px;
     }
   
     .stat-number {
@@ -754,16 +792,58 @@
     .modern-booking-table {
       font-size: 0.85rem;
     }
+
+    .modern-booking-table thead th {
+      padding: 15px 10px;
+      font-size: 0.75rem;
+    }
+
+    .modern-booking-table td {
+      padding: 15px 10px;
+    }
   
     .client-avatar {
       width: 40px;
       height: 40px;
     }
+
+    .client-email {
+      font-size: 0.9rem;
+    }
+
+    .quantity-badge,
+    .status-badge {
+      font-size: 0.75rem;
+      padding: 6px 12px;
+    }
+
+    .schedule-btn,
+    .complete-btn {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+    }
+
+    .timestamp {
+      font-size: 0.8rem;
+    }
+
+    /* Make table scrollable hint visible */
+    .table-card::after {
+      content: '← Scroll to see more →';
+      display: block;
+      text-align: center;
+      padding: 15px;
+      background: rgba(0, 212, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-top: 1px solid rgba(0, 212, 255, 0.2);
+    }
   }
   
   @media (max-width: 576px) {
     .booking-mgmt-wrapper {
-      padding: 30px 0;
+      padding: 150px 0 40px;
     }
   
     .hero-content {
@@ -772,6 +852,23 @@
   
     .hero-title {
       font-size: 1.6rem;
+    }
+
+    .hero-icon {
+      font-size: 3rem;
+    }
+
+    .stat-icon-wrapper {
+      width: 60px;
+      height: 60px;
+    }
+
+    .stat-icon {
+      font-size: 1.5rem;
+    }
+
+    .modern-booking-table {
+      min-width: 700px;
     }
   
     .modal-footer-custom {
@@ -782,5 +879,31 @@
     .save-booking-btn,
     .confirm-complete-btn {
       width: 100%;
+    }
+
+    .modal-body-custom {
+      padding: 20px;
+    }
+
+    .modal-header-custom {
+      padding: 20px;
+    }
+
+    .modal-title-custom {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .booking-mgmt-wrapper {
+      padding: 160px 0 40px;
+    }
+
+    .hero-title {
+      font-size: 1.4rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.9rem;
     }
   }

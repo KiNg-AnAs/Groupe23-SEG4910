@@ -1,722 +1,4149 @@
 {
-    "breakfast": {
-      "Balanced": [
-        {
-          "id": 1,
-          "name": "🥣 Power Oatmeal Bowl",
-          "calories": 380,
-          "protein": 12,
-          "carbs": 52,
-          "fats": 14,
-          "fiber": 8,
-          "description": "Steel-cut oats topped with almond butter, sliced banana, chia seeds, and a drizzle of honey",
-          "ingredients": ["Steel-cut oats (1 cup)", "Almond butter (2 tbsp)", "Banana (1 medium)", "Chia seeds (1 tbsp)", "Honey (1 tsp)"],
-          "prep_time": "10 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400",
-          "tags": ["high-fiber", "energy-boosting", "heart-healthy"],
-          "meal_timing": "Pre-workout"
-        },
-        {
-          "id": 2,
-          "name": "🍳 Mediterranean Scramble",
-          "calories": 420,
-          "protein": 28,
-          "carbs": 35,
-          "fats": 18,
-          "fiber": 6,
-          "description": "Fluffy eggs scrambled with feta cheese, spinach, tomatoes, and whole wheat toast",
-          "ingredients": ["Eggs (3 whole)", "Feta cheese (30g)", "Fresh spinach (1 cup)", "Cherry tomatoes (1/2 cup)", "Whole wheat toast (2 slices)", "Olive oil (1 tsp)"],
-          "prep_time": "12 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
-          "tags": ["protein-rich", "mediterranean", "muscle-building"],
-          "meal_timing": "Anytime"
-        },
-        {
-          "id": 3,
-          "name": "🥑 Avocado Toast Deluxe",
-          "calories": 440,
-          "protein": 22,
-          "carbs": 42,
-          "fats": 21,
-          "fiber": 12,
-          "description": "Smashed avocado on sourdough with poached eggs, microgreens, and hemp seeds",
-          "ingredients": ["Sourdough bread (2 slices)", "Avocado (1 whole)", "Eggs (2 poached)", "Microgreens (handful)", "Hemp seeds (1 tbsp)", "Lemon juice", "Red pepper flakes"],
-          "prep_time": "15 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400",
-          "tags": ["omega-3", "instagram-worthy", "brain-food"],
-          "meal_timing": "Anytime"
-        },
-        {
-          "id": 4,
-          "name": "🫐 Berry Protein Parfait",
-          "calories": 360,
-          "protein": 25,
-          "carbs": 45,
-          "fats": 8,
-          "fiber": 7,
-          "description": "Layers of Greek yogurt, mixed berries, granola, and a touch of maple syrup",
-          "ingredients": ["Greek yogurt (200g)", "Mixed berries (1 cup)", "Granola (1/4 cup)", "Maple syrup (1 tsp)", "Almonds (10 sliced)"],
-          "prep_time": "5 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
-          "tags": ["quick", "antioxidant-rich", "probiotic"],
-          "meal_timing": "Post-workout"
-        },
-        {
-          "id": 5,
-          "name": "🥞 Protein Pancake Stack",
-          "calories": 410,
-          "protein": 32,
-          "carbs": 48,
-          "fats": 10,
-          "fiber": 5,
-          "description": "Fluffy protein pancakes topped with fresh berries and sugar-free syrup",
-          "ingredients": ["Protein powder (1 scoop)", "Banana (1 mashed)", "Eggs (2)", "Oats (1/2 cup)", "Baking powder (1 tsp)", "Berries (1/2 cup)", "Sugar-free syrup"],
-          "prep_time": "18 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=400",
-          "tags": ["muscle-building", "filling", "weekend-special"],
-          "meal_timing": "Post-workout"
-        }
-      ],
-      "Vegan": [
-        {
-          "id": 6,
-          "name": "🌱 Green Goddess Smoothie Bowl",
-          "calories": 390,
-          "protein": 15,
-          "carbs": 58,
-          "fats": 12,
-          "fiber": 14,
-          "description": "Thick smoothie bowl with spinach, banana, spirulina, topped with granola and fresh fruits",
-          "ingredients": ["Spinach (2 cups)", "Frozen banana (2)", "Spirulina powder (1 tsp)", "Almond milk (1 cup)", "Granola (1/4 cup)", "Kiwi slices", "Coconut flakes"],
-          "prep_time": "8 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400",
-          "tags": ["detox", "energizing", "superfood"],
-          "meal_timing": "Morning boost"
-        },
-        {
-          "id": 7,
-          "name": "🥐 Tofu Scramble Supreme",
-          "calories": 420,
-          "protein": 24,
-          "carbs": 38,
-          "fats": 18,
-          "fiber": 8,
-          "description": "Seasoned crumbled tofu with turmeric, veggies, and nutritional yeast",
-          "ingredients": ["Firm tofu (200g)", "Turmeric (1/2 tsp)", "Nutritional yeast (2 tbsp)", "Bell peppers (1/2 cup)", "Mushrooms (1/2 cup)", "Spinach (1 cup)", "Whole wheat toast (2 slices)"],
-          "prep_time": "15 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-          "tags": ["plant-protein", "savory", "cholesterol-free"],
-          "meal_timing": "Anytime"
-        },
-        {
-          "id": 8,
-          "name": "🍌 Peanut Butter Banana Wrap",
-          "calories": 450,
-          "protein": 18,
-          "carbs": 62,
-          "fats": 16,
-          "fiber": 10,
-          "description": "Whole wheat tortilla spread with peanut butter, banana slices, and hemp seeds",
-          "ingredients": ["Whole wheat tortilla (1 large)", "Natural peanut butter (3 tbsp)", "Banana (1 large)", "Hemp seeds (1 tbsp)", "Cinnamon", "Agave nectar (optional)"],
-          "prep_time": "5 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400",
-          "tags": ["quick", "portable", "kid-friendly"],
-          "meal_timing": "Pre-workout"
-        }
-      ],
-      "Keto": [
-        {
-          "id": 9,
-          "name": "🥓 Keto Breakfast Plate",
-          "calories": 520,
-          "protein": 32,
-          "carbs": 6,
-          "fats": 42,
-          "fiber": 2,
-          "description": "Scrambled eggs cooked in butter with bacon, avocado, and sautéed spinach",
-          "ingredients": ["Eggs (3 whole)", "Bacon (3 strips)", "Avocado (1/2)", "Spinach (2 cups)", "Butter (1 tbsp)", "Cheddar cheese (30g)"],
-          "prep_time": "12 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400",
-          "tags": ["low-carb", "high-fat", "ketogenic"],
-          "meal_timing": "Morning"
-        },
-        {
-          "id": 10,
-          "name": "🧀 Cream Cheese Pancakes",
-          "calories": 480,
-          "protein": 28,
-          "carbs": 8,
-          "fats": 38,
-          "fiber": 1,
-          "description": "Fluffy keto pancakes made with cream cheese and almond flour",
-          "ingredients": ["Cream cheese (60g)", "Eggs (3)", "Almond flour (1/4 cup)", "Vanilla extract", "Butter (for cooking)", "Sugar-free syrup", "Berries (small handful)"],
-          "prep_time": "15 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400",
-          "tags": ["grain-free", "low-carb", "indulgent"],
-          "meal_timing": "Weekend treat"
-        }
-      ],
-      "High-Protein": [
-        {
-          "id": 11,
-          "name": "💪 Mega Protein Shake",
-          "calories": 480,
-          "protein": 52,
-          "carbs": 42,
-          "fats": 12,
-          "fiber": 6,
-          "description": "Blended shake with protein powder, oats, banana, peanut butter, and milk",
-          "ingredients": ["Whey protein (2 scoops)", "Rolled oats (1/2 cup)", "Banana (1)", "Peanut butter (2 tbsp)", "Milk (1.5 cups)", "Ice cubes"],
-          "prep_time": "5 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400",
-          "tags": ["muscle-gain", "quick", "post-workout"],
-          "meal_timing": "Post-workout"
-        },
-        {
-          "id": 12,
-          "name": "🍗 Chicken & Egg White Bowl",
-          "calories": 420,
-          "protein": 58,
-          "carbs": 28,
-          "fats": 8,
-          "fiber": 4,
-          "description": "Grilled chicken breast with scrambled egg whites, quinoa, and steamed broccoli",
-          "ingredients": ["Chicken breast (150g)", "Egg whites (6)", "Quinoa (1/2 cup cooked)", "Broccoli (1 cup)", "Garlic powder", "Black pepper"],
-          "prep_time": "20 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-          "tags": ["bodybuilding", "lean", "meal-prep"],
-          "meal_timing": "Post-workout"
-        }
-      ],
-      "Mediterranean": [
-        {
-          "id": 13,
-          "name": "🫒 Greek Yogurt Power Bowl",
-          "calories": 410,
-          "protein": 26,
-          "carbs": 48,
-          "fats": 14,
-          "fiber": 7,
-          "description": "Thick Greek yogurt with honey, walnuts, figs, and whole grain toast",
-          "ingredients": ["Greek yogurt (250g)", "Honey (1 tbsp)", "Walnuts (1/4 cup)", "Fresh figs (2)", "Whole grain toast (1 slice)", "Cinnamon"],
-          "prep_time": "5 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
-          "tags": ["mediterranean", "probiotic", "brain-food"],
-          "meal_timing": "Morning"
-        },
-        {
-          "id": 14,
-          "name": "🥖 Shakshuka with Pita",
-          "calories": 450,
-          "protein": 22,
-          "carbs": 42,
-          "fats": 20,
-          "fiber": 8,
-          "description": "Poached eggs in spicy tomato sauce with whole wheat pita bread",
-          "ingredients": ["Eggs (2)", "Tomato sauce (1 cup)", "Bell peppers (1/2 cup)", "Onion (1/4)", "Cumin", "Paprika", "Whole wheat pita (1)", "Feta cheese (30g)", "Cilantro"],
-          "prep_time": "18 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1587376634689-c8c76b0e5b8f?w=400",
-          "tags": ["middle-eastern", "spicy", "one-pan"],
-          "meal_timing": "Brunch"
-        }
-      ]
-    },
-    "lunch": {
-      "Balanced": [
-        {
-          "id": 15,
-          "name": "🥗 Grilled Chicken Buddha Bowl",
-          "calories": 580,
-          "protein": 46,
-          "carbs": 58,
-          "fats": 16,
-          "fiber": 12,
-          "description": "Grilled chicken over quinoa with roasted vegetables, avocado, and tahini dressing",
-          "ingredients": ["Chicken breast (180g)", "Quinoa (3/4 cup cooked)", "Sweet potato (1 cup cubed)", "Chickpeas (1/2 cup)", "Avocado (1/2)", "Mixed greens", "Tahini dressing (2 tbsp)"],
-          "prep_time": "25 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-          "tags": ["complete-meal", "meal-prep", "nutrient-dense"],
-          "meal_timing": "Lunch"
-        },
-        {
-          "id": 16,
-          "name": "🍝 Whole Wheat Pasta Primavera",
-          "calories": 540,
-          "protein": 24,
-          "carbs": 78,
-          "fats": 14,
-          "fiber": 10,
-          "description": "Whole wheat pasta tossed with seasonal vegetables and light pesto sauce",
-          "ingredients": ["Whole wheat penne (100g dry)", "Zucchini (1)", "Cherry tomatoes (1 cup)", "Broccoli (1 cup)", "Pesto (2 tbsp)", "Parmesan (20g)", "Olive oil"],
-          "prep_time": "20 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
-          "tags": ["vegetarian", "italian", "comfort-food"],
-          "meal_timing": "Lunch/Dinner"
-        }
-      ],
-      "Vegan": [
-        {
-          "id": 17,
-          "name": "🌯 Chipotle Black Bean Burrito Bowl",
-          "calories": 560,
-          "protein": 22,
-          "carbs": 84,
-          "fats": 16,
-          "fiber": 18,
-          "description": "Brown rice, black beans, corn, salsa, guacamole, and cashew cream",
-          "ingredients": ["Brown rice (1 cup)", "Black beans (3/4 cup)", "Corn (1/2 cup)", "Bell peppers (1/2 cup)", "Tomato salsa (1/4 cup)", "Guacamole (3 tbsp)", "Cashew cream (2 tbsp)", "Cilantro", "Lime"],
-          "prep_time": "15 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
-          "tags": ["mexican", "filling", "fiber-rich"],
-          "meal_timing": "Lunch/Dinner"
-        },
-        {
-          "id": 18,
-          "name": "🥙 Falafel Wrap Supreme",
-          "calories": 520,
-          "protein": 20,
-          "carbs": 68,
-          "fats": 18,
-          "fiber": 14,
-          "description": "Homemade falafel in whole wheat wrap with tahini, hummus, and fresh vegetables",
-          "ingredients": ["Falafel (4 pieces)", "Whole wheat wrap (1 large)", "Hummus (3 tbsp)", "Tahini sauce (2 tbsp)", "Cucumber (1/2 cup)", "Tomatoes (1/2 cup)", "Red cabbage", "Parsley"],
-          "prep_time": "20 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400",
-          "tags": ["middle-eastern", "protein-rich", "handheld"],
-          "meal_timing": "Lunch"
-        }
-      ],
-      "Keto": [
-        {
-          "id": 19,
-          "name": "🥩 Ribeye Steak with Cauliflower Mash",
-          "calories": 680,
-          "protein": 54,
-          "carbs": 12,
-          "fats": 48,
-          "fiber": 4,
-          "description": "Perfectly grilled ribeye with creamy cauliflower mash and butter-sautéed asparagus",
-          "ingredients": ["Ribeye steak (200g)", "Cauliflower (2 cups)", "Heavy cream (1/4 cup)", "Butter (3 tbsp)", "Asparagus (1 cup)", "Garlic", "Salt", "Pepper"],
-          "prep_time": "25 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=400",
-          "tags": ["low-carb", "high-fat", "satisfying"],
-          "meal_timing": "Dinner"
-        },
-        {
-          "id": 20,
-          "name": "🥑 Keto Cobb Salad",
-          "calories": 620,
-          "protein": 42,
-          "carbs": 10,
-          "fats": 46,
-          "fiber": 6,
-          "description": "Mixed greens topped with grilled chicken, bacon, eggs, avocado, and blue cheese",
-          "ingredients": ["Mixed greens (3 cups)", "Grilled chicken (150g)", "Bacon (3 strips)", "Hard-boiled eggs (2)", "Avocado (1)", "Blue cheese (40g)", "Ranch dressing (3 tbsp)"],
-          "prep_time": "15 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400",
-          "tags": ["salad", "complete-meal", "keto-classic"],
-          "meal_timing": "Lunch/Dinner"
-        }
-      ],
-      "High-Protein": [
-        {
-          "id": 21,
-          "name": "🍗 Double Chicken Power Bowl",
-          "calories": 640,
-          "protein": 72,
-          "carbs": 54,
-          "fats": 12,
-          "fiber": 8,
-          "description": "Grilled and shredded chicken breast over brown rice with broccoli and sweet potato",
-          "ingredients": ["Chicken breast (250g)", "Brown rice (1 cup)", "Broccoli (2 cups)", "Sweet potato (1 medium)", "Soy sauce", "Garlic", "Ginger"],
-          "prep_time": "30 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-          "tags": ["muscle-building", "meal-prep", "clean-eating"],
-          "meal_timing": "Post-workout"
-        },
-        {
-          "id": 22,
-          "name": "🐟 Grilled Salmon Superfood Salad",
-          "calories": 580,
-          "protein": 52,
-          "carbs": 38,
-          "fats": 24,
-          "fiber": 10,
-          "description": "Wild-caught salmon over mixed greens with quinoa, edamame, and lemon vinaigrette",
-          "ingredients": ["Salmon fillet (200g)", "Mixed greens (3 cups)", "Quinoa (1/2 cup)", "Edamame (1/2 cup)", "Cherry tomatoes (1 cup)", "Cucumber (1/2 cup)", "Lemon vinaigrette (2 tbsp)"],
-          "prep_time": "20 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
-          "tags": ["omega-3", "heart-healthy", "anti-inflammatory"],
-          "meal_timing": "Lunch/Dinner"
-        }
-      ],
-      "Mediterranean": [
-        {
-          "id": 23,
-          "name": "🍛 Mediterranean Chickpea Bowl",
-          "calories": 540,
-          "protein": 22,
-          "carbs": 72,
-          "fats": 18,
-          "fiber": 16,
-          "description": "Spiced chickpeas over couscous with roasted vegetables and tzatziki sauce",
-          "ingredients": ["Chickpeas (1 cup)", "Whole wheat couscous (3/4 cup)", "Roasted red peppers (1/2 cup)", "Zucchini (1 cup)", "Tzatziki (1/4 cup)", "Olives (10)", "Feta cheese (30g)"],
-          "prep_time": "20 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-          "tags": ["vegetarian", "mediterranean", "fiber-rich"],
-          "meal_timing": "Lunch"
-        }
-      ]
-    },
-    "dinner": {
-      "Balanced": [
-        {
-          "id": 24,
-          "name": "🍲 Hearty Beef Stir-Fry",
-          "calories": 620,
-          "protein": 48,
-          "carbs": 62,
-          "fats": 18,
-          "fiber": 8,
-          "description": "Lean beef strips with mixed vegetables over jasmine rice in savory sauce",
-          "ingredients": ["Lean beef (200g)", "Jasmine rice (1 cup)", "Broccoli (1 cup)", "Bell peppers (1 cup)", "Snap peas (1/2 cup)", "Soy sauce", "Garlic", "Ginger", "Sesame oil"],
-          "prep_time": "25 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1603073585628-b748de49f333?w=400",
-          "tags": ["asian", "quick", "family-friendly"],
-          "meal_timing": "Dinner"
-        },
-        {
-          "id": 25,
-          "name": "🐟 Baked Cod with Roasted Vegetables",
-          "calories": 480,
-          "protein": 52,
-          "carbs": 42,
-          "fats": 10,
-          "fiber": 10,
-          "description": "Herb-crusted cod fillet with colorful roasted root vegetables",
-          "ingredients": ["Cod fillet (220g)", "Sweet potato (1 large)", "Carrots (2)", "Brussels sprouts (1 cup)", "Olive oil (2 tbsp)", "Lemon", "Fresh herbs", "Garlic"],
-          "prep_time": "35 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400",
-          "tags": ["lean", "omega-3", "oven-baked"],
-          "meal_timing": "Dinner"
-        }
-      ],
-      "Vegan": [
-        {
-          "id": 26,
-          "name": "🍜 Thai Coconut Curry",
-          "calories": 580,
-          "protein": 18,
-          "carbs": 78,
-          "fats": 22,
-          "fiber": 12,
-          "description": "Creamy coconut curry with tofu, vegetables, and jasmine rice",
-          "ingredients": ["Firm tofu (200g)", "Coconut milk (1 cup)", "Jasmine rice (1 cup)", "Mixed vegetables (2 cups)", "Red curry paste (2 tbsp)", "Bamboo shoots", "Thai basil", "Lime"],
-          "prep_time": "30 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400",
-          "tags": ["thai", "creamy", "comfort-food"],
-          "meal_timing": "Dinner"
-        },
-        {
-          "id": 27,
-          "name": "🌮 Lentil Tacos with Cashew Crema",
-          "calories": 540,
-          "protein": 24,
-          "carbs": 72,
-          "fats": 16,
-          "fiber": 18,
-          "description": "Spiced lentils in corn tortillas with avocado, salsa, and cashew cream",
-          "ingredients": ["Lentils (1 cup)", "Corn tortillas (3)", "Taco seasoning", "Avocado (1/2)", "Tomato salsa (1/4 cup)", "Cashew cream (3 tbsp)", "Cilantro", "Lime", "Lettuce"],
-          "prep_time": "25 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400",
-          "tags": ["mexican", "plant-protein", "filling"],
-          "meal_timing": "Dinner"
-        }
-      ],
-      "Keto": [
-        {
-          "id": 28,
-          "name": "🥩 Keto Beef & Broccoli",
-          "calories": 640,
-          "protein": 56,
-          "carbs": 12,
-          "fats": 42,
-          "fiber": 4,
-          "description": "Tender beef strips with broccoli in savory sauce over cauliflower rice",
-          "ingredients": ["Beef sirloin (220g)", "Broccoli (2 cups)", "Cauliflower rice (2 cups)", "Coconut aminos (3 tbsp)", "Sesame oil", "Garlic", "Ginger", "Butter (2 tbsp)"],
-          "prep_time": "20 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1603073585628-b748de49f333?w=400",
-          "tags": ["asian-inspired", "low-carb", "satisfying"],
-          "meal_timing": "Dinner"
-        },
-        {
-          "id": 29,
-          "name": "🍗 Creamy Tuscan Chicken",
-          "calories": 680,
-          "protein": 58,
-          "carbs": 10,
-          "fats": 46,
-          "fiber": 3,
-          "description": "Pan-seared chicken in creamy sun-dried tomato sauce with spinach",
-          "ingredients": ["Chicken thighs (250g)", "Heavy cream (1/2 cup)", "Sun-dried tomatoes (1/4 cup)", "Spinach (2 cups)", "Parmesan (40g)", "Garlic", "Italian herbs", "Butter"],
-          "prep_time": "25 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
-          "tags": ["italian", "creamy", "restaurant-quality"],
-          "meal_timing": "Dinner"
-        }
-      ],
-      "High-Protein": [
-        {
-          "id": 30,
-          "name": "💪 Triple Protein Power Bowl",
-          "calories": 720,
-          "protein": 82,
-          "carbs": 58,
-          "fats": 16,
-          "fiber": 10,
-          "description": "Grilled chicken, tuna, and cottage cheese over quinoa with vegetables",
-          "ingredients": ["Grilled chicken (120g)", "Canned tuna (100g)", "Low-fat cottage cheese (1/2 cup)", "Quinoa (1 cup)", "Steamed broccoli (1 cup)", "Carrots (1/2 cup)", "Lemon", "Herbs"],
-          "prep_time": "20 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-          "tags": ["bodybuilding", "extreme-protein", "meal-prep"],
-          "meal_timing": "Post-workout"
-        },
-        {
-          "id": 31,
-          "name": "🦐 Garlic Shrimp Zoodle Bowl",
-          "calories": 480,
-          "protein": 64,
-          "carbs": 28,
-          "fats": 12,
-          "fiber": 8,
-          "description": "Jumbo shrimp sautéed in garlic over zucchini noodles with cherry tomatoes",
-          "ingredients": ["Jumbo shrimp (300g)", "Zucchini noodles (3 cups)", "Cherry tomatoes (1 cup)", "Garlic (4 cloves)", "Olive oil (1 tbsp)", "White wine (2 tbsp)", "Parsley", "Lemon"],
-          "prep_time": "15 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
-          "tags": ["seafood", "low-carb", "quick"],
-          "meal_timing": "Dinner"
-        }
-      ],
-      "Mediterranean": [
-        {
-          "id": 32,
-          "name": "🐟 Greek-Style Baked Salmon",
-          "calories": 620,
-          "protein": 54,
-          "carbs": 48,
-          "fats": 24,
-          "fiber": 8,
-          "description": "Lemon-herb salmon with roasted potatoes, olives, and feta cheese",
-          "ingredients": ["Salmon fillet (220g)", "Baby potatoes (1.5 cups)", "Kalamata olives (1/4 cup)", "Feta cheese (40g)", "Cherry tomatoes (1 cup)", "Lemon", "Oregano", "Olive oil"],
-          "prep_time": "30 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
-          "tags": ["greek", "omega-3", "one-pan"],
-          "meal_timing": "Dinner"
-        }
-      ]
-    },
-    "snacks": {
-      "Balanced": [
-        {
-          "id": 33,
-          "name": "🍎 Apple with Almond Butter",
-          "calories": 220,
-          "protein": 6,
-          "carbs": 28,
-          "fats": 10,
-          "fiber": 6,
-          "description": "Crisp apple slices with creamy almond butter",
-          "ingredients": ["Apple (1 medium)", "Almond butter (2 tbsp)", "Cinnamon (optional)"],
-          "prep_time": "2 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=400",
-          "tags": ["portable", "sweet", "energy"],
-          "meal_timing": "Mid-morning/afternoon"
-        },
-        {
-          "id": 34,
-          "name": "🥜 Trail Mix Power Blend",
-          "calories": 280,
-          "protein": 8,
-          "carbs": 32,
-          "fats": 14,
-          "fiber": 5,
-          "description": "Custom mix of almonds, cashews, dried cranberries, and dark chocolate chips",
-          "ingredients": ["Almonds (1/4 cup)", "Cashews (2 tbsp)", "Dried cranberries (2 tbsp)", "Dark chocolate chips (1 tbsp)", "Pumpkin seeds (1 tbsp)"],
-          "prep_time": "1 min",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400",
-          "tags": ["hiking", "portable", "energy-dense"],
-          "meal_timing": "Pre-workout"
-        }
-      ],
-      "Vegan": [
-        {
-          "id": 35,
-          "name": "🥑 Guacamole with Veggie Sticks",
-          "calories": 180,
-          "protein": 4,
-          "carbs": 18,
-          "fats": 12,
-          "fiber": 10,
-          "description": "Fresh guacamole with carrot and celery sticks",
-          "ingredients": ["Avocado (1)", "Lime juice", "Salt", "Carrots (1 cup)", "Celery (1 cup)", "Cherry tomatoes", "Cilantro"],
-          "prep_time": "8 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400",
-          "tags": ["fresh", "healthy-fats", "crunchy"],
-          "meal_timing": "Anytime"
-        },
-        {
-          "id": 36,
-          "name": "🍪 Energy Balls",
-          "calories": 240,
-          "protein": 8,
-          "carbs": 32,
-          "fats": 10,
-          "fiber": 6,
-          "description": "No-bake energy balls with dates, oats, and nut butter",
-          "ingredients": ["Dates (1/2 cup)", "Rolled oats (1/2 cup)", "Almond butter (2 tbsp)", "Chia seeds (1 tbsp)", "Vanilla extract", "Coconut flakes"],
-          "prep_time": "15 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1587241321921-91a834d85d1f?w=400",
-          "tags": ["meal-prep", "sweet", "satisfying"],
-          "meal_timing": "Pre/post-workout"
-        }
-      ],
-      "Keto": [
-        {
-          "id": 37,
-          "name": "🧀 Cheese & Salami Platter",
-          "calories": 320,
-          "protein": 22,
-          "carbs": 4,
-          "fats": 26,
-          "fiber": 0,
-          "description": "Assorted cheeses with salami and olives",
-          "ingredients": ["Cheddar cheese (50g)", "Mozzarella (30g)", "Salami (40g)", "Olives (10)", "Cucumber slices"],
-          "prep_time": "3 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1452251889946-8da5f03a7f13?w=400",
-          "tags": ["quick", "savory", "zero-prep"],
-          "meal_timing": "Anytime"
-        },
-        {
-          "id": 38,
-          "name": "🥓 Bacon-Wrapped Jalapeño Poppers",
-          "calories": 380,
-          "protein": 18,
-          "carbs": 6,
-          "fats": 32,
-          "fiber": 1,
-          "description": "Jalapeños stuffed with cream cheese, wrapped in bacon",
-          "ingredients": ["Jalapeños (4)", "Cream cheese (60g)", "Bacon (4 strips)", "Cheddar cheese (30g)", "Garlic powder"],
-          "prep_time": "25 mins",
-          "difficulty": "Medium",
-          "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
-          "tags": ["spicy", "party-food", "indulgent"],
-          "meal_timing": "Afternoon/evening"
-        }
-      ],
-      "High-Protein": [
-        {
-          "id": 39,
-          "name": "💪 Protein Bar Homemade",
-          "calories": 280,
-          "protein": 28,
-          "carbs": 24,
-          "fats": 8,
-          "fiber": 4,
-          "description": "Homemade protein bar with whey, oats, and peanut butter",
-          "ingredients": ["Whey protein (1 scoop)", "Rolled oats (1/2 cup)", "Peanut butter (2 tbsp)", "Honey (1 tbsp)", "Dark chocolate chips (1 tbsp)"],
-          "prep_time": "10 mins + chill",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1606312619070-d48b4cda8b0c?w=400",
-          "tags": ["meal-prep", "portable", "muscle-building"],
-          "meal_timing": "Post-workout"
-        },
-        {
-          "id": 40,
-          "name": "🥚 Deviled Eggs Protein Boost",
-          "calories": 220,
-          "protein": 24,
-          "carbs": 2,
-          "fats": 14,
-          "fiber": 0,
-          "description": "Classic deviled eggs made with Greek yogurt instead of mayo",
-          "ingredients": ["Hard-boiled eggs (4)", "Greek yogurt (2 tbsp)", "Dijon mustard (1 tsp)", "Paprika", "Chives"],
-          "prep_time": "15 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1587486937303-68cfb01f1e41?w=400",
-          "tags": ["classic", "protein-rich", "picnic"],
-          "meal_timing": "Anytime"
-        }
-      ],
-      "Mediterranean": [
-        {
-          "id": 41,
-          "name": "🫒 Hummus & Veggie Plate",
-          "calories": 260,
-          "protein": 10,
-          "carbs": 32,
-          "fats": 12,
-          "fiber": 10,
-          "description": "Creamy hummus with cucumber, bell peppers, and whole wheat pita",
-          "ingredients": ["Hummus (1/2 cup)", "Cucumber (1 cup sliced)", "Bell peppers (1 cup)", "Whole wheat pita (1/2)", "Olives (5)", "Cherry tomatoes"],
-          "prep_time": "5 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1571805618078-97f35419301c?w=400",
-          "tags": ["fresh", "mediterranean", "crunchy"],
-          "meal_timing": "Mid-afternoon"
-        },
-        {
-          "id": 42,
-          "name": "🍇 Greek Yogurt Honey Bowl",
-          "calories": 240,
-          "protein": 18,
-          "carbs": 34,
-          "fats": 4,
-          "fiber": 3,
-          "description": "Thick Greek yogurt with honey, fresh figs, and pistachios",
-          "ingredients": ["Greek yogurt (200g)", "Honey (1 tbsp)", "Fresh figs (2)", "Pistachios (1 tbsp)", "Mint leaves"],
-          "prep_time": "3 mins",
-          "difficulty": "Easy",
-          "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
-          "tags": ["sweet", "probiotic", "elegant"],
-          "meal_timing": "Dessert/snack"
-        }
-      ]
-    }
+  "breakfast": {
+    "Balanced": [
+      {
+        "id": 1,
+        "name": "\ud83e\udd63 Power Oatmeal Bowl",
+        "calories": 380,
+        "protein": 12,
+        "carbs": 52,
+        "fats": 14,
+        "fiber": 8,
+        "description": "Steel-cut oats topped with almond butter, sliced banana, chia seeds, and a drizzle of honey",
+        "ingredients": [
+          "Steel-cut oats (1 cup)",
+          "Almond butter (2 tbsp)",
+          "Banana (1 medium)",
+          "Chia seeds (1 tbsp)",
+          "Honey (1 tsp)"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400",
+        "tags": [
+          "high-fiber",
+          "energy-boosting",
+          "heart-healthy"
+        ],
+        "meal_timing": "Pre-workout"
+      },
+      {
+        "id": 2,
+        "name": "\ud83c\udf73 Mediterranean Scramble",
+        "calories": 420,
+        "protein": 28,
+        "carbs": 35,
+        "fats": 18,
+        "fiber": 6,
+        "description": "Fluffy eggs scrambled with feta cheese, spinach, tomatoes, and whole wheat toast",
+        "ingredients": [
+          "Eggs (3 whole)",
+          "Feta cheese (30g)",
+          "Fresh spinach (1 cup)",
+          "Cherry tomatoes (1/2 cup)",
+          "Whole wheat toast (2 slices)",
+          "Olive oil (1 tsp)"
+        ],
+        "prep_time": "12 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
+        "tags": [
+          "protein-rich",
+          "mediterranean",
+          "muscle-building"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 3,
+        "name": "\ud83e\udd51 Avocado Toast Deluxe",
+        "calories": 440,
+        "protein": 22,
+        "carbs": 42,
+        "fats": 21,
+        "fiber": 12,
+        "description": "Smashed avocado on sourdough with poached eggs, microgreens, and hemp seeds",
+        "ingredients": [
+          "Sourdough bread (2 slices)",
+          "Avocado (1 whole)",
+          "Eggs (2 poached)",
+          "Microgreens (handful)",
+          "Hemp seeds (1 tbsp)",
+          "Lemon juice",
+          "Red pepper flakes"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400",
+        "tags": [
+          "omega-3",
+          "instagram-worthy",
+          "brain-food"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 4,
+        "name": "\ud83e\uded0 Berry Protein Parfait",
+        "calories": 360,
+        "protein": 25,
+        "carbs": 45,
+        "fats": 8,
+        "fiber": 7,
+        "description": "Layers of Greek yogurt, mixed berries, granola, and a touch of maple syrup",
+        "ingredients": [
+          "Greek yogurt (200g)",
+          "Mixed berries (1 cup)",
+          "Granola (1/4 cup)",
+          "Maple syrup (1 tsp)",
+          "Almonds (10 sliced)"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "quick",
+          "antioxidant-rich",
+          "probiotic"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 5,
+        "name": "\ud83e\udd5e Protein Pancake Stack",
+        "calories": 410,
+        "protein": 32,
+        "carbs": 48,
+        "fats": 10,
+        "fiber": 5,
+        "description": "Fluffy protein pancakes topped with fresh berries and sugar-free syrup",
+        "ingredients": [
+          "Protein powder (1 scoop)",
+          "Banana (1 mashed)",
+          "Eggs (2)",
+          "Oats (1/2 cup)",
+          "Baking powder (1 tsp)",
+          "Berries (1/2 cup)",
+          "Sugar-free syrup"
+        ],
+        "prep_time": "18 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=400",
+        "tags": [
+          "muscle-building",
+          "filling",
+          "weekend-special"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 101,
+        "name": "\ud83c\udf5e French Toast Protein",
+        "calories": 395,
+        "protein": 24,
+        "carbs": 48,
+        "fats": 12,
+        "fiber": 6,
+        "description": "Whole wheat French toast with cinnamon, Greek yogurt, and fresh strawberries",
+        "ingredients": [
+          "Whole wheat bread (2 slices)",
+          "Eggs (2)",
+          "Greek yogurt (1/2 cup)",
+          "Cinnamon",
+          "Vanilla extract",
+          "Strawberries (1 cup)",
+          "Honey (1 tsp)"
+        ],
+        "prep_time": "12 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=400",
+        "tags": [
+          "breakfast-classic",
+          "protein-packed",
+          "sweet"
+        ],
+        "meal_timing": "Weekend brunch"
+      },
+      {
+        "id": 102,
+        "name": "\ud83e\udd5a Veggie Omelet Supreme",
+        "calories": 385,
+        "protein": 26,
+        "carbs": 28,
+        "fats": 18,
+        "fiber": 7,
+        "description": "Three-egg omelet loaded with mushrooms, peppers, onions, and cheddar cheese",
+        "ingredients": [
+          "Eggs (3)",
+          "Mushrooms (1/2 cup)",
+          "Bell peppers (1/2 cup)",
+          "Onions (1/4 cup)",
+          "Cheddar cheese (30g)",
+          "Whole wheat toast (1 slice)"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=400",
+        "tags": [
+          "vegetable-loaded",
+          "satisfying",
+          "classic"
+        ],
+        "meal_timing": "Morning"
+      },
+      {
+        "id": 103,
+        "name": "\ud83c\udf4c Banana Walnut Smoothie Bowl",
+        "calories": 425,
+        "protein": 18,
+        "carbs": 56,
+        "fats": 16,
+        "fiber": 9,
+        "description": "Thick banana smoothie bowl topped with walnuts, granola, and coconut flakes",
+        "ingredients": [
+          "Frozen banana (2)",
+          "Protein powder (1 scoop)",
+          "Almond milk (1/2 cup)",
+          "Walnuts (1/4 cup)",
+          "Granola (3 tbsp)",
+          "Coconut flakes",
+          "Honey"
+        ],
+        "prep_time": "8 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400",
+        "tags": [
+          "smoothie-bowl",
+          "instagram-worthy",
+          "nutrient-dense"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 104,
+        "name": "\ud83e\uddc7 Belgian Waffle Delight",
+        "calories": 455,
+        "protein": 20,
+        "carbs": 62,
+        "fats": 14,
+        "fiber": 6,
+        "description": "Whole grain Belgian waffle with Greek yogurt, mixed berries, and almond butter",
+        "ingredients": [
+          "Whole grain waffle mix (1 serving)",
+          "Greek yogurt (1/2 cup)",
+          "Mixed berries (3/4 cup)",
+          "Almond butter (1 tbsp)",
+          "Maple syrup (1 tbsp)"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400",
+        "tags": [
+          "weekend-treat",
+          "balanced",
+          "family-friendly"
+        ],
+        "meal_timing": "Weekend brunch"
+      },
+      {
+        "id": 105,
+        "name": "\ud83c\udf73 Breakfast Burrito Bowl",
+        "calories": 490,
+        "protein": 32,
+        "carbs": 52,
+        "fats": 18,
+        "fiber": 10,
+        "description": "Scrambled eggs over brown rice with black beans, salsa, and avocado",
+        "ingredients": [
+          "Eggs (3)",
+          "Brown rice (3/4 cup)",
+          "Black beans (1/2 cup)",
+          "Salsa (1/4 cup)",
+          "Avocado (1/2)",
+          "Cheddar cheese (20g)",
+          "Cilantro"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+        "tags": [
+          "mexican-inspired",
+          "filling",
+          "complete-meal"
+        ],
+        "meal_timing": "Morning"
+      }
+    ],
+    "Vegan": [
+      {
+        "id": 6,
+        "name": "\ud83c\udf31 Green Goddess Smoothie Bowl",
+        "calories": 390,
+        "protein": 15,
+        "carbs": 58,
+        "fats": 12,
+        "fiber": 14,
+        "description": "Thick smoothie bowl with spinach, banana, spirulina, topped with granola and fresh fruits",
+        "ingredients": [
+          "Spinach (2 cups)",
+          "Frozen banana (2)",
+          "Spirulina powder (1 tsp)",
+          "Almond milk (1 cup)",
+          "Granola (1/4 cup)",
+          "Kiwi slices",
+          "Coconut flakes"
+        ],
+        "prep_time": "8 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400",
+        "tags": [
+          "detox",
+          "energizing",
+          "superfood"
+        ],
+        "meal_timing": "Morning boost"
+      },
+      {
+        "id": 7,
+        "name": "\ud83e\udd50 Tofu Scramble Supreme",
+        "calories": 420,
+        "protein": 24,
+        "carbs": 38,
+        "fats": 18,
+        "fiber": 8,
+        "description": "Seasoned crumbled tofu with turmeric, veggies, and nutritional yeast",
+        "ingredients": [
+          "Firm tofu (200g)",
+          "Turmeric (1/2 tsp)",
+          "Nutritional yeast (2 tbsp)",
+          "Bell peppers (1/2 cup)",
+          "Mushrooms (1/2 cup)",
+          "Spinach (1 cup)",
+          "Whole wheat toast (2 slices)"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "plant-protein",
+          "savory",
+          "cholesterol-free"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 8,
+        "name": "\ud83c\udf4c Peanut Butter Banana Wrap",
+        "calories": 450,
+        "protein": 18,
+        "carbs": 62,
+        "fats": 16,
+        "fiber": 10,
+        "description": "Whole wheat tortilla spread with peanut butter, banana slices, and hemp seeds",
+        "ingredients": [
+          "Whole wheat tortilla (1 large)",
+          "Natural peanut butter (3 tbsp)",
+          "Banana (1 large)",
+          "Hemp seeds (1 tbsp)",
+          "Cinnamon",
+          "Agave nectar (optional)"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400",
+        "tags": [
+          "quick",
+          "portable",
+          "kid-friendly"
+        ],
+        "meal_timing": "Pre-workout"
+      },
+      {
+        "id": 106,
+        "name": "\ud83e\udd65 Chia Coconut Pudding",
+        "calories": 340,
+        "protein": 12,
+        "carbs": 42,
+        "fats": 14,
+        "fiber": 16,
+        "description": "Creamy chia pudding made with coconut milk, topped with mango and pistachios",
+        "ingredients": [
+          "Chia seeds (1/4 cup)",
+          "Coconut milk (1 cup)",
+          "Maple syrup (1 tbsp)",
+          "Vanilla extract",
+          "Mango chunks (1/2 cup)",
+          "Pistachios (2 tbsp)",
+          "Coconut flakes"
+        ],
+        "prep_time": "5 mins + overnight",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "make-ahead",
+          "omega-3",
+          "tropical"
+        ],
+        "meal_timing": "Morning"
+      },
+      {
+        "id": 107,
+        "name": "\ud83c\udf3e Quinoa Breakfast Bowl",
+        "calories": 410,
+        "protein": 16,
+        "carbs": 58,
+        "fats": 14,
+        "fiber": 12,
+        "description": "Warm quinoa with almond milk, cinnamon, dried fruits, and nuts",
+        "ingredients": [
+          "Quinoa (1 cup cooked)",
+          "Almond milk (1/2 cup)",
+          "Raisins (2 tbsp)",
+          "Almonds (1/4 cup)",
+          "Cinnamon",
+          "Maple syrup (1 tbsp)",
+          "Apple slices"
+        ],
+        "prep_time": "12 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400",
+        "tags": [
+          "protein-rich",
+          "warming",
+          "gluten-free"
+        ],
+        "meal_timing": "Morning"
+      },
+      {
+        "id": 108,
+        "name": "\ud83e\udd5e Vegan Blueberry Pancakes",
+        "calories": 385,
+        "protein": 14,
+        "carbs": 64,
+        "fats": 10,
+        "fiber": 8,
+        "description": "Fluffy vegan pancakes loaded with fresh blueberries and maple syrup",
+        "ingredients": [
+          "Flour (1 cup)",
+          "Almond milk (1 cup)",
+          "Flax egg (1)",
+          "Baking powder (2 tsp)",
+          "Blueberries (1/2 cup)",
+          "Maple syrup",
+          "Vegan butter"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=400",
+        "tags": [
+          "fluffy",
+          "berry-loaded",
+          "crowd-pleaser"
+        ],
+        "meal_timing": "Weekend brunch"
+      },
+      {
+        "id": 109,
+        "name": "\ud83c\udf5e Avocado Hummus Toast",
+        "calories": 395,
+        "protein": 16,
+        "carbs": 48,
+        "fats": 18,
+        "fiber": 14,
+        "description": "Whole grain toast with hummus, smashed avocado, and roasted chickpeas",
+        "ingredients": [
+          "Whole grain bread (2 slices)",
+          "Hummus (3 tbsp)",
+          "Avocado (1/2)",
+          "Roasted chickpeas (1/4 cup)",
+          "Red pepper flakes",
+          "Lemon juice",
+          "Microgreens"
+        ],
+        "prep_time": "8 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400",
+        "tags": [
+          "savory",
+          "plant-protein",
+          "filling"
+        ],
+        "meal_timing": "Morning"
+      }
+    ],
+    "Keto": [
+      {
+        "id": 9,
+        "name": "\ud83e\udd53 Keto Breakfast Plate",
+        "calories": 520,
+        "protein": 32,
+        "carbs": 6,
+        "fats": 42,
+        "fiber": 2,
+        "description": "Scrambled eggs cooked in butter with bacon, avocado, and saut\u00e9ed spinach",
+        "ingredients": [
+          "Eggs (3 whole)",
+          "Bacon (3 strips)",
+          "Avocado (1/2)",
+          "Spinach (2 cups)",
+          "Butter (1 tbsp)",
+          "Cheddar cheese (30g)"
+        ],
+        "prep_time": "12 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400",
+        "tags": [
+          "low-carb",
+          "high-fat",
+          "ketogenic"
+        ],
+        "meal_timing": "Morning"
+      },
+      {
+        "id": 10,
+        "name": "\ud83e\uddc0 Cream Cheese Pancakes",
+        "calories": 480,
+        "protein": 28,
+        "carbs": 8,
+        "fats": 38,
+        "fiber": 1,
+        "description": "Fluffy keto pancakes made with cream cheese and almond flour",
+        "ingredients": [
+          "Cream cheese (60g)",
+          "Eggs (3)",
+          "Almond flour (1/4 cup)",
+          "Vanilla extract",
+          "Butter (for cooking)",
+          "Sugar-free syrup",
+          "Berries (small handful)"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400",
+        "tags": [
+          "grain-free",
+          "low-carb",
+          "indulgent"
+        ],
+        "meal_timing": "Weekend treat"
+      },
+      {
+        "id": 110,
+        "name": "\ud83c\udf73 Keto Egg Muffins",
+        "calories": 340,
+        "protein": 26,
+        "carbs": 5,
+        "fats": 24,
+        "fiber": 1,
+        "description": "Baked egg muffins with cheese, sausage, and bell peppers",
+        "ingredients": [
+          "Eggs (4)",
+          "Sausage (100g)",
+          "Cheddar cheese (40g)",
+          "Bell peppers (1/2 cup)",
+          "Onions (2 tbsp)",
+          "Heavy cream (2 tbsp)"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
+        "tags": [
+          "meal-prep",
+          "portable",
+          "protein-rich"
+        ],
+        "meal_timing": "Grab-and-go"
+      },
+      {
+        "id": 111,
+        "name": "\ud83e\udd51 Keto Avocado Bowl",
+        "calories": 460,
+        "protein": 22,
+        "carbs": 10,
+        "fats": 38,
+        "fiber": 8,
+        "description": "Halved avocado filled with scrambled eggs, bacon bits, and cheese",
+        "ingredients": [
+          "Avocado (1 large)",
+          "Eggs (2)",
+          "Bacon (2 strips)",
+          "Cheddar cheese (20g)",
+          "Chives",
+          "Salt",
+          "Pepper"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400",
+        "tags": [
+          "instagram-worthy",
+          "nutrient-dense",
+          "quick"
+        ],
+        "meal_timing": "Morning"
+      },
+      {
+        "id": 112,
+        "name": "\ud83e\uddc8 Bulletproof Coffee Bowl",
+        "calories": 420,
+        "protein": 8,
+        "carbs": 6,
+        "fats": 42,
+        "fiber": 2,
+        "description": "Coffee blended with butter and MCT oil, served with macadamia nuts",
+        "ingredients": [
+          "Brewed coffee (2 cups)",
+          "Grass-fed butter (2 tbsp)",
+          "MCT oil (1 tbsp)",
+          "Macadamia nuts (1/4 cup)",
+          "Sugar-free chocolate (10g)",
+          "Vanilla extract"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400",
+        "tags": [
+          "energy-boost",
+          "brain-fuel",
+          "morning-ritual"
+        ],
+        "meal_timing": "Morning"
+      }
+    ],
+    "High-Protein": [
+      {
+        "id": 11,
+        "name": "\ud83d\udcaa Mega Protein Shake",
+        "calories": 480,
+        "protein": 52,
+        "carbs": 42,
+        "fats": 12,
+        "fiber": 6,
+        "description": "Blended shake with protein powder, oats, banana, peanut butter, and milk",
+        "ingredients": [
+          "Whey protein (2 scoops)",
+          "Rolled oats (1/2 cup)",
+          "Banana (1)",
+          "Peanut butter (2 tbsp)",
+          "Milk (1.5 cups)",
+          "Ice cubes"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400",
+        "tags": [
+          "muscle-gain",
+          "quick",
+          "post-workout"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 12,
+        "name": "\ud83c\udf57 Chicken & Egg White Bowl",
+        "calories": 420,
+        "protein": 58,
+        "carbs": 28,
+        "fats": 8,
+        "fiber": 4,
+        "description": "Grilled chicken breast with scrambled egg whites, quinoa, and steamed broccoli",
+        "ingredients": [
+          "Chicken breast (150g)",
+          "Egg whites (6)",
+          "Quinoa (1/2 cup cooked)",
+          "Broccoli (1 cup)",
+          "Garlic powder",
+          "Black pepper"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "bodybuilding",
+          "lean",
+          "meal-prep"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 113,
+        "name": "\ud83e\udd69 Steak & Eggs Classic",
+        "calories": 540,
+        "protein": 62,
+        "carbs": 12,
+        "fats": 26,
+        "fiber": 2,
+        "description": "Grilled sirloin steak with scrambled eggs and saut\u00e9ed mushrooms",
+        "ingredients": [
+          "Sirloin steak (150g)",
+          "Eggs (3)",
+          "Mushrooms (1 cup)",
+          "Onions (1/4 cup)",
+          "Butter (1 tbsp)",
+          "Garlic",
+          "Herbs"
+        ],
+        "prep_time": "18 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=400",
+        "tags": [
+          "iron-rich",
+          "satisfying",
+          "carnivore"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 114,
+        "name": "\ud83d\udc1f Smoked Salmon Protein Plate",
+        "calories": 425,
+        "protein": 48,
+        "carbs": 32,
+        "fats": 12,
+        "fiber": 6,
+        "description": "Smoked salmon with scrambled eggs, whole grain toast, and cream cheese",
+        "ingredients": [
+          "Smoked salmon (120g)",
+          "Eggs (2)",
+          "Whole grain bread (2 slices)",
+          "Low-fat cream cheese (2 tbsp)",
+          "Capers",
+          "Red onion",
+          "Dill"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+        "tags": [
+          "omega-3",
+          "luxurious",
+          "quick"
+        ],
+        "meal_timing": "Brunch"
+      },
+      {
+        "id": 115,
+        "name": "\ud83e\udd5b Triple Protein Parfait",
+        "calories": 465,
+        "protein": 54,
+        "carbs": 48,
+        "fats": 8,
+        "fiber": 5,
+        "description": "Layered Greek yogurt, cottage cheese, protein powder with berries and granola",
+        "ingredients": [
+          "Greek yogurt (150g)",
+          "Cottage cheese (100g)",
+          "Protein powder (1 scoop)",
+          "Mixed berries (1 cup)",
+          "Granola (3 tbsp)",
+          "Honey (1 tsp)"
+        ],
+        "prep_time": "6 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "protein-loaded",
+          "quick",
+          "muscle-building"
+        ],
+        "meal_timing": "Post-workout"
+      }
+    ],
+    "Mediterranean": [
+      {
+        "id": 13,
+        "name": "\ud83e\uded2 Greek Yogurt Power Bowl",
+        "calories": 410,
+        "protein": 26,
+        "carbs": 48,
+        "fats": 14,
+        "fiber": 7,
+        "description": "Thick Greek yogurt with honey, walnuts, figs, and whole grain toast",
+        "ingredients": [
+          "Greek yogurt (250g)",
+          "Honey (1 tbsp)",
+          "Walnuts (1/4 cup)",
+          "Fresh figs (2)",
+          "Whole grain toast (1 slice)",
+          "Cinnamon"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "mediterranean",
+          "probiotic",
+          "brain-food"
+        ],
+        "meal_timing": "Morning"
+      },
+      {
+        "id": 14,
+        "name": "\ud83e\udd56 Shakshuka with Pita",
+        "calories": 450,
+        "protein": 22,
+        "carbs": 42,
+        "fats": 20,
+        "fiber": 8,
+        "description": "Poached eggs in spicy tomato sauce with whole wheat pita bread",
+        "ingredients": [
+          "Eggs (2)",
+          "Tomato sauce (1 cup)",
+          "Bell peppers (1/2 cup)",
+          "Onion (1/4)",
+          "Cumin",
+          "Paprika",
+          "Whole wheat pita (1)",
+          "Feta cheese (30g)",
+          "Cilantro"
+        ],
+        "prep_time": "18 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1587376634689-c8c76b0e5b8f?w=400",
+        "tags": [
+          "middle-eastern",
+          "spicy",
+          "one-pan"
+        ],
+        "meal_timing": "Brunch"
+      },
+      {
+        "id": 116,
+        "name": "\ud83e\udd59 Mediterranean Breakfast Wrap",
+        "calories": 425,
+        "protein": 24,
+        "carbs": 46,
+        "fats": 16,
+        "fiber": 8,
+        "description": "Whole wheat wrap with scrambled eggs, feta, olives, and sun-dried tomatoes",
+        "ingredients": [
+          "Whole wheat wrap (1)",
+          "Eggs (2)",
+          "Feta cheese (30g)",
+          "Olives (8)",
+          "Sun-dried tomatoes (2 tbsp)",
+          "Spinach (1 cup)",
+          "Hummus (2 tbsp)"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+        "tags": [
+          "portable",
+          "mediterranean",
+          "filling"
+        ],
+        "meal_timing": "On-the-go"
+      },
+      {
+        "id": 117,
+        "name": "\ud83c\udf6f Labneh Bowl with Dates",
+        "calories": 380,
+        "protein": 20,
+        "carbs": 52,
+        "fats": 12,
+        "fiber": 6,
+        "description": "Creamy labneh topped with dates, honey, pistachios, and olive oil drizzle",
+        "ingredients": [
+          "Labneh (200g)",
+          "Dates (4)",
+          "Honey (1 tbsp)",
+          "Pistachios (2 tbsp)",
+          "Olive oil drizzle",
+          "Whole wheat pita (1/2)",
+          "Mint"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "middle-eastern",
+          "probiotic",
+          "sweet"
+        ],
+        "meal_timing": "Morning"
+      }
+    ]
+  },
+  "lunch": {
+    "Balanced": [
+      {
+        "id": 15,
+        "name": "\ud83e\udd57 Grilled Chicken Buddha Bowl",
+        "calories": 580,
+        "protein": 46,
+        "carbs": 58,
+        "fats": 16,
+        "fiber": 12,
+        "description": "Grilled chicken over quinoa with roasted vegetables, avocado, and tahini dressing",
+        "ingredients": [
+          "Chicken breast (180g)",
+          "Quinoa (3/4 cup cooked)",
+          "Sweet potato (1 cup cubed)",
+          "Chickpeas (1/2 cup)",
+          "Avocado (1/2)",
+          "Mixed greens",
+          "Tahini dressing (2 tbsp)"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "complete-meal",
+          "meal-prep",
+          "nutrient-dense"
+        ],
+        "meal_timing": "Lunch"
+      },
+      {
+        "id": 16,
+        "name": "\ud83c\udf5d Whole Wheat Pasta Primavera",
+        "calories": 540,
+        "protein": 24,
+        "carbs": 78,
+        "fats": 14,
+        "fiber": 10,
+        "description": "Whole wheat pasta tossed with seasonal vegetables and light pesto sauce",
+        "ingredients": [
+          "Whole wheat penne (100g dry)",
+          "Zucchini (1)",
+          "Cherry tomatoes (1 cup)",
+          "Broccoli (1 cup)",
+          "Pesto (2 tbsp)",
+          "Parmesan (20g)",
+          "Olive oil"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+        "tags": [
+          "vegetarian",
+          "italian",
+          "comfort-food"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      },
+      {
+        "id": 118,
+        "name": "\ud83e\udd6a Turkey Avocado Club Sandwich",
+        "calories": 520,
+        "protein": 38,
+        "carbs": 48,
+        "fats": 18,
+        "fiber": 10,
+        "description": "Triple-decker sandwich with turkey, bacon, avocado, lettuce, and tomato",
+        "ingredients": [
+          "Whole wheat bread (3 slices)",
+          "Turkey breast (120g)",
+          "Bacon (2 strips)",
+          "Avocado (1/2)",
+          "Lettuce",
+          "Tomato (2 slices)",
+          "Mayo (1 tbsp)"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+        "tags": [
+          "classic",
+          "portable",
+          "satisfying"
+        ],
+        "meal_timing": "Lunch"
+      },
+      {
+        "id": 119,
+        "name": "\ud83c\udf72 Chicken Vegetable Soup",
+        "calories": 380,
+        "protein": 32,
+        "carbs": 42,
+        "fats": 8,
+        "fiber": 8,
+        "description": "Hearty soup with chicken, mixed vegetables, and whole grain crackers",
+        "ingredients": [
+          "Chicken breast (150g)",
+          "Mixed vegetables (2 cups)",
+          "Chicken broth (2 cups)",
+          "Whole grain crackers (6)",
+          "Herbs",
+          "Garlic",
+          "Onion"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400",
+        "tags": [
+          "warming",
+          "immune-boost",
+          "comfort-food"
+        ],
+        "meal_timing": "Lunch"
+      },
+      {
+        "id": 120,
+        "name": "\ud83c\udf2e Chicken Burrito Bowl",
+        "calories": 620,
+        "protein": 44,
+        "carbs": 68,
+        "fats": 18,
+        "fiber": 14,
+        "description": "Grilled chicken over cilantro-lime rice with black beans, corn, and pico de gallo",
+        "ingredients": [
+          "Chicken breast (180g)",
+          "Brown rice (1 cup)",
+          "Black beans (3/4 cup)",
+          "Corn (1/2 cup)",
+          "Pico de gallo (1/4 cup)",
+          "Guacamole (2 tbsp)",
+          "Sour cream (2 tbsp)",
+          "Cilantro",
+          "Lime"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+        "tags": [
+          "mexican",
+          "customizable",
+          "filling"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      }
+    ],
+    "Vegan": [
+      {
+        "id": 17,
+        "name": "\ud83c\udf2f Chipotle Black Bean Burrito Bowl",
+        "calories": 560,
+        "protein": 22,
+        "carbs": 84,
+        "fats": 16,
+        "fiber": 18,
+        "description": "Brown rice, black beans, corn, salsa, guacamole, and cashew cream",
+        "ingredients": [
+          "Brown rice (1 cup)",
+          "Black beans (3/4 cup)",
+          "Corn (1/2 cup)",
+          "Bell peppers (1/2 cup)",
+          "Tomato salsa (1/4 cup)",
+          "Guacamole (3 tbsp)",
+          "Cashew cream (2 tbsp)",
+          "Cilantro",
+          "Lime"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+        "tags": [
+          "mexican",
+          "filling",
+          "fiber-rich"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      },
+      {
+        "id": 18,
+        "name": "\ud83e\udd59 Falafel Wrap Supreme",
+        "calories": 520,
+        "protein": 20,
+        "carbs": 68,
+        "fats": 18,
+        "fiber": 14,
+        "description": "Homemade falafel in whole wheat wrap with tahini, hummus, and fresh vegetables",
+        "ingredients": [
+          "Falafel (4 pieces)",
+          "Whole wheat wrap (1 large)",
+          "Hummus (3 tbsp)",
+          "Tahini sauce (2 tbsp)",
+          "Cucumber (1/2 cup)",
+          "Tomatoes (1/2 cup)",
+          "Red cabbage",
+          "Parsley"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400",
+        "tags": [
+          "middle-eastern",
+          "protein-rich",
+          "handheld"
+        ],
+        "meal_timing": "Lunch"
+      },
+      {
+        "id": 121,
+        "name": "\ud83c\udf5c Thai Peanut Noodle Bowl",
+        "calories": 580,
+        "protein": 20,
+        "carbs": 78,
+        "fats": 22,
+        "fiber": 10,
+        "description": "Rice noodles with vegetables in spicy peanut sauce and tofu",
+        "ingredients": [
+          "Rice noodles (100g)",
+          "Tofu (150g)",
+          "Mixed vegetables (2 cups)",
+          "Peanut butter (3 tbsp)",
+          "Soy sauce",
+          "Lime juice",
+          "Sriracha",
+          "Peanuts (2 tbsp)",
+          "Cilantro"
+        ],
+        "prep_time": "18 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400",
+        "tags": [
+          "thai",
+          "spicy",
+          "nut-based"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      },
+      {
+        "id": 122,
+        "name": "\ud83e\udd57 Mediterranean Quinoa Salad",
+        "calories": 490,
+        "protein": 18,
+        "carbs": 64,
+        "fats": 18,
+        "fiber": 12,
+        "description": "Quinoa salad with cucumbers, tomatoes, olives, and lemon-herb dressing",
+        "ingredients": [
+          "Quinoa (1 cup cooked)",
+          "Cucumber (1 cup)",
+          "Cherry tomatoes (1 cup)",
+          "Olives (1/4 cup)",
+          "Red onion (1/4 cup)",
+          "Chickpeas (1/2 cup)",
+          "Lemon-herb dressing (2 tbsp)",
+          "Fresh herbs"
+        ],
+        "prep_time": "12 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "refreshing",
+          "mediterranean",
+          "make-ahead"
+        ],
+        "meal_timing": "Lunch"
+      },
+      {
+        "id": 123,
+        "name": "\ud83c\udf5b Lentil Dal with Rice",
+        "calories": 540,
+        "protein": 24,
+        "carbs": 86,
+        "fats": 10,
+        "fiber": 16,
+        "description": "Spiced red lentil curry served over basmati rice with naan bread",
+        "ingredients": [
+          "Red lentils (1 cup)",
+          "Basmati rice (3/4 cup)",
+          "Coconut milk (1/2 cup)",
+          "Tomatoes (1 cup)",
+          "Curry spices",
+          "Garlic",
+          "Ginger",
+          "Naan (1/2 piece)",
+          "Cilantro"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400",
+        "tags": [
+          "indian",
+          "protein-rich",
+          "warming"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      }
+    ],
+    "Keto": [
+      {
+        "id": 19,
+        "name": "\ud83e\udd69 Ribeye Steak with Cauliflower Mash",
+        "calories": 680,
+        "protein": 54,
+        "carbs": 12,
+        "fats": 48,
+        "fiber": 4,
+        "description": "Perfectly grilled ribeye with creamy cauliflower mash and butter-saut\u00e9ed asparagus",
+        "ingredients": [
+          "Ribeye steak (200g)",
+          "Cauliflower (2 cups)",
+          "Heavy cream (1/4 cup)",
+          "Butter (3 tbsp)",
+          "Asparagus (1 cup)",
+          "Garlic",
+          "Salt",
+          "Pepper"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=400",
+        "tags": [
+          "low-carb",
+          "high-fat",
+          "satisfying"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 20,
+        "name": "\ud83e\udd51 Keto Cobb Salad",
+        "calories": 620,
+        "protein": 42,
+        "carbs": 10,
+        "fats": 46,
+        "fiber": 6,
+        "description": "Mixed greens topped with grilled chicken, bacon, eggs, avocado, and blue cheese",
+        "ingredients": [
+          "Mixed greens (3 cups)",
+          "Grilled chicken (150g)",
+          "Bacon (3 strips)",
+          "Hard-boiled eggs (2)",
+          "Avocado (1)",
+          "Blue cheese (40g)",
+          "Ranch dressing (3 tbsp)"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400",
+        "tags": [
+          "salad",
+          "complete-meal",
+          "keto-classic"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      },
+      {
+        "id": 124,
+        "name": "\ud83c\udf57 Buffalo Chicken Lettuce Wraps",
+        "calories": 540,
+        "protein": 48,
+        "carbs": 8,
+        "fats": 36,
+        "fiber": 3,
+        "description": "Spicy buffalo chicken in crisp lettuce cups with ranch and celery",
+        "ingredients": [
+          "Chicken breast (200g)",
+          "Buffalo sauce (3 tbsp)",
+          "Butter (2 tbsp)",
+          "Lettuce leaves (6)",
+          "Ranch dressing (2 tbsp)",
+          "Celery sticks",
+          "Blue cheese crumbles (30g)"
+        ],
+        "prep_time": "18 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400",
+        "tags": [
+          "spicy",
+          "low-carb",
+          "game-day"
+        ],
+        "meal_timing": "Lunch"
+      },
+      {
+        "id": 125,
+        "name": "\ud83e\udd90 Garlic Butter Shrimp Zoodles",
+        "calories": 480,
+        "protein": 52,
+        "carbs": 10,
+        "fats": 26,
+        "fiber": 4,
+        "description": "Jumbo shrimp saut\u00e9ed in garlic butter over zucchini noodles",
+        "ingredients": [
+          "Shrimp (250g)",
+          "Zucchini noodles (3 cups)",
+          "Butter (3 tbsp)",
+          "Garlic (4 cloves)",
+          "Lemon juice",
+          "Parsley",
+          "Parmesan (20g)",
+          "Red pepper flakes"
+        ],
+        "prep_time": "12 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
+        "tags": [
+          "seafood",
+          "quick",
+          "elegant"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      },
+      {
+        "id": 126,
+        "name": "\ud83e\udd69 Bunless Bacon Cheeseburger Bowl",
+        "calories": 640,
+        "protein": 46,
+        "carbs": 8,
+        "fats": 48,
+        "fiber": 3,
+        "description": "Seasoned beef patty over mixed greens with bacon, cheese, and special sauce",
+        "ingredients": [
+          "Ground beef (200g)",
+          "Bacon (3 strips)",
+          "Cheddar cheese (50g)",
+          "Mixed greens (2 cups)",
+          "Tomato (1/2 cup)",
+          "Pickles",
+          "Sugar-free keto sauce (2 tbsp)",
+          "Onions (2 tbsp)"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+        "tags": [
+          "burger",
+          "american",
+          "satisfying"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      }
+    ],
+    "High-Protein": [
+      {
+        "id": 21,
+        "name": "\ud83c\udf57 Double Chicken Power Bowl",
+        "calories": 640,
+        "protein": 72,
+        "carbs": 54,
+        "fats": 12,
+        "fiber": 8,
+        "description": "Grilled and shredded chicken breast over brown rice with broccoli and sweet potato",
+        "ingredients": [
+          "Chicken breast (250g)",
+          "Brown rice (1 cup)",
+          "Broccoli (2 cups)",
+          "Sweet potato (1 medium)",
+          "Soy sauce",
+          "Garlic",
+          "Ginger"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "muscle-building",
+          "meal-prep",
+          "clean-eating"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 22,
+        "name": "\ud83d\udc1f Grilled Salmon Superfood Salad",
+        "calories": 580,
+        "protein": 52,
+        "carbs": 38,
+        "fats": 24,
+        "fiber": 10,
+        "description": "Wild-caught salmon over mixed greens with quinoa, edamame, and lemon vinaigrette",
+        "ingredients": [
+          "Salmon fillet (200g)",
+          "Mixed greens (3 cups)",
+          "Quinoa (1/2 cup)",
+          "Edamame (1/2 cup)",
+          "Cherry tomatoes (1 cup)",
+          "Cucumber (1/2 cup)",
+          "Lemon vinaigrette (2 tbsp)"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+        "tags": [
+          "omega-3",
+          "heart-healthy",
+          "anti-inflammatory"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      },
+      {
+        "id": 127,
+        "name": "\ud83c\udf57 Triple Protein Wrap",
+        "calories": 680,
+        "protein": 78,
+        "carbs": 52,
+        "fats": 16,
+        "fiber": 8,
+        "description": "Whole wheat wrap with chicken, turkey, tuna, and vegetables",
+        "ingredients": [
+          "Whole wheat wrap (1 large)",
+          "Grilled chicken (80g)",
+          "Turkey breast (80g)",
+          "Tuna (80g)",
+          "Lettuce",
+          "Tomato",
+          "Cucumber",
+          "Mustard",
+          "Pickles"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+        "tags": [
+          "protein-loaded",
+          "portable",
+          "extreme"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 128,
+        "name": "\ud83e\udd69 Lean Beef Protein Bowl",
+        "calories": 620,
+        "protein": 68,
+        "carbs": 48,
+        "fats": 14,
+        "fiber": 10,
+        "description": "Extra-lean ground beef over quinoa with roasted vegetables",
+        "ingredients": [
+          "Extra-lean ground beef (200g)",
+          "Quinoa (1 cup)",
+          "Roasted vegetables (2 cups)",
+          "Low-sodium beef broth",
+          "Garlic",
+          "Onions",
+          "Herbs"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "iron-rich",
+          "muscle-building",
+          "filling"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      },
+      {
+        "id": 129,
+        "name": "\ud83c\udf57 Grilled Chicken Protein Pasta",
+        "calories": 660,
+        "protein": 64,
+        "carbs": 72,
+        "fats": 12,
+        "fiber": 8,
+        "description": "High-protein pasta with grilled chicken and marinara sauce",
+        "ingredients": [
+          "Protein pasta (100g)",
+          "Grilled chicken (200g)",
+          "Marinara sauce (1 cup)",
+          "Parmesan (20g)",
+          "Basil",
+          "Garlic",
+          "Onions"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+        "tags": [
+          "italian",
+          "comfort-food",
+          "protein-packed"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      }
+    ],
+    "Mediterranean": [
+      {
+        "id": 23,
+        "name": "\ud83c\udf5b Mediterranean Chickpea Bowl",
+        "calories": 540,
+        "protein": 22,
+        "carbs": 72,
+        "fats": 18,
+        "fiber": 16,
+        "description": "Spiced chickpeas over couscous with roasted vegetables and tzatziki sauce",
+        "ingredients": [
+          "Chickpeas (1 cup)",
+          "Whole wheat couscous (3/4 cup)",
+          "Roasted red peppers (1/2 cup)",
+          "Zucchini (1 cup)",
+          "Tzatziki (1/4 cup)",
+          "Olives (10)",
+          "Feta cheese (30g)"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "vegetarian",
+          "mediterranean",
+          "fiber-rich"
+        ],
+        "meal_timing": "Lunch"
+      },
+      {
+        "id": 130,
+        "name": "\ud83e\udd59 Greek Chicken Pita",
+        "calories": 580,
+        "protein": 44,
+        "carbs": 58,
+        "fats": 18,
+        "fiber": 10,
+        "description": "Grilled chicken in warm pita with tzatziki, cucumbers, tomatoes, and feta",
+        "ingredients": [
+          "Chicken breast (180g)",
+          "Whole wheat pita (2)",
+          "Tzatziki (1/4 cup)",
+          "Cucumber (1/2 cup)",
+          "Tomatoes (1/2 cup)",
+          "Feta cheese (30g)",
+          "Red onion",
+          "Lettuce"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400",
+        "tags": [
+          "greek",
+          "handheld",
+          "flavorful"
+        ],
+        "meal_timing": "Lunch"
+      },
+      {
+        "id": 131,
+        "name": "\ud83c\udf5d Lemon Orzo with Shrimp",
+        "calories": 560,
+        "protein": 38,
+        "carbs": 64,
+        "fats": 16,
+        "fiber": 6,
+        "description": "Orzo pasta with grilled shrimp, spinach, lemon, and feta cheese",
+        "ingredients": [
+          "Orzo (100g)",
+          "Shrimp (180g)",
+          "Spinach (2 cups)",
+          "Feta cheese (40g)",
+          "Lemon juice",
+          "Olive oil (2 tbsp)",
+          "Garlic",
+          "Fresh dill"
+        ],
+        "prep_time": "18 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+        "tags": [
+          "seafood",
+          "citrus",
+          "elegant"
+        ],
+        "meal_timing": "Lunch/Dinner"
+      }
+    ]
+  },
+  "dinner": {
+    "Balanced": [
+      {
+        "id": 24,
+        "name": "\ud83c\udf72 Hearty Beef Stir-Fry",
+        "calories": 620,
+        "protein": 48,
+        "carbs": 62,
+        "fats": 18,
+        "fiber": 8,
+        "description": "Lean beef strips with mixed vegetables over jasmine rice in savory sauce",
+        "ingredients": [
+          "Lean beef (200g)",
+          "Jasmine rice (1 cup)",
+          "Broccoli (1 cup)",
+          "Bell peppers (1 cup)",
+          "Snap peas (1/2 cup)",
+          "Soy sauce",
+          "Garlic",
+          "Ginger",
+          "Sesame oil"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1603073585628-b748de49f333?w=400",
+        "tags": [
+          "asian",
+          "quick",
+          "family-friendly"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 25,
+        "name": "\ud83d\udc1f Baked Cod with Roasted Vegetables",
+        "calories": 480,
+        "protein": 52,
+        "carbs": 42,
+        "fats": 10,
+        "fiber": 10,
+        "description": "Herb-crusted cod fillet with colorful roasted root vegetables",
+        "ingredients": [
+          "Cod fillet (220g)",
+          "Sweet potato (1 large)",
+          "Carrots (2)",
+          "Brussels sprouts (1 cup)",
+          "Olive oil (2 tbsp)",
+          "Lemon",
+          "Fresh herbs",
+          "Garlic"
+        ],
+        "prep_time": "35 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400",
+        "tags": [
+          "lean",
+          "omega-3",
+          "oven-baked"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 132,
+        "name": "\ud83c\udf57 Honey Garlic Chicken Thighs",
+        "calories": 590,
+        "protein": 46,
+        "carbs": 54,
+        "fats": 20,
+        "fiber": 6,
+        "description": "Glazed chicken thighs with roasted sweet potatoes and green beans",
+        "ingredients": [
+          "Chicken thighs (220g)",
+          "Sweet potatoes (1 large)",
+          "Green beans (1 cup)",
+          "Honey (2 tbsp)",
+          "Garlic (4 cloves)",
+          "Soy sauce",
+          "Ginger"
+        ],
+        "prep_time": "40 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+        "tags": [
+          "sweet-savory",
+          "satisfying",
+          "crowd-pleaser"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 133,
+        "name": "\ud83e\udd58 Turkey Chili Bowl",
+        "calories": 540,
+        "protein": 42,
+        "carbs": 58,
+        "fats": 14,
+        "fiber": 16,
+        "description": "Lean turkey chili with kidney beans, topped with Greek yogurt and avocado",
+        "ingredients": [
+          "Ground turkey (200g)",
+          "Kidney beans (1 cup)",
+          "Tomatoes (1 cup)",
+          "Onions",
+          "Bell peppers",
+          "Chili spices",
+          "Greek yogurt (1/4 cup)",
+          "Avocado (1/4)"
+        ],
+        "prep_time": "35 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400",
+        "tags": [
+          "comfort-food",
+          "protein-rich",
+          "warming"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 134,
+        "name": "\ud83c\udf5d Turkey Meatballs Marinara",
+        "calories": 580,
+        "protein": 44,
+        "carbs": 64,
+        "fats": 16,
+        "fiber": 8,
+        "description": "Lean turkey meatballs over whole wheat spaghetti with marinara sauce",
+        "ingredients": [
+          "Ground turkey (200g)",
+          "Whole wheat spaghetti (100g)",
+          "Marinara sauce (1 cup)",
+          "Parmesan (20g)",
+          "Fresh basil",
+          "Garlic",
+          "Italian herbs"
+        ],
+        "prep_time": "35 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+        "tags": [
+          "italian",
+          "family-friendly",
+          "meal-prep"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 135,
+        "name": "\ud83c\udf2e Fish Tacos with Mango Salsa",
+        "calories": 560,
+        "protein": 40,
+        "carbs": 62,
+        "fats": 16,
+        "fiber": 10,
+        "description": "Grilled white fish in corn tortillas with fresh mango salsa and cabbage slaw",
+        "ingredients": [
+          "White fish (200g)",
+          "Corn tortillas (3)",
+          "Mango (1/2)",
+          "Cabbage (1 cup)",
+          "Lime juice",
+          "Cilantro",
+          "Red onion",
+          "Jalape\u00f1o"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400",
+        "tags": [
+          "tropical",
+          "fresh",
+          "light"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 136,
+        "name": "\ud83c\udf5b Chicken Tikka Masala",
+        "calories": 610,
+        "protein": 48,
+        "carbs": 58,
+        "fats": 18,
+        "fiber": 8,
+        "description": "Tender chicken in creamy tomato curry sauce with basmati rice",
+        "ingredients": [
+          "Chicken breast (200g)",
+          "Basmati rice (1 cup)",
+          "Tomato curry sauce (1 cup)",
+          "Greek yogurt (1/4 cup)",
+          "Garam masala",
+          "Garlic",
+          "Ginger",
+          "Cilantro"
+        ],
+        "prep_time": "40 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400",
+        "tags": [
+          "indian",
+          "creamy",
+          "aromatic"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 137,
+        "name": "\ud83e\udd69 Sirloin Steak Fajitas",
+        "calories": 580,
+        "protein": 46,
+        "carbs": 54,
+        "fats": 18,
+        "fiber": 8,
+        "description": "Grilled sirloin strips with peppers and onions in warm tortillas",
+        "ingredients": [
+          "Sirloin steak (180g)",
+          "Whole wheat tortillas (2)",
+          "Bell peppers (2)",
+          "Onions (1)",
+          "Fajita seasoning",
+          "Salsa (1/4 cup)",
+          "Greek yogurt (2 tbsp)",
+          "Lime"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400",
+        "tags": [
+          "mexican",
+          "sizzling",
+          "interactive"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 184,
+        "name": "\ud83c\udf5d Spaghetti Bolognese",
+        "calories": 600,
+        "protein": 40,
+        "carbs": 68,
+        "fats": 18,
+        "fiber": 10,
+        "description": "Classic meat sauce over whole wheat spaghetti with parmesan",
+        "ingredients": [
+          "Lean ground beef (180g)",
+          "Whole wheat spaghetti (100g)",
+          "Tomato sauce (1 cup)",
+          "Onions",
+          "Carrots",
+          "Celery",
+          "Garlic",
+          "Parmesan (20g)"
+        ],
+        "prep_time": "45 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+        "tags": [
+          "italian",
+          "classic",
+          "comfort"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 185,
+        "name": "\ud83d\udc13 Grilled Lemon Herb Chicken",
+        "calories": 550,
+        "protein": 50,
+        "carbs": 48,
+        "fats": 14,
+        "fiber": 8,
+        "description": "Marinated grilled chicken with quinoa and roasted asparagus",
+        "ingredients": [
+          "Chicken breast (220g)",
+          "Quinoa (3/4 cup)",
+          "Asparagus (1.5 cups)",
+          "Lemon",
+          "Fresh herbs",
+          "Garlic",
+          "Olive oil (2 tbsp)"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+        "tags": [
+          "grilled",
+          "fresh",
+          "healthy"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 186,
+        "name": "\ud83c\udf64 Shrimp Fried Rice",
+        "calories": 580,
+        "protein": 38,
+        "carbs": 72,
+        "fats": 14,
+        "fiber": 6,
+        "description": "Asian-style fried rice with shrimp, eggs, and vegetables",
+        "ingredients": [
+          "Shrimp (180g)",
+          "Brown rice (1 cup cooked)",
+          "Eggs (2)",
+          "Mixed vegetables (1.5 cups)",
+          "Soy sauce",
+          "Sesame oil",
+          "Garlic",
+          "Ginger"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400",
+        "tags": [
+          "asian",
+          "quick",
+          "one-pan"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 187,
+        "name": "\ud83e\udd58 Moroccan Lamb Tagine",
+        "calories": 620,
+        "protein": 44,
+        "carbs": 58,
+        "fats": 20,
+        "fiber": 10,
+        "description": "Slow-cooked lamb with apricots, almonds, and couscous",
+        "ingredients": [
+          "Lamb leg (180g)",
+          "Couscous (1 cup)",
+          "Dried apricots (1/4 cup)",
+          "Chickpeas (1/2 cup)",
+          "Almonds (2 tbsp)",
+          "Moroccan spices",
+          "Cilantro"
+        ],
+        "prep_time": "120 mins",
+        "difficulty": "Hard",
+        "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400",
+        "tags": [
+          "moroccan",
+          "exotic",
+          "special-occasion"
+        ],
+        "meal_timing": "Dinner"
+      }
+    ],
+    "Vegan": [
+      {
+        "id": 26,
+        "name": "\ud83c\udf5c Thai Coconut Curry",
+        "calories": 580,
+        "protein": 18,
+        "carbs": 78,
+        "fats": 22,
+        "fiber": 12,
+        "description": "Creamy coconut curry with tofu, vegetables, and jasmine rice",
+        "ingredients": [
+          "Firm tofu (200g)",
+          "Coconut milk (1 cup)",
+          "Jasmine rice (1 cup)",
+          "Mixed vegetables (2 cups)",
+          "Red curry paste (2 tbsp)",
+          "Bamboo shoots",
+          "Thai basil",
+          "Lime"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400",
+        "tags": [
+          "thai",
+          "creamy",
+          "comfort-food"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 27,
+        "name": "\ud83c\udf2e Lentil Tacos with Cashew Crema",
+        "calories": 540,
+        "protein": 24,
+        "carbs": 72,
+        "fats": 16,
+        "fiber": 18,
+        "description": "Spiced lentils in corn tortillas with avocado, salsa, and cashew cream",
+        "ingredients": [
+          "Lentils (1 cup)",
+          "Corn tortillas (3)",
+          "Taco seasoning",
+          "Avocado (1/2)",
+          "Tomato salsa (1/4 cup)",
+          "Cashew cream (3 tbsp)",
+          "Cilantro",
+          "Lime",
+          "Lettuce"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400",
+        "tags": [
+          "mexican",
+          "plant-protein",
+          "filling"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 138,
+        "name": "\ud83c\udf5d Creamy Vegan Alfredo",
+        "calories": 590,
+        "protein": 20,
+        "carbs": 82,
+        "fats": 20,
+        "fiber": 10,
+        "description": "Fettuccine in cashew-based alfredo sauce with roasted broccoli",
+        "ingredients": [
+          "Fettuccine (100g)",
+          "Cashews (1/2 cup)",
+          "Nutritional yeast (3 tbsp)",
+          "Garlic (4 cloves)",
+          "Broccoli (2 cups)",
+          "Almond milk",
+          "Lemon juice"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+        "tags": [
+          "creamy",
+          "comfort-food",
+          "italian"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 139,
+        "name": "\ud83c\udf5b Chickpea Curry with Naan",
+        "calories": 620,
+        "protein": 22,
+        "carbs": 92,
+        "fats": 18,
+        "fiber": 16,
+        "description": "Spiced chickpea curry with coconut milk, served with whole wheat naan",
+        "ingredients": [
+          "Chickpeas (1.5 cups)",
+          "Coconut milk (1 cup)",
+          "Tomatoes (1 cup)",
+          "Curry spices",
+          "Spinach (2 cups)",
+          "Whole wheat naan (1)",
+          "Cilantro",
+          "Ginger",
+          "Garlic"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400",
+        "tags": [
+          "indian",
+          "protein-rich",
+          "aromatic"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 140,
+        "name": "\ud83e\udd59 Vegan Shawarma Bowl",
+        "calories": 570,
+        "protein": 24,
+        "carbs": 78,
+        "fats": 18,
+        "fiber": 14,
+        "description": "Spiced chickpeas and cauliflower over rice with tahini sauce",
+        "ingredients": [
+          "Chickpeas (1 cup)",
+          "Cauliflower (2 cups)",
+          "Brown rice (1 cup)",
+          "Tahini sauce (3 tbsp)",
+          "Shawarma spice",
+          "Cucumber",
+          "Tomato",
+          "Parsley"
+        ],
+        "prep_time": "35 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400",
+        "tags": [
+          "middle-eastern",
+          "flavorful",
+          "complete-meal"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 141,
+        "name": "\ud83c\udf72 Vegan Black Bean Enchiladas",
+        "calories": 600,
+        "protein": 26,
+        "carbs": 86,
+        "fats": 16,
+        "fiber": 20,
+        "description": "Black bean and veggie enchiladas with cashew cheese sauce",
+        "ingredients": [
+          "Black beans (1.5 cups)",
+          "Corn tortillas (3)",
+          "Enchilada sauce (1 cup)",
+          "Cashew cheese (1/4 cup)",
+          "Bell peppers (1 cup)",
+          "Onions",
+          "Corn (1/2 cup)",
+          "Cilantro"
+        ],
+        "prep_time": "40 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400",
+        "tags": [
+          "mexican",
+          "cheesy",
+          "baked"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 142,
+        "name": "\ud83e\udd58 Moroccan Vegetable Tagine",
+        "calories": 550,
+        "protein": 18,
+        "carbs": 84,
+        "fats": 16,
+        "fiber": 16,
+        "description": "Aromatic vegetable stew with chickpeas and dried apricots over couscous",
+        "ingredients": [
+          "Chickpeas (1 cup)",
+          "Sweet potato (1 large)",
+          "Carrots (2)",
+          "Dried apricots (1/4 cup)",
+          "Couscous (1 cup)",
+          "Moroccan spices",
+          "Almonds (2 tbsp)",
+          "Cilantro"
+        ],
+        "prep_time": "45 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400",
+        "tags": [
+          "moroccan",
+          "exotic",
+          "warming"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 188,
+        "name": "\ud83c\udf5d Vegan Pad Thai",
+        "calories": 560,
+        "protein": 20,
+        "carbs": 86,
+        "fats": 16,
+        "fiber": 8,
+        "description": "Rice noodles with tofu, vegetables, and tangy tamarind sauce",
+        "ingredients": [
+          "Rice noodles (100g)",
+          "Firm tofu (150g)",
+          "Bean sprouts (1 cup)",
+          "Peanuts (2 tbsp)",
+          "Tamarind paste",
+          "Lime",
+          "Scallions",
+          "Cilantro"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400",
+        "tags": [
+          "thai",
+          "tangy",
+          "street-food"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 189,
+        "name": "\ud83e\udd57 Buddha Bowl Deluxe",
+        "calories": 580,
+        "protein": 22,
+        "carbs": 76,
+        "fats": 20,
+        "fiber": 18,
+        "description": "Quinoa bowl with roasted vegetables, chickpeas, and tahini dressing",
+        "ingredients": [
+          "Quinoa (1 cup)",
+          "Chickpeas (3/4 cup)",
+          "Sweet potato (1 cup)",
+          "Kale (2 cups)",
+          "Avocado (1/2)",
+          "Tahini dressing (3 tbsp)",
+          "Pumpkin seeds"
+        ],
+        "prep_time": "35 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "rainbow",
+          "nutrient-dense",
+          "complete-meal"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 190,
+        "name": "\ud83c\udf5c Vegan Ramen Bowl",
+        "calories": 520,
+        "protein": 20,
+        "carbs": 78,
+        "fats": 14,
+        "fiber": 10,
+        "description": "Miso-based ramen with tofu, mushrooms, and bok choy",
+        "ingredients": [
+          "Ramen noodles (100g)",
+          "Firm tofu (150g)",
+          "Shiitake mushrooms (1 cup)",
+          "Bok choy (2 cups)",
+          "Miso paste (2 tbsp)",
+          "Scallions",
+          "Nori",
+          "Sesame oil"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400",
+        "tags": [
+          "japanese",
+          "warming",
+          "umami"
+        ],
+        "meal_timing": "Dinner"
+      }
+    ],
+    "Keto": [
+      {
+        "id": 28,
+        "name": "\ud83e\udd69 Keto Beef & Broccoli",
+        "calories": 640,
+        "protein": 56,
+        "carbs": 12,
+        "fats": 42,
+        "fiber": 4,
+        "description": "Tender beef strips with broccoli in savory sauce over cauliflower rice",
+        "ingredients": [
+          "Beef sirloin (220g)",
+          "Broccoli (2 cups)",
+          "Cauliflower rice (2 cups)",
+          "Coconut aminos (3 tbsp)",
+          "Sesame oil",
+          "Garlic",
+          "Ginger",
+          "Butter (2 tbsp)"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1603073585628-b748de49f333?w=400",
+        "tags": [
+          "asian-inspired",
+          "low-carb",
+          "satisfying"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 29,
+        "name": "\ud83c\udf57 Creamy Tuscan Chicken",
+        "calories": 680,
+        "protein": 58,
+        "carbs": 10,
+        "fats": 46,
+        "fiber": 3,
+        "description": "Pan-seared chicken in creamy sun-dried tomato sauce with spinach",
+        "ingredients": [
+          "Chicken thighs (250g)",
+          "Heavy cream (1/2 cup)",
+          "Sun-dried tomatoes (1/4 cup)",
+          "Spinach (2 cups)",
+          "Parmesan (40g)",
+          "Garlic",
+          "Italian herbs",
+          "Butter"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+        "tags": [
+          "italian",
+          "creamy",
+          "restaurant-quality"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 143,
+        "name": "\ud83e\udd69 Ribeye with Garlic Butter Mushrooms",
+        "calories": 720,
+        "protein": 62,
+        "carbs": 8,
+        "fats": 52,
+        "fiber": 2,
+        "description": "Perfectly grilled ribeye topped with saut\u00e9ed mushrooms in garlic butter",
+        "ingredients": [
+          "Ribeye steak (250g)",
+          "Mushrooms (2 cups)",
+          "Butter (4 tbsp)",
+          "Garlic (6 cloves)",
+          "Fresh thyme",
+          "Asparagus (1 cup)",
+          "Salt",
+          "Pepper"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=400",
+        "tags": [
+          "steakhouse",
+          "indulgent",
+          "low-carb"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 144,
+        "name": "\ud83d\udc1f Keto Salmon with Dill Sauce",
+        "calories": 620,
+        "protein": 54,
+        "carbs": 8,
+        "fats": 42,
+        "fiber": 4,
+        "description": "Baked salmon with creamy dill sauce and roasted Brussels sprouts",
+        "ingredients": [
+          "Salmon fillet (220g)",
+          "Heavy cream (1/4 cup)",
+          "Fresh dill",
+          "Brussels sprouts (2 cups)",
+          "Butter (3 tbsp)",
+          "Lemon",
+          "Garlic",
+          "Olive oil"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+        "tags": [
+          "omega-3",
+          "elegant",
+          "healthy-fats"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 145,
+        "name": "\ud83c\udf57 Bacon-Wrapped Stuffed Chicken",
+        "calories": 690,
+        "protein": 64,
+        "carbs": 6,
+        "fats": 46,
+        "fiber": 2,
+        "description": "Chicken breast stuffed with cream cheese and spinach, wrapped in bacon",
+        "ingredients": [
+          "Chicken breast (220g)",
+          "Bacon (4 strips)",
+          "Cream cheese (60g)",
+          "Spinach (1 cup)",
+          "Mozzarella (30g)",
+          "Garlic",
+          "Italian seasoning"
+        ],
+        "prep_time": "35 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+        "tags": [
+          "impressive",
+          "bacon-wrapped",
+          "stuffed"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 146,
+        "name": "\ud83e\udd90 Cajun Shrimp Cauliflower Grits",
+        "calories": 580,
+        "protein": 52,
+        "carbs": 14,
+        "fats": 36,
+        "fiber": 6,
+        "description": "Spicy Cajun shrimp over creamy cauliflower 'grits'",
+        "ingredients": [
+          "Jumbo shrimp (250g)",
+          "Cauliflower (3 cups)",
+          "Heavy cream (1/3 cup)",
+          "Cheddar cheese (40g)",
+          "Cajun seasoning",
+          "Butter (3 tbsp)",
+          "Garlic",
+          "Green onions"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
+        "tags": [
+          "southern",
+          "spicy",
+          "comfort-food"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 147,
+        "name": "\ud83e\udd69 Keto Beef Zucchini Lasagna",
+        "calories": 660,
+        "protein": 58,
+        "carbs": 12,
+        "fats": 44,
+        "fiber": 4,
+        "description": "Layered zucchini noodles with beef, ricotta, and mozzarella",
+        "ingredients": [
+          "Ground beef (200g)",
+          "Zucchini (3 large)",
+          "Ricotta cheese (1/2 cup)",
+          "Mozzarella (60g)",
+          "Marinara sauce (1/2 cup)",
+          "Parmesan (30g)",
+          "Italian herbs"
+        ],
+        "prep_time": "50 mins",
+        "difficulty": "Hard",
+        "image": "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400",
+        "tags": [
+          "italian",
+          "layered",
+          "impressive"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 191,
+        "name": "\ud83e\udd53 Keto Bacon Cheeseburger Bowl",
+        "calories": 700,
+        "protein": 56,
+        "carbs": 10,
+        "fats": 50,
+        "fiber": 4,
+        "description": "Deconstructed cheeseburger over lettuce with bacon and special sauce",
+        "ingredients": [
+          "Ground beef (220g)",
+          "Bacon (4 strips)",
+          "Cheddar cheese (50g)",
+          "Lettuce (3 cups)",
+          "Tomato",
+          "Pickles",
+          "Mayo-based sauce",
+          "Onions"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+        "tags": [
+          "burger-bowl",
+          "loaded",
+          "satisfying"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 192,
+        "name": "\ud83d\udc13 Keto Chicken Parmesan",
+        "calories": 650,
+        "protein": 60,
+        "carbs": 12,
+        "fats": 42,
+        "fiber": 4,
+        "description": "Almond-crusted chicken with marinara and mozzarella over zoodles",
+        "ingredients": [
+          "Chicken breast (220g)",
+          "Almond flour (1/4 cup)",
+          "Mozzarella (60g)",
+          "Marinara sauce (1/2 cup)",
+          "Zucchini noodles (2 cups)",
+          "Parmesan (30g)",
+          "Italian herbs"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+        "tags": [
+          "italian",
+          "crispy",
+          "comfort"
+        ],
+        "meal_timing": "Dinner"
+      }
+    ],
+    "High-Protein": [
+      {
+        "id": 30,
+        "name": "\ud83d\udcaa Triple Protein Power Bowl",
+        "calories": 720,
+        "protein": 82,
+        "carbs": 58,
+        "fats": 16,
+        "fiber": 10,
+        "description": "Grilled chicken, tuna, and cottage cheese over quinoa with vegetables",
+        "ingredients": [
+          "Grilled chicken (120g)",
+          "Canned tuna (100g)",
+          "Low-fat cottage cheese (1/2 cup)",
+          "Quinoa (1 cup)",
+          "Steamed broccoli (1 cup)",
+          "Carrots (1/2 cup)",
+          "Lemon",
+          "Herbs"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "bodybuilding",
+          "extreme-protein",
+          "meal-prep"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 31,
+        "name": "\ud83e\udd90 Garlic Shrimp Zoodle Bowl",
+        "calories": 480,
+        "protein": 64,
+        "carbs": 28,
+        "fats": 12,
+        "fiber": 8,
+        "description": "Jumbo shrimp saut\u00e9ed in garlic over zucchini noodles with cherry tomatoes",
+        "ingredients": [
+          "Jumbo shrimp (300g)",
+          "Zucchini noodles (3 cups)",
+          "Cherry tomatoes (1 cup)",
+          "Garlic (4 cloves)",
+          "Olive oil (1 tbsp)",
+          "White wine (2 tbsp)",
+          "Parsley",
+          "Lemon"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
+        "tags": [
+          "seafood",
+          "low-carb",
+          "quick"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 148,
+        "name": "\ud83c\udf57 Double Chicken Breast Plate",
+        "calories": 680,
+        "protein": 88,
+        "carbs": 52,
+        "fats": 12,
+        "fiber": 8,
+        "description": "Two grilled chicken breasts with sweet potato and steamed vegetables",
+        "ingredients": [
+          "Chicken breast (300g)",
+          "Sweet potato (1 large)",
+          "Broccoli (2 cups)",
+          "Carrots (1 cup)",
+          "Lemon",
+          "Herbs",
+          "Garlic",
+          "Olive oil spray"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "clean-eating",
+          "meal-prep",
+          "extreme-protein"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 149,
+        "name": "\ud83e\udd69 Protein-Packed Steak Bowl",
+        "calories": 700,
+        "protein": 76,
+        "carbs": 56,
+        "fats": 18,
+        "fiber": 8,
+        "description": "Lean sirloin steak over brown rice with egg whites and vegetables",
+        "ingredients": [
+          "Sirloin steak (220g)",
+          "Brown rice (1 cup)",
+          "Egg whites (4)",
+          "Mixed vegetables (2 cups)",
+          "Soy sauce",
+          "Garlic",
+          "Ginger"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=400",
+        "tags": [
+          "iron-rich",
+          "muscle-building",
+          "complete-meal"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 150,
+        "name": "\ud83d\udc1f Tuna Steak Power Plate",
+        "calories": 620,
+        "protein": 72,
+        "carbs": 48,
+        "fats": 14,
+        "fiber": 10,
+        "description": "Seared tuna steak with quinoa and Asian-style vegetables",
+        "ingredients": [
+          "Tuna steak (250g)",
+          "Quinoa (1 cup)",
+          "Bok choy (2 cups)",
+          "Edamame (1/2 cup)",
+          "Soy sauce",
+          "Ginger",
+          "Sesame seeds",
+          "Lime"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+        "tags": [
+          "omega-3",
+          "asian",
+          "lean"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 151,
+        "name": "\ud83c\udf57 Lemon Herb Turkey Breast",
+        "calories": 560,
+        "protein": 68,
+        "carbs": 44,
+        "fats": 10,
+        "fiber": 8,
+        "description": "Roasted turkey breast with herb seasoning, wild rice, and green beans",
+        "ingredients": [
+          "Turkey breast (240g)",
+          "Wild rice (3/4 cup)",
+          "Green beans (2 cups)",
+          "Lemon",
+          "Fresh herbs",
+          "Garlic",
+          "Olive oil (1 tbsp)"
+        ],
+        "prep_time": "35 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+        "tags": [
+          "lean",
+          "holiday-inspired",
+          "clean"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 152,
+        "name": "\ud83e\udd69 Bison Burger Protein Bowl",
+        "calories": 640,
+        "protein": 70,
+        "carbs": 52,
+        "fats": 16,
+        "fiber": 10,
+        "description": "Lean bison patty over quinoa with roasted vegetables",
+        "ingredients": [
+          "Ground bison (220g)",
+          "Quinoa (1 cup)",
+          "Roasted vegetables (2 cups)",
+          "Tomato",
+          "Lettuce",
+          "Pickles",
+          "Mustard",
+          "Onions"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+        "tags": [
+          "lean-meat",
+          "nutrient-dense",
+          "alternative-protein"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 193,
+        "name": "\ud83c\udf57 Protein-Loaded Chicken Stir-Fry",
+        "calories": 660,
+        "protein": 74,
+        "carbs": 58,
+        "fats": 14,
+        "fiber": 8,
+        "description": "Extra chicken stir-fry with vegetables over brown rice",
+        "ingredients": [
+          "Chicken breast (280g)",
+          "Brown rice (1 cup)",
+          "Mixed vegetables (2 cups)",
+          "Egg whites (2)",
+          "Soy sauce",
+          "Garlic",
+          "Ginger"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1603073585628-b748de49f333?w=400",
+        "tags": [
+          "asian",
+          "muscle-building",
+          "quick"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 194,
+        "name": "\ud83d\udc1f Grilled Salmon with Protein Sides",
+        "calories": 690,
+        "protein": 70,
+        "carbs": 50,
+        "fats": 20,
+        "fiber": 10,
+        "description": "Large salmon fillet with quinoa and cottage cheese",
+        "ingredients": [
+          "Salmon (250g)",
+          "Quinoa (3/4 cup)",
+          "Low-fat cottage cheese (1/2 cup)",
+          "Asparagus (1.5 cups)",
+          "Lemon",
+          "Dill",
+          "Garlic"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+        "tags": [
+          "omega-3",
+          "protein-combo",
+          "clean"
+        ],
+        "meal_timing": "Dinner"
+      }
+    ],
+    "Mediterranean": [
+      {
+        "id": 32,
+        "name": "\ud83d\udc1f Greek-Style Baked Salmon",
+        "calories": 620,
+        "protein": 54,
+        "carbs": 48,
+        "fats": 24,
+        "fiber": 8,
+        "description": "Lemon-herb salmon with roasted potatoes, olives, and feta cheese",
+        "ingredients": [
+          "Salmon fillet (220g)",
+          "Baby potatoes (1.5 cups)",
+          "Kalamata olives (1/4 cup)",
+          "Feta cheese (40g)",
+          "Cherry tomatoes (1 cup)",
+          "Lemon",
+          "Oregano",
+          "Olive oil"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+        "tags": [
+          "greek",
+          "omega-3",
+          "one-pan"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 153,
+        "name": "\ud83c\udf46 Mediterranean Moussaka",
+        "calories": 580,
+        "protein": 38,
+        "carbs": 52,
+        "fats": 24,
+        "fiber": 12,
+        "description": "Layered eggplant with lean beef, tomatoes, and b\u00e9chamel sauce",
+        "ingredients": [
+          "Eggplant (2 medium)",
+          "Lean ground beef (150g)",
+          "Tomato sauce (1 cup)",
+          "Low-fat milk (1 cup)",
+          "Onions",
+          "Garlic",
+          "Cinnamon",
+          "Parmesan (20g)"
+        ],
+        "prep_time": "60 mins",
+        "difficulty": "Hard",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "greek",
+          "layered",
+          "traditional"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 154,
+        "name": "\ud83e\udd90 Garlic Shrimp with Orzo",
+        "calories": 590,
+        "protein": 46,
+        "carbs": 62,
+        "fats": 16,
+        "fiber": 6,
+        "description": "Lemon-garlic shrimp with orzo pasta, spinach, and feta",
+        "ingredients": [
+          "Shrimp (220g)",
+          "Orzo (100g)",
+          "Spinach (2 cups)",
+          "Feta cheese (30g)",
+          "Garlic (5 cloves)",
+          "Lemon juice",
+          "Olive oil (2 tbsp)",
+          "White wine"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
+        "tags": [
+          "seafood",
+          "quick",
+          "flavorful"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 155,
+        "name": "\ud83c\udf57 Chicken Souvlaki Bowl",
+        "calories": 600,
+        "protein": 52,
+        "carbs": 56,
+        "fats": 18,
+        "fiber": 8,
+        "description": "Marinated grilled chicken over rice with tzatziki and Greek salad",
+        "ingredients": [
+          "Chicken breast (200g)",
+          "Basmati rice (1 cup)",
+          "Tzatziki (1/4 cup)",
+          "Cucumber (1 cup)",
+          "Tomatoes (1 cup)",
+          "Red onion",
+          "Olives",
+          "Feta (30g)"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "tags": [
+          "greek",
+          "marinated",
+          "fresh"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 156,
+        "name": "\ud83d\udc1f Mediterranean Sea Bass",
+        "calories": 560,
+        "protein": 50,
+        "carbs": 42,
+        "fats": 20,
+        "fiber": 8,
+        "description": "Whole roasted sea bass with lemon, herbs, and roasted vegetables",
+        "ingredients": [
+          "Sea bass (220g)",
+          "Baby potatoes (1 cup)",
+          "Zucchini (1 cup)",
+          "Bell peppers (1 cup)",
+          "Lemon",
+          "Fresh herbs",
+          "Olive oil (2 tbsp)",
+          "Garlic"
+        ],
+        "prep_time": "35 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400",
+        "tags": [
+          "elegant",
+          "whole-fish",
+          "herbs"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 195,
+        "name": "\ud83c\udf5d Mediterranean Pasta Primavera",
+        "calories": 570,
+        "protein": 24,
+        "carbs": 76,
+        "fats": 20,
+        "fiber": 12,
+        "description": "Whole wheat pasta with seasonal vegetables, olives, and feta",
+        "ingredients": [
+          "Whole wheat pasta (100g)",
+          "Zucchini (1 cup)",
+          "Bell peppers (1 cup)",
+          "Cherry tomatoes (1 cup)",
+          "Kalamata olives (1/4 cup)",
+          "Feta (40g)",
+          "Olive oil (2 tbsp)",
+          "Garlic"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+        "tags": [
+          "vegetarian",
+          "colorful",
+          "light"
+        ],
+        "meal_timing": "Dinner"
+      },
+      {
+        "id": 196,
+        "name": "\ud83e\udd90 Mediterranean Shrimp Skewers",
+        "calories": 540,
+        "protein": 48,
+        "carbs": 52,
+        "fats": 16,
+        "fiber": 8,
+        "description": "Grilled shrimp skewers with couscous and Greek salad",
+        "ingredients": [
+          "Shrimp (240g)",
+          "Whole wheat couscous (1 cup)",
+          "Cherry tomatoes (1 cup)",
+          "Cucumber (1 cup)",
+          "Feta (30g)",
+          "Lemon",
+          "Oregano",
+          "Olive oil"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
+        "tags": [
+          "grilled",
+          "fresh",
+          "summer"
+        ],
+        "meal_timing": "Dinner"
+      }
+    ]
+  },
+  "snacks": {
+    "Balanced": [
+      {
+        "id": 33,
+        "name": "\ud83c\udf4e Apple with Almond Butter",
+        "calories": 220,
+        "protein": 6,
+        "carbs": 28,
+        "fats": 10,
+        "fiber": 6,
+        "description": "Crisp apple slices with creamy almond butter",
+        "ingredients": [
+          "Apple (1 medium)",
+          "Almond butter (2 tbsp)",
+          "Cinnamon (optional)"
+        ],
+        "prep_time": "2 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=400",
+        "tags": [
+          "portable",
+          "sweet",
+          "energy"
+        ],
+        "meal_timing": "Mid-morning/afternoon"
+      },
+      {
+        "id": 34,
+        "name": "\ud83e\udd5c Trail Mix Power Blend",
+        "calories": 280,
+        "protein": 8,
+        "carbs": 32,
+        "fats": 14,
+        "fiber": 5,
+        "description": "Custom mix of almonds, cashews, dried cranberries, and dark chocolate chips",
+        "ingredients": [
+          "Almonds (1/4 cup)",
+          "Cashews (2 tbsp)",
+          "Dried cranberries (2 tbsp)",
+          "Dark chocolate chips (1 tbsp)",
+          "Pumpkin seeds (1 tbsp)"
+        ],
+        "prep_time": "1 min",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400",
+        "tags": [
+          "hiking",
+          "portable",
+          "energy-dense"
+        ],
+        "meal_timing": "Pre-workout"
+      },
+      {
+        "id": 157,
+        "name": "\ud83e\udd64 Berry Protein Smoothie",
+        "calories": 260,
+        "protein": 24,
+        "carbs": 32,
+        "fats": 4,
+        "fiber": 6,
+        "description": "Blended protein shake with mixed berries and banana",
+        "ingredients": [
+          "Protein powder (1 scoop)",
+          "Mixed berries (1 cup)",
+          "Banana (1/2)",
+          "Almond milk (1 cup)",
+          "Ice cubes"
+        ],
+        "prep_time": "3 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400",
+        "tags": [
+          "quick",
+          "refreshing",
+          "protein-rich"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 158,
+        "name": "\ud83c\udf7f Air-Popped Popcorn",
+        "calories": 180,
+        "protein": 6,
+        "carbs": 36,
+        "fats": 2,
+        "fiber": 8,
+        "description": "Light popcorn with a sprinkle of nutritional yeast",
+        "ingredients": [
+          "Popcorn kernels (1/3 cup)",
+          "Nutritional yeast (2 tbsp)",
+          "Olive oil spray",
+          "Salt"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1578849278619-e73505e9610f?w=400",
+        "tags": [
+          "low-calorie",
+          "crunchy",
+          "movie-night"
+        ],
+        "meal_timing": "Evening"
+      },
+      {
+        "id": 159,
+        "name": "\ud83e\udd55 Veggie Sticks with Hummus",
+        "calories": 200,
+        "protein": 8,
+        "carbs": 24,
+        "fats": 8,
+        "fiber": 8,
+        "description": "Fresh carrot, celery, and bell pepper sticks with hummus",
+        "ingredients": [
+          "Carrots (1 cup)",
+          "Celery (1 cup)",
+          "Bell peppers (1/2 cup)",
+          "Hummus (1/3 cup)"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1571805618078-97f35419301c?w=400",
+        "tags": [
+          "crunchy",
+          "fresh",
+          "nutrient-dense"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 160,
+        "name": "\ud83c\udf4c Banana Oat Cookies",
+        "calories": 240,
+        "protein": 6,
+        "carbs": 42,
+        "fats": 6,
+        "fiber": 5,
+        "description": "No-sugar-added cookies made with banana and oats",
+        "ingredients": [
+          "Banana (1 large)",
+          "Rolled oats (1/2 cup)",
+          "Almond butter (1 tbsp)",
+          "Cinnamon",
+          "Vanilla extract",
+          "Dark chocolate chips (1 tbsp)"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400",
+        "tags": [
+          "baked",
+          "sweet",
+          "guilt-free"
+        ],
+        "meal_timing": "Dessert/snack"
+      },
+      {
+        "id": 161,
+        "name": "\ud83e\udd5b Greek Yogurt Parfait Mini",
+        "calories": 220,
+        "protein": 18,
+        "carbs": 28,
+        "fats": 4,
+        "fiber": 4,
+        "description": "Layers of Greek yogurt with berries and granola",
+        "ingredients": [
+          "Greek yogurt (150g)",
+          "Mixed berries (1/2 cup)",
+          "Granola (2 tbsp)",
+          "Honey (1 tsp)"
+        ],
+        "prep_time": "3 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "quick",
+          "protein-rich",
+          "probiotic"
+        ],
+        "meal_timing": "Mid-morning"
+      },
+      {
+        "id": 162,
+        "name": "\ud83e\udd5c Rice Cakes with Peanut Butter",
+        "calories": 200,
+        "protein": 8,
+        "carbs": 24,
+        "fats": 8,
+        "fiber": 3,
+        "description": "Whole grain rice cakes topped with peanut butter and banana slices",
+        "ingredients": [
+          "Rice cakes (2)",
+          "Peanut butter (2 tbsp)",
+          "Banana (1/2)",
+          "Cinnamon"
+        ],
+        "prep_time": "2 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400",
+        "tags": [
+          "quick",
+          "crunchy",
+          "satisfying"
+        ],
+        "meal_timing": "Pre-workout"
+      },
+      {
+        "id": 197,
+        "name": "\ud83e\uddc7 Protein Waffles Mini",
+        "calories": 250,
+        "protein": 20,
+        "carbs": 30,
+        "fats": 6,
+        "fiber": 4,
+        "description": "High-protein waffles with Greek yogurt and berries",
+        "ingredients": [
+          "Protein powder (1/2 scoop)",
+          "Oat flour (1/4 cup)",
+          "Egg (1)",
+          "Greek yogurt (1/4 cup)",
+          "Berries (1/2 cup)",
+          "Sugar-free syrup"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400",
+        "tags": [
+          "sweet",
+          "filling",
+          "protein-packed"
+        ],
+        "meal_timing": "Mid-morning"
+      },
+      {
+        "id": 198,
+        "name": "\ud83e\udd59 Mini Chicken Wraps",
+        "calories": 240,
+        "protein": 22,
+        "carbs": 26,
+        "fats": 6,
+        "fiber": 4,
+        "description": "Small whole wheat wraps with grilled chicken and veggies",
+        "ingredients": [
+          "Whole wheat tortilla (1 small)",
+          "Grilled chicken (80g)",
+          "Lettuce",
+          "Tomato",
+          "Cucumber",
+          "Mustard"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+        "tags": [
+          "savory",
+          "portable",
+          "protein-rich"
+        ],
+        "meal_timing": "Afternoon"
+      }
+    ],
+    "Vegan": [
+      {
+        "id": 35,
+        "name": "\ud83e\udd51 Guacamole with Veggie Sticks",
+        "calories": 180,
+        "protein": 4,
+        "carbs": 18,
+        "fats": 12,
+        "fiber": 10,
+        "description": "Fresh guacamole with carrot and celery sticks",
+        "ingredients": [
+          "Avocado (1)",
+          "Lime juice",
+          "Salt",
+          "Carrots (1 cup)",
+          "Celery (1 cup)",
+          "Cherry tomatoes",
+          "Cilantro"
+        ],
+        "prep_time": "8 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400",
+        "tags": [
+          "fresh",
+          "healthy-fats",
+          "crunchy"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 36,
+        "name": "\ud83c\udf6a Energy Balls",
+        "calories": 240,
+        "protein": 8,
+        "carbs": 32,
+        "fats": 10,
+        "fiber": 6,
+        "description": "No-bake energy balls with dates, oats, and nut butter",
+        "ingredients": [
+          "Dates (1/2 cup)",
+          "Rolled oats (1/2 cup)",
+          "Almond butter (2 tbsp)",
+          "Chia seeds (1 tbsp)",
+          "Vanilla extract",
+          "Coconut flakes"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1587241321921-91a834d85d1f?w=400",
+        "tags": [
+          "meal-prep",
+          "sweet",
+          "satisfying"
+        ],
+        "meal_timing": "Pre/post-workout"
+      },
+      {
+        "id": 163,
+        "name": "\ud83e\udd65 Coconut Chia Pudding Cup",
+        "calories": 220,
+        "protein": 6,
+        "carbs": 28,
+        "fats": 10,
+        "fiber": 12,
+        "description": "Creamy chia pudding with coconut milk and fresh mango",
+        "ingredients": [
+          "Chia seeds (3 tbsp)",
+          "Coconut milk (3/4 cup)",
+          "Maple syrup (1 tsp)",
+          "Mango chunks (1/2 cup)",
+          "Coconut flakes"
+        ],
+        "prep_time": "5 mins + chill",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "make-ahead",
+          "tropical",
+          "omega-3"
+        ],
+        "meal_timing": "Morning/afternoon"
+      },
+      {
+        "id": 164,
+        "name": "\ud83c\udf7f Spicy Roasted Chickpeas",
+        "calories": 200,
+        "protein": 10,
+        "carbs": 32,
+        "fats": 4,
+        "fiber": 10,
+        "description": "Crispy roasted chickpeas with paprika and cumin",
+        "ingredients": [
+          "Chickpeas (1 cup)",
+          "Olive oil (1 tsp)",
+          "Paprika",
+          "Cumin",
+          "Garlic powder",
+          "Salt"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1587241321921-91a834d85d1f?w=400",
+        "tags": [
+          "crunchy",
+          "protein-rich",
+          "savory"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 165,
+        "name": "\ud83e\udd5c Almond Date Bites",
+        "calories": 230,
+        "protein": 6,
+        "carbs": 30,
+        "fats": 10,
+        "fiber": 5,
+        "description": "Sweet date and almond energy bites with cacao",
+        "ingredients": [
+          "Dates (1/2 cup)",
+          "Almonds (1/4 cup)",
+          "Cacao powder (1 tbsp)",
+          "Coconut oil (1 tsp)",
+          "Sea salt"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1587241321921-91a834d85d1f?w=400",
+        "tags": [
+          "no-bake",
+          "sweet",
+          "energy-boosting"
+        ],
+        "meal_timing": "Pre-workout"
+      },
+      {
+        "id": 166,
+        "name": "\ud83c\udf4c Banana Nice Cream",
+        "calories": 180,
+        "protein": 4,
+        "carbs": 40,
+        "fats": 2,
+        "fiber": 6,
+        "description": "Frozen banana blended into creamy 'ice cream' with peanut butter swirl",
+        "ingredients": [
+          "Frozen bananas (2)",
+          "Peanut butter (1 tbsp)",
+          "Vanilla extract",
+          "Cinnamon"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "dessert",
+          "frozen",
+          "guilt-free"
+        ],
+        "meal_timing": "Dessert"
+      },
+      {
+        "id": 167,
+        "name": "\ud83e\udd52 Cucumber Avocado Rolls",
+        "calories": 160,
+        "protein": 4,
+        "carbs": 16,
+        "fats": 10,
+        "fiber": 8,
+        "description": "Cucumber slices wrapped around avocado and hummus",
+        "ingredients": [
+          "Cucumber (1 large)",
+          "Avocado (1/2)",
+          "Hummus (2 tbsp)",
+          "Lemon juice",
+          "Sesame seeds",
+          "Nori sheets (optional)"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400",
+        "tags": [
+          "fresh",
+          "low-calorie",
+          "creative"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 199,
+        "name": "\ud83e\udd5c Peanut Butter Protein Balls",
+        "calories": 250,
+        "protein": 10,
+        "carbs": 28,
+        "fats": 12,
+        "fiber": 5,
+        "description": "No-bake balls with peanut butter, oats, and vegan protein",
+        "ingredients": [
+          "Peanut butter (3 tbsp)",
+          "Rolled oats (1/2 cup)",
+          "Vegan protein powder (1/2 scoop)",
+          "Maple syrup (1 tbsp)",
+          "Dark chocolate chips"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1587241321921-91a834d85d1f?w=400",
+        "tags": [
+          "protein-rich",
+          "sweet",
+          "meal-prep"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 200,
+        "name": "\ud83c\udf47 Frozen Fruit Bites",
+        "calories": 150,
+        "protein": 2,
+        "carbs": 36,
+        "fats": 1,
+        "fiber": 5,
+        "description": "Frozen grapes and banana chunks dipped in dark chocolate",
+        "ingredients": [
+          "Grapes (1 cup)",
+          "Banana (1)",
+          "Dark vegan chocolate (20g)",
+          "Coconut oil (1 tsp)"
+        ],
+        "prep_time": "15 mins + freeze",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400",
+        "tags": [
+          "frozen",
+          "sweet",
+          "refreshing"
+        ],
+        "meal_timing": "Dessert"
+      }
+    ],
+    "Keto": [
+      {
+        "id": 37,
+        "name": "\ud83e\uddc0 Cheese & Salami Platter",
+        "calories": 320,
+        "protein": 22,
+        "carbs": 4,
+        "fats": 26,
+        "fiber": 0,
+        "description": "Assorted cheeses with salami and olives",
+        "ingredients": [
+          "Cheddar cheese (50g)",
+          "Mozzarella (30g)",
+          "Salami (40g)",
+          "Olives (10)",
+          "Cucumber slices"
+        ],
+        "prep_time": "3 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1452251889946-8da5f03a7f13?w=400",
+        "tags": [
+          "quick",
+          "savory",
+          "zero-prep"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 38,
+        "name": "\ud83e\udd53 Bacon-Wrapped Jalape\u00f1o Poppers",
+        "calories": 380,
+        "protein": 18,
+        "carbs": 6,
+        "fats": 32,
+        "fiber": 1,
+        "description": "Jalape\u00f1os stuffed with cream cheese, wrapped in bacon",
+        "ingredients": [
+          "Jalape\u00f1os (4)",
+          "Cream cheese (60g)",
+          "Bacon (4 strips)",
+          "Cheddar cheese (30g)",
+          "Garlic powder"
+        ],
+        "prep_time": "25 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
+        "tags": [
+          "spicy",
+          "party-food",
+          "indulgent"
+        ],
+        "meal_timing": "Afternoon/evening"
+      },
+      {
+        "id": 168,
+        "name": "\ud83e\udd51 Keto Avocado Fries",
+        "calories": 340,
+        "protein": 12,
+        "carbs": 10,
+        "fats": 30,
+        "fiber": 8,
+        "description": "Baked avocado slices coated in almond flour and parmesan",
+        "ingredients": [
+          "Avocado (1 large)",
+          "Almond flour (1/4 cup)",
+          "Parmesan (1/4 cup)",
+          "Egg (1)",
+          "Paprika",
+          "Garlic powder"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400",
+        "tags": [
+          "baked",
+          "crispy",
+          "innovative"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 169,
+        "name": "\ud83e\uddc0 Keto Fat Bombs",
+        "calories": 260,
+        "protein": 6,
+        "carbs": 4,
+        "fats": 26,
+        "fiber": 2,
+        "description": "Cream cheese and peanut butter fat bombs with dark chocolate coating",
+        "ingredients": [
+          "Cream cheese (50g)",
+          "Peanut butter (2 tbsp)",
+          "Sugar-free dark chocolate (30g)",
+          "Vanilla extract",
+          "Stevia"
+        ],
+        "prep_time": "15 mins + freeze",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1587241321921-91a834d85d1f?w=400",
+        "tags": [
+          "make-ahead",
+          "sweet",
+          "energy"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 170,
+        "name": "\ud83e\udd5a Keto Deviled Eggs",
+        "calories": 240,
+        "protein": 16,
+        "carbs": 2,
+        "fats": 20,
+        "fiber": 0,
+        "description": "Classic deviled eggs with bacon bits and chives",
+        "ingredients": [
+          "Hard-boiled eggs (4)",
+          "Mayo (2 tbsp)",
+          "Dijon mustard (1 tsp)",
+          "Bacon bits (2 tbsp)",
+          "Chives",
+          "Paprika"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1587486937303-68cfb01f1e41?w=400",
+        "tags": [
+          "classic",
+          "protein-rich",
+          "party-food"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 171,
+        "name": "\ud83e\udd69 Beef Jerky & Cheese Sticks",
+        "calories": 300,
+        "protein": 28,
+        "carbs": 6,
+        "fats": 20,
+        "fiber": 0,
+        "description": "High-protein beef jerky paired with cheese sticks",
+        "ingredients": [
+          "Beef jerky (60g)",
+          "String cheese (2 sticks)",
+          "Pickles (optional)"
+        ],
+        "prep_time": "1 min",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1452251889946-8da5f03a7f13?w=400",
+        "tags": [
+          "portable",
+          "zero-prep",
+          "protein-rich"
+        ],
+        "meal_timing": "On-the-go"
+      },
+      {
+        "id": 172,
+        "name": "\ud83e\udd53 Keto Pork Rinds Nachos",
+        "calories": 360,
+        "protein": 24,
+        "carbs": 6,
+        "fats": 28,
+        "fiber": 2,
+        "description": "Pork rinds topped with cheese, sour cream, and jalape\u00f1os",
+        "ingredients": [
+          "Pork rinds (40g)",
+          "Cheddar cheese (50g)",
+          "Sour cream (2 tbsp)",
+          "Jalape\u00f1os",
+          "Guacamole (2 tbsp)",
+          "Salsa (1 tbsp)"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400",
+        "tags": [
+          "crunchy",
+          "loaded",
+          "game-day"
+        ],
+        "meal_timing": "Evening"
+      },
+      {
+        "id": 201,
+        "name": "\ud83e\udd5c Keto Nut Mix",
+        "calories": 280,
+        "protein": 10,
+        "carbs": 8,
+        "fats": 26,
+        "fiber": 4,
+        "description": "Mixed nuts with macadamia, pecans, and Brazil nuts",
+        "ingredients": [
+          "Macadamia nuts (1/4 cup)",
+          "Pecans (2 tbsp)",
+          "Brazil nuts (5)",
+          "Sea salt"
+        ],
+        "prep_time": "1 min",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400",
+        "tags": [
+          "portable",
+          "healthy-fats",
+          "simple"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 202,
+        "name": "\ud83e\udd53 Bacon & Cream Cheese Roll-Ups",
+        "calories": 310,
+        "protein": 16,
+        "carbs": 4,
+        "fats": 26,
+        "fiber": 1,
+        "description": "Crispy bacon wrapped around herb cream cheese",
+        "ingredients": [
+          "Bacon (6 strips)",
+          "Cream cheese (80g)",
+          "Chives",
+          "Garlic powder",
+          "Jalape\u00f1o slices"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
+        "tags": [
+          "savory",
+          "crispy",
+          "party-food"
+        ],
+        "meal_timing": "Afternoon"
+      }
+    ],
+    "High-Protein": [
+      {
+        "id": 39,
+        "name": "\ud83d\udcaa Protein Bar Homemade",
+        "calories": 280,
+        "protein": 28,
+        "carbs": 24,
+        "fats": 8,
+        "fiber": 4,
+        "description": "Homemade protein bar with whey, oats, and peanut butter",
+        "ingredients": [
+          "Whey protein (1 scoop)",
+          "Rolled oats (1/2 cup)",
+          "Peanut butter (2 tbsp)",
+          "Honey (1 tbsp)",
+          "Dark chocolate chips (1 tbsp)"
+        ],
+        "prep_time": "10 mins + chill",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1606312619070-d48b4cda8b0c?w=400",
+        "tags": [
+          "meal-prep",
+          "portable",
+          "muscle-building"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 40,
+        "name": "\ud83e\udd5a Deviled Eggs Protein Boost",
+        "calories": 220,
+        "protein": 24,
+        "carbs": 2,
+        "fats": 14,
+        "fiber": 0,
+        "description": "Classic deviled eggs made with Greek yogurt instead of mayo",
+        "ingredients": [
+          "Hard-boiled eggs (4)",
+          "Greek yogurt (2 tbsp)",
+          "Dijon mustard (1 tsp)",
+          "Paprika",
+          "Chives"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1587486937303-68cfb01f1e41?w=400",
+        "tags": [
+          "classic",
+          "protein-rich",
+          "picnic"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 173,
+        "name": "\ud83c\udf57 Chicken Breast Strips",
+        "calories": 260,
+        "protein": 46,
+        "carbs": 8,
+        "fats": 6,
+        "fiber": 2,
+        "description": "Grilled chicken breast strips with mustard dipping sauce",
+        "ingredients": [
+          "Chicken breast (150g)",
+          "Dijon mustard (2 tbsp)",
+          "Lemon juice",
+          "Herbs",
+          "Garlic powder"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+        "tags": [
+          "lean",
+          "simple",
+          "meal-prep"
+        ],
+        "meal_timing": "Post-workout"
+      },
+      {
+        "id": 174,
+        "name": "\ud83e\udd64 Protein Coffee Shake",
+        "calories": 240,
+        "protein": 30,
+        "carbs": 20,
+        "fats": 4,
+        "fiber": 2,
+        "description": "Iced coffee blended with protein powder and banana",
+        "ingredients": [
+          "Protein powder (1 scoop)",
+          "Cold brew coffee (1 cup)",
+          "Banana (1/2)",
+          "Ice cubes",
+          "Cinnamon"
+        ],
+        "prep_time": "3 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400",
+        "tags": [
+          "energizing",
+          "caffeinated",
+          "refreshing"
+        ],
+        "meal_timing": "Morning/pre-workout"
+      },
+      {
+        "id": 175,
+        "name": "\ud83e\udd90 Shrimp Cocktail",
+        "calories": 200,
+        "protein": 38,
+        "carbs": 12,
+        "fats": 2,
+        "fiber": 2,
+        "description": "Chilled shrimp with tangy cocktail sauce",
+        "ingredients": [
+          "Cooked shrimp (200g)",
+          "Cocktail sauce (3 tbsp)",
+          "Lemon wedges",
+          "Fresh parsley"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400",
+        "tags": [
+          "elegant",
+          "lean",
+          "quick"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 176,
+        "name": "\ud83e\udd5b Cottage Cheese Power Bowl",
+        "calories": 250,
+        "protein": 32,
+        "carbs": 20,
+        "fats": 4,
+        "fiber": 4,
+        "description": "Low-fat cottage cheese with pineapple and almonds",
+        "ingredients": [
+          "Low-fat cottage cheese (1 cup)",
+          "Pineapple chunks (1/2 cup)",
+          "Sliced almonds (2 tbsp)",
+          "Cinnamon"
+        ],
+        "prep_time": "2 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "quick",
+          "protein-packed",
+          "refreshing"
+        ],
+        "meal_timing": "Anytime"
+      },
+      {
+        "id": 177,
+        "name": "\ud83c\udf57 Turkey Roll-Ups",
+        "calories": 220,
+        "protein": 34,
+        "carbs": 8,
+        "fats": 6,
+        "fiber": 2,
+        "description": "Deli turkey wrapped around cucumber and cream cheese",
+        "ingredients": [
+          "Turkey breast slices (150g)",
+          "Cucumber sticks",
+          "Low-fat cream cheese (2 tbsp)",
+          "Dijon mustard",
+          "Lettuce"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+        "tags": [
+          "low-carb",
+          "portable",
+          "lean"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 178,
+        "name": "\ud83e\udd5a Egg White Muffins",
+        "calories": 180,
+        "protein": 26,
+        "carbs": 8,
+        "fats": 4,
+        "fiber": 2,
+        "description": "Baked egg white muffins with vegetables and turkey",
+        "ingredients": [
+          "Egg whites (6)",
+          "Turkey bacon (2 strips)",
+          "Bell peppers (1/4 cup)",
+          "Spinach (1/2 cup)",
+          "Onions",
+          "Cheese (20g)"
+        ],
+        "prep_time": "20 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
+        "tags": [
+          "meal-prep",
+          "portable",
+          "lean"
+        ],
+        "meal_timing": "Morning/afternoon"
+      },
+      {
+        "id": 203,
+        "name": "\ud83d\udc1f Tuna Lettuce Wraps",
+        "calories": 210,
+        "protein": 32,
+        "carbs": 8,
+        "fats": 6,
+        "fiber": 3,
+        "description": "Tuna salad wrapped in crisp lettuce leaves",
+        "ingredients": [
+          "Canned tuna (150g)",
+          "Greek yogurt (2 tbsp)",
+          "Celery (1/4 cup)",
+          "Red onion",
+          "Lettuce leaves (4)",
+          "Lemon juice"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+        "tags": [
+          "low-carb",
+          "quick",
+          "omega-3"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 204,
+        "name": "\ud83d\udcaa Protein Pancakes Mini",
+        "calories": 270,
+        "protein": 26,
+        "carbs": 28,
+        "fats": 6,
+        "fiber": 4,
+        "description": "Small protein pancakes with Greek yogurt topping",
+        "ingredients": [
+          "Protein powder (1 scoop)",
+          "Oat flour (1/4 cup)",
+          "Egg whites (3)",
+          "Greek yogurt (1/4 cup)",
+          "Berries (1/4 cup)",
+          "Cinnamon"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Medium",
+        "image": "https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=400",
+        "tags": [
+          "sweet",
+          "filling",
+          "breakfast-snack"
+        ],
+        "meal_timing": "Post-workout"
+      }
+    ],
+    "Mediterranean": [
+      {
+        "id": 41,
+        "name": "\ud83e\uded2 Hummus & Veggie Plate",
+        "calories": 260,
+        "protein": 10,
+        "carbs": 32,
+        "fats": 12,
+        "fiber": 10,
+        "description": "Creamy hummus with cucumber, bell peppers, and whole wheat pita",
+        "ingredients": [
+          "Hummus (1/2 cup)",
+          "Cucumber (1 cup sliced)",
+          "Bell peppers (1 cup)",
+          "Whole wheat pita (1/2)",
+          "Olives (5)",
+          "Cherry tomatoes"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1571805618078-97f35419301c?w=400",
+        "tags": [
+          "fresh",
+          "mediterranean",
+          "crunchy"
+        ],
+        "meal_timing": "Mid-afternoon"
+      },
+      {
+        "id": 42,
+        "name": "\ud83c\udf47 Greek Yogurt Honey Bowl",
+        "calories": 240,
+        "protein": 18,
+        "carbs": 34,
+        "fats": 4,
+        "fiber": 3,
+        "description": "Thick Greek yogurt with honey, fresh figs, and pistachios",
+        "ingredients": [
+          "Greek yogurt (200g)",
+          "Honey (1 tbsp)",
+          "Fresh figs (2)",
+          "Pistachios (1 tbsp)",
+          "Mint leaves"
+        ],
+        "prep_time": "3 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+        "tags": [
+          "sweet",
+          "probiotic",
+          "elegant"
+        ],
+        "meal_timing": "Dessert/snack"
+      },
+      {
+        "id": 179,
+        "name": "\ud83e\uddc0 Caprese Skewers",
+        "calories": 220,
+        "protein": 14,
+        "carbs": 12,
+        "fats": 14,
+        "fiber": 2,
+        "description": "Cherry tomatoes, mozzarella balls, and basil drizzled with balsamic",
+        "ingredients": [
+          "Cherry tomatoes (10)",
+          "Mozzarella balls (100g)",
+          "Fresh basil leaves",
+          "Balsamic glaze (1 tbsp)",
+          "Olive oil"
+        ],
+        "prep_time": "8 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400",
+        "tags": [
+          "italian",
+          "fresh",
+          "party-food"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 180,
+        "name": "\ud83e\uded2 Marinated Olives & Feta",
+        "calories": 200,
+        "protein": 8,
+        "carbs": 10,
+        "fats": 16,
+        "fiber": 4,
+        "description": "Mixed olives with feta cubes, herbs, and lemon",
+        "ingredients": [
+          "Mixed olives (1/2 cup)",
+          "Feta cheese (50g)",
+          "Olive oil (1 tbsp)",
+          "Lemon zest",
+          "Oregano",
+          "Garlic"
+        ],
+        "prep_time": "5 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1452251889946-8da5f03a7f13?w=400",
+        "tags": [
+          "savory",
+          "mediterranean",
+          "quick"
+        ],
+        "meal_timing": "Appetizer/snack"
+      },
+      {
+        "id": 181,
+        "name": "\ud83e\udd52 Tzatziki with Pita Chips",
+        "calories": 230,
+        "protein": 12,
+        "carbs": 28,
+        "fats": 8,
+        "fiber": 4,
+        "description": "Homemade tzatziki with baked pita chips",
+        "ingredients": [
+          "Greek yogurt (1/2 cup)",
+          "Cucumber (1/2 cup grated)",
+          "Garlic (2 cloves)",
+          "Dill",
+          "Lemon juice",
+          "Whole wheat pita (1)",
+          "Olive oil spray"
+        ],
+        "prep_time": "15 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1571805618078-97f35419301c?w=400",
+        "tags": [
+          "refreshing",
+          "greek",
+          "crunchy"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 182,
+        "name": "\ud83e\udd5c Roasted Chickpeas Mediterranean",
+        "calories": 210,
+        "protein": 12,
+        "carbs": 32,
+        "fats": 4,
+        "fiber": 10,
+        "description": "Crispy chickpeas roasted with za'atar and olive oil",
+        "ingredients": [
+          "Chickpeas (1 cup)",
+          "Za'atar (2 tsp)",
+          "Olive oil (1 tsp)",
+          "Lemon zest",
+          "Sea salt"
+        ],
+        "prep_time": "30 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1587241321921-91a834d85d1f?w=400",
+        "tags": [
+          "crunchy",
+          "protein-rich",
+          "middle-eastern"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 183,
+        "name": "\ud83c\udf47 Mediterranean Fruit & Nut Mix",
+        "calories": 250,
+        "protein": 8,
+        "carbs": 34,
+        "fats": 12,
+        "fiber": 6,
+        "description": "Dried figs, apricots, almonds, and walnuts",
+        "ingredients": [
+          "Dried figs (3)",
+          "Dried apricots (4)",
+          "Almonds (1/4 cup)",
+          "Walnuts (2 tbsp)",
+          "Dark chocolate (10g)"
+        ],
+        "prep_time": "2 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400",
+        "tags": [
+          "sweet",
+          "portable",
+          "energy"
+        ],
+        "meal_timing": "Pre-workout"
+      },
+      {
+        "id": 205,
+        "name": "\ud83e\udd52 Greek Salad Cups",
+        "calories": 190,
+        "protein": 8,
+        "carbs": 16,
+        "fats": 12,
+        "fiber": 4,
+        "description": "Deconstructed Greek salad in cucumber cups with feta",
+        "ingredients": [
+          "Cucumber (1 large)",
+          "Cherry tomatoes (1/2 cup)",
+          "Feta cheese (40g)",
+          "Kalamata olives (8)",
+          "Red onion",
+          "Olive oil",
+          "Oregano"
+        ],
+        "prep_time": "10 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400",
+        "tags": [
+          "fresh",
+          "low-carb",
+          "creative"
+        ],
+        "meal_timing": "Afternoon"
+      },
+      {
+        "id": 206,
+        "name": "\ud83c\udf4b Lemon Herb Feta Dip",
+        "calories": 220,
+        "protein": 12,
+        "carbs": 18,
+        "fats": 12,
+        "fiber": 3,
+        "description": "Whipped feta dip with herbs served with veggie sticks",
+        "ingredients": [
+          "Feta cheese (80g)",
+          "Greek yogurt (1/4 cup)",
+          "Lemon juice",
+          "Fresh herbs",
+          "Garlic",
+          "Carrot sticks (1 cup)",
+          "Celery (1 cup)"
+        ],
+        "prep_time": "8 mins",
+        "difficulty": "Easy",
+        "image": "https://images.unsplash.com/photo-1571805618078-97f35419301c?w=400",
+        "tags": [
+          "creamy",
+          "tangy",
+          "fresh"
+        ],
+        "meal_timing": "Afternoon"
+      }
+    ]
   }
+}

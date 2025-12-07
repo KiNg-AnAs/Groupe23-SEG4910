@@ -48,18 +48,6 @@ const BestProgramSection = () => {
             </div>
           </Col>
         </Row>
-
-        {/* Video Testimonial Section */}
-        <Row className="video-section">
-          <Col md={12} className="text-center">
-            <h3 className="video-title">See How It Works</h3>
-            <p>Watch how our AI transforms your fitness journey.</p>
-            <div className="video-wrapper">
-              <img src={img13} alt="Video Thumbnail" className="video-thumbnail" />
-              <Button variant="danger" className="play-button">▶ Play Video</Button>
-            </div>
-          </Col>
-        </Row>
       </Container>
     </section>
   );

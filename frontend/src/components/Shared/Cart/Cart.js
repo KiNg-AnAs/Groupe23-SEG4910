@@ -98,7 +98,12 @@ const Cart = () => {
 
   const handlePlanChange = (planKey) => {
     const chosen = plans.find((p) => p.key === planKey);
-    setSelectedPlan(chosen);
+    // Toggle: if clicking the same plan, deselect it
+    if (selectedPlan?.key === planKey) {
+      setSelectedPlan(null);
+    } else {
+      setSelectedPlan(chosen);
+    }
   };
 
   const removePlan = () => {

@@ -347,6 +347,12 @@ const BookingManagement = () => {
                 type="datetime-local"
                 value={editDate}
                 onChange={(e) => setEditDate(e.target.value)}
+                onClick={(e) => {
+                  // Open calendar picker on click
+                  if (e.target.showPicker) {
+                    e.target.showPicker();
+                  }
+                }}
                 className="modern-input"
               />
               <div className="form-hint">

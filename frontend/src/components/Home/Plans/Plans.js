@@ -1,10 +1,9 @@
 import React from "react";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { FaStar, FaDumbbell } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "./Plans.css";
 import { useAuth } from "../../../context/AuthContext";
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const plans = [
   {
@@ -17,7 +16,6 @@ const plans = [
       "- Workout & Progress Tracking",
     ],
     popular: false,
-    paymentLink: "https://buy.stripe.com/test_bIY4k6aAZ2Sb83mfZ2",
     planKey: "basic",
   },
   {
@@ -32,43 +30,33 @@ const plans = [
       "- Access to Coach's Personalized Training Programs",
     ],
     popular: true,
-    paymentLink: "https://buy.stripe.com/test_7sI5oaeRf1O76Zi7sv",
     planKey: "advanced",
   },
 ];
 
-const Plans = ({ cartItem, setCartItem }) => {
-  const { isAuthenticated, loginWithRedirect, fetchWithAuth } = useAuth();
+const Plans = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, loginWithRedirect } = useAuth();
 
-  const handleAddToCart = async (plan) => {
-    //  Step 1: If not logged in, store plan and redirect to Auth0
+  const handleSelectPlan = (plan) => {
+    // If not logged in, redirect to login first
     if (!isAuthenticated) {
-      sessionStorage.setItem("redirectPlan", JSON.stringify(plan));
+      sessionStorage.setItem("redirectAfterLogin", "/cart");
+      sessionStorage.setItem("selectedPlan", JSON.stringify(plan));
       return loginWithRedirect();
     }
 
-    try {
-      //  Step 2: Fetch current subscription plan from backend
-      const data = await fetchWithAuth(`${API_URL}/subscription/`);
-      const currentPlan = data.subscription_plan;
+    // Store selected plan in localStorage for cart to pick up
+    localStorage.setItem("cart_plan", JSON.stringify({
+      key: plan.planKey,
+      title: plan.title,
+      price: parseInt(plan.price.replace(/[^0-9]/g, '')),
+      description: plan.planKey === "basic" ? "AI Training + Tracking" : "Everything + Nutrition + E-Book",
+      icon: plan.planKey === "basic" ? "🚀" : "👑"
+    }));
 
-      //  Step 3: Prevent same-plan or downgrade purchase
-      const planPriority = { none: 0, basic: 1, advanced: 2 };
-      const selectedPriority = planPriority[plan.planKey];
-      const userPriority = planPriority[currentPlan];
-
-      if (selectedPriority <= userPriority) {
-        alert(`You already have a ${currentPlan} plan or higher.`);
-        return;
-      }
-
-      //  Step 4: Proceed to checkout (Stripe)
-      setCartItem(plan);
-      window.location.href = plan.paymentLink;
-    } catch (err) {
-      console.error("Error fetching subscription plan:", err);
-      alert("Something went wrong. Please try again later.");
-    }
+    // Navigate to cart
+    navigate("/cart");
   };
 
   return (
@@ -84,11 +72,7 @@ const Plans = ({ cartItem, setCartItem }) => {
               key={index}
               className="plan-column"
             >
-              <Card
-                className={`plan-card ${
-                  cartItem?.title === plan.title ? "selected-plan" : ""
-                }`}
-              >
+              <Card className="plan-card">
                 <div
                   className="plan-overlay"
                   style={{ backgroundImage: `url(${plan.image})` }}
@@ -106,13 +90,11 @@ const Plans = ({ cartItem, setCartItem }) => {
                       ))}
                     </ul>
                     <Button
-                      variant={
-                        cartItem?.title === plan.title ? "secondary" : "danger"
-                      }
+                      variant="danger"
                       className="buy-now"
-                      onClick={() => handleAddToCart(plan)}
+                      onClick={() => handleSelectPlan(plan)}
                     >
-                      {cartItem?.title === plan.title ? "Remove" : "Buy Now"}
+                      Select Plan
                     </Button>
                   </div>
                 </div>
